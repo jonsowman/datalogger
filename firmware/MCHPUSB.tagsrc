@@ -1,0 +1,17 @@
+D:\Download\3DAQ\firmware\main.c
+D:\Download\3DAQ\firmware\system\usb\usbmmap.c
+D:\Download\3DAQ\firmware\system\usb\usbdrv\usbdrv.c
+D:\Download\3DAQ\firmware\system\usb\usb9\usb9.c
+D:\Download\3DAQ\firmware\autofiles\usbdsc.c
+D:\Download\3DAQ\firmware\system\usb\usbctrltrf\usbctrltrf.c
+D:\Download\3DAQ\firmware\user\user.c
+D:\Download\3DAQ\firmware\system\usb\class\generic\usbgen.c
+D:\Download\3DAQ\firmware\io_cfg.h
+D:\Download\3DAQ\firmware\system\usb\usbmmap.h
+D:\Download\3DAQ\firmware\autofiles\usbcfg.h
+D:\Download\3DAQ\firmware\system\usb\usb.h
+D:\Download\3DAQ\firmware\system\typedefs.h
+D:\Download\3DAQ\firmware\autofiles\usbdsc.h
+D:\Download\3DAQ\firmware\system\usb\class\generic\usbgen.h
+D:\Download\3DAQ\firmware\user\user.h
+C:\PICUSBDemo\system\usb\usbdrv\usbdrv.h

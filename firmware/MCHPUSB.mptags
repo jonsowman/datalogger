@@ -1,0 +1,361 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.5.4	//
+!_TAG_REVISION_NAME	MCHPTags	//
+!_TAG_REVISION_VERSION	6.0.1	//
+ADDRESS_STATE::5	D:\Download\3DAQ\firmware\system\usb\usbmmap.h	26;"	d	line:26
+ADR	D:\Download\3DAQ\firmware\system\usb\usbmmap.h	87;"	m	line:87	struct:_BDT::<anonymous>
+ADRH	D:\Download\3DAQ\firmware\system\usb\usbmmap.h	81;"	m	line:81	struct:_BDT::<anonymous>
+ADRL	D:\Download\3DAQ\firmware\system\usb\usbmmap.h	80;"	m	line:80	struct:_BDT::<anonymous>
+ADR_PENDING_STATE::4	D:\Download\3DAQ\firmware\system\usb\usbmmap.h	25;"	d	line:25
+ATTACHED_STATE::1	D:\Download\3DAQ\firmware\system\usb\usbmmap.h	22;"	d	line:22
+BC8	D:\Download\3DAQ\firmware\system\usb\usbmmap.h	48;"	m	line:48	struct:_BD_STAT::<anonymous>
+BC8	D:\Download\3DAQ\firmware\system\usb\usbmmap.h	58;"	m	line:58	struct:_BD_STAT::<anonymous>
+BC9	D:\Download\3DAQ\firmware\system\usb\usbmmap.h	49;"	m	line:49	struct:_BD_STAT::<anonymous>
+BC9	D:\Download\3DAQ\firmware\system\usb\usbmmap.h	59;"	m	line:59	struct:_BD_STAT::<anonymous>
+BDT	D:\Download\3DAQ\firmware\system\usb\usbmmap.h	89;"	t	line:89
+BD_STAT	D:\Download\3DAQ\firmware\system\usb\usbmmap.h	72;"	t	line:72
+BLINK_LED_COMMAND	D:\Download\3DAQ\firmware\user\user.h	30;"	e	line:30	enum:DATA_PACKET::<anonymous>::<anonymous>
+BOOL	D:\Download\3DAQ\firmware\system\typedefs.h	114;"	t	line:114
+BSTALL	D:\Download\3DAQ\firmware\system\usb\usbmmap.h	50;"	m	line:50	struct:_BD_STAT::<anonymous>
+BYTE	D:\Download\3DAQ\firmware\system\typedefs.h	22;"	t	line:22
+Blink	D:\Download\3DAQ\firmware\user\user.c	252;"	f	line:252	signature:(byte onState)
+Blink	D:\Download\3DAQ\firmware\user\user.c	39;"	p	line:39	file:
+BlinkUSBStatus	D:\Download\3DAQ\firmware\user\user.c	190;"	f	line:190	signature:(void)
+BlinkUSBStatus	D:\Download\3DAQ\firmware\user\user.c	33;"	p	line:33	file:	signature:(void)
+Byte0	D:\Download\3DAQ\firmware\system\typedefs.h	34;"	m	line:34	struct:_WORD::<anonymous>
+Byte0	D:\Download\3DAQ\firmware\system\typedefs.h	67;"	m	line:67	struct:_DWORD::<anonymous>
+Byte1	D:\Download\3DAQ\firmware\system\typedefs.h	35;"	m	line:35	struct:_WORD::<anonymous>
+Byte1	D:\Download\3DAQ\firmware\system\typedefs.h	68;"	m	line:68	struct:_DWORD::<anonymous>
+Byte2	D:\Download\3DAQ\firmware\system\typedefs.h	69;"	m	line:69	struct:_DWORD::<anonymous>
+Byte3	D:\Download\3DAQ\firmware\system\typedefs.h	70;"	m	line:70	struct:_DWORD::<anonymous>
+CFG01::romstruct\	D:\Download\3DAQ\firmware\autofiles\usbdsc.h	17;"	d	line:17
+CMD	D:\Download\3DAQ\firmware\user\user.h	32;"	m	line:32	struct:DATA_PACKET::<anonymous>
+CONFIGURED_STATE::6	D:\Download\3DAQ\firmware\system\usb\usbmmap.h	27;"	d	line:27
+CallDelay	D:\Download\3DAQ\firmware\user\user.c	278;"	f	line:278	signature:(int delay)
+CheckButtons	D:\Download\3DAQ\firmware\user\user.c	272;"	f	line:272	signature:(void)
+ClearArray	D:\Download\3DAQ\firmware\system\usb\usbdrv\usbdrv.c	546;"	f	line:546	signature:(byte* startAdr,byte count)
+Cnt	D:\Download\3DAQ\firmware\system\usb\usbmmap.h	79;"	m	line:79	struct:_BDT::<anonymous>
+CtrlTrfData	D:\Download\3DAQ\firmware\system\usb\usbmmap.c	269;"	v	line:269
+DATA_PACKET	D:\Download\3DAQ\firmware\user\user.h	17;"	u	line:17
+DATA_PACKET	D:\Download\3DAQ\firmware\user\user.h	51;"	t	line:51
+DEFAULT_STATE::3	D:\Download\3DAQ\firmware\system\usb\usbmmap.h	24;"	d	line:24
+DETACHED_STATE::0	D:\Download\3DAQ\firmware\system\usb\usbmmap.h	21;"	d	line:21
+DTS	D:\Download\3DAQ\firmware\system\usb\usbmmap.h	54;"	m	line:54	struct:_BD_STAT::<anonymous>
+DTSEN	D:\Download\3DAQ\firmware\system\usb\usbmmap.h	51;"	m	line:51	struct:_BD_STAT::<anonymous>
+DWORD	D:\Download\3DAQ\firmware\system\typedefs.h	81;"	t	line:81
+EP0_BUFF_SIZE::8	D:\Download\3DAQ\firmware\autofiles\usbcfg.h	5;"	d	line:5
+FAIL::FALSE	D:\Download\3DAQ\firmware\system\typedefs.h	117;"	d	line:117
+FALSE	D:\Download\3DAQ\firmware\system\typedefs.h	114;"	e	line:114	enum:_BOOL
+GET_ADC_COMMAND	D:\Download\3DAQ\firmware\user\user.h	29;"	e	line:29	enum:DATA_PACKET::<anonymous>::<anonymous>
+HighB	D:\Download\3DAQ\firmware\system\typedefs.h	40;"	m	line:40	struct:_WORD::<anonymous>
+ID	D:\Download\3DAQ\firmware\user\user.h	38;"	m	line:38	struct:DATA_PACKET::<anonymous>
+ID_BOARD	D:\Download\3DAQ\firmware\user\user.h	26;"	e	line:26	enum:DATA_PACKET::<anonymous>::<anonymous>
+INCDIS	D:\Download\3DAQ\firmware\system\usb\usbmmap.h	52;"	m	line:52	struct:_BD_STAT::<anonymous>
+INPUT_PIN::1	D:\Download\3DAQ\firmware\io_cfg.h	8;"	d	line:8
+IO_CFG_H	D:\Download\3DAQ\firmware\io_cfg.h	2;"	d	line:2
+InitializeSystem	D:\Download\3DAQ\firmware\main.c	14;"	p	line:14	file:	signature:(void)
+KEN	D:\Download\3DAQ\firmware\system\usb\usbmmap.h	53;"	m	line:53	struct:_BD_STAT::<anonymous>
+LOWER_LSB::(a)((a).v[0])	D:\Download\3DAQ\firmware\system\typedefs.h	82;"	d	line:82
+LOWER_MSB::(a)((a).v[1])	D:\Download\3DAQ\firmware\system\typedefs.h	83;"	d	line:83
+LSB::(a)((a).v[0])	D:\Download\3DAQ\firmware\system\typedefs.h	47;"	d	line:47
+LowB	D:\Download\3DAQ\firmware\system\typedefs.h	39;"	m	line:39	struct:_WORD::<anonymous>
+MAJOR_VERSION::0x01	D:\Download\3DAQ\firmware\user\user.h	10;"	d	line:10
+MAX_EP_NUMBER::2	D:\Download\3DAQ\firmware\autofiles\usbcfg.h	41;"	d	line:41
+MAX_NUM_INT::1	D:\Download\3DAQ\firmware\autofiles\usbcfg.h	6;"	d	line:6
+MINOR_VERSION::0x00	D:\Download\3DAQ\firmware\user\user.h	9;"	d	line:9
+MODE_PP::_PPBM0	D:\Download\3DAQ\firmware\autofiles\usbcfg.h	9;"	d	line:9
+MSB::(a)((a).v[1])	D:\Download\3DAQ\firmware\system\typedefs.h	48;"	d	line:48
+MUID_NULL::0	D:\Download\3DAQ\firmware\autofiles\usbcfg.h	26;"	d	line:26
+MUID_USB9::1	D:\Download\3DAQ\firmware\autofiles\usbcfg.h	27;"	d	line:27
+OK::TRUE	D:\Download\3DAQ\firmware\system\typedefs.h	116;"	d	line:116
+OUTPUT_PIN::0	D:\Download\3DAQ\firmware\io_cfg.h	9;"	d	line:9
+PICDEM_FS_DEMO_H	D:\Download\3DAQ\firmware\user\user.h	2;"	d	line:2
+PID	D:\Download\3DAQ\firmware\system\usb\usbmmap.h	69;"	m	line:69	struct:_BD_STAT::<anonymous>
+PID0	D:\Download\3DAQ\firmware\system\usb\usbmmap.h	60;"	m	line:60	struct:_BD_STAT::<anonymous>
+PID1	D:\Download\3DAQ\firmware\system\usb\usbmmap.h	61;"	m	line:61	struct:_BD_STAT::<anonymous>
+PID2	D:\Download\3DAQ\firmware\system\usb\usbmmap.h	62;"	m	line:62	struct:_BD_STAT::<anonymous>
+PID3	D:\Download\3DAQ\firmware\system\usb\usbmmap.h	63;"	m	line:63	struct:_BD_STAT::<anonymous>
+POINTER	D:\Download\3DAQ\firmware\system\typedefs.h	112;"	t	line:112
+POWERED_STATE::2	D:\Download\3DAQ\firmware\system\usb\usbmmap.h	23;"	d	line:23
+ProcessIO	D:\Download\3DAQ\firmware\user\user.c	62;"	f	line:62	signature:(void)
+ProcessIO	D:\Download\3DAQ\firmware\user\user.h	55;"	p	line:55	signature:(void)
+READ_VERSION	D:\Download\3DAQ\firmware\user\user.h	25;"	e	line:25	enum:DATA_PACKET::<anonymous>::<anonymous>
+RESET	D:\Download\3DAQ\firmware\user\user.h	31;"	e	line:31	enum:DATA_PACKET::<anonymous>::<anonymous>
+ReadPOT	D:\Download\3DAQ\firmware\user\user.c	259;"	f	line:259	signature:(void)
+ReadPOT	D:\Download\3DAQ\firmware\user\user.c	38;"	p	line:38	file:	signature:(void)
+ReadTemp	D:\Download\3DAQ\firmware\user\user.c	347;"	f	line:347	signature:(void)
+RemoteWakeup	D:\Download\3DAQ\firmware\system\usb\usbmmap.h	39;"	m	line:39	struct:_USB_DEVICE_STATUS::<anonymous>
+ResetTempLog	D:\Download\3DAQ\firmware\user\user.c	35;"	p	line:35	file:	signature:(void)
+ServiceRequests	D:\Download\3DAQ\firmware\user\user.c	34;"	p	line:34	file:	signature:(void)
+ServiceRequests	D:\Download\3DAQ\firmware\user\user.c	75;"	f	line:75	signature:(void)
+SetupPkt	D:\Download\3DAQ\firmware\system\usb\usbmmap.c	268;"	v	line:268
+Stat	D:\Download\3DAQ\firmware\system\usb\usbmmap.h	78;"	m	line:78	struct:_BDT::<anonymous>
+TEMP_LOGGING::0x01	D:\Download\3DAQ\firmware\user\user.h	14;"	d	line:14
+TEMP_REAL_TIME::0x00	D:\Download\3DAQ\firmware\user\user.h	13;"	d	line:13
+TIMER0H_VAL::0x48	D:\Download\3DAQ\firmware\user\user.c	29;"	d	line:29	file:
+TIMER0L_VAL::0xE5	D:\Download\3DAQ\firmware\user\user.c	28;"	d	line:28	file:
+TRUE	D:\Download\3DAQ\firmware\system\typedefs.h	114;"	e	line:114	enum:_BOOL
+TYPEDEFS_H	D:\Download\3DAQ\firmware\system\typedefs.h	2;"	d	line:2
+ThermReadTemp	D:\Download\3DAQ\firmware\user\user.c	316;"	f	line:316	signature:(void)
+ThermSendReset	D:\Download\3DAQ\firmware\user\user.c	336;"	f	line:336	signature:(void)
+ThermWrite	D:\Download\3DAQ\firmware\user\user.c	288;"	f	line:288	signature:(int command)
+ThermometerCount	D:\Download\3DAQ\firmware\user\user.c	360;"	l	line:360
+UCFG_VAL::_PUEN|_TRINT|_FS|MODE_PP	D:\Download\3DAQ\firmware\autofiles\usbcfg.h	10;"	d	line:10
+UOWN	D:\Download\3DAQ\firmware\system\usb\usbmmap.h	55;"	m	line:55	struct:_BD_STAT::<anonymous>
+UOWN	D:\Download\3DAQ\firmware\system\usb\usbmmap.h	65;"	m	line:65	struct:_BD_STAT::<anonymous>
+UPDATE_LED	D:\Download\3DAQ\firmware\user\user.h	27;"	e	line:27	enum:DATA_PACKET::<anonymous>::<anonymous>
+UPPER_LSB::(a)((a).v[2])	D:\Download\3DAQ\firmware\system\typedefs.h	84;"	d	line:84
+UPPER_MSB::(a)((a).v[3])	D:\Download\3DAQ\firmware\system\typedefs.h	85;"	d	line:85
+USBCFG_H	D:\Download\3DAQ\firmware\autofiles\usbcfg.h	2;"	d	line:2
+USBCheckBusStatus	D:\Download\3DAQ\firmware\system\usb\usbdrv\usbdrv.c	40;"	f	line:40	signature:(void)
+USBCheckStdRequest	D:\Download\3DAQ\firmware\system\usb\usb9\usb9.c	34;"	f	line:34	signature:(void)
+USBCtrlEPService	D:\Download\3DAQ\firmware\system\usb\usbctrltrf\usbctrltrf.c	78;"	f	line:78	signature:(void)
+USBCtrlEPServiceComplete	D:\Download\3DAQ\firmware\system\usb\usbctrltrf\usbctrltrf.c	380;"	f	line:380	signature:(void)
+USBCtrlTrfInHandler	D:\Download\3DAQ\firmware\system\usb\usbctrltrf\usbctrltrf.c	219;"	f	line:219	signature:(void)
+USBCtrlTrfInHandler	D:\Download\3DAQ\firmware\system\usb\usbctrltrf\usbctrltrf.c	54;"	p	line:54	file:	signature:(void)
+USBCtrlTrfOutHandler	D:\Download\3DAQ\firmware\system\usb\usbctrltrf\usbctrltrf.c	174;"	f	line:174	signature:(void)
+USBCtrlTrfOutHandler	D:\Download\3DAQ\firmware\system\usb\usbctrltrf\usbctrltrf.c	53;"	p	line:53	file:	signature:(void)
+USBCtrlTrfRxService	D:\Download\3DAQ\firmware\system\usb\usbctrltrf\usbctrltrf.c	328;"	f	line:328	signature:(void)
+USBCtrlTrfSetupHandler	D:\Download\3DAQ\firmware\system\usb\usbctrltrf\usbctrltrf.c	133;"	f	line:133	signature:(void)
+USBCtrlTrfSetupHandler	D:\Download\3DAQ\firmware\system\usb\usbctrltrf\usbctrltrf.c	52;"	p	line:52	file:	signature:(void)
+USBCtrlTrfTxService	D:\Download\3DAQ\firmware\system\usb\usbctrltrf\usbctrltrf.c	258;"	f	line:258	signature:(void)
+USBDSC_H	D:\Download\3DAQ\firmware\autofiles\usbdsc.h	7;"	d	line:7
+USBDriverService	D:\Download\3DAQ\firmware\system\usb\usbdrv\usbdrv.c	183;"	f	line:183	signature:(void)
+USBErrorHandler	D:\Download\3DAQ\firmware\system\usb\usbdrv\usbdrv.c	20;"	p	line:20	file:	signature:(void)
+USBErrorHandler	D:\Download\3DAQ\firmware\system\usb\usbdrv\usbdrv.c	495;"	f	line:495	signature:(void)
+USBGEN_BD_IN::ep1Bi	D:\Download\3DAQ\firmware\autofiles\usbcfg.h	38;"	d	line:38
+USBGEN_BD_OUT::ep1Bo	D:\Download\3DAQ\firmware\autofiles\usbcfg.h	37;"	d	line:37
+USBGEN_EP_SIZE::64	D:\Download\3DAQ\firmware\autofiles\usbcfg.h	39;"	d	line:39
+USBGEN_H	D:\Download\3DAQ\firmware\system\usb\class\generic\usbgen.h	37;"	d	line:37
+USBGEN_INTF_ID::0x00	D:\Download\3DAQ\firmware\autofiles\usbcfg.h	35;"	d	line:35
+USBGEN_UEP::UEP1	D:\Download\3DAQ\firmware\autofiles\usbcfg.h	36;"	d	line:36
+USBGenInitEP	D:\Download\3DAQ\firmware\system\usb\class\generic\usbgen.c	38;"	f	line:38	signature:(void)
+USBGenInitEP	D:\Download\3DAQ\firmware\system\usb\class\generic\usbgen.h	107;"	p	line:107	signature:(void)
+USBGenRead	D:\Download\3DAQ\firmware\system\usb\class\generic\usbgen.c	151;"	f	line:151	signature:(byte *buffer, byte len)
+USBGenRead	D:\Download\3DAQ\firmware\system\usb\class\generic\usbgen.h	109;"	p	line:109	signature:(byte *buffer, byte len)
+USBGenWrite	D:\Download\3DAQ\firmware\system\usb\class\generic\usbgen.c	94;"	f	line:94	signature:(byte *buffer, byte len)
+USBGenWrite	D:\Download\3DAQ\firmware\system\usb\class\generic\usbgen.h	108;"	p	line:108	signature:(byte *buffer, byte len)
+USBMMAP_H	D:\Download\3DAQ\firmware\system\usb\usbmmap.h	2;"	d	line:2
+USBModuleDisable	D:\Download\3DAQ\firmware\system\usb\usbdrv\usbdrv.c	129;"	f	line:129	signature:(void)
+USBModuleDisable	D:\Download\3DAQ\firmware\system\usb\usbdrv\usbdrv.c	12;"	p	line:12	file:	signature:(void)
+USBModuleEnable	D:\Download\3DAQ\firmware\system\usb\usbdrv\usbdrv.c	103;"	f	line:103	signature:(void)
+USBModuleEnable	D:\Download\3DAQ\firmware\system\usb\usbdrv\usbdrv.c	11;"	p	line:11	file:	signature:(void)
+USBPrepareForNextSetupTrf	D:\Download\3DAQ\firmware\system\usb\usbctrltrf\usbctrltrf.c	488;"	f	line:488	signature:(void)
+USBProtocolResetHandler	D:\Download\3DAQ\firmware\system\usb\usbdrv\usbdrv.c	17;"	p	line:17	file:	signature:(void)
+USBProtocolResetHandler	D:\Download\3DAQ\firmware\system\usb\usbdrv\usbdrv.c	522;"	f	line:522	signature:(void)
+USBRemoteWakeup	D:\Download\3DAQ\firmware\system\usb\usbdrv\usbdrv.c	369;"	f	line:369	signature:(void)
+USBSoftDetach	D:\Download\3DAQ\firmware\system\usb\usbdrv\usbdrv.c	160;"	f	line:160	signature:(void)
+USBStallHandler	D:\Download\3DAQ\firmware\system\usb\usbdrv\usbdrv.c	19;"	p	line:19	file:	signature:(void)
+USBStallHandler	D:\Download\3DAQ\firmware\system\usb\usbdrv\usbdrv.c	453;"	f	line:453	signature:(void)
+USBStdFeatureReqHandler	D:\Download\3DAQ\firmware\system\usb\usb9\usb9.c	14;"	p	line:14	file:	signature:(void)
+USBStdFeatureReqHandler	D:\Download\3DAQ\firmware\system\usb\usb9\usb9.c	239;"	f	line:239	signature:(void)
+USBStdGetDscHandler	D:\Download\3DAQ\firmware\system\usb\usb9\usb9.c	100;"	f	line:100	signature:(void)
+USBStdGetDscHandler	D:\Download\3DAQ\firmware\system\usb\usb9\usb9.c	11;"	p	line:11	file:	signature:(void)
+USBStdGetStatusHandler	D:\Download\3DAQ\firmware\system\usb\usb9\usb9.c	13;"	p	line:13	file:	signature:(void)
+USBStdGetStatusHandler	D:\Download\3DAQ\firmware\system\usb\usb9\usb9.c	182;"	f	line:182	signature:(void)
+USBStdSetCfgHandler	D:\Download\3DAQ\firmware\system\usb\usb9\usb9.c	12;"	p	line:12	file:	signature:(void)
+USBStdSetCfgHandler	D:\Download\3DAQ\firmware\system\usb\usb9\usb9.c	144;"	f	line:144	signature:(void)
+USBSuspend	D:\Download\3DAQ\firmware\system\usb\usbdrv\usbdrv.c	14;"	p	line:14	file:	signature:(void)
+USBSuspend	D:\Download\3DAQ\firmware\system\usb\usbdrv\usbdrv.c	265;"	f	line:265	signature:(void)
+USBTasks	D:\Download\3DAQ\firmware\main.c	15;"	p	line:15	file:	signature:(void)
+USBWakeFromSuspend	D:\Download\3DAQ\firmware\system\usb\usbdrv\usbdrv.c	15;"	p	line:15	file:	signature:(void)
+USBWakeFromSuspend	D:\Download\3DAQ\firmware\system\usb\usbdrv\usbdrv.c	320;"	f	line:320	signature:(void)
+USB_BUS_ATTACHED::1	D:\Download\3DAQ\firmware\system\usb\usbdrv\usbdrv.c	46;"	d	line:46	file:
+USB_BUS_DETACHED::0	D:\Download\3DAQ\firmware\system\usb\usbdrv\usbdrv.c	47;"	d	line:47	file:
+USB_CD_Ptr	D:\Download\3DAQ\firmware\autofiles\usbdsc.c	213;"	v	line:213
+USB_DEVICE_STATUS	D:\Download\3DAQ\firmware\system\usb\usbmmap.h	42;"	t	line:42
+USB_H	D:\Download\3DAQ\firmware\system\usb\usb.h	2;"	d	line:2
+USB_SD_Ptr	D:\Download\3DAQ\firmware\autofiles\usbdsc.c	214;"	v	line:214
+USB_SOF_Handler	D:\Download\3DAQ\firmware\system\usb\usbdrv\usbdrv.c	18;"	p	line:18	file:	signature:(void)
+USB_SOF_Handler	D:\Download\3DAQ\firmware\system\usb\usbdrv\usbdrv.c	410;"	f	line:410	signature:(void)
+USB_USE_GEN	D:\Download\3DAQ\firmware\autofiles\usbcfg.h	19;"	d	line:19
+UserInit	D:\Download\3DAQ\firmware\user\user.c	369;"	f	line:369	signature:(void)
+UserInit	D:\Download\3DAQ\firmware\user\user.h	54;"	p	line:54	signature:(void)
+UserTasks	D:\Download\3DAQ\firmware\user\user.c	357;"	f	line:357	signature:(void)
+WORD	D:\Download\3DAQ\firmware\system\typedefs.h	46;"	t	line:46
+Word0	D:\Download\3DAQ\firmware\system\typedefs.h	74;"	m	line:74	struct:_DWORD::<anonymous>
+Word1	D:\Download\3DAQ\firmware\system\typedefs.h	75;"	m	line:75	struct:_DWORD::<anonymous>
+_BDT	D:\Download\3DAQ\firmware\system\usb\usbmmap.h	74;"	u	line:74
+_BD_STAT	D:\Download\3DAQ\firmware\system\usb\usbmmap.h	44;"	u	line:44
+_BOOL	D:\Download\3DAQ\firmware\system\typedefs.h	114;"	g	line:114
+_BSTALL::0x04	D:\Download\3DAQ\firmware\system\usb\usbmmap.h	10;"	d	line:10
+_BYTE	D:\Download\3DAQ\firmware\system\typedefs.h	8;"	u	line:8
+_DAT0::0x00	D:\Download\3DAQ\firmware\system\usb\usbmmap.h	14;"	d	line:14
+_DAT1::0x40	D:\Download\3DAQ\firmware\system\usb\usbmmap.h	15;"	d	line:15
+_DTSEN::0x08	D:\Download\3DAQ\firmware\system\usb\usbmmap.h	11;"	d	line:11
+_DTSMASK::0x40	D:\Download\3DAQ\firmware\system\usb\usbmmap.h	16;"	d	line:16
+_DWORD	D:\Download\3DAQ\firmware\system\typedefs.h	50;"	u	line:50
+_INCDIS::0x10	D:\Download\3DAQ\firmware\system\usb\usbmmap.h	12;"	d	line:12
+_KEN::0x20	D:\Download\3DAQ\firmware\system\usb\usbmmap.h	13;"	d	line:13
+_POINTER	D:\Download\3DAQ\firmware\system\typedefs.h	89;"	u	line:89
+_RAM::0	D:\Download\3DAQ\firmware\system\usb\usbmmap.h	30;"	d	line:30
+_ROM::1	D:\Download\3DAQ\firmware\system\usb\usbmmap.h	31;"	d	line:31
+_UCPU::0x00	D:\Download\3DAQ\firmware\system\usb\usbmmap.h	18;"	d	line:18
+_USB_DEVICE_STATUS	D:\Download\3DAQ\firmware\system\usb\usbmmap.h	34;"	u	line:34
+_USIE::0x80	D:\Download\3DAQ\firmware\system\usb\usbmmap.h	17;"	d	line:17
+_WORD	D:\Download\3DAQ\firmware\system\typedefs.h	24;"	u	line:24
+_byte	D:\Download\3DAQ\firmware\system\typedefs.h	10;"	m	line:10	union:_BYTE
+_byte	D:\Download\3DAQ\firmware\system\usb\usbmmap.h	36;"	m	line:36	union:_USB_DEVICE_STATUS
+_byte	D:\Download\3DAQ\firmware\system\usb\usbmmap.h	46;"	m	line:46	union:_BD_STAT
+_byte	D:\Download\3DAQ\firmware\user\user.h	19;"	m	line:19	union:DATA_PACKET
+_dword	D:\Download\3DAQ\firmware\system\typedefs.h	52;"	m	line:52	union:_DWORD
+_reset	D:\Download\3DAQ\firmware\main.c	21;"	f	line:21	signature:(void)
+_startup	D:\Download\3DAQ\firmware\main.c	19;"	p	line:19	file:	signature:(void)
+_word	D:\Download\3DAQ\firmware\system\typedefs.h	26;"	m	line:26	union:_WORD
+_word	D:\Download\3DAQ\firmware\system\typedefs.h	97;"	m	line:97	union:_POINTER
+_word	D:\Download\3DAQ\firmware\user\user.h	20;"	m	line:20	union:DATA_PACKET
+b0	D:\Download\3DAQ\firmware\system\typedefs.h	13;"	m	line:13	struct:_BYTE::<anonymous>
+b1	D:\Download\3DAQ\firmware\system\typedefs.h	14;"	m	line:14	struct:_BYTE::<anonymous>
+b2	D:\Download\3DAQ\firmware\system\typedefs.h	15;"	m	line:15	struct:_BYTE::<anonymous>
+b3	D:\Download\3DAQ\firmware\system\typedefs.h	16;"	m	line:16	struct:_BYTE::<anonymous>
+b4	D:\Download\3DAQ\firmware\system\typedefs.h	17;"	m	line:17	struct:_BYTE::<anonymous>
+b5	D:\Download\3DAQ\firmware\system\typedefs.h	18;"	m	line:18	struct:_BYTE::<anonymous>
+b6	D:\Download\3DAQ\firmware\system\typedefs.h	19;"	m	line:19	struct:_BYTE::<anonymous>
+b7	D:\Download\3DAQ\firmware\system\typedefs.h	20;"	m	line:20	struct:_BYTE::<anonymous>
+bDscType	D:\Download\3DAQ\firmware\autofiles\usbdsc.c	199;"	m	line:199	file:
+bDscType	D:\Download\3DAQ\firmware\autofiles\usbdsc.c	202;"	m	line:202	file:
+bDscType	D:\Download\3DAQ\firmware\autofiles\usbdsc.c	207;"	m	line:207	file:
+bHigh	D:\Download\3DAQ\firmware\system\typedefs.h	94;"	m	line:94	struct:_POINTER::<anonymous>
+bLength	D:\Download\3DAQ\firmware\autofiles\usbdsc.c	199;"	m	line:199	file:
+bLength	D:\Download\3DAQ\firmware\autofiles\usbdsc.c	202;"	m	line:202	file:
+bLength	D:\Download\3DAQ\firmware\autofiles\usbdsc.c	207;"	m	line:207	file:
+bLow	D:\Download\3DAQ\firmware\system\typedefs.h	93;"	m	line:93	struct:_POINTER::<anonymous>
+bRam	D:\Download\3DAQ\firmware\system\typedefs.h	101;"	m	line:101	union:_POINTER
+bRom	D:\Download\3DAQ\firmware\system\typedefs.h	106;"	m	line:106	union:_POINTER
+byte	D:\Download\3DAQ\firmware\system\typedefs.h	4;"	t	line:4
+byte0	D:\Download\3DAQ\firmware\system\typedefs.h	29;"	m	line:29	struct:_WORD::<anonymous>
+byte0	D:\Download\3DAQ\firmware\system\typedefs.h	55;"	m	line:55	struct:_DWORD::<anonymous>
+byte1	D:\Download\3DAQ\firmware\system\typedefs.h	30;"	m	line:30	struct:_WORD::<anonymous>
+byte1	D:\Download\3DAQ\firmware\system\typedefs.h	56;"	m	line:56	struct:_DWORD::<anonymous>
+byte2	D:\Download\3DAQ\firmware\system\typedefs.h	57;"	m	line:57	struct:_DWORD::<anonymous>
+byte3	D:\Download\3DAQ\firmware\system\typedefs.h	58;"	m	line:58	struct:_DWORD::<anonymous>
+byte_to_read	D:\Download\3DAQ\firmware\system\usb\usbctrltrf\usbctrltrf.c	330;"	l	line:330
+byte_to_send	D:\Download\3DAQ\firmware\system\usb\usbctrltrf\usbctrltrf.c	260;"	l	line:260
+cd01	D:\Download\3DAQ\firmware\autofiles\usbdsc.h	18;"	v	line:18
+counter	D:\Download\3DAQ\firmware\user\user.c	14;"	v	line:14
+ctrl_trf_mem	D:\Download\3DAQ\firmware\system\usb\usbmmap.h	40;"	m	line:40	struct:_USB_DEVICE_STATUS::<anonymous>
+ctrl_trf_session_owner	D:\Download\3DAQ\firmware\system\usb\usbctrltrf\usbctrltrf.c	45;"	v	line:45
+ctrl_trf_state	D:\Download\3DAQ\firmware\system\usb\usbctrltrf\usbctrltrf.c	44;"	v	line:44
+dataPacket	D:\Download\3DAQ\firmware\user\user.c	17;"	v	line:17
+deg	D:\Download\3DAQ\firmware\user\user.c	349;"	l	line:349
+delay_count	D:\Download\3DAQ\firmware\system\usb\usbdrv\usbdrv.c	371;"	l	line:371	file:
+device_dsc	D:\Download\3DAQ\firmware\autofiles\usbdsc.c	147;"	v	line:147
+dword	D:\Download\3DAQ\firmware\system\typedefs.h	6;"	t	line:6
+ep01i_i00a00	D:\Download\3DAQ\firmware\autofiles\usbdsc.h	21;"	v	line:21
+ep01o_i00a00	D:\Download\3DAQ\firmware\autofiles\usbdsc.h	20;"	v	line:20
+ep0Bi	D:\Download\3DAQ\firmware\system\usb\usbmmap.c	175;"	v	line:175
+ep0Bo	D:\Download\3DAQ\firmware\system\usb\usbmmap.c	174;"	v	line:174
+ep10Bi	D:\Download\3DAQ\firmware\system\usb\usbmmap.c	225;"	v	line:225
+ep10Bo	D:\Download\3DAQ\firmware\system\usb\usbmmap.c	224;"	v	line:224
+ep11Bi	D:\Download\3DAQ\firmware\system\usb\usbmmap.c	230;"	v	line:230
+ep11Bo	D:\Download\3DAQ\firmware\system\usb\usbmmap.c	229;"	v	line:229
+ep12Bi	D:\Download\3DAQ\firmware\system\usb\usbmmap.c	235;"	v	line:235
+ep12Bo	D:\Download\3DAQ\firmware\system\usb\usbmmap.c	234;"	v	line:234
+ep13Bi	D:\Download\3DAQ\firmware\system\usb\usbmmap.c	240;"	v	line:240
+ep13Bo	D:\Download\3DAQ\firmware\system\usb\usbmmap.c	239;"	v	line:239
+ep14Bi	D:\Download\3DAQ\firmware\system\usb\usbmmap.c	245;"	v	line:245
+ep14Bo	D:\Download\3DAQ\firmware\system\usb\usbmmap.c	244;"	v	line:244
+ep15Bi	D:\Download\3DAQ\firmware\system\usb\usbmmap.c	250;"	v	line:250
+ep15Bo	D:\Download\3DAQ\firmware\system\usb\usbmmap.c	249;"	v	line:249
+ep1Bi	D:\Download\3DAQ\firmware\system\usb\usbmmap.c	180;"	v	line:180
+ep1Bo	D:\Download\3DAQ\firmware\system\usb\usbmmap.c	179;"	v	line:179
+ep2Bi	D:\Download\3DAQ\firmware\system\usb\usbmmap.c	185;"	v	line:185
+ep2Bo	D:\Download\3DAQ\firmware\system\usb\usbmmap.c	184;"	v	line:184
+ep3Bi	D:\Download\3DAQ\firmware\system\usb\usbmmap.c	190;"	v	line:190
+ep3Bo	D:\Download\3DAQ\firmware\system\usb\usbmmap.c	189;"	v	line:189
+ep4Bi	D:\Download\3DAQ\firmware\system\usb\usbmmap.c	195;"	v	line:195
+ep4Bo	D:\Download\3DAQ\firmware\system\usb\usbmmap.c	194;"	v	line:194
+ep5Bi	D:\Download\3DAQ\firmware\system\usb\usbmmap.c	200;"	v	line:200
+ep5Bo	D:\Download\3DAQ\firmware\system\usb\usbmmap.c	199;"	v	line:199
+ep6Bi	D:\Download\3DAQ\firmware\system\usb\usbmmap.c	205;"	v	line:205
+ep6Bo	D:\Download\3DAQ\firmware\system\usb\usbmmap.c	204;"	v	line:204
+ep7Bi	D:\Download\3DAQ\firmware\system\usb\usbmmap.c	210;"	v	line:210
+ep7Bo	D:\Download\3DAQ\firmware\system\usb\usbmmap.c	209;"	v	line:209
+ep8Bi	D:\Download\3DAQ\firmware\system\usb\usbmmap.c	215;"	v	line:215
+ep8Bo	D:\Download\3DAQ\firmware\system\usb\usbmmap.c	214;"	v	line:214
+ep9Bi	D:\Download\3DAQ\firmware\system\usb\usbmmap.c	220;"	v	line:220
+ep9Bo	D:\Download\3DAQ\firmware\system\usb\usbmmap.c	219;"	v	line:219
+finalTemp	D:\Download\3DAQ\firmware\user\user.c	319;"	l	line:319
+high	D:\Download\3DAQ\firmware\user\user.c	261;"	l	line:261
+i	D:\Download\3DAQ\firmware\system\usb\class\generic\usbgen.c	96;"	l	line:96
+i	D:\Download\3DAQ\firmware\system\usb\usbctrltrf\usbctrltrf.c	135;"	l	line:135
+i	D:\Download\3DAQ\firmware\user\user.c	281;"	l	line:281
+i	D:\Download\3DAQ\firmware\user\user.c	290;"	l	line:290
+i	D:\Download\3DAQ\firmware\user\user.c	318;"	l	line:318
+i	D:\Download\3DAQ\firmware\user\user.c	359;"	l	line:359
+i	D:\Download\3DAQ\firmware\user\user.c	79;"	l	line:79
+i00a00	D:\Download\3DAQ\firmware\autofiles\usbdsc.h	19;"	v	line:19
+index	D:\Download\3DAQ\firmware\user\user.c	77;"	l	line:77
+led_count	D:\Download\3DAQ\firmware\user\user.c	192;"	l	line:192	file:
+led_num	D:\Download\3DAQ\firmware\user\user.h	43;"	m	line:43	struct:DATA_PACKET::<anonymous>
+led_status	D:\Download\3DAQ\firmware\user\user.h	44;"	m	line:44	struct:DATA_PACKET::<anonymous>
+len	D:\Download\3DAQ\firmware\user\user.h	33;"	m	line:33	struct:DATA_PACKET::<anonymous>
+low	D:\Download\3DAQ\firmware\user\user.c	261;"	l	line:261
+mInitAllLEDs::LATD&=0xF0;TRISD&=0xF0;	D:\Download\3DAQ\firmware\io_cfg.h	43;"	d	line:43
+mInitPOT::TRISAbits.TRISA0=1;ADCON0=0x01	D:\Download\3DAQ\firmware\io_cfg.h	36;"	d	line:36
+mLED_1::LATDbits.LATD0	D:\Download\3DAQ\firmware\io_cfg.h	48;"	d	line:48
+mLED_1_Off::mLED_1=0;	D:\Download\3DAQ\firmware\io_cfg.h	58;"	d	line:58
+mLED_1_On::mLED_1=1;	D:\Download\3DAQ\firmware\io_cfg.h	53;"	d	line:53
+mLED_1_Toggle::mLED_1=!mLED_1;	D:\Download\3DAQ\firmware\io_cfg.h	63;"	d	line:63
+mLED_2::LATDbits.LATD1	D:\Download\3DAQ\firmware\io_cfg.h	49;"	d	line:49
+mLED_2_Off::mLED_2=0;	D:\Download\3DAQ\firmware\io_cfg.h	59;"	d	line:59
+mLED_2_On::mLED_2=1;	D:\Download\3DAQ\firmware\io_cfg.h	54;"	d	line:54
+mLED_2_Toggle::mLED_2=!mLED_2;	D:\Download\3DAQ\firmware\io_cfg.h	64;"	d	line:64
+mLED_3::LATDbits.LATD2	D:\Download\3DAQ\firmware\io_cfg.h	50;"	d	line:50
+mLED_3_Off::mLED_3=0;	D:\Download\3DAQ\firmware\io_cfg.h	60;"	d	line:60
+mLED_3_On::mLED_3=1;	D:\Download\3DAQ\firmware\io_cfg.h	55;"	d	line:55
+mLED_3_Toggle::mLED_3=!mLED_3;	D:\Download\3DAQ\firmware\io_cfg.h	65;"	d	line:65
+mLED_4::LATDbits.LATD3	D:\Download\3DAQ\firmware\io_cfg.h	51;"	d	line:51
+mLED_4_Off::mLED_4=0;	D:\Download\3DAQ\firmware\io_cfg.h	61;"	d	line:61
+mLED_4_On::mLED_4=1;	D:\Download\3DAQ\firmware\io_cfg.h	56;"	d	line:56
+mLED_4_Toggle::mLED_4=!mLED_4;	D:\Download\3DAQ\firmware\io_cfg.h	66;"	d	line:66
+mLED_Both_Off::{mLED_1_Off;mLED_2_Off;}	D:\Download\3DAQ\firmware\user\user.c	198;"	d	line:198	file:
+mLED_Both_On::{mLED_1_On;mLED_2_On;}	D:\Download\3DAQ\firmware\user\user.c	199;"	d	line:199	file:
+mLED_Only_1_On::{mLED_1_On;mLED_2_Off;}	D:\Download\3DAQ\firmware\user\user.c	200;"	d	line:200	file:
+mLED_Only_2_On::{mLED_1_Off;mLED_2_On;}	D:\Download\3DAQ\firmware\user\user.c	201;"	d	line:201	file:
+mUSBGenGetRxLength::usbgen_rx_len	D:\Download\3DAQ\firmware\system\usb\class\generic\usbgen.h	99;"	d	line:99
+mUSBGenRxIsBusy::USBGEN_BD_OUT.Stat.UOWN	D:\Download\3DAQ\firmware\system\usb\class\generic\usbgen.h	61;"	d	line:61
+mUSBGenTxIsBusy::USBGEN_BD_IN.Stat.UOWN	D:\Download\3DAQ\firmware\system\usb\class\generic\usbgen.h	80;"	d	line:80
+pDst	D:\Download\3DAQ\firmware\system\usb\usbctrltrf\usbctrltrf.c	48;"	v	line:48
+pFunc	D:\Download\3DAQ\firmware\system\typedefs.h	87;"	t	line:87
+pSrc	D:\Download\3DAQ\firmware\system\usb\usbctrltrf\usbctrltrf.c	47;"	v	line:47
+pTemp	D:\Download\3DAQ\firmware\user\user.c	19;"	v	line:19
+q	D:\Download\3DAQ\firmware\user\user.c	80;"	l	line:80
+sd000	D:\Download\3DAQ\firmware\autofiles\usbdsc.c	199;"	v	line:199
+sd001	D:\Download\3DAQ\firmware\autofiles\usbdsc.c	202;"	v	line:202
+sd002	D:\Download\3DAQ\firmware\autofiles\usbdsc.c	207;"	v	line:207
+self_power::1	D:\Download\3DAQ\firmware\io_cfg.h	28;"	d	line:28
+self_power::PORTAbits.RA2	D:\Download\3DAQ\firmware\io_cfg.h	26;"	d	line:26
+string	D:\Download\3DAQ\firmware\autofiles\usbdsc.c	199;"	m	line:199	file:
+string	D:\Download\3DAQ\firmware\autofiles\usbdsc.c	202;"	m	line:202	file:
+string	D:\Download\3DAQ\firmware\autofiles\usbdsc.c	207;"	m	line:207	file:
+sw2::PORTBbits.RB4	D:\Download\3DAQ\firmware\io_cfg.h	33;"	d	line:33
+temp	D:\Download\3DAQ\firmware\user\user.c	320;"	l	line:320
+temp	D:\Download\3DAQ\firmware\user\user.c	81;"	l	line:81
+temp_data	D:\Download\3DAQ\firmware\user\user.c	22;"	v	line:22
+temp_sense::PORTDbits.RD7	D:\Download\3DAQ\firmware\io_cfg.h	20;"	d	line:20
+trf_state	D:\Download\3DAQ\firmware\user\user.c	15;"	v	line:15
+tris_self_power::TRISAbits.TRISA2	D:\Download\3DAQ\firmware\io_cfg.h	23;"	d	line:23
+tris_usb_bus_sense::TRISAbits.TRISA1	D:\Download\3DAQ\firmware\io_cfg.h	12;"	d	line:12
+usb_active_cfg	D:\Download\3DAQ\firmware\system\usb\usbmmap.c	159;"	v	line:159
+usb_alt_intf	D:\Download\3DAQ\firmware\system\usb\usbmmap.c	160;"	v	line:160
+usb_bus_sense::1	D:\Download\3DAQ\firmware\io_cfg.h	18;"	d	line:18
+usb_device_state	D:\Download\3DAQ\firmware\system\usb\usbmmap.c	157;"	v	line:157
+usb_stat	D:\Download\3DAQ\firmware\system\usb\usbmmap.c	158;"	v	line:158
+usbgen_in	D:\Download\3DAQ\firmware\system\usb\usbmmap.c	277;"	v	line:277
+usbgen_out	D:\Download\3DAQ\firmware\system\usb\usbmmap.c	276;"	v	line:276
+usbgen_rx_len	D:\Download\3DAQ\firmware\system\usb\class\generic\usbgen.c	10;"	v	line:10
+v	D:\Download\3DAQ\firmware\system\typedefs.h	44;"	m	line:44	struct:_WORD::<anonymous>
+v	D:\Download\3DAQ\firmware\system\typedefs.h	79;"	m	line:79	struct:_DWORD::<anonymous>
+valid_temp	D:\Download\3DAQ\firmware\user\user.c	21;"	v	line:21
+wCount	D:\Download\3DAQ\firmware\system\usb\usbctrltrf\usbctrltrf.c	49;"	v	line:49
+wRam	D:\Download\3DAQ\firmware\system\typedefs.h	103;"	m	line:103	union:_POINTER
+wRom	D:\Download\3DAQ\firmware\system\typedefs.h	107;"	m	line:107	union:_POINTER
+word	D:\Download\3DAQ\firmware\system\typedefs.h	5;"	t	line:5
+word0	D:\Download\3DAQ\firmware\system\typedefs.h	62;"	m	line:62	struct:_DWORD::<anonymous>
+word1	D:\Download\3DAQ\firmware\system\typedefs.h	63;"	m	line:63	struct:_DWORD::<anonymous>
+word_data	D:\Download\3DAQ\firmware\user\user.h	49;"	m	line:49	struct:DATA_PACKET::<anonymous>

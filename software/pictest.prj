@@ -1,0 +1,134 @@
+[Project Header]
+Version = 810
+Pathname = "/c/3DAQ/software/pictest.prj"
+CVI Dir = "/c/program files/national instruments/cvi81"
+IVI Standard Root Dir = "/C/Program Files/IVI"
+VXIplug&play Framework Dir = "/C/VXIpnp/winnt"
+Number of Files = 4
+Target Type = "Executable"
+Flags = 16
+
+[File 0001]
+File Type = "CSource"
+Res Id = 1
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "picdriver.c"
+Path = "/c/3DAQ/software/picdriver.c"
+Exclude = False
+Compile Into Object File = False
+Project Flags = 0
+Folder = "Source Files"
+
+[File 0002]
+File Type = "Include"
+Res Id = 2
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "picdriver.h"
+Path = "/c/3DAQ/software/picdriver.h"
+Exclude = False
+Project Flags = 0
+Folder = "Include Files"
+
+[File 0003]
+File Type = "CSource"
+Res Id = 3
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "pictest.c"
+Path = "/c/3DAQ/software/pictest.c"
+Exclude = False
+Compile Into Object File = False
+Project Flags = 0
+Folder = "Source Files"
+
+[File 0004]
+File Type = "User Interface Resource"
+Res Id = 4
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "pictest.uir"
+Path = "/c/3DAQ/software/pictest.uir"
+Exclude = False
+Project Flags = 0
+Folder = "User Interface Files"
+
+[Folders]
+Instrument Files Folder Not Added Yet = True
+Folder 0 = "Source Files"
+Folder 1 = "Include Files"
+Folder 2 = "User Interface Files"
+
+[Compiler Options]
+Default Calling Convention = "cdecl"
+Require Prototypes = True
+Require Return Values = True
+Enable Pointer Mismatch Warning = False
+Enable Unreachable Code Warning = False
+Enable Unreferenced Identifiers Warning = False
+Enable Assignment In Conditional Warning = False
+O Option Compatible With 5.0 = False
+Uninitialized Locals Compile Warning = "Conservative"
+
+[Run Options]
+Stack Size = 250000
+Image Base Address = 4194304
+
+[Compiler Defines]
+Compiler Defines = "/DWIN32_LEAN_AND_MEAN"
+
+[Create Executable]
+Executable File_Debug Is Rel = True
+Executable File_Debug Rel To = "Project"
+Executable File_Debug Rel Path = "pictest_dbg.exe"
+Executable File_Debug = "/c/3DAQ/software/pictest_dbg.exe"
+Executable File_Release Is Rel = True
+Executable File_Release Rel To = "Project"
+Executable File_Release Rel Path = "pictest.exe"
+Executable File_Release = "/c/3DAQ/software/pictest.exe"
+Icon File Is Rel = False
+Icon File = ""
+Application Title = ""
+DLL Exports = "Include File Symbols"
+DLL Import Library Choice = "Gen Lib For Current Mode"
+Use IVI Subdirectories for Import Libraries = False
+Use VXIPNP Subdirectories for Import Libraries = False
+Use Dflt Import Lib Base Name = True
+Where to Copy DLL = "Do not copy"
+Add Type Lib To DLL = False
+Include Type Lib Help Links = False
+Type Lib FP File Is Rel = False
+Type Lib FP File = ""
+Type Lib Guid = ""
+Runtime Support = "Full Runtime Support"
+Instrument Driver Support Only = False
+Embed Project .UIRs = False
+Generate Map File = False
+
+[External Compiler Support]
+UIR Callbacks File Option = 0
+Using LoadExternalModule = False
+Create Project Symbols File = True
+UIR Callbacks Obj File Is Rel = False
+UIR Callbacks Obj File = ""
+Project Symbols H File Is Rel = False
+Project Symbols H File = ""
+Project Symbols Obj File Is Rel = False
+Project Symbols Obj File = ""
+
+[ActiveX Server Options]
+Specification File Is Rel = False
+Specification File = ""
+Source File Is Rel = False
+Source File = ""
+Include File Is Rel = False
+Include File = ""
+IDL File Is Rel = False
+IDL File = ""
+Register ActiveX Server = False
+
+[tpcSection]
+tpcEnabled = 0
+tpcOverrideEnvironment = 0
+
