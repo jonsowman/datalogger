@@ -341,6 +341,10 @@ void UserTasks(void)
 		ReadTemp();
 	}
 	CheckButtons();
+	if(PORTD & 0x02) // RD1 ON
+		PORTD &= 0xfd; // Turn RD1 off
+	else
+		PORTD |= 0x02; // Turn RD1 on
 	return;
 }//end UserTasks
 
@@ -352,6 +356,7 @@ void UserInit(void)
 	ADCON2=0x3C;
     ADCON2bits.ADFM = 1;   // ADC result right justified
 	TRISD = 0x18;
+	TRIDS &= 0xfd; // Set RD1 as output
 	ThermSendReset();
 }//end UserInit
 
