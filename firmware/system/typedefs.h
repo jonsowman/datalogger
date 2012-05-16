@@ -5,6 +5,12 @@ typedef unsigned char   byte;           // 8-bit
 typedef unsigned int    word;           // 16-bit
 typedef unsigned long   dword;          // 32-bit
 
+// Now some actually standard ones
+typedef unsigned char 	uint8_t;
+typedef char			int8_t;
+typedef unsigned int	uint16_t;
+typedef int				int16_t;
+
 typedef union _BYTE
 {
     byte _byte;

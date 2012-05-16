@@ -37,28 +37,11 @@ void ResetTempLog(void);
 //UCAM
 byte ReadPOT(void);
 void Blink(byte);
+void nullSampler(void);
 
 /** D E C L A R A T I O N S **************************************************/
 #pragma code
 
-
-
-/******************************************************************************
- * Function:        void ProcessIO(void)
- *
- * PreCondition:    None
- *
- * Input:           None
- *
- * Output:          None
- *
- * Side Effects:    None
- *
- * Overview:        This function is a place holder for other user routines.
- *                  It is a mixture of both USB and non-USB tasks.
- *
- * Note:            None
- *****************************************************************************/
 void ProcessIO(void)
 {   
     //BlinkUSBStatus();
@@ -68,9 +51,7 @@ void ProcessIO(void)
     
     //UCAM
     ServiceRequests();
-
-}//end ProcessIO
-
+}
 
 void ServiceRequests(void)
 {
@@ -120,32 +101,34 @@ void ServiceRequests(void)
                 {
                     mLED_1 = dataPacket.led_status;
                     counter = 0x01;
-                }//end if
+                }
                 if(dataPacket.led_num == 2)
                 {
                     mLED_2 = dataPacket.led_status;
                     counter = 0x01;
-                }//end if
+                }
                 if(dataPacket.led_num == 3)
                 {
                     mLED_3 = dataPacket.led_status;
                     counter = 0x01;
-                }//end if
+                }
                 else if(dataPacket.led_num == 4)
                 {
                     mLED_4 = dataPacket.led_status;
                     counter = 0x01;
-                }//end if else
+                }
                 break;
 
             //UCAM
             case BLINK_LED_COMMAND: //[0xEE, Onstate]
             	//Return the sum of the numbers, note no overflow protection present, to keep simplicity.
-                Blink(dataPacket._byte[1]);
+                //Blink(dataPacket._byte[1]);
+				nullSampler();
                 counter=0x02; //sends back same command
                 break;
-           //UCAM
-           case GET_ADC_COMMAND: //[0xED. 8-bit data]
+
+           	//UCAM
+           	case GET_ADC_COMMAND: //[0xED. 8-bit data]
                 dataPacket._byte[1] = ReadPOT();
                 counter=0x02; //returns[0xED, command]
                 break;
@@ -156,37 +139,16 @@ void ServiceRequests(void)
                 
             default:
                 break;
-        }//end switch()
+        }
         if(counter != 0)
         {
             if(!mUSBGenTxIsBusy())
-				//Mod by Tim
                 USBGenWrite((byte*)&dataPacket,counter);
-				//USBGenWrite((byte*)&dataPacket,64);
-				//end mod by Tim
-        }//end if
-    }//end if
+        }
+    }
 return;
-}//end ServiceRequests
+}
 
-/******************************************************************************
- * Function:        void BlinkUSBStatus(void)
- *
- * PreCondition:    None
- *
- * Input:           None
- *
- * Output:          None
- *
- * Side Effects:    None
- *
- * Overview:        BlinkUSBStatus turns on and off LEDs corresponding to
- *                  the USB device state.
- *
- * Note:            mLED macros can be found in io_cfg.h
- *                  usb_device_state is declared in usbmmap.c and is modified
- *                  in usbdrv.c, usbctrltrf.c, and usb9.c
- *****************************************************************************/
 void BlinkUSBStatus(void)
 {
     static word led_count=0;
@@ -234,7 +196,7 @@ void BlinkUSBStatus(void)
             {
                 mLED_1_Toggle();
                 mLED_2_Off();
-            }//end if
+            }
         }
         else if(usb_device_state == CONFIGURED_STATE)
         {
@@ -242,19 +204,20 @@ void BlinkUSBStatus(void)
             {
                 mLED_1_Toggle();
                 mLED_2 = !mLED_1;       // Alternate blink                
-            }//end if
-        }//end if(...)
-    }//end if(UCONbits.SUSPND...)
+            }
+        }
+    }
 
-}//end BlinkUSBStatus
+}
 
 //UCAM
-void Blink(byte onState)
 //code section will blink LEDs 5 times
+// For some reason this writes the ENTIRE PORTD
+void Blink(byte onState)
 {
 	LATD = onState;
 	return;
-}//end CodeSectionAccessed
+}
 
 byte ReadPOT(void)
 {
@@ -267,23 +230,38 @@ byte ReadPOT(void)
 	low >>= 2;
 	high <<= 6;
     return (low | high);
-}//end ReadPOT
+}
+
+/**
+ * Run lots of ADC samples and toggle an IO
+ * to test sampling rate.
+ */
+void nullSampler(void)
+{
+	uint16_t i;
+	for( i = 0; i < 65535; i++)
+	{
+		ADCON0bits.GO = 1;
+    	while(ADCON0bits.NOT_DONE);
+		LATD = ~(LATDbits.LATD0) & 0x01;
+	}
+	return;
+}
 
 void CheckButtons(void)
 {
 	return;
-}//end CheckButtons
-//end mod by Tim
+}
 
+//Delay of 1 gives 6-8us (this is a totally useless number)
 void CallDelay(int delay)
-//Delay of 1 gives 6-8us
 {
 	int i;
 	for(i=0;i<delay;i++)
 	{
 	}
 	return;
-}//end CallDelay
+}
 
 void ThermWrite(int command)
 {
@@ -363,6 +341,10 @@ void UserTasks(void)
 		ReadTemp();
 	}
 	CheckButtons();
+	if(PORTD & 0x02) // RD1 ON
+		PORTD &= 0xfd; // Turn RD1 off
+	else
+		PORTD |= 0x02; // Turn RD1 on
 	return;
 }//end UserTasks
 
@@ -374,6 +356,7 @@ void UserInit(void)
 	ADCON2=0x3C;
     ADCON2bits.ADFM = 1;   // ADC result right justified
 	TRISD = 0x18;
+	TRIDS &= 0xfd; // Set RD1 as output
 	ThermSendReset();
 }//end UserInit
 
