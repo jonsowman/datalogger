@@ -1,5 +1,5 @@
 MPLINK 4.1, Linker
-Linker Map File - Created Wed May 16 10:57:35 2012
+Linker Map File - Created Wed May 16 12:14:37 2012
 
                                  Section Info
                   Section       Type    Address   Location Size(Bytes)
@@ -9,18 +9,18 @@ Linker Map File - Created Wed May 16 10:57:35 2012
    _HIGH_INTERRUPT_VECTOR       code   0x000808    program   0x000002
     _LOW_INTERRUPT_VECTOR       code   0x000818    program   0x000002
                    .cinit    romdata   0x00082a    program   0x00000e
-             .code_user.o       code   0x000838    program   0x000586
-             .code_usb9.o       code   0x000dbe    program   0x000308
-       .code_usbctrltrf.o       code   0x0010c6    program   0x0002b2
-           .code_usbdrv.o       code   0x001378    program   0x00016e
-           .code_usbgen.o       code   0x0014e6    program   0x00011e
-        .romdata_usbdsc.o    romdata   0x001604    program   0x0000b8
-               _cinit_scn       code   0x0016bc    program   0x00009e
-                     PROG       code   0x00175a    program   0x00005a
-             .code_main.o       code   0x0017b4    program   0x00002e
-             _startup_scn       code   0x0017e2    program   0x00001c
-           .code___init.o       code   0x0017fe    program   0x000002
-          .idata_user.o_i    romdata   0x001800    program   0x000002
+             .code_user.o       code   0x000838    program   0x0005de
+             .code_usb9.o       code   0x000e16    program   0x000308
+       .code_usbctrltrf.o       code   0x00111e    program   0x0002b2
+           .code_usbdrv.o       code   0x0013d0    program   0x00016e
+           .code_usbgen.o       code   0x00153e    program   0x00011e
+        .romdata_usbdsc.o    romdata   0x00165c    program   0x0000b8
+               _cinit_scn       code   0x001714    program   0x00009e
+                     PROG       code   0x0017b2    program   0x00005a
+             .code_main.o       code   0x00180c    program   0x00002e
+             _startup_scn       code   0x00183a    program   0x00001c
+           .code___init.o       code   0x001856    program   0x000002
+          .idata_user.o_i    romdata   0x001858    program   0x000002
                 MATH_DATA      udata   0x000000       data   0x000014
                  .tmpdata      udata   0x000014       data   0x000004
             .udata_user.o      udata   0x000060       data   0x000080
@@ -43,113 +43,114 @@ Linker Map File - Created Wed May 16 10:57:35 2012
                             0x000800    0x000805      
                             0x000808    0x000809      
                             0x000818    0x000819      
-                            0x00082a    0x001801      
-            4072 out of 33048 program addresses used, program memory utilization is 12%
+                            0x00082a    0x001859      
+            4160 out of 33048 program addresses used, program memory utilization is 12%
 
 
 
                               Symbols - Sorted by Name
                      Name    Address   Location    Storage File                     
                 ---------  ---------  ---------  --------- ---------                
-                    Blink   0x000a58    program     extern C:\datalogger\firmware\user\user.c
-           BlinkUSBStatus   0x0009c8    program     extern C:\datalogger\firmware\user\user.c
-                CallDelay   0x000ac8    program     extern C:\datalogger\firmware\user\user.c
-             CheckButtons   0x000ac4    program     extern C:\datalogger\firmware\user\user.c
-               ClearArray   0x0014bc    program     extern C:\datalogger\firmware\system\usb\usbdrv\usbdrv.c
-                 FXM1616S   0x00175a    program     extern C:\MCC18\SRC\TRADIT~1\MATH\fxm1616s.asm
-         InitializeSystem   0x0017c0    program     static C:\datalogger\firmware\main.c
+                    Blink   0x000a50    program     extern C:\datalogger\firmware\user\user.c
+           BlinkUSBStatus   0x0009c0    program     extern C:\datalogger\firmware\user\user.c
+                CallDelay   0x000b20    program     extern C:\datalogger\firmware\user\user.c
+             CheckButtons   0x000b1c    program     extern C:\datalogger\firmware\user\user.c
+               ClearArray   0x001514    program     extern C:\datalogger\firmware\system\usb\usbdrv\usbdrv.c
+                 FXM1616S   0x0017b2    program     extern C:\MCC18\SRC\TRADIT~1\MATH\fxm1616s.asm
+         InitializeSystem   0x001818    program     static C:\datalogger\firmware\main.c
                 ProcessIO   0x000838    program     extern C:\datalogger\firmware\user\user.c
-                  ReadPOT   0x000a70    program     extern C:\datalogger\firmware\user\user.c
-                 ReadTemp   0x000cec    program     extern C:\datalogger\firmware\user\user.c
+                  ReadPOT   0x000a68    program     extern C:\datalogger\firmware\user\user.c
+                 ReadTemp   0x000d44    program     extern C:\datalogger\firmware\user\user.c
           ServiceRequests   0x00084c    program     extern C:\datalogger\firmware\user\user.c
-               TSIGN1616A   0x0017a6    program     static C:\MCC18\SRC\TRADIT~1\MATH\fxm1616s.asm
-            ThermReadTemp   0x000bc2    program     extern C:\datalogger\firmware\user\user.c
-           ThermSendReset   0x000cc6    program     extern C:\datalogger\firmware\user\user.c
-               ThermWrite   0x000b22    program     extern C:\datalogger\firmware\user\user.c
-        USBCheckBusStatus   0x001378    program     extern C:\datalogger\firmware\system\usb\usbdrv\usbdrv.c
-       USBCheckStdRequest   0x000dbe    program     extern C:\datalogger\firmware\system\usb\usb9\usb9.c
-         USBCtrlEPService   0x0010c6    program     extern C:\datalogger\firmware\system\usb\usbctrltrf\usbctrltrf.c
- USBCtrlEPServiceComplete   0x0012d0    program     extern C:\datalogger\firmware\system\usb\usbctrltrf\usbctrltrf.c
-      USBCtrlTrfInHandler   0x001140    program     extern C:\datalogger\firmware\system\usb\usbctrltrf\usbctrltrf.c
-     USBCtrlTrfOutHandler   0x001120    program     extern C:\datalogger\firmware\system\usb\usbctrltrf\usbctrltrf.c
-      USBCtrlTrfRxService   0x001256    program     extern C:\datalogger\firmware\system\usb\usbctrltrf\usbctrltrf.c
-   USBCtrlTrfSetupHandler   0x0010fc    program     extern C:\datalogger\firmware\system\usb\usbctrltrf\usbctrltrf.c
-      USBCtrlTrfTxService   0x00117a    program     extern C:\datalogger\firmware\system\usb\usbctrltrf\usbctrltrf.c
-         USBDriverService   0x0013b0    program     extern C:\datalogger\firmware\system\usb\usbdrv\usbdrv.c
-          USBErrorHandler   0x001474    program     extern C:\datalogger\firmware\system\usb\usbdrv\usbdrv.c
-             USBGenInitEP   0x0014e6    program     extern C:\datalogger\firmware\system\usb\class\generic\usbgen.c
-               USBGenRead   0x001584    program     extern C:\datalogger\firmware\system\usb\class\generic\usbgen.c
-              USBGenWrite   0x001510    program     extern C:\datalogger\firmware\system\usb\class\generic\usbgen.c
-         USBModuleDisable   0x0013a2    program     extern C:\datalogger\firmware\system\usb\usbdrv\usbdrv.c
-          USBModuleEnable   0x001394    program     extern C:\datalogger\firmware\system\usb\usbdrv\usbdrv.c
-USBPrepareForNextSetupTrf   0x00135c    program     extern C:\datalogger\firmware\system\usb\usbctrltrf\usbctrltrf.c
-  USBProtocolResetHandler   0x001478    program     extern C:\datalogger\firmware\system\usb\usbdrv\usbdrv.c
-          USBRemoteWakeup   0x00143e    program     extern C:\datalogger\firmware\system\usb\usbdrv\usbdrv.c
-            USBSoftDetach   0x0013ac    program     extern C:\datalogger\firmware\system\usb\usbdrv\usbdrv.c
-          USBStallHandler   0x001466    program     extern C:\datalogger\firmware\system\usb\usbdrv\usbdrv.c
-  USBStdFeatureReqHandler   0x001024    program     extern C:\datalogger\firmware\system\usb\usb9\usb9.c
-      USBStdGetDscHandler   0x000e80    program     extern C:\datalogger\firmware\system\usb\usb9\usb9.c
-   USBStdGetStatusHandler   0x000f88    program     extern C:\datalogger\firmware\system\usb\usb9\usb9.c
-      USBStdSetCfgHandler   0x000f38    program     extern C:\datalogger\firmware\system\usb\usb9\usb9.c
-               USBSuspend   0x00142e    program     extern C:\datalogger\firmware\system\usb\usbdrv\usbdrv.c
-                 USBTasks   0x0017d4    program     extern C:\datalogger\firmware\main.c
-       USBWakeFromSuspend   0x001436    program     extern C:\datalogger\firmware\system\usb\usbdrv\usbdrv.c
-               USB_CD_Ptr   0x0016b2    program     extern C:\datalogger\firmware\autofiles\usbdsc.c
-               USB_SD_Ptr   0x0016b6    program     extern C:\datalogger\firmware\autofiles\usbdsc.c
-          USB_SOF_Handler   0x001462    program     extern C:\datalogger\firmware\system\usb\usbdrv\usbdrv.c
-                 UserInit   0x000da4    program     extern C:\datalogger\firmware\user\user.c
-                UserTasks   0x000d36    program     extern C:\datalogger\firmware\user\user.c
-     ___case_-18_lbl00021   0x00096c    program     static                          
-     ___case_-19_lbl00022   0x00097c    program     static                          
-      ___case_-1_lbl00023   0x00098a    program     static                          
-       ___case_0_lbl00005   0x0008b0    program     static                          
-      ___case_49_lbl00006   0x0008c2    program     static                          
-      ___case_50_lbl00016   0x000902    program     static                          
-      ___default_lbl00024   0x00098e    program     static                          
-         ___else_lbl00008   0x0008fc    program     static                          
-         ___else_lbl00010   0x0008ee    program     static                          
-         ___else_lbl00012   0x0008e0    program     static                          
-         ___else_lbl00014   0x0008d4    program     static                          
-         ___else_lbl00020   0x000950    program     static                          
-           ___if_lbl00007   0x000900    program     static                          
-           ___if_lbl00009   0x000900    program     static                          
-           ___if_lbl00011   0x000900    program     static                          
-           ___if_lbl00013   0x000900    program     static                          
-           ___if_lbl00015   0x00091a    program     static                          
-           ___if_lbl00017   0x000934    program     static                          
-           ___if_lbl00018   0x00096a    program     static                          
-           ___if_lbl00019   0x00096a    program     static                          
-           ___if_lbl00025   0x0009b2    program     static                          
-           ___if_lbl00026   0x0009b2    program     static                          
-           ___if_lbl00027   0x0009b2    program     static                          
+               TSIGN1616A   0x0017fe    program     static C:\MCC18\SRC\TRADIT~1\MATH\fxm1616s.asm
+            ThermReadTemp   0x000c1a    program     extern C:\datalogger\firmware\user\user.c
+           ThermSendReset   0x000d1e    program     extern C:\datalogger\firmware\user\user.c
+               ThermWrite   0x000b7a    program     extern C:\datalogger\firmware\user\user.c
+        USBCheckBusStatus   0x0013d0    program     extern C:\datalogger\firmware\system\usb\usbdrv\usbdrv.c
+       USBCheckStdRequest   0x000e16    program     extern C:\datalogger\firmware\system\usb\usb9\usb9.c
+         USBCtrlEPService   0x00111e    program     extern C:\datalogger\firmware\system\usb\usbctrltrf\usbctrltrf.c
+ USBCtrlEPServiceComplete   0x001328    program     extern C:\datalogger\firmware\system\usb\usbctrltrf\usbctrltrf.c
+      USBCtrlTrfInHandler   0x001198    program     extern C:\datalogger\firmware\system\usb\usbctrltrf\usbctrltrf.c
+     USBCtrlTrfOutHandler   0x001178    program     extern C:\datalogger\firmware\system\usb\usbctrltrf\usbctrltrf.c
+      USBCtrlTrfRxService   0x0012ae    program     extern C:\datalogger\firmware\system\usb\usbctrltrf\usbctrltrf.c
+   USBCtrlTrfSetupHandler   0x001154    program     extern C:\datalogger\firmware\system\usb\usbctrltrf\usbctrltrf.c
+      USBCtrlTrfTxService   0x0011d2    program     extern C:\datalogger\firmware\system\usb\usbctrltrf\usbctrltrf.c
+         USBDriverService   0x001408    program     extern C:\datalogger\firmware\system\usb\usbdrv\usbdrv.c
+          USBErrorHandler   0x0014cc    program     extern C:\datalogger\firmware\system\usb\usbdrv\usbdrv.c
+             USBGenInitEP   0x00153e    program     extern C:\datalogger\firmware\system\usb\class\generic\usbgen.c
+               USBGenRead   0x0015dc    program     extern C:\datalogger\firmware\system\usb\class\generic\usbgen.c
+              USBGenWrite   0x001568    program     extern C:\datalogger\firmware\system\usb\class\generic\usbgen.c
+         USBModuleDisable   0x0013fa    program     extern C:\datalogger\firmware\system\usb\usbdrv\usbdrv.c
+          USBModuleEnable   0x0013ec    program     extern C:\datalogger\firmware\system\usb\usbdrv\usbdrv.c
+USBPrepareForNextSetupTrf   0x0013b4    program     extern C:\datalogger\firmware\system\usb\usbctrltrf\usbctrltrf.c
+  USBProtocolResetHandler   0x0014d0    program     extern C:\datalogger\firmware\system\usb\usbdrv\usbdrv.c
+          USBRemoteWakeup   0x001496    program     extern C:\datalogger\firmware\system\usb\usbdrv\usbdrv.c
+            USBSoftDetach   0x001404    program     extern C:\datalogger\firmware\system\usb\usbdrv\usbdrv.c
+          USBStallHandler   0x0014be    program     extern C:\datalogger\firmware\system\usb\usbdrv\usbdrv.c
+  USBStdFeatureReqHandler   0x00107c    program     extern C:\datalogger\firmware\system\usb\usb9\usb9.c
+      USBStdGetDscHandler   0x000ed8    program     extern C:\datalogger\firmware\system\usb\usb9\usb9.c
+   USBStdGetStatusHandler   0x000fe0    program     extern C:\datalogger\firmware\system\usb\usb9\usb9.c
+      USBStdSetCfgHandler   0x000f90    program     extern C:\datalogger\firmware\system\usb\usb9\usb9.c
+               USBSuspend   0x001486    program     extern C:\datalogger\firmware\system\usb\usbdrv\usbdrv.c
+                 USBTasks   0x00182c    program     extern C:\datalogger\firmware\main.c
+       USBWakeFromSuspend   0x00148e    program     extern C:\datalogger\firmware\system\usb\usbdrv\usbdrv.c
+               USB_CD_Ptr   0x00170a    program     extern C:\datalogger\firmware\autofiles\usbdsc.c
+               USB_SD_Ptr   0x00170e    program     extern C:\datalogger\firmware\autofiles\usbdsc.c
+          USB_SOF_Handler   0x0014ba    program     extern C:\datalogger\firmware\system\usb\usbdrv\usbdrv.c
+                 UserInit   0x000dfc    program     extern C:\datalogger\firmware\user\user.c
+                UserTasks   0x000d8e    program     extern C:\datalogger\firmware\user\user.c
+     ___case_-18_lbl00021   0x00096a    program     static                          
+     ___case_-19_lbl00022   0x000974    program     static                          
+      ___case_-1_lbl00023   0x000982    program     static                          
+       ___case_0_lbl00005   0x0008ae    program     static                          
+      ___case_49_lbl00006   0x0008c0    program     static                          
+      ___case_50_lbl00016   0x000900    program     static                          
+      ___default_lbl00024   0x000986    program     static                          
+         ___else_lbl00008   0x0008fa    program     static                          
+         ___else_lbl00010   0x0008ec    program     static                          
+         ___else_lbl00012   0x0008de    program     static                          
+         ___else_lbl00014   0x0008d2    program     static                          
+         ___else_lbl00020   0x00094e    program     static                          
+           ___if_lbl00007   0x0008fe    program     static                          
+           ___if_lbl00009   0x0008fe    program     static                          
+           ___if_lbl00011   0x0008fe    program     static                          
+           ___if_lbl00013   0x0008fe    program     static                          
+           ___if_lbl00015   0x000918    program     static                          
+           ___if_lbl00017   0x000932    program     static                          
+           ___if_lbl00018   0x000968    program     static                          
+           ___if_lbl00019   0x000968    program     static                          
+           ___if_lbl00025   0x0009aa    program     static                          
+           ___if_lbl00026   0x0009aa    program     static                          
+           ___if_lbl00027   0x0009aa    program     static                          
        ___return_lbl00000   0x000804    program     static                          
        ___return_lbl00000   0x000004    program     static                          
-       ___return_lbl00001   0x0017fc    program     static                          
-       ___return_lbl00002   0x001758    program     static                          
-       ___return_lbl00003   0x0009b4    program     static                          
-       ___return_lbl00039   0x0014de    program     static                          
-   ___switchexit_lbl00004   0x000990    program     static                          
-        ___while_lbl00040   0x0014d0    program     static                          
-        ___while_lbl00041   0x0014de    program     static                          
-                   __init   0x0017fe    program     extern C:\MCC18\src\TRADIT~1\stdclib\__init.c
-                _do_cinit   0x0016bc    program     extern C:\MCC18\src\traditional\startup\c018i.c
+       ___return_lbl00001   0x001854    program     static                          
+       ___return_lbl00002   0x0017b0    program     static                          
+       ___return_lbl00003   0x0009ac    program     static                          
+       ___return_lbl00039   0x001536    program     static                          
+   ___switchexit_lbl00004   0x000988    program     static                          
+        ___while_lbl00040   0x001528    program     static                          
+        ___while_lbl00041   0x001536    program     static                          
+                   __init   0x001856    program     extern C:\MCC18\src\TRADIT~1\stdclib\__init.c
+                _do_cinit   0x001714    program     extern C:\MCC18\src\traditional\startup\c018i.c
                    _entry   0x000000    program     extern C:\MCC18\src\traditional\startup\c018i.c
                 _high_ISR   0x000808    program     extern C:\datalogger\firmware\main.c
                  _low_ISR   0x000818    program     extern C:\datalogger\firmware\main.c
                    _reset   0x000800    program     extern C:\datalogger\firmware\main.c
-                 _startup   0x0017e2    program     extern C:\MCC18\src\traditional\startup\c018i.c
-                    cfg01   0x001616    program     extern C:\datalogger\firmware\autofiles\usbdsc.c
-                copy_loop   0x00172e    program     static                          
-            copy_one_byte   0x001734    program     static                          
-               device_dsc   0x001604    program     extern C:\datalogger\firmware\autofiles\usbdsc.c
-                     done   0x001758    program     static                          
-             done_copying   0x001742    program     static                          
-                     loop   0x0017f2    program     static                          
-                     main   0x0017b4    program     extern C:\datalogger\firmware\main.c
-                    sd000   0x001636    program     extern C:\datalogger\firmware\autofiles\usbdsc.c
-                    sd001   0x00163a    program     extern C:\datalogger\firmware\autofiles\usbdsc.c
-                    sd002   0x00166e    program     extern C:\datalogger\firmware\autofiles\usbdsc.c
-                     test   0x0016d6    program     static                          
+                 _startup   0x00183a    program     extern C:\MCC18\src\traditional\startup\c018i.c
+                    cfg01   0x00166e    program     extern C:\datalogger\firmware\autofiles\usbdsc.c
+                copy_loop   0x001786    program     static                          
+            copy_one_byte   0x00178c    program     static                          
+               device_dsc   0x00165c    program     extern C:\datalogger\firmware\autofiles\usbdsc.c
+                     done   0x0017b0    program     static                          
+             done_copying   0x00179a    program     static                          
+                     loop   0x00184a    program     static                          
+                     main   0x00180c    program     extern C:\datalogger\firmware\main.c
+              nullSampler   0x000abc    program     extern C:\datalogger\firmware\user\user.c
+                    sd000   0x00168e    program     extern C:\datalogger\firmware\autofiles\usbdsc.c
+                    sd001   0x001692    program     extern C:\datalogger\firmware\autofiles\usbdsc.c
+                    sd002   0x0016c6    program     extern C:\datalogger\firmware\autofiles\usbdsc.c
+                     test   0x00172e    program     static                          
                    ADCON0   0x000fc2       data     extern C:\MCC18\SRC\TRADIT~1\PROC\p18f4550.asm
                ADCON0bits   0x000fc2       data     extern C:\MCC18\SRC\TRADIT~1\PROC\p18f4550.asm
                    ADCON1   0x000fc1       data     extern C:\MCC18\SRC\TRADIT~1\PROC\p18f4550.asm
@@ -473,97 +474,98 @@ USBPrepareForNextSetupTrf   0x00135c    program     extern C:\datalogger\firmwar
                  _low_ISR   0x000818    program     extern C:\datalogger\firmware\main.c
                 ProcessIO   0x000838    program     extern C:\datalogger\firmware\user\user.c
           ServiceRequests   0x00084c    program     extern C:\datalogger\firmware\user\user.c
-       ___case_0_lbl00005   0x0008b0    program     static                          
-      ___case_49_lbl00006   0x0008c2    program     static                          
-         ___else_lbl00014   0x0008d4    program     static                          
-         ___else_lbl00012   0x0008e0    program     static                          
-         ___else_lbl00010   0x0008ee    program     static                          
-         ___else_lbl00008   0x0008fc    program     static                          
-           ___if_lbl00007   0x000900    program     static                          
-           ___if_lbl00009   0x000900    program     static                          
-           ___if_lbl00011   0x000900    program     static                          
-           ___if_lbl00013   0x000900    program     static                          
-      ___case_50_lbl00016   0x000902    program     static                          
-           ___if_lbl00015   0x00091a    program     static                          
-           ___if_lbl00017   0x000934    program     static                          
-         ___else_lbl00020   0x000950    program     static                          
-           ___if_lbl00018   0x00096a    program     static                          
-           ___if_lbl00019   0x00096a    program     static                          
-     ___case_-18_lbl00021   0x00096c    program     static                          
-     ___case_-19_lbl00022   0x00097c    program     static                          
-      ___case_-1_lbl00023   0x00098a    program     static                          
-      ___default_lbl00024   0x00098e    program     static                          
-   ___switchexit_lbl00004   0x000990    program     static                          
-           ___if_lbl00025   0x0009b2    program     static                          
-           ___if_lbl00026   0x0009b2    program     static                          
-           ___if_lbl00027   0x0009b2    program     static                          
-       ___return_lbl00003   0x0009b4    program     static                          
-           BlinkUSBStatus   0x0009c8    program     extern C:\datalogger\firmware\user\user.c
-                    Blink   0x000a58    program     extern C:\datalogger\firmware\user\user.c
-                  ReadPOT   0x000a70    program     extern C:\datalogger\firmware\user\user.c
-             CheckButtons   0x000ac4    program     extern C:\datalogger\firmware\user\user.c
-                CallDelay   0x000ac8    program     extern C:\datalogger\firmware\user\user.c
-               ThermWrite   0x000b22    program     extern C:\datalogger\firmware\user\user.c
-            ThermReadTemp   0x000bc2    program     extern C:\datalogger\firmware\user\user.c
-           ThermSendReset   0x000cc6    program     extern C:\datalogger\firmware\user\user.c
-                 ReadTemp   0x000cec    program     extern C:\datalogger\firmware\user\user.c
-                UserTasks   0x000d36    program     extern C:\datalogger\firmware\user\user.c
-                 UserInit   0x000da4    program     extern C:\datalogger\firmware\user\user.c
-       USBCheckStdRequest   0x000dbe    program     extern C:\datalogger\firmware\system\usb\usb9\usb9.c
-      USBStdGetDscHandler   0x000e80    program     extern C:\datalogger\firmware\system\usb\usb9\usb9.c
-      USBStdSetCfgHandler   0x000f38    program     extern C:\datalogger\firmware\system\usb\usb9\usb9.c
-   USBStdGetStatusHandler   0x000f88    program     extern C:\datalogger\firmware\system\usb\usb9\usb9.c
-  USBStdFeatureReqHandler   0x001024    program     extern C:\datalogger\firmware\system\usb\usb9\usb9.c
-         USBCtrlEPService   0x0010c6    program     extern C:\datalogger\firmware\system\usb\usbctrltrf\usbctrltrf.c
-   USBCtrlTrfSetupHandler   0x0010fc    program     extern C:\datalogger\firmware\system\usb\usbctrltrf\usbctrltrf.c
-     USBCtrlTrfOutHandler   0x001120    program     extern C:\datalogger\firmware\system\usb\usbctrltrf\usbctrltrf.c
-      USBCtrlTrfInHandler   0x001140    program     extern C:\datalogger\firmware\system\usb\usbctrltrf\usbctrltrf.c
-      USBCtrlTrfTxService   0x00117a    program     extern C:\datalogger\firmware\system\usb\usbctrltrf\usbctrltrf.c
-      USBCtrlTrfRxService   0x001256    program     extern C:\datalogger\firmware\system\usb\usbctrltrf\usbctrltrf.c
- USBCtrlEPServiceComplete   0x0012d0    program     extern C:\datalogger\firmware\system\usb\usbctrltrf\usbctrltrf.c
-USBPrepareForNextSetupTrf   0x00135c    program     extern C:\datalogger\firmware\system\usb\usbctrltrf\usbctrltrf.c
-        USBCheckBusStatus   0x001378    program     extern C:\datalogger\firmware\system\usb\usbdrv\usbdrv.c
-          USBModuleEnable   0x001394    program     extern C:\datalogger\firmware\system\usb\usbdrv\usbdrv.c
-         USBModuleDisable   0x0013a2    program     extern C:\datalogger\firmware\system\usb\usbdrv\usbdrv.c
-            USBSoftDetach   0x0013ac    program     extern C:\datalogger\firmware\system\usb\usbdrv\usbdrv.c
-         USBDriverService   0x0013b0    program     extern C:\datalogger\firmware\system\usb\usbdrv\usbdrv.c
-               USBSuspend   0x00142e    program     extern C:\datalogger\firmware\system\usb\usbdrv\usbdrv.c
-       USBWakeFromSuspend   0x001436    program     extern C:\datalogger\firmware\system\usb\usbdrv\usbdrv.c
-          USBRemoteWakeup   0x00143e    program     extern C:\datalogger\firmware\system\usb\usbdrv\usbdrv.c
-          USB_SOF_Handler   0x001462    program     extern C:\datalogger\firmware\system\usb\usbdrv\usbdrv.c
-          USBStallHandler   0x001466    program     extern C:\datalogger\firmware\system\usb\usbdrv\usbdrv.c
-          USBErrorHandler   0x001474    program     extern C:\datalogger\firmware\system\usb\usbdrv\usbdrv.c
-  USBProtocolResetHandler   0x001478    program     extern C:\datalogger\firmware\system\usb\usbdrv\usbdrv.c
-               ClearArray   0x0014bc    program     extern C:\datalogger\firmware\system\usb\usbdrv\usbdrv.c
-        ___while_lbl00040   0x0014d0    program     static                          
-        ___while_lbl00041   0x0014de    program     static                          
-       ___return_lbl00039   0x0014de    program     static                          
-             USBGenInitEP   0x0014e6    program     extern C:\datalogger\firmware\system\usb\class\generic\usbgen.c
-              USBGenWrite   0x001510    program     extern C:\datalogger\firmware\system\usb\class\generic\usbgen.c
-               USBGenRead   0x001584    program     extern C:\datalogger\firmware\system\usb\class\generic\usbgen.c
-               device_dsc   0x001604    program     extern C:\datalogger\firmware\autofiles\usbdsc.c
-                    cfg01   0x001616    program     extern C:\datalogger\firmware\autofiles\usbdsc.c
-                    sd000   0x001636    program     extern C:\datalogger\firmware\autofiles\usbdsc.c
-                    sd001   0x00163a    program     extern C:\datalogger\firmware\autofiles\usbdsc.c
-                    sd002   0x00166e    program     extern C:\datalogger\firmware\autofiles\usbdsc.c
-               USB_CD_Ptr   0x0016b2    program     extern C:\datalogger\firmware\autofiles\usbdsc.c
-               USB_SD_Ptr   0x0016b6    program     extern C:\datalogger\firmware\autofiles\usbdsc.c
-                _do_cinit   0x0016bc    program     extern C:\MCC18\src\traditional\startup\c018i.c
-                     test   0x0016d6    program     static                          
-                copy_loop   0x00172e    program     static                          
-            copy_one_byte   0x001734    program     static                          
-             done_copying   0x001742    program     static                          
-       ___return_lbl00002   0x001758    program     static                          
-                     done   0x001758    program     static                          
-                 FXM1616S   0x00175a    program     extern C:\MCC18\SRC\TRADIT~1\MATH\fxm1616s.asm
-               TSIGN1616A   0x0017a6    program     static C:\MCC18\SRC\TRADIT~1\MATH\fxm1616s.asm
-                     main   0x0017b4    program     extern C:\datalogger\firmware\main.c
-         InitializeSystem   0x0017c0    program     static C:\datalogger\firmware\main.c
-                 USBTasks   0x0017d4    program     extern C:\datalogger\firmware\main.c
-                 _startup   0x0017e2    program     extern C:\MCC18\src\traditional\startup\c018i.c
-                     loop   0x0017f2    program     static                          
-       ___return_lbl00001   0x0017fc    program     static                          
-                   __init   0x0017fe    program     extern C:\MCC18\src\TRADIT~1\stdclib\__init.c
+       ___case_0_lbl00005   0x0008ae    program     static                          
+      ___case_49_lbl00006   0x0008c0    program     static                          
+         ___else_lbl00014   0x0008d2    program     static                          
+         ___else_lbl00012   0x0008de    program     static                          
+         ___else_lbl00010   0x0008ec    program     static                          
+         ___else_lbl00008   0x0008fa    program     static                          
+           ___if_lbl00007   0x0008fe    program     static                          
+           ___if_lbl00009   0x0008fe    program     static                          
+           ___if_lbl00011   0x0008fe    program     static                          
+           ___if_lbl00013   0x0008fe    program     static                          
+      ___case_50_lbl00016   0x000900    program     static                          
+           ___if_lbl00015   0x000918    program     static                          
+           ___if_lbl00017   0x000932    program     static                          
+         ___else_lbl00020   0x00094e    program     static                          
+           ___if_lbl00018   0x000968    program     static                          
+           ___if_lbl00019   0x000968    program     static                          
+     ___case_-18_lbl00021   0x00096a    program     static                          
+     ___case_-19_lbl00022   0x000974    program     static                          
+      ___case_-1_lbl00023   0x000982    program     static                          
+      ___default_lbl00024   0x000986    program     static                          
+   ___switchexit_lbl00004   0x000988    program     static                          
+           ___if_lbl00025   0x0009aa    program     static                          
+           ___if_lbl00026   0x0009aa    program     static                          
+           ___if_lbl00027   0x0009aa    program     static                          
+       ___return_lbl00003   0x0009ac    program     static                          
+           BlinkUSBStatus   0x0009c0    program     extern C:\datalogger\firmware\user\user.c
+                    Blink   0x000a50    program     extern C:\datalogger\firmware\user\user.c
+                  ReadPOT   0x000a68    program     extern C:\datalogger\firmware\user\user.c
+              nullSampler   0x000abc    program     extern C:\datalogger\firmware\user\user.c
+             CheckButtons   0x000b1c    program     extern C:\datalogger\firmware\user\user.c
+                CallDelay   0x000b20    program     extern C:\datalogger\firmware\user\user.c
+               ThermWrite   0x000b7a    program     extern C:\datalogger\firmware\user\user.c
+            ThermReadTemp   0x000c1a    program     extern C:\datalogger\firmware\user\user.c
+           ThermSendReset   0x000d1e    program     extern C:\datalogger\firmware\user\user.c
+                 ReadTemp   0x000d44    program     extern C:\datalogger\firmware\user\user.c
+                UserTasks   0x000d8e    program     extern C:\datalogger\firmware\user\user.c
+                 UserInit   0x000dfc    program     extern C:\datalogger\firmware\user\user.c
+       USBCheckStdRequest   0x000e16    program     extern C:\datalogger\firmware\system\usb\usb9\usb9.c
+      USBStdGetDscHandler   0x000ed8    program     extern C:\datalogger\firmware\system\usb\usb9\usb9.c
+      USBStdSetCfgHandler   0x000f90    program     extern C:\datalogger\firmware\system\usb\usb9\usb9.c
+   USBStdGetStatusHandler   0x000fe0    program     extern C:\datalogger\firmware\system\usb\usb9\usb9.c
+  USBStdFeatureReqHandler   0x00107c    program     extern C:\datalogger\firmware\system\usb\usb9\usb9.c
+         USBCtrlEPService   0x00111e    program     extern C:\datalogger\firmware\system\usb\usbctrltrf\usbctrltrf.c
+   USBCtrlTrfSetupHandler   0x001154    program     extern C:\datalogger\firmware\system\usb\usbctrltrf\usbctrltrf.c
+     USBCtrlTrfOutHandler   0x001178    program     extern C:\datalogger\firmware\system\usb\usbctrltrf\usbctrltrf.c
+      USBCtrlTrfInHandler   0x001198    program     extern C:\datalogger\firmware\system\usb\usbctrltrf\usbctrltrf.c
+      USBCtrlTrfTxService   0x0011d2    program     extern C:\datalogger\firmware\system\usb\usbctrltrf\usbctrltrf.c
+      USBCtrlTrfRxService   0x0012ae    program     extern C:\datalogger\firmware\system\usb\usbctrltrf\usbctrltrf.c
+ USBCtrlEPServiceComplete   0x001328    program     extern C:\datalogger\firmware\system\usb\usbctrltrf\usbctrltrf.c
+USBPrepareForNextSetupTrf   0x0013b4    program     extern C:\datalogger\firmware\system\usb\usbctrltrf\usbctrltrf.c
+        USBCheckBusStatus   0x0013d0    program     extern C:\datalogger\firmware\system\usb\usbdrv\usbdrv.c
+          USBModuleEnable   0x0013ec    program     extern C:\datalogger\firmware\system\usb\usbdrv\usbdrv.c
+         USBModuleDisable   0x0013fa    program     extern C:\datalogger\firmware\system\usb\usbdrv\usbdrv.c
+            USBSoftDetach   0x001404    program     extern C:\datalogger\firmware\system\usb\usbdrv\usbdrv.c
+         USBDriverService   0x001408    program     extern C:\datalogger\firmware\system\usb\usbdrv\usbdrv.c
+               USBSuspend   0x001486    program     extern C:\datalogger\firmware\system\usb\usbdrv\usbdrv.c
+       USBWakeFromSuspend   0x00148e    program     extern C:\datalogger\firmware\system\usb\usbdrv\usbdrv.c
+          USBRemoteWakeup   0x001496    program     extern C:\datalogger\firmware\system\usb\usbdrv\usbdrv.c
+          USB_SOF_Handler   0x0014ba    program     extern C:\datalogger\firmware\system\usb\usbdrv\usbdrv.c
+          USBStallHandler   0x0014be    program     extern C:\datalogger\firmware\system\usb\usbdrv\usbdrv.c
+          USBErrorHandler   0x0014cc    program     extern C:\datalogger\firmware\system\usb\usbdrv\usbdrv.c
+  USBProtocolResetHandler   0x0014d0    program     extern C:\datalogger\firmware\system\usb\usbdrv\usbdrv.c
+               ClearArray   0x001514    program     extern C:\datalogger\firmware\system\usb\usbdrv\usbdrv.c
+        ___while_lbl00040   0x001528    program     static                          
+        ___while_lbl00041   0x001536    program     static                          
+       ___return_lbl00039   0x001536    program     static                          
+             USBGenInitEP   0x00153e    program     extern C:\datalogger\firmware\system\usb\class\generic\usbgen.c
+              USBGenWrite   0x001568    program     extern C:\datalogger\firmware\system\usb\class\generic\usbgen.c
+               USBGenRead   0x0015dc    program     extern C:\datalogger\firmware\system\usb\class\generic\usbgen.c
+               device_dsc   0x00165c    program     extern C:\datalogger\firmware\autofiles\usbdsc.c
+                    cfg01   0x00166e    program     extern C:\datalogger\firmware\autofiles\usbdsc.c
+                    sd000   0x00168e    program     extern C:\datalogger\firmware\autofiles\usbdsc.c
+                    sd001   0x001692    program     extern C:\datalogger\firmware\autofiles\usbdsc.c
+                    sd002   0x0016c6    program     extern C:\datalogger\firmware\autofiles\usbdsc.c
+               USB_CD_Ptr   0x00170a    program     extern C:\datalogger\firmware\autofiles\usbdsc.c
+               USB_SD_Ptr   0x00170e    program     extern C:\datalogger\firmware\autofiles\usbdsc.c
+                _do_cinit   0x001714    program     extern C:\MCC18\src\traditional\startup\c018i.c
+                     test   0x00172e    program     static                          
+                copy_loop   0x001786    program     static                          
+            copy_one_byte   0x00178c    program     static                          
+             done_copying   0x00179a    program     static                          
+                     done   0x0017b0    program     static                          
+       ___return_lbl00002   0x0017b0    program     static                          
+                 FXM1616S   0x0017b2    program     extern C:\MCC18\SRC\TRADIT~1\MATH\fxm1616s.asm
+               TSIGN1616A   0x0017fe    program     static C:\MCC18\SRC\TRADIT~1\MATH\fxm1616s.asm
+                     main   0x00180c    program     extern C:\datalogger\firmware\main.c
+         InitializeSystem   0x001818    program     static C:\datalogger\firmware\main.c
+                 USBTasks   0x00182c    program     extern C:\datalogger\firmware\main.c
+                 _startup   0x00183a    program     extern C:\MCC18\src\traditional\startup\c018i.c
+                     loop   0x00184a    program     static                          
+       ___return_lbl00001   0x001854    program     static                          
+                   __init   0x001856    program     extern C:\MCC18\src\TRADIT~1\stdclib\__init.c
                      SIGN   0x000000       data     extern C:\MCC18\SRC\TRADIT~1\MATH\cmath18.asm
             __FPFLAGSbits   0x000001       data     extern C:\MCC18\SRC\TRADIT~1\MATH\cmath18.asm
                 __FPFLAGS   0x000001       data     extern C:\MCC18\SRC\TRADIT~1\MATH\cmath18.asm
