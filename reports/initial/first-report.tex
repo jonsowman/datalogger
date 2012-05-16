@@ -1,0 +1,130 @@
+% ----------------------------------------
+%
+% LaTeX Article Template for CUED Reports
+% Jon Sowman - 2009
+% jon@hexoc.com
+% 
+% ----------------------------------------
+% Set up the document class for an article
+\documentclass[11pt]{article}
+
+% Import the required packages for latex
+\usepackage{appendix}
+
+% This packages permits using $ \therefore $
+\usepackage{amssymb}
+\usepackage{graphicx}
+
+% This package allows the use of $ \text{} $
+\usepackage{amsmath}
+
+% The document title and author
+\title{SB3 - Datalogger\\Cambridge University Engineering Department}
+\author{David Turner \& Jon Sowman}
+
+% Begin the document
+\begin{document}
+    \maketitle
+    \tableofcontents
+	
+% Insert the abstract for the document here
+\begin{abstract}
+    A compact, high speed logic analyser is designed with onboard buffering for
+    the simultaneous analysis and logging of up to eight digital channels, plus
+    an optional clock line for analysis of synchronous transfers. The supporting
+    desktop application is also developed to configure and control the analyser,
+    as well as to retrieve and post-process the recorded data and display it in
+    a convenient format.
+\end{abstract}
+
+\section{Hardware Overview}
+    A PIC18F4550 microcontroller on a breakout board provides the core of the
+    datalogging hardware, clocked at 48MHz. The USB peripheral external hardware
+    already exists on the board, along with hardware to bring the device out of
+    reset into either the bootloader or user code.
+
+    Additional hardware will be put in place to provide the following
+    functionality:
+    \begin{itemize}
+    \item Monitor and log up to eight digital channels plus a clock.
+    \item Store up to 1Mbit of data (that is to say, 128k samples if using all
+    eight channels).
+    \item Retrieve the samples from memory and transmit them to the desktop
+    computer via USB interface for post processing, analysis and charting.
+    \end{itemize}
+
+\subsection{Filtering}
+    Frontend antialiasing filters will be put in place to avoid frequency domain
+    aliasing caused by signals at the input above the Nyquist frequency, which
+    will be defined by the sampling frequency of the device. Simple first order
+    low pass RC filters will suffice for this, with a $-3dB$ frequency placed
+    just above the Nyquist frequency.
+
+\subsection{Buffering}
+    The datalogger will dump data to an SRAM buffer during the logging process,
+    since the PIC does not have enough internal RAM to store a suitable number
+    of samples to satisfy the specification. SRAM, whilst relatively expensive,
+    also demonstrates extremely fast write speeds which is essential to keeping
+    the sampling rate high.
+
+    The hardware of choice is the AS6C1008 1Mbit SRAM IC from Alliance Memory, 
+    which is divided into eight blocks. A 17-bit wide parallel interface is 
+    used for byte-addressing, and a byte-wide parallel interface is provided 
+    for data.
+
+    The address lines will be directly attached to the PIC using the two
+    byte-wide ports PORTB and PORTD, plus one additional line from another port.
+    After the hardware anti-aliasing filters, the eight input channels are
+    connected directly to the SRAM data interface via a 8-gate tri-state 
+    buffer, controlled by the PIC. This buffer is enabled during the data
+    acquisition phase, and subsequently disabled to detach the input channels
+    from the memory.
+
+\subsection{Data Retrieval}
+    Retrieving data from the SRAM is achieved via the use of a
+    parallel-in/serial-out shift register such as the 74HC165 series. The
+    byte-wide parallel input to this device is attached to the SRAM data
+    interface, and data is clocked out to the PIC before being packetised and
+    transmitted to the desktop computer via the USB interface.
+
+    A diagram of how to set up the apparatus is shown in figure \ref{fig:app}.
+    
+    \begin{figure}
+    \centering
+    \includegraphics[height=5cm]{blank}
+    \caption{Apparatus setup}
+    \label{fig:app}
+    \end{figure}
+	
+\section{Method}
+	
+\section{Results}
+	
+\section{Observations}
+	
+\section{Discussion}
+
+    These results can be seen in table \ref{fig:myt}.
+	
+    \begin{table}
+    \begin{center}
+    \begin{tabular}{|r|c|c|c|}
+        \hline Station & Unloaded/mm & Predicted Loaded/mm & True Loaded/mm \\
+        \hline 4 & 0.08 & 6.55 & 6.86 \\
+        \hline 6 & 0.00 & 8.25 & 8.70 \\
+        \hline
+    \end{tabular}
+    \end{center}
+    \caption{Predicted and measured beam deflections}
+    \label{fig:myt}
+    \end{table}
+	
+\section{Conclusion}
+
+% Now print the appendix section
+\appendix
+\appendixpage
+\addappheadtotoc
+\section{Appendix 1}
+			
+\end{document}
