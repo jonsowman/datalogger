@@ -1,6 +1,6 @@
 /**************************************************************************/
 /* LabWindows/CVI User Interface Resource (UIR) Include File              */
-/* Copyright (c) National Instruments 2007. All Rights Reserved.          */
+/* Copyright (c) National Instruments 2012. All Rights Reserved.          */
 /*                                                                        */
 /* WARNING: Do not add to, delete from, or otherwise modify the contents  */
 /*          of this include file.                                         */
@@ -19,6 +19,8 @@
 #define  PANEL_quit_button               3       /* callback function: quit_button_hit */
 #define  PANEL_read_analog_button        4       /* callback function: read_analog_button_hit */
 #define  PANEL_LED_button                5       /* callback function: led_button_hit */
+#define  PANEL_DIGGRAPH                  6
+#define  PANEL_COMMANDBUTTON             7       /* callback function: commandbutton_click */
 
 
      /* Menu Bars, Menus, and Menu Items: */
@@ -28,6 +30,7 @@
 
      /* Callback Prototypes: */ 
 
+int  CVICALLBACK commandbutton_click(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK led_button_hit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK quit_button_hit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK read_analog_button_hit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);

@@ -45,43 +45,43 @@ Force Rebuild = False
 [File 0001]
 Path = "/c/datalogger/software/pictest.uir"
 File Type = "User Interface Resource"
-Disk Date = 3257926364
+Disk Date = 3420026961
 In Projects = "1,"
 Window Top = 33
 Window Left = 5
 Window Height = 521
 Window Width = 669
-Window Z-Order = 4
+Window Z-Order = 1
 
 [File 0002]
 Path = "/c/datalogger/software/picdriver.c"
 File Type = "CSource"
-Disk Date = 3276711432
+Disk Date = 3419838372
 In Projects = "1,"
 Window Top = 32
 Window Left = 6
-Window Z-Order = 1
-Source Window State = "1,0,0,0,0,0,0,0,0,130,0,0,0,0,0,68,0,0,25,30,271,524,1,0,"
+Window Z-Order = 3
+Source Window State = "1,0,0,0,0,0,0,0,0,61,0,0,0,0,0,19,149,0,190,78,271,524,1,0,"
 
 [File 0003]
 Path = "/c/datalogger/software/picdriver.h"
 File Type = "Include"
-Disk Date = 3257926484
+Disk Date = 3419838372
 In Projects = "1,"
 Window Top = 62
 Window Left = 22
-Window Z-Order = 3
+Window Z-Order = 4
 Source Window State = "1,0,0,0,0,0,0,0,0,61,0,0,0,0,0,19,0,0,0,0,271,524,1,0,"
 
 [File 0004]
 Path = "/c/datalogger/software/pictest.c"
 File Type = "CSource"
-Disk Date = 3258901628
+Disk Date = 3420026963
 In Projects = "1,"
 Window Top = 32
 Window Left = 6
 Window Z-Order = 2
-Source Window State = "1,0,0,0,0,0,0,0,0,61,0,0,0,0,0,19,0,0,37,94,271,524,1,0,"
+Source Window State = "1,63,63,63,4,13,13,0,0,61,0,0,0,0,0,19,26,0,63,4,271,524,1,0,"
 
 [Build Options 0001]
 Generate Browse Info = True
