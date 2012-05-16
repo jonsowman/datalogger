@@ -59,9 +59,14 @@ int CVICALLBACK led_button_hit (int panel, int control, int event,
 int CVICALLBACK commandbutton_click (int panel, int control, int event,
 		void *callbackData, int eventData1, int eventData2)
 {
+	short int data[6] = {0, 0, 1, 0, 1, 1};
+	// Order is chan0 sample0, chan1 sample0, chan0 sample1, chan1 sample1, etc.
+	
 	if (event!=EVENT_COMMIT) return 0; 
 	
 	
+	
+	PlotDigitalLines(panel,PANEL_DIGGRAPH,data,6,VAL_SHORT_INTEGER,2);
 	
 	return 0;
 }
