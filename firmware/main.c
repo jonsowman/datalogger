@@ -62,6 +62,7 @@ void main(void)
         USBTasks();         // USB Tasks
 		//UCAM
         ProcessIO();        // See user\user.c & .h
+		UserTasks();
 		
     }//end while
 }//end main

@@ -129,7 +129,8 @@ void ServiceRequests(void)
 
            	//UCAM
            	case GET_ADC_COMMAND: //[0xED. 8-bit data]
-                dataPacket._byte[1] = ReadPOT();
+                //dataPacket._byte[1] = ReadPOT();
+				dataPacket._byte[1] = 0x2A;
                 counter=0x02; //returns[0xED, command]
                 break;
  
@@ -334,13 +335,6 @@ int ReadTemp(void)
 
 void UserTasks(void)
 {
-	int i;
-	int ThermometerCount = 1;
-	for (i = 1; i <= ThermometerCount; i++)
-	{
-		ReadTemp();
-	}
-	CheckButtons();
 	if(PORTD & 0x02) // RD1 ON
 		PORTD &= 0xfd; // Turn RD1 off
 	else
@@ -356,7 +350,7 @@ void UserInit(void)
 	ADCON2=0x3C;
     ADCON2bits.ADFM = 1;   // ADC result right justified
 	TRISD = 0x18;
-	TRIDS &= 0xfd; // Set RD1 as output
+	TRISD &= ~(1 << TRISDbits.TRISD0); // Set RD1 as output
 	ThermSendReset();
 }//end UserInit
 
