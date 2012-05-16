@@ -1,18 +1,17 @@
 [Workspace Header]
 Version = 810
-Pathname Line0001 = "/c/Users/Andy/Documents/3rd Year Uni/DataLogger/Download/3DAQ/software/pictest.c"
-Pathname Line0002 = "ws"
+Pathname = "/c/Users/datalogger/Desktop/datalogger/software/pictest.cws"
 CVI Dir = "/c/program files/national instruments/cvi81"
-IVI Standard Root Dir = "/C/Program Files/IVI"
-VXIplug&play Framework Dir = "/c/vxipnp/winnt"
+IVI Standard Root Dir = "/C/Program Files/IVI Foundation/IVI"
+VXIplug&play Framework Dir = "/C/Program Files/IVI Foundation/VISA/winnt"
 Number of Projects = 1
 Active Project = 1
 Project 0001 = "pictest.prj"
 Drag Bar Left = 208
 Window Top = 58
-Window Left = 25
+Window Left = 26
 Window Bottom = 560
-Window Right = 815
+Window Right = 816
 Maximized = True
 Maximized Children = True
 Max Number Of Errors = 20
@@ -44,10 +43,9 @@ Batch Build Debug = False
 Force Rebuild = False
 
 [File 0001]
-Path Line0001 = "/c/Users/Andy/Documents/3rd Year Uni/DataLogger/Download/3DAQ/software/pictest.u"
-Path Line0002 = "ir"
+Path = "/c/Users/datalogger/Desktop/datalogger/software/pictest.uir"
 File Type = "User Interface Resource"
-Disk Date = 3257926364
+Disk Date = 3419838372
 In Projects = "1,"
 Window Top = 33
 Window Left = 5
@@ -56,21 +54,19 @@ Window Width = 669
 Window Z-Order = 4
 
 [File 0002]
-Path Line0001 = "/c/Users/Andy/Documents/3rd Year Uni/DataLogger/Download/3DAQ/software/picdriver"
-Path Line0002 = ".c"
+Path = "/c/Users/datalogger/Desktop/datalogger/software/picdriver.c"
 File Type = "CSource"
-Disk Date = 3276711432
+Disk Date = 3419838372
 In Projects = "1,"
 Window Top = 32
 Window Left = 6
 Window Z-Order = 1
-Source Window State = "1,0,0,0,0,0,0,0,0,150,0,0,0,0,0,48,146,0,25,30,271,524,1,0,"
+Source Window State = "1,0,0,0,0,0,0,0,0,130,0,0,0,0,0,68,149,0,173,107,271,524,1,0,"
 
 [File 0003]
-Path Line0001 = "/c/Users/Andy/Documents/3rd Year Uni/DataLogger/Download/3DAQ/software/picdriver"
-Path Line0002 = ".h"
+Path = "/c/Users/datalogger/Desktop/datalogger/software/picdriver.h"
 File Type = "Include"
-Disk Date = 3257926484
+Disk Date = 3419838372
 In Projects = "1,"
 Window Top = 62
 Window Left = 22
@@ -78,9 +74,9 @@ Window Z-Order = 3
 Source Window State = "1,0,0,0,0,0,0,0,0,61,0,0,0,0,0,19,0,0,0,0,271,524,1,0,"
 
 [File 0004]
-Path = "/c/Users/Andy/Documents/3rd Year Uni/DataLogger/Download/3DAQ/software/pictest.c"
+Path = "/c/Users/datalogger/Desktop/datalogger/software/pictest.c"
 File Type = "CSource"
-Disk Date = 3258901628
+Disk Date = 3419838372
 In Projects = "1,"
 Window Top = 32
 Window Left = 6
