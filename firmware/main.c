@@ -13,6 +13,8 @@
 /** P R I V A T E  P R O T O T Y P E S ***************************************/
 static void InitializeSystem(void);
 void USBTasks(void);
+void low_isr(void);
+void high_isr(void);
 
 /** V E C T O R  R E M A P P I N G *******************************************/
 
@@ -24,36 +26,44 @@ void _reset (void)
 }
 #pragma code
 
-#pragma code _HIGH_INTERRUPT_VECTOR = 0x000808
+#pragma code _HIGH_INTERRUPT_VECTOR = 0x000008
 void _high_ISR (void)
 {
-    ;
+    _asm goto high_isr _endasm
 }
 
-#pragma code _LOW_INTERRUPT_VECTOR = 0x000818
+#pragma code _LOW_INTERRUPT_VECTOR = 0x000018
 void _low_ISR (void)
 {
-    ;
+    _asm goto low_isr _endasm
+}
+
+#pragma interrupt high_isr
+void high_isr(void)
+{
+	LATDbits.LATD1 = 1; // Turn RD1 on
+	if(INTCONbits.TMR0IE && INTCONbits.TMR0IF)
+	{
+		TMR0L = 0x00;
+		INTCONbits.TMR0IF = 0;
+	}
+}
+
+#pragma interruptlow low_isr
+void low_isr(void)
+{
+	LATDbits.LATD1 = 1; // Turn RD1 on
+	if(INTCONbits.TMR0IE && INTCONbits.TMR0IF)
+	{
+		TMR0L = 0x00;
+		INTCONbits.TMR0IF = 0;
+	}
 }
 #pragma code
 
-/** D E C L A R A T I O N S **************************************************/
+// End interrupt handling
+
 #pragma code
-/******************************************************************************
- * Function:        void main(void)
- *
- * PreCondition:    None
- *
- * Input:           None
- *
- * Output:          None
- *
- * Side Effects:    None
- *
- * Overview:        Main program entry point.
- *
- * Note:            None
- *****************************************************************************/
 void main(void)
 {
     InitializeSystem();
@@ -63,33 +73,13 @@ void main(void)
 		//UCAM
         ProcessIO();        // See user\user.c & .h
 		UserTasks();
-		
-    }//end while
-}//end main
+    }
+}
 
-
-
-
-/******************************************************************************
- * Function:        static void InitializeSystem(void)
- *
- * PreCondition:    None
- *
- * Input:           None
- *
- * Output:          None
- *
- * Side Effects:    None
- *
- * Overview:        InitializeSystem is a centralize initialization routine.
- *                  All required USB initialization routines are called from
- *                  here.
- *
- *                  User application initialization routine should also be
- *                  called from here.                  
- *
- * Note:            None
- *****************************************************************************/
+/* InitializeSystem is a centralize initialization routine.
+ * All required USB initialization routines are called from
+ * here.
+ */
 static void InitializeSystem(void)
 {
 
@@ -105,34 +95,17 @@ static void InitializeSystem(void)
     
     UserInit();                     // See user.c & .h
 
-}//end InitializeSystem
+}
 
-/******************************************************************************
- * Function:        void USBTasks(void)
- *
- * PreCondition:    InitializeSystem has been called.
- *
- * Input:           None
- *
- * Output:          None
- *
- * Side Effects:    None
- *
- * Overview:        Service loop for USB tasks.
- *
- * Note:            None
- *****************************************************************************/
+/*
+ * Call this after InitializeSystem()
+ */
 void USBTasks(void)
 {
-    /*
-     * Servicing Hardware
-     */
-    USBCheckBusStatus();                    // Must use polling method
+    // Servicing Hardware
+    USBCheckBusStatus();          // Must use polling method
     if(UCFGbits.UTEYE!=1)
 	{
-        USBDriverService();                 // Interrupt or polling method
-	}//end if
-
-}// end USBTasks
-
-/** EOF main.c ***************************************************************/
+        USBDriverService();     // Interrupt or polling method
+	}
+}

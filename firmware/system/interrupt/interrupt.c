@@ -38,6 +38,12 @@ void interrupt_at_low_vector(void)
 #pragma interrupt high_isr
 void high_isr(void)
 {
+	LATDbits.LATD1 = 1; // Turn RD1 on
+	if(INTCONbits.TMR0IE && INTCONbits.TMR0IF)
+	{
+		TMR0L = 0x00;
+		INTCONbits.TMR0IF = 0;
+	}
 }
 
 /******************************************************************************
@@ -51,6 +57,12 @@ void high_isr(void)
 #pragma interruptlow low_isr
 void low_isr(void)
 {
+	LATDbits.LATD1 = 1; // Turn RD1 on
+	if(INTCONbits.TMR0IE && INTCONbits.TMR0IF)
+	{
+		TMR0L = 0x00;
+		INTCONbits.TMR0IF = 0;
+	}
 }
 #pragma code
 

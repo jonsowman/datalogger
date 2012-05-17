@@ -1,12 +1,14 @@
 /** I N C L U D E S **********************************************************/
 #include <p18cxxx.h>
 #include <usart.h>
+#include <timers.h>
 #include "system\typedefs.h"
 
 #include "system\usb\usb.h"
 
 #include "io_cfg.h"             // I/O pin mapping
 #include "user\user.h"
+#include "logic\logic.h"
 
 /** V A R I A B L E S ********************************************************/
 #pragma udata
@@ -335,12 +337,8 @@ int ReadTemp(void)
 
 void UserTasks(void)
 {
-	if(PORTD & 0x02) // RD1 ON
-		PORTD &= 0xfd; // Turn RD1 off
-	else
-		PORTD |= 0x02; // Turn RD1 on
 	return;
-}//end UserTasks
+}
 
 void UserInit(void)
 {
@@ -350,8 +348,10 @@ void UserInit(void)
 	ADCON2=0x3C;
     ADCON2bits.ADFM = 1;   // ADC result right justified
 	TRISD = 0x18;
-	TRISD &= ~(1 << TRISDbits.TRISD0); // Set RD1 as output
+	// Set RD0 and RD1 as output
+	TRISD &= ~(1 << TRISDbits.TRISD0 | 1 << TRISDbits.TRISD1); 
 	ThermSendReset();
+	initAcquisition(0x0001);
 }//end UserInit
 
 
