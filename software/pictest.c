@@ -2,6 +2,7 @@
 #include <userint.h>
 #include "pictest.h"
 #include "picdriver.h"  
+#include "dummy_interface.h"
 
 #define true 1
 #define false 0
@@ -12,7 +13,7 @@ int main (int argc, char *argv[])
 {
 	if (InitCVIRTE (0, argv, 0) == 0)
 		return -1;	/* out of memory */
-	if ((panelHandle = LoadPanel (0, "pictest.uir", PANEL)) < 0)
+	if ((panelHandle = LoadPanel (0, "dummy_interface.uir", PANEL2)) < 0)
 		return -1;
 	DisplayPanel (panelHandle);
 	init_usb();
