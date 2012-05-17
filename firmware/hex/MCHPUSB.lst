@@ -1,6 +1,6 @@
 MP2COD 4.1, COFF to COD File Converter
 Copyright (c) 2006 Microchip Technology Inc.
-Listing File Generated: Thu May 17 11:51:45 2012
+Listing File Generated: Thu May 17 12:05:12 2012
 
 
 Address  Value    Disassembly              Source                                                                           File
@@ -4107,34 +4107,34 @@ Address  Value    Disassembly              Source                               
 001818   ffe6                                                                                                               
 00181a   cfe1     MOVFF     0xfe1,0xfd9                                                                                     
 00181c   ffd9                                                                                                               
-                                           {                                                                                C:\datalogger\firmware\logic\logic.c
+                                           {	                                                                               C:\datalogger\firmware\logic\logic.c
+                                           	// Enable interrupt priority                                                    C:\datalogger\firmware\logic\logic.c
+00181e   8ed0     BSF       0xd0,0x7,0x0   	RCONbits.IPEN = 1;                                                              C:\datalogger\firmware\logic\logic.c
+                                                                                                                            C:\datalogger\firmware\logic\logic.c
                                            	// Stop timer                                                                   C:\datalogger\firmware\logic\logic.c
-00181e   9ed5     BCF       0xd5,0x7,0x0   	T0CONbits.TMR0ON = 0;                                                           C:\datalogger\firmware\logic\logic.c
+001820   9ed5     BCF       0xd5,0x7,0x0   	T0CONbits.TMR0ON = 0;                                                           C:\datalogger\firmware\logic\logic.c
                                                                                                                             C:\datalogger\firmware\logic\logic.c
                                            	// Set to 8 bit mode                                                            C:\datalogger\firmware\logic\logic.c
-001820   8cd5     BSF       0xd5,0x6,0x0   	T0CONbits.T08BIT = 1;                                                           C:\datalogger\firmware\logic\logic.c
+001822   8cd5     BSF       0xd5,0x6,0x0   	T0CONbits.T08BIT = 1;                                                           C:\datalogger\firmware\logic\logic.c
                                                                                                                             C:\datalogger\firmware\logic\logic.c
                                            	// Clock on instruction clock cycles                                            C:\datalogger\firmware\logic\logic.c
-001822   9ad5     BCF       0xd5,0x5,0x0   	T0CONbits.T0CS = 0;                                                             C:\datalogger\firmware\logic\logic.c
+001824   9ad5     BCF       0xd5,0x5,0x0   	T0CONbits.T0CS = 0;                                                             C:\datalogger\firmware\logic\logic.c
                                            	                                                                                C:\datalogger\firmware\logic\logic.c
                                            	// 256 prescaler                                                                C:\datalogger\firmware\logic\logic.c
-001824   96d5     BCF       0xd5,0x3,0x0   	T0CONbits.PSA = 0;                                                              C:\datalogger\firmware\logic\logic.c
-001826   84d5     BSF       0xd5,0x2,0x0   	T0CONbits.T0PS2 = 1;                                                            C:\datalogger\firmware\logic\logic.c
-001828   82d5     BSF       0xd5,0x1,0x0   	T0CONbits.T0PS1  = 1;                                                           C:\datalogger\firmware\logic\logic.c
-00182a   80d5     BSF       0xd5,0x0,0x0   	T0CONbits.T0PS0 = 1;                                                            C:\datalogger\firmware\logic\logic.c
+001826   96d5     BCF       0xd5,0x3,0x0   	T0CONbits.PSA = 0;                                                              C:\datalogger\firmware\logic\logic.c
+001828   84d5     BSF       0xd5,0x2,0x0   	T0CONbits.T0PS2 = 1;                                                            C:\datalogger\firmware\logic\logic.c
+00182a   82d5     BSF       0xd5,0x1,0x0   	T0CONbits.T0PS1  = 1;                                                           C:\datalogger\firmware\logic\logic.c
+00182c   80d5     BSF       0xd5,0x0,0x0   	T0CONbits.T0PS0 = 1;                                                            C:\datalogger\firmware\logic\logic.c
                                                                                                                             C:\datalogger\firmware\logic\logic.c
                                            	// Enable TIMER0 OVF interrupt, periph interrupt                                C:\datalogger\firmware\logic\logic.c
                                            	// and global interrupts                                                        C:\datalogger\firmware\logic\logic.c
-00182c   8af2     BSF       0xf2,0x5,0x0   	INTCONbits.TMR0IE = 1;                                                          C:\datalogger\firmware\logic\logic.c
-00182e   94f2     BCF       0xf2,0x2,0x0   	INTCONbits.TMR0IF = 0;                                                          C:\datalogger\firmware\logic\logic.c
-001830   8cf2     BSF       0xf2,0x6,0x0   	INTCONbits.PEIE  = 1;                                                           C:\datalogger\firmware\logic\logic.c
-001832   8ef2     BSF       0xf2,0x7,0x0   	INTCONbits.GIE = 1;                                                             C:\datalogger\firmware\logic\logic.c
+00182e   8af2     BSF       0xf2,0x5,0x0   	INTCONbits.TMR0IE = 1;                                                          C:\datalogger\firmware\logic\logic.c
+001830   94f2     BCF       0xf2,0x2,0x0   	INTCONbits.TMR0IF = 0;                                                          C:\datalogger\firmware\logic\logic.c
+001832   8cf2     BSF       0xf2,0x6,0x0   	INTCONbits.GIEL  = 1;                                                           C:\datalogger\firmware\logic\logic.c
+001834   8ef2     BSF       0xf2,0x7,0x0   	INTCONbits.GIEH = 1;                                                            C:\datalogger\firmware\logic\logic.c
                                                                                                                             C:\datalogger\firmware\logic\logic.c
-                                           	// Set TIMER0 OVF to low priority                                               C:\datalogger\firmware\logic\logic.c
-001834   84f1     BSF       0xf1,0x2,0x0   	INTCON2bits.TMR0IP = 1;                                                         C:\datalogger\firmware\logic\logic.c
-                                                                                                                            C:\datalogger\firmware\logic\logic.c
-                                           	// Enable interrupt priority                                                    C:\datalogger\firmware\logic\logic.c
-001836   8ed0     BSF       0xd0,0x7,0x0   	RCONbits.IPEN = 1;                                                              C:\datalogger\firmware\logic\logic.c
+                                           	// Set TIMER0 OVF to high priority                                              C:\datalogger\firmware\logic\logic.c
+001836   84f1     BSF       0xf1,0x2,0x0   	INTCON2bits.TMR0IP = 1;                                                         C:\datalogger\firmware\logic\logic.c
                                                                                                                             C:\datalogger\firmware\logic\logic.c
                                            	// Finally enable the timer                                                     C:\datalogger\firmware\logic\logic.c
 001838   8ed5     BSF       0xd5,0x7,0x0   	T0CONbits.TMR0ON = 1;                                                           C:\datalogger\firmware\logic\logic.c
