@@ -351,7 +351,6 @@ void UserInit(void)
 	// Set RD0 and RD1 as output
 	TRISD &= ~(1 << TRISDbits.TRISD0 | 1 << TRISDbits.TRISD1); 
 	ThermSendReset();
-	initAcquisition(0x0001);
 }//end UserInit
 
 
