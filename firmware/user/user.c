@@ -8,7 +8,7 @@
 
 #include "io_cfg.h"             // I/O pin mapping
 #include "user\user.h"
-#include "logic\logic.h"
+//#include "logic\logic.h"
 
 /** V A R I A B L E S ********************************************************/
 #pragma udata
