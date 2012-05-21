@@ -59,14 +59,12 @@ void ProcessIO(void)
     ServiceRequests();
 }
 
+/**
+ * Check for incoming data in the USB buffer. If found, process it and 
+ * fill the USB buffer with data to be returned to the USB host.
+ */
 void ServiceRequests(void)
 {
-    byte index;
-
-	int i = 0;
-	int q = 0;
-	int temp = 0;
-    
     if(USBGenRead((byte*)&dataPacket,sizeof(dataPacket)))
     {   
 	    // Pointer to the data packet
@@ -110,7 +108,9 @@ void ServiceRequests(void)
                 
             case LOGIC_SET_SRATE:
             	// Rate is 16 bit, MSB first
-            	uint16_t rate = *usbptr | *(usbptr + 1);
+            	uint8_t rate = *usbptr;
+            	rate <<= 8;
+            	rate |= *(usbptr + 1);
             	setSampleRate(rate);
             	// Return CMD along with 1 for success [CMD, 0x03, 0x01]
             	*usbptr = 0x01;
@@ -221,8 +221,7 @@ void BlinkUSBStatus(void)
 
 }
 
-//UCAM
-//code section will blink LEDs 5 times
+// UCAM
 // For some reason this writes the ENTIRE PORTD
 void Blink(byte onState)
 {
@@ -230,10 +229,12 @@ void Blink(byte onState)
 	return;
 }
 
+/**
+ * Return the 8 bit value of ADC channel 0.
+ */
 byte ReadPOT(void)
 {
 	byte low, high;
-
     ADCON0bits.GO = 1;              // Start AD conversion
     while(ADCON0bits.NOT_DONE);     // Wait for conversion
 	low = ADRESL;
