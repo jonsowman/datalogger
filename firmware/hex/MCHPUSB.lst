@@ -1,6 +1,6 @@
 MP2COD 4.1, COFF to COD File Converter
 Copyright (c) 2006 Microchip Technology Inc.
-Listing File Generated: Mon May 21 12:49:39 2012
+Listing File Generated: Mon May 21 15:28:03 2012
 
 
 Address  Value    Disassembly              Source                                                                           File
@@ -30,8 +30,8 @@ Address  Value    Disassembly              Source                               
                                            void                                                                             C:\MCC18\src\traditional\startup\c018i.c
                                            _entry (void)                                                                    C:\MCC18\src\traditional\startup\c018i.c
                                            {                                                                                C:\MCC18\src\traditional\startup\c018i.c
-000000   ef01     GOTO      0x1802         _asm goto _startup _endasm                                                       C:\MCC18\src\traditional\startup\c018i.c
-000002   f00c                                                                                                               
+000000   eff9     GOTO      0x17f2         _asm goto _startup _endasm                                                       C:\MCC18\src\traditional\startup\c018i.c
+000002   f00b                                                                                                               
                                                                                                                             C:\MCC18\src\traditional\startup\c018i.c
 000004   0012     RETURN    0x0            }                                                                                C:\MCC18\src\traditional\startup\c018i.c
                                            #pragma code _startup_scn                                                        C:\MCC18\src\traditional\startup\c018i.c
@@ -40,31 +40,31 @@ Address  Value    Disassembly              Source                               
                                            {                                                                                C:\MCC18\src\traditional\startup\c018i.c
                                              _asm                                                                           C:\MCC18\src\traditional\startup\c018i.c
                                                // Initialize the stack pointer                                              C:\MCC18\src\traditional\startup\c018i.c
-001802   ee13     LFSR      0x1,0x300          lfsr 1, _stack                                                               C:\MCC18\src\traditional\startup\c018i.c
-001804   f000                                                                                                               
-001806   ee23     LFSR      0x2,0x300          lfsr 2, _stack                                                               C:\MCC18\src\traditional\startup\c018i.c
-001808   f000                                                                                                               
+0017f2   ee13     LFSR      0x1,0x300          lfsr 1, _stack                                                               C:\MCC18\src\traditional\startup\c018i.c
+0017f4   f000                                                                                                               
+0017f6   ee23     LFSR      0x2,0x300          lfsr 2, _stack                                                               C:\MCC18\src\traditional\startup\c018i.c
+0017f8   f000                                                                                                               
                                                                                                                             C:\MCC18\src\traditional\startup\c018i.c
-00180a   6af8     CLRF      0xf8,0x0           clrf TBLPTRU, 0 // 1st silicon doesn't do this on POR                        C:\MCC18\src\traditional\startup\c018i.c
+0017fa   6af8     CLRF      0xf8,0x0           clrf TBLPTRU, 0 // 1st silicon doesn't do this on POR                        C:\MCC18\src\traditional\startup\c018i.c
                                                                                                                             C:\MCC18\src\traditional\startup\c018i.c
-00180c   9c01     BCF       0x1,0x6,0x0        bcf __FPFLAGS,RND,0 // Initialize rounding flag for floating point libs      C:\MCC18\src\traditional\startup\c018i.c
+0017fc   9c01     BCF       0x1,0x6,0x0        bcf __FPFLAGS,RND,0 // Initialize rounding flag for floating point libs      C:\MCC18\src\traditional\startup\c018i.c
                                                                                                                             C:\MCC18\src\traditional\startup\c018i.c
                                                _endasm                                                                      C:\MCC18\src\traditional\startup\c018i.c
-00180e   ec50     CALL      0x16a0,0x0         _do_cinit ();                                                                C:\MCC18\src\traditional\startup\c018i.c
-001810   f00b                                                                                                               
+0017fe   ec50     CALL      0x16a0,0x0         _do_cinit ();                                                                C:\MCC18\src\traditional\startup\c018i.c
+001800   f00b                                                                                                               
                                                                                                                             C:\MCC18\src\traditional\startup\c018i.c
                                            loop:                                                                            C:\MCC18\src\traditional\startup\c018i.c
                                                                                                                             C:\MCC18\src\traditional\startup\c018i.c
                                              // If user defined __init is not found, the one in clib.lib will be used       C:\MCC18\src\traditional\startup\c018i.c
-001812   ec0f     CALL      0x181e,0x0       __init ();                                                                     C:\MCC18\src\traditional\startup\c018i.c
-001814   f00c                                                                                                               
+001802   ec07     CALL      0x180e,0x0       __init ();                                                                     C:\MCC18\src\traditional\startup\c018i.c
+001804   f00c                                                                                                               
                                                                                                                             C:\MCC18\src\traditional\startup\c018i.c
                                              // Call the user's main routine                                                C:\MCC18\src\traditional\startup\c018i.c
-001816   eccc     CALL      0x1798,0x0       main ();                                                                       C:\MCC18\src\traditional\startup\c018i.c
-001818   f00b                                                                                                               
+001806   eccc     CALL      0x1798,0x0       main ();                                                                       C:\MCC18\src\traditional\startup\c018i.c
+001808   f00b                                                                                                               
                                                                                                                             C:\MCC18\src\traditional\startup\c018i.c
-00181a   d7fb     BRA       0x1812           goto loop;                                                                     C:\MCC18\src\traditional\startup\c018i.c
-00181c   0012     RETURN    0x0            }                               /* end _startup() */                             C:\MCC18\src\traditional\startup\c018i.c
+00180a   d7fb     BRA       0x1802           goto loop;                                                                     C:\MCC18\src\traditional\startup\c018i.c
+00180c   0012     RETURN    0x0            }                               /* end _startup() */                             C:\MCC18\src\traditional\startup\c018i.c
                                                                                                                             C:\MCC18\src\traditional\startup\c018i.c
                                            /* MPLAB-C18 initialized data memory support */                                  C:\MCC18\src\traditional\startup\c018i.c
                                            /* The linker will populate the _cinit table */                                  C:\MCC18\src\traditional\startup\c018i.c
@@ -245,8 +245,8 @@ Address  Value    Disassembly              Source                               
                                            #pragma code _RESET_INTERRUPT_VECTOR = 0x000800                                  C:\datalogger\firmware\main.c
                                            void _reset (void)                                                               C:\datalogger\firmware\main.c
                                            {                                                                                C:\datalogger\firmware\main.c
-000800   ef01     GOTO      0x1802         	_asm goto _startup _endasm                                                      C:\datalogger\firmware\main.c
-000802   f00c                                                                                                               
+000800   eff9     GOTO      0x17f2         	_asm goto _startup _endasm                                                      C:\datalogger\firmware\main.c
+000802   f00b                                                                                                               
 000804   0012     RETURN    0x0            }                                                                                C:\datalogger\firmware\main.c
                                            #pragma code                                                                     C:\datalogger\firmware\main.c
                                                                                                                             C:\datalogger\firmware\main.c
@@ -307,7 +307,7 @@ Address  Value    Disassembly              Source                               
                                            #pragma code                                                                     C:\datalogger\firmware\main.c
                                            void main(void)                                                                  C:\datalogger\firmware\main.c
                                            {                                                                                C:\datalogger\firmware\main.c
-001798   d815     RCALL     0x17c4             InitializeSystem();                                                          C:\datalogger\firmware\main.c
+001798   d80d     RCALL     0x17b4             InitializeSystem();                                                          C:\datalogger\firmware\main.c
                                                                                                                             C:\datalogger\firmware\main.c
                                            	// Enable interrupt priority                                                    C:\datalogger\firmware\main.c
 00179a   8ed0     BSF       0xd0,0x7,0x0   	RCONbits.IPEN = 1;                                                              C:\datalogger\firmware\main.c
@@ -321,33 +321,16 @@ Address  Value    Disassembly              Source                               
                                                                                                                             C:\datalogger\firmware\main.c
 0017a4   928c     BCF       0x8c,0x1,0x0   	LATDbits.LATD1 = 0; // Check LED off.                                           C:\datalogger\firmware\main.c
                                                                                                                             C:\datalogger\firmware\main.c
-0017a6   ec0f     CALL      0x1e,0x0       	high_isr();                                                                     C:\datalogger\firmware\main.c
-0017a8   f000                                                                                                               
-                                                                                                                            C:\datalogger\firmware\main.c
-0017b4   d7fa     BRA       0x17aa         	while(1)                                                                        C:\datalogger\firmware\main.c
-                                           	{                                                                               C:\datalogger\firmware\main.c
-                                           	/*                                                                              C:\datalogger\firmware\main.c
-                                           	if(INTCONbits.INT0IF)                                                           C:\datalogger\firmware\main.c
-                                           			while(1)                                                                      C:\datalogger\firmware\main.c
-                                           				LATDbits.LATD1 = 1;                                                          C:\datalogger\firmware\main.c
-                                           	*/                                                                              C:\datalogger\firmware\main.c
-0017aa   a08c     BTFSS     0x8c,0x0,0x0   		if(LATDbits.LATD0 == 1)                                                        C:\datalogger\firmware\main.c
-0017ac   d002     BRA       0x17b2                                                                                          
-0017ae   908c     BCF       0x8c,0x0,0x0   			LATDbits.LATD0 = 0;                                                           C:\datalogger\firmware\main.c
-0017b0   d001     BRA       0x17b4         		else                                                                           C:\datalogger\firmware\main.c
-0017b2   808c     BSF       0x8c,0x0,0x0   			LATDbits.LATD0 = 1;                                                           C:\datalogger\firmware\main.c
-                                           	}                                                                               C:\datalogger\firmware\main.c
-                                                                                                                            C:\datalogger\firmware\main.c
-0017c0   d7fa     BRA       0x17b6             while(1)                                                                     C:\datalogger\firmware\main.c
+0017b0   d7fa     BRA       0x17a6             while(1)                                                                     C:\datalogger\firmware\main.c
                                                {                                                                            C:\datalogger\firmware\main.c
-0017b6   d808     RCALL     0x17c8                 USBTasks();         // USB Tasks                                         C:\datalogger\firmware\main.c
+0017a6   d808     RCALL     0x17b8                 USBTasks();         // USB Tasks                                         C:\datalogger\firmware\main.c
                                            		//UCAM                                                                         C:\datalogger\firmware\main.c
-0017b8   ec1c     CALL      0x838,0x0              ProcessIO();        // See user\user.c & .h                              C:\datalogger\firmware\main.c
-0017ba   f004                                                                                                               
-0017bc   ecc7     CALL      0xd8e,0x0      		UserTasks();                                                                   C:\datalogger\firmware\main.c
-0017be   f006                                                                                                               
+0017a8   ec1c     CALL      0x838,0x0              ProcessIO();        // See user\user.c & .h                              C:\datalogger\firmware\main.c
+0017aa   f004                                                                                                               
+0017ac   ecc7     CALL      0xd8e,0x0      		UserTasks();                                                                   C:\datalogger\firmware\main.c
+0017ae   f006                                                                                                               
                                                }                                                                            C:\datalogger\firmware\main.c
-0017c2   0012     RETURN    0x0            }                                                                                C:\datalogger\firmware\main.c
+0017b2   0012     RETURN    0x0            }                                                                                C:\datalogger\firmware\main.c
                                                                                                                             C:\datalogger\firmware\main.c
                                            /* InitializeSystem is a centralize initialization routine.                      C:\datalogger\firmware\main.c
                                             * All required USB initialization routines are called from                      C:\datalogger\firmware\main.c
@@ -366,8 +349,8 @@ Address  Value    Disassembly              Source                               
                                                                                                                             C:\datalogger\firmware\main.c
                                                //mInitializeUSBDriver();         // See usbdrv.h                            C:\datalogger\firmware\main.c
                                                                                                                             C:\datalogger\firmware\main.c
-0017c4   efc9     GOTO      0xd92              UserInit();                     // See user.c & .h                           C:\datalogger\firmware\main.c
-0017c6   f006                                                                                                               
+0017b4   efc9     GOTO      0xd92              UserInit();                     // See user.c & .h                           C:\datalogger\firmware\main.c
+0017b6   f006                                                                                                               
                                                                                                                             C:\datalogger\firmware\main.c
                                            }                                                                                C:\datalogger\firmware\main.c
                                                                                                                             C:\datalogger\firmware\main.c
@@ -377,15 +360,15 @@ Address  Value    Disassembly              Source                               
                                            void USBTasks(void)                                                              C:\datalogger\firmware\main.c
                                            {                                                                                C:\datalogger\firmware\main.c
                                                // Servicing Hardware                                                        C:\datalogger\firmware\main.c
-0017c8   ecae     CALL      0x135c,0x0         USBCheckBusStatus();          // Must use polling method                     C:\datalogger\firmware\main.c
-0017ca   f009                                                                                                               
-0017cc   be6f     BTFSC     0x6f,0x7,0x0       if(UCFGbits.UTEYE!=1)                                                        C:\datalogger\firmware\main.c
-0017ce   d002     BRA       0x17d4                                                                                          
+0017b8   ecae     CALL      0x135c,0x0         USBCheckBusStatus();          // Must use polling method                     C:\datalogger\firmware\main.c
+0017ba   f009                                                                                                               
+0017bc   be6f     BTFSC     0x6f,0x7,0x0       if(UCFGbits.UTEYE!=1)                                                        C:\datalogger\firmware\main.c
+0017be   d002     BRA       0x17c4                                                                                          
                                            	{                                                                               C:\datalogger\firmware\main.c
-0017d0   ecca     CALL      0x1394,0x0             USBDriverService();     // Interrupt or polling method                   C:\datalogger\firmware\main.c
-0017d2   f009                                                                                                               
+0017c0   ecca     CALL      0x1394,0x0             USBDriverService();     // Interrupt or polling method                   C:\datalogger\firmware\main.c
+0017c2   f009                                                                                                               
                                            	}                                                                               C:\datalogger\firmware\main.c
-0017d4   0012     RETURN    0x0            }                                                                                C:\datalogger\firmware\main.c
+0017c4   0012     RETURN    0x0            }                                                                                C:\datalogger\firmware\main.c
                                            /*********************************************************************           C:\datalogger\firmware\system\usb\usbmmap.c
                                             *                                                                               C:\datalogger\firmware\system\usb\usbmmap.c
                                             *                Microchip USB C18 Firmware Version 1.0                         C:\datalogger\firmware\system\usb\usbmmap.c
@@ -4074,45 +4057,45 @@ Address  Value    Disassembly              Source                               
                                             * Set up an interrupt to run at the samplerate,                                 C:\datalogger\firmware\logic\logic.c
                                             * discard data for now.                                                         C:\datalogger\firmware\logic\logic.c
                                             */                                                                              C:\datalogger\firmware\logic\logic.c
-0017d6   cfd9     MOVFF     0xfd9,0xfe6    void initAcquisition(uint16_t samplerate)                                        C:\datalogger\firmware\logic\logic.c
-0017d8   ffe6                                                                                                               
-0017da   cfe1     MOVFF     0xfe1,0xfd9                                                                                     
-0017dc   ffd9                                                                                                               
+0017c6   cfd9     MOVFF     0xfd9,0xfe6    void initAcquisition(uint16_t samplerate)                                        C:\datalogger\firmware\logic\logic.c
+0017c8   ffe6                                                                                                               
+0017ca   cfe1     MOVFF     0xfe1,0xfd9                                                                                     
+0017cc   ffd9                                                                                                               
                                            {	                                                                               C:\datalogger\firmware\logic\logic.c
                                            	// Enable interrupt priority                                                    C:\datalogger\firmware\logic\logic.c
-0017de   8ed0     BSF       0xd0,0x7,0x0   	RCONbits.IPEN = 1;                                                              C:\datalogger\firmware\logic\logic.c
+0017ce   8ed0     BSF       0xd0,0x7,0x0   	RCONbits.IPEN = 1;                                                              C:\datalogger\firmware\logic\logic.c
                                                                                                                             C:\datalogger\firmware\logic\logic.c
                                            	// Stop timer                                                                   C:\datalogger\firmware\logic\logic.c
-0017e0   9ed5     BCF       0xd5,0x7,0x0   	T0CONbits.TMR0ON = 0;                                                           C:\datalogger\firmware\logic\logic.c
+0017d0   9ed5     BCF       0xd5,0x7,0x0   	T0CONbits.TMR0ON = 0;                                                           C:\datalogger\firmware\logic\logic.c
                                                                                                                             C:\datalogger\firmware\logic\logic.c
                                            	// Set to 8 bit mode                                                            C:\datalogger\firmware\logic\logic.c
-0017e2   8cd5     BSF       0xd5,0x6,0x0   	T0CONbits.T08BIT = 1;                                                           C:\datalogger\firmware\logic\logic.c
+0017d2   8cd5     BSF       0xd5,0x6,0x0   	T0CONbits.T08BIT = 1;                                                           C:\datalogger\firmware\logic\logic.c
                                                                                                                             C:\datalogger\firmware\logic\logic.c
                                            	// Clock on instruction clock cycles                                            C:\datalogger\firmware\logic\logic.c
-0017e4   9ad5     BCF       0xd5,0x5,0x0   	T0CONbits.T0CS = 0;                                                             C:\datalogger\firmware\logic\logic.c
+0017d4   9ad5     BCF       0xd5,0x5,0x0   	T0CONbits.T0CS = 0;                                                             C:\datalogger\firmware\logic\logic.c
                                            	                                                                                C:\datalogger\firmware\logic\logic.c
                                            	// 256 prescaler                                                                C:\datalogger\firmware\logic\logic.c
-0017e6   96d5     BCF       0xd5,0x3,0x0   	T0CONbits.PSA = 0;                                                              C:\datalogger\firmware\logic\logic.c
-0017e8   84d5     BSF       0xd5,0x2,0x0   	T0CONbits.T0PS2 = 1;                                                            C:\datalogger\firmware\logic\logic.c
-0017ea   82d5     BSF       0xd5,0x1,0x0   	T0CONbits.T0PS1  = 1;                                                           C:\datalogger\firmware\logic\logic.c
-0017ec   80d5     BSF       0xd5,0x0,0x0   	T0CONbits.T0PS0 = 1;                                                            C:\datalogger\firmware\logic\logic.c
+0017d6   96d5     BCF       0xd5,0x3,0x0   	T0CONbits.PSA = 0;                                                              C:\datalogger\firmware\logic\logic.c
+0017d8   84d5     BSF       0xd5,0x2,0x0   	T0CONbits.T0PS2 = 1;                                                            C:\datalogger\firmware\logic\logic.c
+0017da   82d5     BSF       0xd5,0x1,0x0   	T0CONbits.T0PS1  = 1;                                                           C:\datalogger\firmware\logic\logic.c
+0017dc   80d5     BSF       0xd5,0x0,0x0   	T0CONbits.T0PS0 = 1;                                                            C:\datalogger\firmware\logic\logic.c
                                                                                                                             C:\datalogger\firmware\logic\logic.c
                                            	// Enable TIMER0 OVF interrupt, periph interrupt                                C:\datalogger\firmware\logic\logic.c
                                            	// and global interrupts                                                        C:\datalogger\firmware\logic\logic.c
-0017ee   8af2     BSF       0xf2,0x5,0x0   	INTCONbits.TMR0IE = 1;                                                          C:\datalogger\firmware\logic\logic.c
-0017f0   94f2     BCF       0xf2,0x2,0x0   	INTCONbits.TMR0IF = 0;                                                          C:\datalogger\firmware\logic\logic.c
-0017f2   8cf2     BSF       0xf2,0x6,0x0   	INTCONbits.GIEL  = 1;                                                           C:\datalogger\firmware\logic\logic.c
-0017f4   8ef2     BSF       0xf2,0x7,0x0   	INTCONbits.GIEH = 1;                                                            C:\datalogger\firmware\logic\logic.c
+0017de   8af2     BSF       0xf2,0x5,0x0   	INTCONbits.TMR0IE = 1;                                                          C:\datalogger\firmware\logic\logic.c
+0017e0   94f2     BCF       0xf2,0x2,0x0   	INTCONbits.TMR0IF = 0;                                                          C:\datalogger\firmware\logic\logic.c
+0017e2   8cf2     BSF       0xf2,0x6,0x0   	INTCONbits.GIEL  = 1;                                                           C:\datalogger\firmware\logic\logic.c
+0017e4   8ef2     BSF       0xf2,0x7,0x0   	INTCONbits.GIEH = 1;                                                            C:\datalogger\firmware\logic\logic.c
                                                                                                                             C:\datalogger\firmware\logic\logic.c
                                            	// Set TIMER0 OVF to high priority                                              C:\datalogger\firmware\logic\logic.c
-0017f6   84f1     BSF       0xf1,0x2,0x0   	INTCON2bits.TMR0IP = 1;                                                         C:\datalogger\firmware\logic\logic.c
+0017e6   84f1     BSF       0xf1,0x2,0x0   	INTCON2bits.TMR0IP = 1;                                                         C:\datalogger\firmware\logic\logic.c
                                                                                                                             C:\datalogger\firmware\logic\logic.c
                                            	// Finally enable the timer                                                     C:\datalogger\firmware\logic\logic.c
-0017f8   8ed5     BSF       0xd5,0x7,0x0   	T0CONbits.TMR0ON = 1;                                                           C:\datalogger\firmware\logic\logic.c
-0017fa   52e5     MOVF      0xe5,0x1,0x0   }                                                                                C:\datalogger\firmware\logic\logic.c
-0017fc   cfe7     MOVFF     0xfe7,0xfd9                                                                                     
-0017fe   ffd9                                                                                                               
-001800   0012     RETURN    0x0                                                                                             
+0017e8   8ed5     BSF       0xd5,0x7,0x0   	T0CONbits.TMR0ON = 1;                                                           C:\datalogger\firmware\logic\logic.c
+0017ea   52e5     MOVF      0xe5,0x1,0x0   }                                                                                C:\datalogger\firmware\logic\logic.c
+0017ec   cfe7     MOVFF     0xfe7,0xfd9                                                                                     
+0017ee   ffd9                                                                                                               
+0017f0   0012     RETURN    0x0                                                                                             
                                                    LIST P=18F4550                                                           C:\MCC18\SRC\TRADIT~1\PROC\p18f4550.asm
                                                    LIST                                                                     C:\MCC18\SRC\TRADIT~1\PROC\p18f4550.asm
                                                    END                                                                      C:\MCC18\SRC\TRADIT~1\PROC\p18f4550.asm
@@ -4835,5 +4818,5 @@ Address  Value    Disassembly              Source                               
                                                                                                                             C:\MCC18\src\TRADIT~1\stdclib\__init.c
                                            void __init (void)                                                               C:\MCC18\src\TRADIT~1\stdclib\__init.c
                                            {                                                                                C:\MCC18\src\TRADIT~1\stdclib\__init.c
-00181e   0012     RETURN    0x0            }                                                                                C:\MCC18\src\TRADIT~1\stdclib\__init.c
+00180e   0012     RETURN    0x0            }                                                                                C:\MCC18\src\TRADIT~1\stdclib\__init.c
                                                                                                                             C:\MCC18\src\TRADIT~1\stdclib\__init.c

@@ -1,5 +1,5 @@
 MPLINK 4.1, Linker
-Linker Map File - Created Mon May 21 12:49:39 2012
+Linker Map File - Created Mon May 21 15:28:03 2012
 
                                  Section Info
                   Section       Type    Address   Location Size(Bytes)
@@ -17,11 +17,11 @@ Linker Map File - Created Mon May 21 12:49:39 2012
         .romdata_usbdsc.o    romdata   0x0015e8    program   0x0000b8
                _cinit_scn       code   0x0016a0    program   0x00009e
                      PROG       code   0x00173e    program   0x00005a
-             .code_main.o       code   0x001798    program   0x00003e
-            .code_logic.o       code   0x0017d6    program   0x00002c
-             _startup_scn       code   0x001802    program   0x00001c
-           .code___init.o       code   0x00181e    program   0x000002
-          .idata_user.o_i    romdata   0x001820    program   0x000002
+             .code_main.o       code   0x001798    program   0x00002e
+            .code_logic.o       code   0x0017c6    program   0x00002c
+             _startup_scn       code   0x0017f2    program   0x00001c
+           .code___init.o       code   0x00180e    program   0x000002
+          .idata_user.o_i    romdata   0x001810    program   0x000002
                 MATH_DATA      udata   0x000000       data   0x000014
                  .tmpdata      udata   0x000014       data   0x000004
             .udata_user.o      udata   0x000060       data   0x000080
@@ -44,8 +44,8 @@ Linker Map File - Created Mon May 21 12:49:39 2012
                             0x000008    0x00000d      
                             0x000018    0x00005d      
                             0x000800    0x000805      
-                            0x00082a    0x001821      
-            4176 out of 33048 program addresses used, program memory utilization is 12%
+                            0x00082a    0x001811      
+            4160 out of 33048 program addresses used, program memory utilization is 12%
 
 
 
@@ -58,7 +58,7 @@ Linker Map File - Created Mon May 21 12:49:39 2012
              CheckButtons   0x000b1c    program     extern C:\datalogger\firmware\user\user.c
                ClearArray   0x0014a0    program     extern C:\datalogger\firmware\system\usb\usbdrv\usbdrv.c
                  FXM1616S   0x00173e    program     extern C:\MCC18\SRC\TRADIT~1\MATH\fxm1616s.asm
-         InitializeSystem   0x0017c4    program     static C:\datalogger\firmware\main.c
+         InitializeSystem   0x0017b4    program     static C:\datalogger\firmware\main.c
                 ProcessIO   0x000838    program     extern C:\datalogger\firmware\user\user.c
                   ReadPOT   0x000a68    program     extern C:\datalogger\firmware\user\user.c
                  ReadTemp   0x000d44    program     extern C:\datalogger\firmware\user\user.c
@@ -93,7 +93,7 @@ USBPrepareForNextSetupTrf   0x001340    program     extern C:\datalogger\firmwar
    USBStdGetStatusHandler   0x000f6c    program     extern C:\datalogger\firmware\system\usb\usb9\usb9.c
       USBStdSetCfgHandler   0x000f1c    program     extern C:\datalogger\firmware\system\usb\usb9\usb9.c
                USBSuspend   0x001412    program     extern C:\datalogger\firmware\system\usb\usbdrv\usbdrv.c
-                 USBTasks   0x0017c8    program     extern C:\datalogger\firmware\main.c
+                 USBTasks   0x0017b8    program     extern C:\datalogger\firmware\main.c
        USBWakeFromSuspend   0x00141a    program     extern C:\datalogger\firmware\system\usb\usbdrv\usbdrv.c
                USB_CD_Ptr   0x001696    program     extern C:\datalogger\firmware\autofiles\usbdsc.c
                USB_SD_Ptr   0x00169a    program     extern C:\datalogger\firmware\autofiles\usbdsc.c
@@ -126,7 +126,7 @@ USBPrepareForNextSetupTrf   0x001340    program     extern C:\datalogger\firmwar
        ___return_lbl00000   0x000004    program     static                          
        ___return_lbl00000   0x000804    program     static                          
        ___return_lbl00001   0x00000c    program     static                          
-       ___return_lbl00001   0x00181c    program     static                          
+       ___return_lbl00001   0x00180c    program     static                          
        ___return_lbl00002   0x00001c    program     static                          
        ___return_lbl00002   0x00173c    program     static                          
        ___return_lbl00003   0x0009ac    program     static                          
@@ -134,13 +134,13 @@ USBPrepareForNextSetupTrf   0x001340    program     extern C:\datalogger\firmwar
    ___switchexit_lbl00004   0x000988    program     static                          
         ___while_lbl00040   0x0014b4    program     static                          
         ___while_lbl00041   0x0014c2    program     static                          
-                   __init   0x00181e    program     extern C:\MCC18\src\TRADIT~1\stdclib\__init.c
+                   __init   0x00180e    program     extern C:\MCC18\src\TRADIT~1\stdclib\__init.c
                 _do_cinit   0x0016a0    program     extern C:\MCC18\src\traditional\startup\c018i.c
                    _entry   0x000000    program     extern C:\MCC18\src\traditional\startup\c018i.c
                 _high_ISR   0x000008    program     extern C:\datalogger\firmware\main.c
                  _low_ISR   0x000018    program     extern C:\datalogger\firmware\main.c
                    _reset   0x000800    program     extern C:\datalogger\firmware\main.c
-                 _startup   0x001802    program     extern C:\MCC18\src\traditional\startup\c018i.c
+                 _startup   0x0017f2    program     extern C:\MCC18\src\traditional\startup\c018i.c
                     cfg01   0x0015fa    program     extern C:\datalogger\firmware\autofiles\usbdsc.c
                 copy_loop   0x001712    program     static                          
             copy_one_byte   0x001718    program     static                          
@@ -148,8 +148,8 @@ USBPrepareForNextSetupTrf   0x001340    program     extern C:\datalogger\firmwar
                      done   0x00173c    program     static                          
              done_copying   0x001726    program     static                          
                  high_isr   0x00001e    program     extern C:\datalogger\firmware\main.c
-          initAcquisition   0x0017d6    program     extern C:\datalogger\firmware\logic\logic.c
-                     loop   0x001812    program     static                          
+          initAcquisition   0x0017c6    program     extern C:\datalogger\firmware\logic\logic.c
+                     loop   0x001802    program     static                          
                   low_isr   0x000034    program     extern C:\datalogger\firmware\main.c
                      main   0x001798    program     extern C:\datalogger\firmware\main.c
               nullSampler   0x000abc    program     extern C:\datalogger\firmware\user\user.c
@@ -570,13 +570,13 @@ USBPrepareForNextSetupTrf   0x001340    program     extern C:\datalogger\firmwar
                  FXM1616S   0x00173e    program     extern C:\MCC18\SRC\TRADIT~1\MATH\fxm1616s.asm
                TSIGN1616A   0x00178a    program     static C:\MCC18\SRC\TRADIT~1\MATH\fxm1616s.asm
                      main   0x001798    program     extern C:\datalogger\firmware\main.c
-         InitializeSystem   0x0017c4    program     static C:\datalogger\firmware\main.c
-                 USBTasks   0x0017c8    program     extern C:\datalogger\firmware\main.c
-          initAcquisition   0x0017d6    program     extern C:\datalogger\firmware\logic\logic.c
-                 _startup   0x001802    program     extern C:\MCC18\src\traditional\startup\c018i.c
-                     loop   0x001812    program     static                          
-       ___return_lbl00001   0x00181c    program     static                          
-                   __init   0x00181e    program     extern C:\MCC18\src\TRADIT~1\stdclib\__init.c
+         InitializeSystem   0x0017b4    program     static C:\datalogger\firmware\main.c
+                 USBTasks   0x0017b8    program     extern C:\datalogger\firmware\main.c
+          initAcquisition   0x0017c6    program     extern C:\datalogger\firmware\logic\logic.c
+                 _startup   0x0017f2    program     extern C:\MCC18\src\traditional\startup\c018i.c
+                     loop   0x001802    program     static                          
+       ___return_lbl00001   0x00180c    program     static                          
+                   __init   0x00180e    program     extern C:\MCC18\src\TRADIT~1\stdclib\__init.c
                      SIGN   0x000000       data     extern C:\MCC18\SRC\TRADIT~1\MATH\cmath18.asm
             __FPFLAGSbits   0x000001       data     extern C:\MCC18\SRC\TRADIT~1\MATH\cmath18.asm
                 __FPFLAGS   0x000001       data     extern C:\MCC18\SRC\TRADIT~1\MATH\cmath18.asm
