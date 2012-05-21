@@ -37,7 +37,7 @@ typedef union DATA_PACKET
 			LOGIC_END			= 0x62,
 			LOGIC_DATA			= 0x63,
 			LOGIC_ERROR			= 0xAA
-        }CMD;
+        } CMD;
         byte len;
     };
     struct
@@ -58,8 +58,12 @@ typedef union DATA_PACKET
     };
 } DATA_PACKET;
 
+// Error values returned by the Logic Analyser
+#define	ERROR_CMD_NOT_FOUND				0x01
+#define ERROR_INVALID_SAMPLE_RATE		0x02
+
 /** P U B L I C  P R O T O T Y P E S *****************************************/
 void UserInit(void);
 void ProcessIO(void);
 
-#endif //PICDEM_FS_DEMO_H
+#endif /* PICDEM_FS_DEMO_H */

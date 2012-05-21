@@ -1,19 +1,24 @@
-/** I N C L U D E S **********************************************************/
+/**
+ * SB3 Datalogger Project
+ * David Turner & Jon Sowman
+ * May 2012
+ */
+ 
+ // Includes from PATH
 #include <p18cxxx.h>
 #include <usart.h>
 #include <timers.h>
+
+// Includes from local repo
 #include "system\typedefs.h"
-
 #include "system\usb\usb.h"
-
 #include "io_cfg.h"             // I/O pin mapping
 #include "user\user.h"
 #include "logic\logic.h"
 
-/** V A R I A B L E S ********************************************************/
+// Variables
 #pragma udata
 
-byte counter;
 byte trf_state;
 
 DATA_PACKET dataPacket;
@@ -30,18 +35,17 @@ word temp_data[30];             // 30 points of data
 #define TIMER0L_VAL         0xE5
 #define TIMER0H_VAL         0x48
 
-/** P R I V A T E  P R O T O T Y P E S ***************************************/
+// Private prototypes
 
 void BlinkUSBStatus(void);
 void ServiceRequests(void);
 void ResetTempLog(void);
 
-//UCAM
+// Added by CUED
 byte ReadPOT(void);
 void Blink(byte);
 void nullSampler(void);
 
-/** D E C L A R A T I O N S **************************************************/
 #pragma code
 
 void ProcessIO(void)
@@ -51,7 +55,7 @@ void ProcessIO(void)
     // User Application USB tasks
     if((usb_device_state < CONFIGURED_STATE)||(UCONbits.SUSPND==1)) return;
     
-    //UCAM
+    // UCAM
     ServiceRequests();
 }
 
@@ -65,76 +69,57 @@ void ServiceRequests(void)
     
     if(USBGenRead((byte*)&dataPacket,sizeof(dataPacket)))
     {   
-		// Pointer to the length field in the USB packet, fill at end
-		uint8_t* len = &(dataPacket._byte[1]);
-		// Pointer into the USB packet, start at first payload byte
-		uint8_t* usbptr = &(dataPacket._byte[2]);
-        counter = 0;
+	    // Pointer to the data packet
+	    uint8_t* usbptr = dataPacket._byte;
+	    uint8_t* usbcmd = usbptr;
+	    uint8_t* usblen = usbptr + 1;
+	    usbptr += 2; // Now points to beginning of payload
+		
+		// Switch on the command byte of the USB packet we got from the PC
         switch(dataPacket.CMD)
         {
             case READ_VERSION:
                 *usbptr++ = MINOR_VERSION;
-                *usbptr = MAJOR_VERSION;
-                *len = 0x04;
-                break;
-
-            case ID_BOARD:
-                counter = 0x01;
-                if(dataPacket.ID == 0)
-                {
-                    mLED_3_Off();mLED_4_Off();
-                }
-                else if(dataPacket.ID == 1)
-                {
-                    mLED_3_Off();mLED_4_On();
-                }
-                else if(dataPacket.ID == 2)
-                {
-                    mLED_3_On();mLED_4_Off();
-                }
-                else if(dataPacket.ID == 3)
-                {
-                    mLED_3_On();mLED_4_On();
-                }
-                else
-                    counter = 0x00;
+                *usbptr++ = MAJOR_VERSION;
+                *usblen = 4;
                 break;
 
             case UPDATE_LED:
-                // LED1 & LED2 were used as USB event indicators.
+                // LED1 & LED2 are USB event indicators
                 if(dataPacket.led_num == 1)
                 {
                     mLED_1 = dataPacket.led_status;
-                    counter = 0x01;
+                    *usblen = 1;
                 }
                 if(dataPacket.led_num == 2)
                 {
                     mLED_2 = dataPacket.led_status;
-                    counter = 0x01;
+                    *usblen = 1;
                 }
                 if(dataPacket.led_num == 3)
                 {
                     mLED_3 = dataPacket.led_status;
-                    counter = 0x01;
+                    *usblen = 1;
                 }
                 else if(dataPacket.led_num == 4)
                 {
                     mLED_4 = dataPacket.led_status;
-                    counter = 0x01;
+                    *usblen = 1;
                 }
                 break;
 
-            //UCAM
+            // The following two commands break the the command/response
+            // protocol defined for the Logic Analyser, in order that they be
+            // back compatible with the provided example PC interface.
+            // (They are missing length field).
             case BLINK_LED_COMMAND: //[0xEE, Onstate]
 				nullSampler();
-                counter=0x02; //sends back same command
+                *usblen = 2; //sends back same command
                 break;
 
-           	//UCAM
            	case GET_ADC_COMMAND: //[0xED. 8-bit data]
-                //dataPacket._byte[1] = ReadPOT();
-				dataPacket._byte[1] = 0x2A;
-                counter=0x02; //returns[0xED, command]
+                *usbptr = ReadPOT();
+                *usblen = 2; //returns[0xED, command]
                 break;
  
             case RESET:
@@ -142,13 +127,17 @@ void ServiceRequests(void)
                 break;
                 
             default:
+            	// We didn't understand the command the PC sent, so error
+            	*usbcmd = LOGIC_ERROR;
+            	*usbptr++ = ERROR_CMD_NOT_FOUND;
+            	*usblen = 3;
                 break;
         }
 		// If we've put data into the send buffer, then transmit
-        if(counter != 0)
+        if(*usblen != 0)
         {
             if(!mUSBGenTxIsBusy())
-                USBGenWrite((byte*)&dataPacket,counter);
+                USBGenWrite((byte*)&dataPacket,*usblen);
         }
     }
 return;

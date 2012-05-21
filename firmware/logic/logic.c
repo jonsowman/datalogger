@@ -1,6 +1,7 @@
 /**
  * SB3 Datalogger Project
- * David Turner & Jon Sowman 2012
+ * David Turner & Jon Sowman
+ * May 2012
  */
 #include <p18cxxx.h>
 #include <usart.h>
@@ -14,7 +15,7 @@
  * containing the configuration options. See documentation
  * for details.
  */
-void logicConf(uint8_t options)
+void logicConfig(uint8_t options)
 {
 }
 
@@ -31,7 +32,7 @@ void logicStart(void)
  * Set the sample rate for the analyser in kHz . We always sample 
  * at the same rate, but oversample in the slower modes.
  */
-void setSampleRate(uint16_t samplerate);
+void setSampleRate(uint16_t samplerate)
 {
 }
 

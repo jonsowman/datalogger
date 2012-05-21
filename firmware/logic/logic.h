@@ -1,6 +1,7 @@
 /**
  * SB3 Datalogger Project
- * David Turner & Jon Sowman 2012
+ * David Turner & Jon Sowman
+ * May 2012
  */
 #ifndef __LOGIC_H__
 #define __LOGIC_H__
