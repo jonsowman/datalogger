@@ -1,9 +1,0 @@
-First report
-	- Flow diagram
-		- add software part - dwt
-		- add firmware part - jon
-	- Management chart of some description?
-
-Get interrupts working - jon
-Play with labview -dwt
-	- Figure out how to use multiple panels
