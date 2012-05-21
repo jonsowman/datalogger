@@ -342,16 +342,20 @@ void UserTasks(void)
 
 void UserInit(void)
 {
-    mInitAllLEDs();
-	TRISAbits.TRISA0=1;
-	ADCON0=0x01;
-	ADCON2=0x3C;
-    ADCON2bits.ADFM = 1;   // ADC result right justified
-	TRISD = 0x18;
+    //mInitAllLEDs();
+	//TRISAbits.TRISA0=1;
+	//ADCON0=0x01;
+	//ADCON2=0x3C;
+    //ADCON2bits.ADFM = 1;   // ADC result right justified
 	// Set RD0 and RD1 as output
-	TRISD &= ~(1 << TRISDbits.TRISD0 | 1 << TRISDbits.TRISD1); 
-	ThermSendReset();
-}//end UserInit
+	ADCON1bits.PCFG0 = 1;
+	ADCON1bits.PCFG1 = 1;
+	ADCON1bits.PCFG2 = 1;
+	ADCON1bits.PCFG3 = 1;
+	TRISBbits.TRISB0 = 1;
+	TRISDbits.TRISD0 = 0;
+	TRISDbits.TRISD1 = 0; 
+}
 
 
 /** EOF user.c ***************************************************************/
