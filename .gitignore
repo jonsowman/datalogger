@@ -2,3 +2,5 @@
 *.o
 *.s#*
 *.b#*
+firmware/hex/*
+*.err
