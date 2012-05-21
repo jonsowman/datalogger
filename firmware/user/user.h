@@ -22,13 +22,21 @@ typedef union DATA_PACKET
     {
         enum
         {
-            READ_VERSION    = 0x00,
-            ID_BOARD        = 0x31,
-            UPDATE_LED      = 0x32,
+            READ_VERSION		= 0x00,
+            ID_BOARD      	 	= 0x31,
+            UPDATE_LED			= 0x32,
             //UCAM
-			GET_ADC_COMMAND	= 0xED,
-            BLINK_LED_COMMAND = 0xEE,
-            RESET           = 0xFF
+			GET_ADC_COMMAND		= 0xED,
+            BLINK_LED_COMMAND	= 0xEE,
+            RESET				= 0xFF,
+			// Logic analyser commands
+			LOGIC_SET_SRATE		= 0x40,
+			LOGIC_GET_SRATE		= 0x41,
+			LOGIC_ARM			= 0x60,
+			LOGIC_START			= 0x61,
+			LOGIC_END			= 0x62,
+			LOGIC_DATA			= 0x63,
+			LOGIC_ERROR			= 0xAA
         }CMD;
         byte len;
     };

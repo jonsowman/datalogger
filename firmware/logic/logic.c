@@ -10,10 +10,43 @@
 #include "io_cfg.h"
 
 /**
+ * Configure the logic analyser, takes one byte bitfield
+ * containing the configuration options. See documentation
+ * for details.
+ */
+void logicConf(uint8_t options)
+{
+}
+
+/**
+ * If in async mode, start logging now and filling the SRAM
+ * buffer. If in sync mode, arm the analyser and start logging
+ * on the clock trigger.
+ */
+void logicStart(void)
+{
+}
+
+/**
+ * Set the sample rate for the analyser in kHz . We always sample 
+ * at the same rate, but oversample in the slower modes.
+ */
+void setSampleRate(uint16_t samplerate);
+{
+}
+
+/**
+ * Get the currently set sample rate in kHz.
+ */
+uint16_t getSampleRate(void)
+{
+}
+
+/**
  * Set up an interrupt to run at the samplerate,
  * discard data for now.
  */
-void initAcquisition(uint16_t samplerate)
+void startTimer(uint16_t samplerate)
 {	
 	// Enable interrupt priority
 	RCONbits.IPEN = 1;

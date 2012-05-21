@@ -7,6 +7,11 @@
 
 #include "system\typedefs.h"
 
-void initAcquisition(uint16_t samplerate);
+void logicConfig(uint8_t options);
+void logicStart(void);
+void setSampleRate(uint16_t samplerate);
+uint16_t getSampleRate(void);
+
+void startTimer(uint16_t samplerate);
 
 #endif /* __LOGIC_H__ */

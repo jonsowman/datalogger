@@ -8,7 +8,7 @@
 
 #include "io_cfg.h"             // I/O pin mapping
 #include "user\user.h"
-//#include "logic\logic.h"
+#include "logic\logic.h"
 
 /** V A R I A B L E S ********************************************************/
 #pragma udata
@@ -65,14 +65,17 @@ void ServiceRequests(void)
     
     if(USBGenRead((byte*)&dataPacket,sizeof(dataPacket)))
     {   
+		// Pointer to the length field in the USB packet, fill at end
+		uint8_t* len = &(dataPacket._byte[1]);
+		// Pointer into the USB packet, start at first payload byte
+		uint8_t* usbptr = &(dataPacket._byte[2]);
         counter = 0;
         switch(dataPacket.CMD)
         {
             case READ_VERSION:
-                //dataPacket._byte[1] is len
-                dataPacket._byte[2] = MINOR_VERSION;
-                dataPacket._byte[3] = MAJOR_VERSION;
-                counter=0x04;
+                *usbptr++ = MINOR_VERSION;
+                *usbptr = MAJOR_VERSION;
+                *len = 0x04;
                 break;
 
             case ID_BOARD:
@@ -123,8 +126,6 @@ void ServiceRequests(void)
 
             //UCAM
             case BLINK_LED_COMMAND: //[0xEE, Onstate]
-            	//Return the sum of the numbers, note no overflow protection present, to keep simplicity.
-                //Blink(dataPacket._byte[1]);
 				nullSampler();
                 counter=0x02; //sends back same command
                 break;
@@ -143,6 +144,7 @@ void ServiceRequests(void)
             default:
                 break;
         }
+		// If we've put data into the send buffer, then transmit
         if(counter != 0)
         {
             if(!mUSBGenTxIsBusy())
