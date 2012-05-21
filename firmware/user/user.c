@@ -125,6 +125,20 @@ void ServiceRequests(void)
             	// Returned is like [CMD, 0x04, MSB, LSB]
             	*usblen = 4;
             	break;
+            
+            case LOGIC_CONFIG:
+            	logicConfig(*usbptr);
+            	// Return 3 bytes, payload is '1' for success [CMD, 0x03, 0x01]
+            	*usbptr = 0x01;
+            	*usblen = 3;
+            	break;
+            	
+            case LOGIC_ARM:
+            	logicStart();
+            	// Return 3 bytes, payload is '1' for success [CMD, 0x03, 0x01]
+            	*usbptr = 0x01;
+            	*usblen = 3;
+            	break;            	
 
             // The following two commands break the the command/response
             // protocol defined for the Logic Analyser, in order that they be
