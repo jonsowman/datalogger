@@ -65,6 +65,7 @@ void ProcessIO(void)
  */
 void ServiceRequests(void)
 {
+	uint16_t rate;
     if(USBGenRead((byte*)&dataPacket,sizeof(dataPacket)))
     {   
 	    // Pointer to the data packet
@@ -108,7 +109,7 @@ void ServiceRequests(void)
                 
             case LOGIC_SET_SRATE:
             	// Rate is 16 bit, MSB first
-            	uint8_t rate = *usbptr;
+            	rate = (uint16_t)(*usbptr);
             	rate <<= 8;
             	rate |= *(usbptr + 1);
             	setSampleRate(rate);
@@ -118,7 +119,7 @@ void ServiceRequests(void)
             	break;
             	
             case LOGIC_GET_SRATE:
-            	uint16_t rate = getSampleRate();
+            	rate = getSampleRate();
             	*usbptr = (rate >> 8) & 0xFF;
             	*usbptr = rate & 0xFF;
             	// Returned is like [CMD, 0x04, MSB, LSB]
