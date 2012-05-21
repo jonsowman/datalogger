@@ -1,5 +1,4 @@
 First report
-	- Schematic - jon before monday
 	- Flow diagram
 		- add software part - dwt
 		- add firmware part - jon
