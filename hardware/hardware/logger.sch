@@ -8672,25 +8672,25 @@ W = angled&lt;p&gt;
 <instance part="BUFFER" gate="A" x="182.88" y="149.86"/>
 <instance part="SRAM" gate="G$1" x="241.3" y="144.78"/>
 <instance part="P+1" gate="1" x="259.08" y="165.1"/>
-<instance part="GND1" gate="1" x="271.78" y="160.02" rot="R90"/>
+<instance part="GND1" gate="1" x="271.78" y="160.02" smashed="yes" rot="R90"/>
 <instance part="BUFFER" gate="P" x="27.94" y="220.98"/>
 <instance part="P+2" gate="1" x="27.94" y="228.6"/>
 <instance part="GND2" gate="1" x="27.94" y="210.82" smashed="yes"/>
-<instance part="GND3" gate="1" x="165.1" y="139.7" rot="R270"/>
+<instance part="GND3" gate="1" x="165.1" y="139.7" smashed="yes" rot="R270"/>
 <instance part="SHIFTREG" gate="A" x="327.66" y="147.32"/>
 <instance part="SHIFTREG" gate="P" x="43.18" y="220.98"/>
 <instance part="P+3" gate="1" x="43.18" y="228.6"/>
 <instance part="GND4" gate="1" x="43.18" y="210.82" smashed="yes"/>
 <instance part="FRAME1" gate="G$1" x="0" y="0"/>
 <instance part="FRAME1" gate="G$2" x="287.02" y="0"/>
-<instance part="GND5" gate="1" x="304.8" y="162.56" rot="R270"/>
+<instance part="GND5" gate="1" x="304.8" y="162.56" smashed="yes" rot="R270"/>
 <instance part="MCU" gate="G$1" x="243.84" y="203.2"/>
 <instance part="R1" gate="G$1" x="134.62" y="215.9" rot="R90"/>
 <instance part="LED1" gate="G$1" x="134.62" y="203.2"/>
-<instance part="GND6" gate="1" x="134.62" y="190.5"/>
+<instance part="GND6" gate="1" x="134.62" y="190.5" smashed="yes"/>
 <instance part="R2" gate="G$1" x="121.92" y="215.9" rot="R90"/>
 <instance part="LED2" gate="G$1" x="121.92" y="203.2"/>
-<instance part="GND7" gate="1" x="121.92" y="190.5"/>
+<instance part="GND7" gate="1" x="121.92" y="190.5" smashed="yes"/>
 <instance part="OPAMP1" gate="A" x="68.58" y="106.68"/>
 <instance part="OPAMP1" gate="B" x="68.58" y="119.38"/>
 <instance part="OPAMP1" gate="C" x="68.58" y="132.08"/>
