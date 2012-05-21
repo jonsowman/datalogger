@@ -107,6 +107,23 @@ void ServiceRequests(void)
                     *usblen = 1;
                 }
                 break;
+                
+            case LOGIC_SET_SRATE:
+            	// Rate is 16 bit, MSB first
+            	uint16_t rate = *usbptr | *(usbptr + 1);
+            	setSampleRate(rate);
+            	// Return CMD along with 1 for success [CMD, 0x03, 0x01]
+            	*usbptr = 0x01;
+            	*usblen = 3;
+            	break;
+            	
+            case LOGIC_GET_SRATE:
+            	uint16_t rate = getSampleRate();
+            	*usbptr = (rate >> 8) & 0xFF;
+            	*usbptr = rate & 0xFF;
+            	// Returned is like [CMD, 0x04, MSB, LSB]
+            	*usblen = 4;
+            	break;
 
             // The following two commands break the the command/response
             // protocol defined for the Logic Analyser, in order that they be
