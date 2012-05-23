@@ -4,5 +4,5 @@
 *.b#*
 firmware/hex/*
 *.err
-reports/*.aux
-reports/*.log
+reports/*/*.aux
+reports/*/*.log
