@@ -33,14 +33,14 @@
 \end{abstract}
 
 \section{Hardware Overview}
-    A PIC18F4550 microcontroller forms the core of the data-logging hardware. The inbuild USB peripheral is used along with support circuitry on the board for USB communications. A hardware reset function exists along with the option to run a bootloader, allowing the microcontroller to be programmed over the USB port.
+    A PIC18F4550 microcontroller forms the core of the data-logging hardware. The inbuilt USB peripheral is used along with support circuitry on the board for USB communications. A hardware reset function exists along with the option to run a bootloader, allowing the microcontroller to be programmed over the USB port.
 
     Additional hardware will be added to provide the following functionality:
     \begin{itemize}
     \item Provide input protection so moderate overvoltages do not damage the datalogger
     \item Log data from up to 8 digital channels, optionally synchronised to a clock on one channel
-    \item Store up to 1Mbit of data (that is to say, up to 128k samples with up to 8 digital channels per sample)
-    \item Retrieve the samples from memory and transfer them to the desktop computer via USB interface for post processing, analysis and charting
+    \item Store up to 1Mbit of data (up to 128k samples with up to 8 digital channels per sample)
+    \item Retrieve the samples from memory and transfer them to the desktop computer via the USB interface for post processing, analysis and charting
     \end{itemize}
 
     A schematic for the logic analyser hardware can be found in Appendix
@@ -55,9 +55,8 @@
     will prevent this voltage being passed on to the octal buffer where it could
     cause damage.
 
-    The disadvantage of using these amplifiers is that they will override the
-    Schmitt trigger type inputs on the MCU, so the protection amplifiers will be
-    configured with some hysteresis to mitigate this problem.
+    The disadvantage of using these amplifiers is that the Schmitt trigger type inputs on the MCU will have no effect, so the protection amplifiers will be
+    configured with some hysteresis to reintroduce the added noise immunity.
 
 \subsection{Buffering}
     The data will be captured directly by an SRAM (Static Random Access Memory) buffer during the logging process, since the PIC does not have enough internal RAM to store enough samples to satisfy the specification. SRAM, whilst relatively expensive, is capable of very fast write speeds, essential to achieve a high sampling rate.
@@ -66,7 +65,7 @@
 
     The address lines will be directly attached to the PIC using the two byte-wide ports PORTB and PORTD, plus one additional line from another port. After the hardware anti-aliasing filters, the eight input channels are connected via a shared data bus to the SRAM data interface via a 8-way tri-state buffer, controlled by the PIC. This buffer is enabled during the data acquisition phase, and subsequently disabled when the PIC reads back the data from the SRAM.
 
-    Synchronous data capture is possible by the use of the clock input line, which allows one input line to bypass the shift register and be connected directly to the PIC.  The PIC will interrupt on changes of this line and capture data to the SRAM on the appropriate clock edge (set by the user).
+    Synchronous data capture is possible using the clock input line, which allows one input line to bypass the shift register and be connected directly to the PIC.  The PIC will interrupt on changes of this line and capture data to the SRAM on the appropriate clock edge (set by the user).
 
 \subsection{Data Retrieval}
     Retrieving data from the SRAM is achieved via the use of a parallel-in/serial-out shift register such as the 74HC165 series in order to reduce the number of IO pins required on the microcontroller. The byte-wide parallel input to this device is attached to the data bus, and data is clocked in to the PIC before being packetised and transmitted to the desktop computer over the USB interface.
@@ -84,7 +83,7 @@
 
     \texttt{[CMD, LEN, D0, D1,  ...]} \\
 
-    Where D are data bits, up to 62 permitted per USB packet. Data is returned
+    Where D are data bits, up to 62 permitted per packet. Data is returned
     to the PC from the MCU in a similar manner. \texttt{LEN} is the total number
     of bytes in the packet, including the \texttt{CMD} and \texttt{LEN} bytes.
 
