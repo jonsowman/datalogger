@@ -43,6 +43,9 @@
     \item Retrieve the samples from memory and transfer them to the desktop computer via USB interface for post processing, analysis and charting
     \end{itemize}
 
+    A schematic for the logic analyser hardware can be found in Appendix
+    \ref{app-schematic}.
+
 \subsection{Filtering}
     Frontend antialiasing filters will be put in place to avoid aliasing caused by input signals containing frequencies above the Nyquist frequency at which the device will sample. Simple first order low pass RC filters will suffice for this, with a $-3dB$ cut-off frequency placed just above the Nyquist frequency.
 
@@ -62,6 +65,46 @@
     
 \subsection{Software Interface}
     The software interface will be developed using the LabWindows environment and will allow configuration and initiation of datalogging and viewing and analysis of captured data.  The user can select either the asyncronous sample rate or synchronous mode, which channels to capture, and number of samples to capture.  The software will have options to immediately initiate the capture, wait for a trigger byte on the 8 channels, or begin capture on a rising or falling edge of the clock line.  Once the capture is complete and data has been streamed to the PC, it will be available for viewing in both timing diagram and listing forms, with optional ASCII interpretation of the listing.
+
+\section{Firmware}
+\subsection{Command Response Protocol}
+    The MCU firmware will be event driven according to a command/response
+    specification. Command bytes followed by a payload will be received from the
+    PC, in the following format: \\
+
+    \texttt{[CMD, LEN, D0, D1,  ...]} \\
+
+    Where D are data bits, up to 62 permitted per USB packet. Data is returned
+    to the PC from the MCU in a similar manner.
+
+\subsection{Data Acquisition}
+    To begin datalogging, a configuration command (\texttt{CFG}) 
+    is first sent to the analyser
+    to set all configurable options, which would otherwise be a in default power
+    up state. These options include sample rate and synchronous or asynchronous
+    modes.
+
+    An \texttt{ARM} command is then sent to the analyser, which will either wait
+    for a change on channel 1 (clock) (in synchronous mode) or begin logging
+    immediately (in asynchronous mode). The analyser will confirm beginning
+    sampling by returning a START \texttt{SRT} packet to the PC, which will then
+    wait until an \texttt{END} command is received signalling the end of
+    sampling. The PC will be able to cancel the logging by sending a CANCEL
+    (\text{CNL}) command at any point during the logging process. During
+    logging, the MCU will clock data into SRAM at the sample rate given, or on
+    the rising/falling (configurable) edge of channel 1 (clock).
+
+\subsection{Data Recovery}
+    The PC will know when sampling has completed and can then request the sample
+    data from the analyser. The MCU will confirm the start of data recovery, and
+    then proceed to packetise the samples into 64 byte packets, which includes
+    the \texttt{CMD} and \texttt{LEN} fields. These packets are transmitted over
+    the USB interface until the SRAM is empty, with termination by a
+    \texttt{END} command packet. Data is lost from the volatile SRAM on power
+    removal, so data recovery must be completed before the unit is powered down.
+
+\section{Software}
+    Waffle about the PC side software and GUI, plus a block diagram.
     
     \begin{figure}
     \centering
@@ -74,6 +117,14 @@
 \appendix
 \appendixpage
 \addappheadtotoc
-\section{Appendix 1}
+\section{Schematic}
+\label{app-schematic}
 			
+    \begin{figure}
+    \centering
+    \includegraphics[height=15cm,angle=90]{../../hardware/schematic.png}
+    \caption{Logic analyser schematic}
+    \label{fig:sch}
+    \end{figure}
+
 \end{document}
