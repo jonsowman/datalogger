@@ -46,8 +46,18 @@
     A schematic for the logic analyser hardware can be found in Appendix
     \ref{app-schematic}.
 
-\subsection{Filtering}
+    \subsection{Filtering \& Conditioning}
     Frontend antialiasing filters will be put in place to avoid aliasing caused by input signals containing frequencies above the Nyquist frequency at which the device will sample. Simple first order low pass RC filters will suffice for this, with a $-3dB$ cut-off frequency placed just above the Nyquist frequency.
+
+    Overvoltage protection is provided by eight operational amplifiers
+    configured as inverting comparators with the threshold voltage set as
+    Vcc/2. These amplifiers can tolerate inputs of up to 32V without damage, and
+    will prevent this voltage being passed on to the octal buffer where it could
+    cause damage.
+
+    The disadvantage of using these amplifiers is that they will override the
+    Schmitt trigger type inputs on the MCU, so the protection amplifiers will be
+    configured with some hysteresis to mitigate this problem.
 
 \subsection{Buffering}
     The data will be captured directly by an SRAM (Static Random Access Memory) buffer during the logging process, since the PIC does not have enough internal RAM to store enough samples to satisfy the specification. SRAM, whilst relatively expensive, is capable of very fast write speeds, essential to achieve a high sampling rate.
