@@ -75,7 +75,8 @@
     \texttt{[CMD, LEN, D0, D1,  ...]} \\
 
     Where D are data bits, up to 62 permitted per USB packet. Data is returned
-    to the PC from the MCU in a similar manner.
+    to the PC from the MCU in a similar manner. \texttt{LEN} is the total number
+    of bytes in the packet, including the \texttt{CMD} and \texttt{LEN} bytes.
 
 \subsection{Data Acquisition}
     To begin datalogging, a configuration command (\texttt{CFG}) 
@@ -87,10 +88,11 @@
     An \texttt{ARM} command is then sent to the analyser, which will either wait
     for a change on channel 1 (clock) (in synchronous mode) or begin logging
     immediately (in asynchronous mode). The analyser will confirm beginning
-    sampling by returning a START \texttt{SRT} packet to the PC, which will then
+    sampling by returning a START (\texttt{SRT}) packet to the PC, which 
+    will then
     wait until an \texttt{END} command is received signalling the end of
     sampling. The PC will be able to cancel the logging by sending a CANCEL
-    (\text{CNL}) command at any point during the logging process. During
+    (\texttt{CNL}) command at any point during the logging process. During
     logging, the MCU will clock data into SRAM at the sample rate given, or on
     the rising/falling (configurable) edge of channel 1 (clock).
 
@@ -122,7 +124,7 @@
 			
     \begin{figure}
     \centering
-    \includegraphics[height=15cm,angle=90]{../../hardware/schematic.png}
+    \includegraphics[height=17cm,angle=90]{../../hardware/schematic.png}
     \caption{Logic analyser schematic}
     \label{fig:sch}
     \end{figure}
