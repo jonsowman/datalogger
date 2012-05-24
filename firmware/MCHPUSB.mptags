@@ -96,7 +96,7 @@ IN::1	C:\datalogger\firmware\system\usb\usbdrv\usbdrv.h	76;"	d	line:76
 INCDIS	C:\datalogger\firmware\system\usb\usbmmap.h	52;"	m	line:52	struct:_BD_STAT::<anonymous>
 INPUT_PIN::1	C:\datalogger\firmware\io_cfg.h	8;"	d	line:8
 IO_CFG_H	C:\datalogger\firmware\io_cfg.h	2;"	d	line:2
-InitializeSystem	C:\datalogger\firmware\main.c	15;"	p	line:15	file:	signature:(void)
+InitializeSystem	C:\datalogger\firmware\main.c	16;"	p	line:16	file:	signature:(void)
 KEN	C:\datalogger\firmware\system\usb\usbmmap.h	53;"	m	line:53	struct:_BD_STAT::<anonymous>
 LOGIC_ARM	C:\datalogger\firmware\user\user.h	35;"	e	line:35	enum:DATA_PACKET::<anonymous>::<anonymous>
 LOGIC_CONFIG	C:\datalogger\firmware\user\user.h	34;"	e	line:34	enum:DATA_PACKET::<anonymous>::<anonymous>
@@ -150,6 +150,7 @@ TEMP_LOGGING::0x01	C:\datalogger\firmware\user\user.h	13;"	d	line:13
 TEMP_REAL_TIME::0x00	C:\datalogger\firmware\user\user.h	12;"	d	line:12
 TIMER0H_VAL::0x48	C:\datalogger\firmware\user\user.c	36;"	d	line:36	file:
 TIMER0L_VAL::0xE5	C:\datalogger\firmware\user\user.c	35;"	d	line:35	file:
+TIMER_PRELOAD::250	C:\datalogger\firmware\logic\logic.h	11;"	d	line:11
 TRUE	C:\datalogger\firmware\system\typedefs.h	120;"	e	line:120	enum:_BOOL
 TYPEDEFS_H	C:\datalogger\firmware\system\typedefs.h	2;"	d	line:2
 UCFG_VAL::_PUEN|_TRINT|_FS|MODE_PP	C:\datalogger\firmware\autofiles\usbcfg.h	10;"	d	line:10
@@ -210,7 +211,7 @@ USBStdSetCfgHandler	C:\datalogger\firmware\system\usb\usb9\usb9.c	12;"	p	line:12
 USBStdSetCfgHandler	C:\datalogger\firmware\system\usb\usb9\usb9.c	144;"	f	line:144	signature:(void)
 USBSuspend	C:\datalogger\firmware\system\usb\usbdrv\usbdrv.c	14;"	p	line:14	file:	signature:(void)
 USBSuspend	C:\datalogger\firmware\system\usb\usbdrv\usbdrv.c	265;"	f	line:265	signature:(void)
-USBTasks	C:\datalogger\firmware\main.c	16;"	p	line:16	file:	signature:(void)
+USBTasks	C:\datalogger\firmware\main.c	17;"	p	line:17	file:	signature:(void)
 USBWakeFromSuspend	C:\datalogger\firmware\system\usb\usbdrv\usbdrv.c	15;"	p	line:15	file:	signature:(void)
 USBWakeFromSuspend	C:\datalogger\firmware\system\usb\usbdrv\usbdrv.c	320;"	f	line:320	signature:(void)
 USB_BUS_ATTACHED::1	C:\datalogger\firmware\system\usb\usbdrv\usbdrv.c	46;"	d	line:46	file:
@@ -264,8 +265,8 @@ _byte	C:\datalogger\firmware\system\usb\usbmmap.h	36;"	m	line:36	union:_USB_DEVI
 _byte	C:\datalogger\firmware\system\usb\usbmmap.h	46;"	m	line:46	union:_BD_STAT
 _byte	C:\datalogger\firmware\user\user.h	18;"	m	line:18	union:DATA_PACKET
 _dword	C:\datalogger\firmware\system\typedefs.h	58;"	m	line:58	union:_DWORD
-_reset	C:\datalogger\firmware\main.c	23;"	f	line:23	signature:(void)
-_startup	C:\datalogger\firmware\main.c	21;"	p	line:21	file:	signature:(void)
+_reset	C:\datalogger\firmware\main.c	22;"	f	line:22	signature:(void)
+_startup	C:\datalogger\firmware\main.c	20;"	p	line:20	file:	signature:(void)
 _word	C:\datalogger\firmware\system\typedefs.h	103;"	m	line:103	union:_POINTER
 _word	C:\datalogger\firmware\system\typedefs.h	32;"	m	line:32	union:_WORD
 _word	C:\datalogger\firmware\user\user.h	19;"	m	line:19	union:DATA_PACKET
@@ -338,10 +339,10 @@ ep8Bi	C:\datalogger\firmware\system\usb\usbmmap.c	215;"	v	line:215
 ep8Bo	C:\datalogger\firmware\system\usb\usbmmap.c	214;"	v	line:214
 ep9Bi	C:\datalogger\firmware\system\usb\usbmmap.c	220;"	v	line:220
 ep9Bo	C:\datalogger\firmware\system\usb\usbmmap.c	219;"	v	line:219
-getSampleRate	C:\datalogger\firmware\logic\logic.c	42;"	f	line:42	signature:(void)
-getSampleRate	C:\datalogger\firmware\logic\logic.h	14;"	p	line:14	signature:(void)
+getSampleRate	C:\datalogger\firmware\logic\logic.c	43;"	f	line:43	signature:(void)
+getSampleRate	C:\datalogger\firmware\logic\logic.h	16;"	p	line:16	signature:(void)
 high	C:\datalogger\firmware\user\user.c	171;"	l	line:171
-high_isr	C:\datalogger\firmware\main.c	18;"	p	line:18	file:	signature:(void)
+high_isr	C:\datalogger\firmware\logic\logic.h	21;"	p	line:21	signature:(void)
 i	C:\datalogger\firmware\system\usb\class\generic\usbgen.c	96;"	l	line:96
 i	C:\datalogger\firmware\system\usb\usbctrltrf\usbctrltrf.c	135;"	l	line:135
 i	C:\datalogger\firmware\user\user.c	187;"	l	line:187
@@ -349,13 +350,14 @@ i	C:\datalogger\firmware\user\user.c	200;"	l	line:200
 i00a00	C:\datalogger\firmware\autofiles\usbdsc.h	19;"	v	line:19
 int16_t	C:\datalogger\firmware\system\typedefs.h	12;"	t	line:12
 int8_t	C:\datalogger\firmware\system\typedefs.h	10;"	t	line:10
+interrupt_at_high_vector	C:\datalogger\firmware\logic\logic.c	87;"	f	line:87	signature:(void)
 len	C:\datalogger\firmware\user\user.h	43;"	m	line:43	struct:DATA_PACKET::<anonymous>
-logicConfig	C:\datalogger\firmware\logic\logic.c	18;"	f	line:18	signature:(uint8_t options)
-logicConfig	C:\datalogger\firmware\logic\logic.h	11;"	p	line:11	signature:(uint8_t options)
-logicStart	C:\datalogger\firmware\logic\logic.c	27;"	f	line:27	signature:(void)
-logicStart	C:\datalogger\firmware\logic\logic.h	12;"	p	line:12	signature:(void)
+logicConfig	C:\datalogger\firmware\logic\logic.c	19;"	f	line:19	signature:(uint8_t options)
+logicConfig	C:\datalogger\firmware\logic\logic.h	13;"	p	line:13	signature:(uint8_t options)
+logicStart	C:\datalogger\firmware\logic\logic.c	28;"	f	line:28	signature:(void)
+logicStart	C:\datalogger\firmware\logic\logic.h	14;"	p	line:14	signature:(void)
 low	C:\datalogger\firmware\user\user.c	171;"	l	line:171
-low_isr	C:\datalogger\firmware\main.c	17;"	p	line:17	file:	signature:(void)
+low_isr	C:\datalogger\firmware\logic\logic.h	20;"	p	line:20	signature:(void)
 mInitAllLEDs::LATD&=0xF0;TRISD&=0xF0;	C:\datalogger\firmware\io_cfg.h	43;"	d	line:43
 mInitPOT::TRISAbits.TRISA0=1;ADCON0=0x01	C:\datalogger\firmware\io_cfg.h	36;"	d	line:36
 mInitializeUSBDriver::{UCFG=UCFG_VAL;\	C:\datalogger\firmware\system\usb\usbdrv\usbdrv.h	135;"	d	line:135
@@ -392,10 +394,10 @@ sd001	C:\datalogger\firmware\autofiles\usbdsc.c	202;"	v	line:202
 sd002	C:\datalogger\firmware\autofiles\usbdsc.c	207;"	v	line:207
 self_power::1	C:\datalogger\firmware\io_cfg.h	28;"	d	line:28
 self_power::PORTAbits.RA2	C:\datalogger\firmware\io_cfg.h	26;"	d	line:26
-setSampleRate	C:\datalogger\firmware\logic\logic.c	35;"	f	line:35	signature:(uint16_t samplerate)
-setSampleRate	C:\datalogger\firmware\logic\logic.h	13;"	p	line:13	signature:(uint16_t samplerate)
-startTimer	C:\datalogger\firmware\logic\logic.c	50;"	f	line:50	signature:(uint16_t samplerate)
-startTimer	C:\datalogger\firmware\logic\logic.h	16;"	p	line:16	signature:(uint16_t samplerate)
+setSampleRate	C:\datalogger\firmware\logic\logic.c	36;"	f	line:36	signature:(uint16_t samplerate)
+setSampleRate	C:\datalogger\firmware\logic\logic.h	15;"	p	line:15	signature:(uint16_t samplerate)
+startTimer	C:\datalogger\firmware\logic\logic.c	51;"	f	line:51
+startTimer	C:\datalogger\firmware\logic\logic.h	17;"	p	line:17	signature:()
 string	C:\datalogger\firmware\autofiles\usbdsc.c	199;"	m	line:199	file:
 string	C:\datalogger\firmware\autofiles\usbdsc.c	202;"	m	line:202	file:
 string	C:\datalogger\firmware\autofiles\usbdsc.c	207;"	m	line:207	file:
