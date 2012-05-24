@@ -25,6 +25,22 @@ void _reset (void)
 }
 #pragma code
 
+// Remap the interrupt vectors (NB: Bootloader code resides between
+// 0x000 and 0x7FF, interrupt vectors have moved. See linker script.
+#pragma code high_vector=0x808
+void interrupt_at_high_vector(void)
+{
+	_asm GOTO high_isr _endasm
+}
+#pragma code
+
+#pragma code low_vector=0x818
+void interrupt_at_low_vector(void)
+{
+	_asm GOTO low_isr _endasm
+}
+#pragma code
+
 // Main program loop
 void main(void)
 {

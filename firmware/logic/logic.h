@@ -9,11 +9,21 @@
 #include "system\typedefs.h"
 
 #define TIMER_PRELOAD			250
+#define MAX_SAMPLE_RATE			250000UL
+#define MAX_SAMPLE_NUM			131072UL
+
+#define MODE_ASYNC				0x01
+#define MODE_SYNC				0x02
+#define SYNC_EDGE_RISE			0x04
+#define SYNC_EDGE_FALL			0x08
+#define SYNC_EDGE_BOTH			0x10
 
 void logicConfig(uint8_t options);
 void logicStart(void);
-void setSampleRate(uint16_t samplerate);
-uint16_t getSampleRate(void);
+uint8_t setSampleRate(uint32_t samplerate);
+uint32_t getSampleRate(void);
+uint8_t setSampleNumber(uint32_t count);
+uint32_t getSampleNumber(void);
 void startTimer();
 
 // ISR prototypes

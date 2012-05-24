@@ -11,6 +11,16 @@
 #include "io_cfg.h"
 #include "logic\logic.h"
 
+uint32_t samplenumber;
+uint32_t samplerate;
+uint8_t config;
+/*
+sync/mode
+clock edge for sync
+sample rate
+total no of samples
+*/
+
 /**
  * Configure the logic analyser, takes one byte bitfield
  * containing the configuration options. See documentation
@@ -18,6 +28,8 @@
  */
 void logicConfig(uint8_t options)
 {
+	config = options;
+	return;
 }
 
 /**
@@ -33,15 +45,47 @@ void logicStart(void)
  * Set the sample rate for the analyser in kHz . We always sample 
  * at the same rate, but oversample in the slower modes.
  */
-void setSampleRate(uint16_t samplerate)
+uint8_t setSampleRate(uint32_t rate)
 {
+	if(rate <= MAX_SAMPLE_RATE)
+	{
+		samplerate = rate;
+		return 1;
+	} else {
+		samplerate = 0;
+		return 0;
+	}
 }
 
 /**
  * Get the currently set sample rate in kHz.
  */
-uint16_t getSampleRate(void)
+uint32_t getSampleRate(void)
 {
+}
+
+/**
+ * Set the number of samples, up to the allowable amount, returning
+ * 1 if set successfully, 0 if not.
+ */
+uint8_t setSampleNumber(uint32_t count)
+{
+	if(count <= MAX_SAMPLE_NUM)
+	{
+		samplenumber = count;
+		return 1;
+	} else {
+		samplenumber = 0;
+		return 0;
+	}
+}
+
+/**
+ * Get the number of samples currently set in the logger subsystem
+ */
+uint32_t getSampleNumber(void)
+{
+	return samplenumber;
 }
 
 /**
@@ -83,20 +127,6 @@ void startTimer()
 }
 
 // Interrupt stuff here
-#pragma code high_vector=0x808
-void interrupt_at_high_vector(void)
-{
-	_asm GOTO high_isr _endasm
-}
-#pragma code
-
-#pragma code low_vector=0x818
-void interrupt_at_low_vector(void)
-{
-	_asm GOTO low_isr _endasm
-}
-#pragma code
-
 #pragma interrupt high_isr
 void high_isr(void)
 {
