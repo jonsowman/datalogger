@@ -20,7 +20,8 @@
 \usepackage{savetrees}
 
 % The document title and author
-\title{SB3 - Datalogger\\Cambridge University Engineering Department} 
+\title{Cambridge University Engineering Department\\SB3 - Datalogger\\Interim Report}
+
 \author{David Turner \& Jon Sowman}
 
 % Begin the document
@@ -89,7 +90,7 @@
     analyser with a ``Get Data'' command.  The analyser can reply signalling either
     that capture has not yet started or that capture is in progress, or if capture
     has finished it will reply to each ``Get Data'' command with a data packet, and
-    finally an "End Of Data" packet when all data has been sent.
+    finally an ``End Of Data'' packet when all data has been sent.
     
     The PC will be able to cancel the arm or capture by sending a ``Cancel''
     command at any point during the logging process. During
@@ -100,8 +101,8 @@
 \section{Software}
 \subsection{Structure}
 
-The software will, when the "Start Capture" button is pressed, send the
-    configuration command to the analyser followed by the "Arm" command.  The
+The software will, when the ``Start Capture'' button is pressed, send the
+    configuration command to the analyser followed by the ``Arm'' command.  The
     user will be notified that a capture is in progress.  The software will poll
     the analyser for data and notify the user that the capture has completed when
     data begins to be returned.  Finally, the user will be able to interact with
