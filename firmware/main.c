@@ -56,10 +56,13 @@ void main(void)
 {
     InitializeSystem();
 
-	OpenTimer0(TIMER_INT_ON & T0_SOURCE_INT & T0_16BIT);
+	OpenTimer0(TIMER_INT_ON & T0_SOURCE_INT & T0_8BIT
+		& T0_PS_1_1);
 	INTCONbits.GIE = 1;
 
 	LATDbits.LATD0 = 0; // Check LED off
+
+	while(1);
 
     while(1)
     {
