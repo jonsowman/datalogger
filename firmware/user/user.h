@@ -67,5 +67,11 @@ typedef union DATA_PACKET
 // Public prototypes
 void UserInit(void);
 void ProcessIO(void);
+void ServiceRequests(void);
+void Blink(byte onState);
+byte readPOT(void);
+void nullSampler(void);
+void CallDelay(int delay);
+void UserTasks(void);
 
 #endif /* PICDEM_FS_DEMO_H */

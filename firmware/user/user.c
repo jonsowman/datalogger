@@ -179,67 +179,6 @@ void ServiceRequests(void)
 return;
 }
 
-void BlinkUSBStatus(void)
-{
-    static word led_count=0;
-    
-    if(led_count == 0)led_count = 10000U;
-    led_count--;
-
-
-    #define mLED_Both_Off()         {mLED_1_Off();mLED_2_Off();}
-    #define mLED_Both_On()          {mLED_1_On();mLED_2_On();}
-    #define mLED_Only_1_On()        {mLED_1_On();mLED_2_Off();}
-    #define mLED_Only_2_On()        {mLED_1_Off();mLED_2_On();}
-
-
-    if(UCONbits.SUSPND == 1) //power conservation mode
-    {
-        if(led_count==0)
-        {
-            mLED_1_Toggle();
-            mLED_2 = mLED_1;        // Both blink at the same time
-        }//end if
-    }
-    else
-    {
-        if(usb_device_state == DETACHED_STATE)
-        {
-            mLED_Both_Off();
-            
-        }
-        else if(usb_device_state == ATTACHED_STATE)
-        {
-            mLED_Both_On();
-        }
-        else if(usb_device_state == POWERED_STATE)
-        {
-            mLED_Only_1_On();
-        }
-        else if(usb_device_state == DEFAULT_STATE)
-        {
-            mLED_Only_2_On();
-        }
-        else if(usb_device_state == ADDRESS_STATE)
-        {
-            if(led_count == 0)
-            {
-                mLED_1_Toggle();
-                mLED_2_Off();
-            }
-        }
-        else if(usb_device_state == CONFIGURED_STATE)
-        {
-            if(led_count==0)
-            {
-                mLED_1_Toggle();
-                mLED_2 = !mLED_1;       // Alternate blink                
-            }
-        }
-    }
-
-}
-
 // UCAM
 // For some reason this writes the ENTIRE PORTD
 void Blink(byte onState)
@@ -279,11 +218,6 @@ void nullSampler(void)
 	return;
 }
 
-void CheckButtons(void)
-{
-	return;
-}
-
 //Delay of 1 gives 6-8us (this is a totally useless number)
 void CallDelay(int delay)
 {
@@ -293,75 +227,6 @@ void CallDelay(int delay)
 	}
 	return;
 }
-
-void ThermWrite(int command)
-{
-	int i;
-	//Set RD7 as OUTPUT
-	
-	for (i=0;i<=15;i++)
-	{
-		if (command & 1)
-		{
-			TRISD = 0x18;
-			LATDbits.LATD6 = 0;
-			CallDelay(1);
-			LATDbits.LATD6 = 1;
-			//TRISD = 0xD8;
-			CallDelay(10);
-		}
-		else
-		{
-			TRISD = 0x18;
-			LATDbits.LATD6 = 0;
-			CallDelay(11);
-			//CodeSectionAccessed(0x4);
-		}
-		command >>=1;
-	}
-	return;
-}
-
-int ThermReadTemp(void)
-{
-	int i;
-	int finalTemp;
-	int temp[7];
-	for (i=0;i<=7;i++)
-	{
-		TRISD = 0x18;
-		LATDbits.LATD7 = 0;
-		TRISD = 0x98;
-		temp[i] = temp_sense;
-		CallDelay(8);
-		if (temp[i]){
-			finalTemp += 1 << i;
-		}
-	}
-	//CodeSectionAccessed(0x4);
-	return finalTemp;
-}
-
-void ThermSendReset(void)
-{
-	TRISD = 0x18; //Set all but RD3, RD4 as output
-	LATDbits.LATD7 = 0;  //Pull Data line low
-	CallDelay(83);//CallDelay gives 6-8us delay per unit, min. 480us required
-	//After 30us, thermometer returns 112us (60-240us) presence pulse (line low)
-	TRISD = 0x98;	//Set RD7 as INPUT
-	CallDelay(2);
-	return;
-}//end ThermSendReset
-
-int ReadTemp(void)
-{
-	int deg;
-	ThermSendReset();
-	ThermWrite(0xAA);//Request temp command
-	//ThermWrite(0xF);//Request temp command
-	deg = ThermReadTemp();
-	return deg;
-}//end ReadTemp
 
 void UserTasks(void)
 {
@@ -381,6 +246,7 @@ void UserInit(void)
 	ADCON1bits.PCFG2 = 1;
 	ADCON1bits.PCFG3 = 1;
 	TRISBbits.TRISB0 = 1;
+	// RD0 and RD1 are outputs
 	TRISDbits.TRISD0 = 0;
 	TRISDbits.TRISD1 = 0; 
 }
