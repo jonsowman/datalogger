@@ -18,11 +18,11 @@
 #define SYNC_EDGE_FALL			0x08
 #define SYNC_EDGE_BOTH			0x10
 
-uint8_t logicConfig(uint8_t options);
+bool logicConfig(uint8_t options);
 void logicStart(void);
-uint8_t setSampleRate(uint32_t samplerate);
+bool setSampleRate(uint32_t* samplerate);
 uint32_t getSampleRate(void);
-uint8_t setSampleNumber(uint32_t count);
+bool setSampleNumber(uint32_t* count);
 uint32_t getSampleNumber(void);
 void startTimer();
 

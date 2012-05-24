@@ -26,15 +26,15 @@ total no of samples
  * containing the configuration options. See documentation
  * for details.
  */
-uint8_t logicConfig(uint8_t options)
+bool logicConfig(uint8_t options)
 {
 	if((options & MODE_ASYNC) && (options & MODE_SYNC))
-		return 0;
+		return false;
 	if((options & SYNC_EDGE_RISE) && (options && SYNC_EDGE_FALL)
 			&& (options && SYNC_EDGE_BOTH))
-		return 0;
+		return false;
 	config = options;
-	return 1;
+	return true;
 }
 
 /**
@@ -50,15 +50,15 @@ void logicStart(void)
  * Set the sample rate for the analyser in kHz . We always sample 
  * at the same rate, but oversample in the slower modes.
  */
-uint8_t setSampleRate(uint32_t rate)
+bool setSampleRate(uint32_t* rate)
 {
-	if(rate <= MAX_SAMPLE_RATE)
+	if(*rate <= MAX_SAMPLE_RATE)
 	{
-		samplerate = rate;
-		return 1;
+		samplerate = *rate;
+		return true;
 	} else {
 		samplerate = 0;
-		return 0;
+		return false;
 	}
 }
 
@@ -73,15 +73,15 @@ uint32_t getSampleRate(void)
  * Set the number of samples, up to the allowable amount, returning
  * 1 if set successfully, 0 if not.
  */
-uint8_t setSampleNumber(uint32_t count)
+bool setSampleNumber(uint32_t* count)
 {
-	if(count <= MAX_SAMPLE_NUM)
+	if(*count <= MAX_SAMPLE_NUM)
 	{
-		samplenumber = count;
-		return 1;
+		samplenumber = *count;
+		return true;
 	} else {
 		samplenumber = 0;
-		return 0;
+		return false;
 	}
 }
 

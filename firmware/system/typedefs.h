@@ -121,6 +121,10 @@ typedef union _POINTER
 
 typedef enum _BOOL { FALSE = 0, TRUE } BOOL;
 
+typedef uint8_t bool;
+#define true	1
+#define false	0
+
 #define OK      TRUE
 #define FAIL    FALSE
 

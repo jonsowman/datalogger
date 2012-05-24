@@ -103,7 +103,12 @@ void ServiceRequests(void)
             	break;
             
             case LOGIC_CONFIG:
-            	logicConfig(*usbptr);
+				// Firstly configure the analyser options
+            	logicConfig(*usbptr++);
+				// Now the sample rate and number of samples
+				setSampleRate(usbptr);
+				usbptr += 4;
+				setSampleNumber(usbptr);
             	// Return 3 bytes, payload is '1' for success [CMD, 0x03, 0x01]
             	*usbptr = 0x01;
             	*usblen = 3;
