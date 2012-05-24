@@ -25,17 +25,19 @@ void _reset (void)
 	_asm GOTO _startup _endasm
 }
 
-#pragma code high_vector=0x08
+#pragma code high_vector=0x808
 void interrupt_at_high_vector(void)
 {
 	_asm GOTO high_isr _endasm
 }
+#pragma code
 
-#pragma code low_vector=0x18
+#pragma code low_vector=0x818
 void interrupt_at_low_vector(void)
 {
 	_asm GOTO low_isr _endasm
 }
+#pragma code
 
 #pragma interrupt high_isr
 void high_isr(void)
