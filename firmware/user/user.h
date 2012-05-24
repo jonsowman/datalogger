@@ -42,22 +42,6 @@ typedef union DATA_PACKET
         } CMD;
         byte len;
     };
-    struct
-    {
-        unsigned :8;
-        byte ID;
-    };
-    struct
-    {
-        unsigned :8;
-        byte led_num;
-        byte led_status;
-    };
-    struct
-    {
-        unsigned :8;
-        word word_data;
-    };
 } DATA_PACKET;
 
 // Error values returned by the Logic Analyser

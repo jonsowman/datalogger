@@ -82,30 +82,6 @@ void ServiceRequests(void)
                 *usbptr++ = MAJOR_VERSION;
                 *usblen = 4;
                 break;
-
-            case UPDATE_LED:
-                // LED1 & LED2 are USB event indicators
-                if(dataPacket.led_num == 1)
-                {
-                    mLED_1 = dataPacket.led_status;
-                    *usblen = 1;
-                }
-                if(dataPacket.led_num == 2)
-                {
-                    mLED_2 = dataPacket.led_status;
-                    *usblen = 1;
-                }
-                if(dataPacket.led_num == 3)
-                {
-                    mLED_3 = dataPacket.led_status;
-                    *usblen = 1;
-                }
-                else if(dataPacket.led_num == 4)
-                {
-                    mLED_4 = dataPacket.led_status;
-                    *usblen = 1;
-                }
-                break;
                 
             case LOGIC_SET_SRATE:
             	// Rate is 16 bit, MSB first
