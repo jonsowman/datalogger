@@ -83,15 +83,15 @@
     up state. These options include sample rate, synchronous or asynchronous
     modes, synchronous clock edge and total number of samples to capture.
 
-    An "Arm" command is then sent to the analyser, which will either wait
+    An ``Arm'' command is then sent to the analyser, which will either wait
     for a change on channel 1 (clock) (in synchronous mode) or begin logging
     immediately (in asynchronous mode). The PC will then repeatedly poll the
-    analyser with a "Get Data" command.  The analyser can reply signalling either
+    analyser with a ``Get Data'' command.  The analyser can reply signalling either
     that capture has not yet started or that capture is in progress, or if capture
-    has finished it will reply to each "Get Data" command with a data packet, and
+    has finished it will reply to each ``Get Data'' command with a data packet, and
     finally an "End Of Data" packet when all data has been sent.
     
-    The PC will be able to cancel the arm or capture by sending a "Cancel"
+    The PC will be able to cancel the arm or capture by sending a ``Cancel''
     command at any point during the logging process. During
     logging, the MCU will clock data into SRAM at the sample rate given, or on
     the rising or falling (configurable) edge of channel 1 (clock).
