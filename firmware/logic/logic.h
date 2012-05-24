@@ -18,7 +18,7 @@
 #define SYNC_EDGE_FALL			0x08
 #define SYNC_EDGE_BOTH			0x10
 
-void logicConfig(uint8_t options);
+uint8_t logicConfig(uint8_t options);
 void logicStart(void);
 uint8_t setSampleRate(uint32_t samplerate);
 uint32_t getSampleRate(void);

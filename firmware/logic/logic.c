@@ -26,10 +26,15 @@ total no of samples
  * containing the configuration options. See documentation
  * for details.
  */
-void logicConfig(uint8_t options)
+uint8_t logicConfig(uint8_t options)
 {
+	if((options & MODE_ASYNC) && (options & MODE_SYNC))
+		return 0;
+	if((options & SYNC_EDGE_RISE) && (options && SYNC_EDGE_FALL)
+			&& (options && SYNC_EDGE_BOTH))
+		return 0;
 	config = options;
-	return;
+	return 1;
 }
 
 /**
