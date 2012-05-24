@@ -42,13 +42,16 @@ void interrupt_at_low_vector(void)
 #pragma interrupt high_isr
 void high_isr(void)
 {
-	LATDbits.LATD0 = 1; // Turn RD0 on
+	if(INTCONbits.TMR0IF)
+	{
+		LATDbits.LATD0 ^= 1; // Turn RD0 on
+		INTCONbits.TMR0IF = 0;
+	}
 }
 
 #pragma interruptlow low_isr
 void low_isr(void)
 {
-	LATDbits.LATD0 = 1; // Turn RD0 on
 }
 
 // End interrupt handling
@@ -58,9 +61,36 @@ void main(void)
 {
     InitializeSystem();
 
-	OpenTimer0(TIMER_INT_ON & T0_SOURCE_INT & T0_8BIT
-		& T0_PS_1_1);
-	INTCONbits.GIE = 1;
+	// Enable interrupt priority
+	RCONbits.IPEN = 1;
+
+	// Stop timer
+	T0CONbits.TMR0ON = 0;
+
+	// Set to 8 bit mode
+	T0CONbits.T08BIT = 1;
+
+	// Clock on instruction clock cycles
+	T0CONbits.T0CS = 0;
+
+	// 1:2 prescaler
+	T0CONbits.PSA = 1;
+	T0CONbits.T0PS2 = 0;
+	T0CONbits.T0PS1  = 0;
+	T0CONbits.T0PS0 = 0;
+
+	// Enable TIMER0 OVF interrupt, periph interrupt
+	// and global interrupts
+	INTCONbits.GIEL  = 1;
+	INTCONbits.GIEH = 1;
+	INTCONbits.TMR0IE = 1;
+	INTCONbits.TMR0IF = 0;
+
+	// Set TIMER0 OVF to high priority
+	INTCON2bits.TMR0IP = 1;
+
+	// Finally enable the timer
+	T0CONbits.TMR0ON = 1;
 
 	LATDbits.LATD0 = 0; // Check LED off
 
