@@ -4,19 +4,19 @@
 // Includes
 #include "system\typedefs.h"
 
-/* PICDEM FS USB Demo Version */
-#define MINOR_VERSION   0x00    //Demo Version 1.00
+// PICDEM FS USB Demo Version
+#define MINOR_VERSION   0x00
 #define MAJOR_VERSION   0x01
 
-/* Temperature Mode */
+// Temperature Mode
 #define TEMP_REAL_TIME  0x00
 #define TEMP_LOGGING    0x01
 
-/// Structs
+// Structs
 typedef union DATA_PACKET
 {
-    byte _byte[USBGEN_EP_SIZE];		//For byte access
-    word _word[USBGEN_EP_SIZE/2];	//For word access
+    byte _byte[USBGEN_EP_SIZE];		// For byte access
+    word _word[USBGEN_EP_SIZE/2];	// For word access
     struct
     {
         enum
@@ -33,9 +33,11 @@ typedef union DATA_PACKET
 			LOGIC_GET_SRATE		= 0x41,
 			LOGIC_CONFIG		= 0x42,
 			LOGIC_ARM			= 0x60,
-			LOGIC_START			= 0x61,
-			LOGIC_END			= 0x62,
-			LOGIC_DATA			= 0x63,
+			LOGIC_WAITING		= 0x61,
+			LOGIC_START			= 0x62,
+			LOGIC_INPROGRESS	= 0x63,
+			LOGIC_END			= 0x64,
+			LOGIC_DATA			= 0x65,
 			LOGIC_ERROR			= 0xAA
         } CMD;
         byte len;

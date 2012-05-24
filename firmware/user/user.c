@@ -138,20 +138,20 @@ void ServiceRequests(void)
             	// Return 3 bytes, payload is '1' for success [CMD, 0x03, 0x01]
             	*usbptr = 0x01;
             	*usblen = 3;
-            	break;            	
+            	break;
 
             // The following two commands break the the command/response
             // protocol defined for the Logic Analyser, in order that they be
             // back compatible with the provided example PC interface.
             // (They are missing length field).
-            case BLINK_LED_COMMAND: //[0xEE, Onstate]
-				nullSampler();
-                *usblen = 2; //sends back same command
+            case BLINK_LED_COMMAND: // [0xEE, Onstate]
+				LATDbits.LATD1 = *++usbcmd;
+                *usblen = 2; // sends back same command
                 break;
 
-           	case GET_ADC_COMMAND: //[0xED. 8-bit data]
+           	case GET_ADC_COMMAND: // [0xED. 8-bit data]
                 *usbptr = ReadPOT();
-                *usblen = 2; //returns[0xED, command]
+                *usblen = 2; // returns[0xED, command]
                 break;
  
             case RESET:
@@ -165,6 +165,10 @@ void ServiceRequests(void)
             	*usblen = 3;
                 break;
         }
+
+		// Calculate the length of the data in the transmit buffer
+		// *usblen = usbptr - usbcmd;
+
 		// If we've put data into the send buffer, then transmit
         if(*usblen != 0)
         {
