@@ -47,6 +47,8 @@ typedef union DATA_PACKET
 // Error values returned by the Logic Analyser
 #define	ERROR_CMD_NOT_FOUND				0x01
 #define ERROR_INVALID_SAMPLE_RATE		0x02
+#define ERROR_INVALID_SAMPLE_NUMBER		0x03
+#define ERROR_INVALID_CONFIG			0x04
 
 // Public prototypes
 void UserInit(void);

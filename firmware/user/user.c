@@ -104,11 +104,30 @@ void ServiceRequests(void)
             
             case LOGIC_CONFIG:
 				// Firstly configure the analyser options
-            	logicConfig(*usbptr++);
-				// Now the sample rate and number of samples
-				setSampleRate(usbptr);
+            	if(!logicConfig(*usbptr++))
+				{
+					*usbcmd = LOGIC_ERROR;
+					*usbptr = ERROR_INVALID_CONFIG;
+					*usblen = 3;
+					break;
+				}
+				// Now the sample rate
+				if(!setSampleRate(usbptr))
+				{
+					*usbcmd = LOGIC_ERROR;
+					*usbptr = ERROR_INVALID_SAMPLE_RATE;
+					*usblen = 3;
+					break;
+				}
+				// And finally the number of samples
 				usbptr += 4;
-				setSampleNumber(usbptr);
+				if(!setSampleNumber(usbptr))
+				{
+					*usbcmd = LOGIC_ERROR;
+					*usbptr = ERROR_INVALID_SAMPLE_NUMBER;
+					*usblen = 3;
+					break;
+				}
             	// Return 3 bytes, payload is '1' for success [CMD, 0x03, 0x01]
             	*usbptr = 0x01;
             	*usblen = 3;
