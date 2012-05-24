@@ -29,16 +29,16 @@
 	
 % Insert the abstract for the document here
 \begin{abstract}
-    A compact, high speed logic analyser is designed with hardware buffering for the simultaneous analysis and logging of up to eight digital channels, one of which may be used as a synchronous clock, for analysis of asynchronous or synchronous digital communications. The supporting desktop application is also developed to configure and control the analyser, as well as to retrieve and post-process the recorded data and display it in a convenient format to aid debugging and analysis.
+    A low cost, compact, high speed logic analyser for the observation of digital communications is designed with hardware buffering, allowing logging and analysis of up to eight digital channels. The supporting desktop application is developed to configure and control the analyser, as well as to retrieve and post-process the recorded data and display it in a convenient format to aid debugging and analysis.
 \end{abstract}
 
 \section{Hardware Overview}
     A PIC18F4550 microcontroller forms the core of the data-logging hardware. The inbuilt USB peripheral is used along with support circuitry on the board for USB communications. A hardware reset function exists along with the option to run a bootloader, allowing the microcontroller to be programmed over the USB port.
 
-    Additional hardware will be added to provide the following functionality:
+    Additional hardware will be developed to provide the following functionality:
     \begin{itemize}
     \item Provide input protection so moderate overvoltages do not damage the datalogger
-    \item Log data from up to 8 digital channels, optionally synchronised to a clock on one channel
+    \item Log data from up to 8 digital channels, asynchronously or synchronised to a clock on one channel
     \item Store up to 1Mbit of data (up to 128k samples with up to 8 digital channels per sample)
     \item Retrieve the samples from memory and transfer them to the desktop computer via the USB interface for post processing, analysis and charting
     \end{itemize}
@@ -51,71 +51,71 @@
 
     Overvoltage protection is provided by eight operational amplifiers
     configured as inverting comparators with the threshold voltage set as
-    Vcc/2. These amplifiers can tolerate inputs of up to 32V without damage, and
+    $0.5*Vcc$. These amplifiers can tolerate inputs of up to $+32V$ without damage, and
     will prevent this voltage being passed on to the octal buffer where it could
     cause damage.
 
-    The disadvantage of using these amplifiers is that the Schmitt trigger type inputs on the MCU will have no effect, so the protection amplifiers will be
-    configured with some hysteresis to reintroduce the added noise immunity.
+    The disadvantage of using these operational amplifiers is that the Schmitt trigger type inputs on the MCU will have no effect, so the protection amplifiers will be
+    configured with some hysteresis to reintroduce the noise immunity.
 
 \subsection{Buffering}
-    The data will be captured directly by an SRAM (Static Random Access Memory) buffer during the logging process, since the PIC does not have enough internal RAM to store enough samples to satisfy the specification. SRAM, whilst relatively expensive, is capable of very fast write speeds, essential to achieve a high sampling rate.
+    The data will be captured directly by an SRAM (Static Random Access Memory) buffer during the logging process, since the PIC does not have enough sufficient RAM to store enough samples to satisfy the specification. SRAM, whilst relatively expensive, is capable of very fast write speeds, essential to achieve a high sampling rate.
 
     The memory chosen is the AS6C1008 1Mbit SRAM IC from Alliance Memory. A 17-bit wide parallel interface is used for byte-addressing and an 8-bit parallel interface is used for data.
 
-    The address lines will be directly attached to the PIC using the two byte-wide ports PORTB and PORTD, plus one additional line from another port. After the hardware anti-aliasing filters, the eight input channels are connected via a shared data bus to the SRAM data interface via a 8-way tri-state buffer, controlled by the PIC. This buffer is enabled during the data acquisition phase, and subsequently disabled when the PIC reads back the data from the SRAM.
-
-    Synchronous data capture is possible using the clock input line, which allows one input line to bypass the shift register and be connected directly to the PIC.  The PIC will interrupt on changes of this line and capture data to the SRAM on the appropriate clock edge (set by the user).
+    The address lines will be directly attached to the PIC. After the over-voltage protection and anti-aliasing filter hardware, the eight input channels are connected via a shared data bus to the SRAM data interface. An 8-way tristate buffer is used to allow the data bus to be shared.
+    
+    Synchronous data capture is possible using the clock input line which connects one input channel directly to the PIC. Changes on this line will interrupt the PIC on the appropriate clock edge (set by the user).  The PIC will will then trigger data capture to the SRAM by setting the address bus and control lines.
 
 \subsection{Data Retrieval}
-    Retrieving data from the SRAM is achieved via the use of a parallel-in/serial-out shift register such as the 74HC165 series in order to reduce the number of IO pins required on the microcontroller. The byte-wide parallel input to this device is attached to the data bus, and data is clocked in to the PIC before being packetised and transmitted to the desktop computer over the USB interface.
+    Retrieving data from the SRAM is achieved via the use of a parallel-in/serial-out shift register such as the 74HC165 series in order to reduce the number of IO pins required on the PIC. The byte-wide parallel input on this device is attached to the data bus and the serial output to the PIC. Data is shifted into the PIC before being packetised and transmitted to the computer over the USB interface.
 
     A block diagram of the hardware of the data capture system is shown in figure \ref{fig:app}.
     
-\subsection{Software Interface}
-    The software interface will be developed using the LabWindows environment and will allow configuration and initiation of datalogging and viewing and analysis of captured data.  The user can select either the asyncronous sample rate or synchronous mode, which channels to capture, and number of samples to capture.  The software will have options to immediately initiate the capture, wait for a trigger byte on the 8 channels, or begin capture on a rising or falling edge of the clock line.  Once the capture is complete and data has been streamed to the PC, it will be available for viewing in both timing diagram and listing forms, with optional ASCII interpretation of the listing.
-
 \section{Firmware}
-\subsection{Command Response Protocol}
+\subsection{Command Protocol}
     The MCU firmware will be event driven according to a command/response
     specification. Command bytes followed by a payload will be received from the
-    PC, in the following format: \\
-
-    \texttt{[CMD, LEN, D0, D1,  ...]} \\
-
-    Where D are data bits, up to 62 permitted per packet. Data is returned
-    to the PC from the MCU in a similar manner. \texttt{LEN} is the total number
-    of bytes in the packet, including the \texttt{CMD} and \texttt{LEN} bytes.
-
-\subsection{Data Acquisition}
-    To begin datalogging, a configuration command (\texttt{CFG}) 
-    is first sent to the analyser
+    PC and data is returned to the PC from the MCU in a similar manner.
+    
+    To begin datalogging, a configuration command is first sent to the analyser
     to set all configurable options, which would otherwise be a in default power
-    up state. These options include sample rate and synchronous or asynchronous
-    modes.
+    up state. These options include sample rate, synchronous or asynchronous
+    modes, synchronous clock edge and total number of samples to capture.
 
-    An \texttt{ARM} command is then sent to the analyser, which will either wait
+    An "Arm" command is then sent to the analyser, which will either wait
     for a change on channel 1 (clock) (in synchronous mode) or begin logging
-    immediately (in asynchronous mode). The analyser will confirm beginning
-    sampling by returning a START (\texttt{SRT}) packet to the PC, which 
-    will then
-    wait until an \texttt{END} command is received signalling the end of
-    sampling. The PC will be able to cancel the logging by sending a CANCEL
-    (\texttt{CNL}) command at any point during the logging process. During
+    immediately (in asynchronous mode). The PC will then repeatedly poll the
+    analyser with a "Get Data" command.  The analyser can reply signalling either
+    that capture has not yet started or that capture is in progress, or if capture
+    has finished it will reply to each "Get Data" command with a data packet, and
+    finally an "End Of Data" packet when all data has been sent.
+    
+    The PC will be able to cancel the arm or capture by sending a "Cancel"
+    command at any point during the logging process. During
     logging, the MCU will clock data into SRAM at the sample rate given, or on
-    the rising/falling (configurable) edge of channel 1 (clock).
+    the rising or falling (configurable) edge of channel 1 (clock).
 
-\subsection{Data Recovery}
-    The PC will know when sampling has completed and can then request the sample
-    data from the analyser. The MCU will confirm the start of data recovery, and
-    then proceed to packetise the samples into 64 byte packets, which includes
-    the \texttt{CMD} and \texttt{LEN} fields. These packets are transmitted over
-    the USB interface until the SRAM is empty, with termination by a
-    \texttt{END} command packet. Data is lost from the volatile SRAM on power
-    removal, so data recovery must be completed before the unit is powered down.
 
 \section{Software}
-    Waffle about the PC side software and GUI, plus a block diagram.
+\subsection{Structure}
+
+The software will, when the "Start Capture" button is pressed, send the
+    configuration command to the analyser followed by the "Arm" command.  The
+    user will be notified that a capture is in progress.  The software will poll
+    the analyser for data and notify the user that the capture has completed when
+    data begins to be returned.  Finally, the user will be able to interact with
+    the data once the transfer and analysis are complete.
+
+\subsection{Interface}
+    The software interface will be developed using the LabWindows environment and will allow configuration and initiation of datalogging and viewing and analysis of captured data.  The user can select either the asyncronous sample rate or synchronous mode, which channels to capture, and number of samples to capture.  The software will have options to immediately initiate the capture, wait for a trigger byte on the 8 channels, or begin capture on a rising or falling edge of the clock line.  Once the capture is complete and data has been streamed to the PC, it will be available for viewing in both timing diagram and listing forms, with optional ASCII interpretation of the listing.
+
+
+
+    Basic analysis of the captured data will include decoding serial RS232 framing
+    to ASCII characters or decoding all 8 channels as a byte in parallel and
+    displaying this byte in ASCII, hex, decimal or binary format.  The timing
+    diagram of the captured channels can also be displayed.
     
     \begin{figure}
     \centering
@@ -135,21 +135,12 @@
 \subsection{Source Control}
     We will be using the ``git'' version control system for source management for both the firmware and software, and Github Issues for issue tracking.
 
-    Jon will be working on the MCU firmware design and implementation and David on the computer side software. Work will be shared on the hardware design and construction.
+    Jon will be working on the MCU firmware design and implementation and David on the computer software and user interface. Work will be shared on the hardware design and construction.
 	
 % Now print the appendix section
 \appendix
 \appendixpage
 \addappheadtotoc
-\section{Schematic}
-\label{app-schematic}
-			
-    \begin{figure}
-    \centering
-    \includegraphics[height=17cm,angle=90]{../../hardware/schematic.png}
-    \caption{Logic analyser schematic}
-    \label{fig:sch}
-    \end{figure}
 
 \section{Bill of Materials}
     All parts are from Farnell Onecall and prices are list, pre-discount.
@@ -167,8 +158,19 @@
         \hline
     \end{tabular}
     \end{center}
-    \caption{Bill of materials for the logic analyser}
+    \caption{Bill of materials for the logic analyser (Appendix A)}
     \label{fig:myt}
     \end{table}
-	
+
+\section{Schematic}
+\label{app-schematic}
+			
+    \begin{figure}
+    \centering
+    \includegraphics[height=17cm,angle=90]{../../hardware/schematic.png}
+    \caption{Logic analyser schematic (Appendix B)}
+    \label{fig:sch}
+    \end{figure}
+
+
 \end{document}

@@ -1,0 +1,27 @@
+\subsection{Data Acquisition}
+    To begin datalogging, a configuration command (\texttt{CFG}) 
+    is first sent to the analyser
+    to set all configurable options, which would otherwise be a in default power
+    up state. These options include sample rate and synchronous or asynchronous
+    modes.
+
+    An \texttt{ARM} command is then sent to the analyser, which will either wait
+    for a change on channel 1 (clock) (in synchronous mode) or begin logging
+    immediately (in asynchronous mode). The analyser will confirm beginning
+    sampling by returning a START (\texttt{SRT}) packet to the PC, which 
+    will then
+    wait until an \texttt{END} command is received signalling the end of
+    sampling. The PC will be able to cancel the logging by sending a CANCEL
+    (\texttt{CNL}) command at any point during the logging process. During
+    logging, the MCU will clock data into SRAM at the sample rate given, or on
+    the rising/falling (configurable) edge of channel 1 (clock).
+
+\subsection{Data Recovery}
+    The PC will know when sampling has completed and can then request the sample
+    data from the analyser. The MCU will confirm the start of data recovery, and
+    then proceed to packetise the samples into 64 byte packets, which includes
+    the \texttt{CMD} and \texttt{LEN} fields. These packets are transmitted over
+    the USB interface until the SRAM is empty, with termination by a
+    \texttt{END} command packet. Data is lost from the volatile SRAM on power
+    removal, so data recovery must be completed before the unit is powered down.
+

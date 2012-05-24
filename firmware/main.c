@@ -7,6 +7,7 @@
 
 #include "system\usb\usb_compile_time_validation.h" // Optional
 #include "user\user.h"                              // Modifiable
+#include "logic\logic.h"
 
 // Variables
 #pragma udata
@@ -14,8 +15,6 @@
 // Private prototypes
 static void InitializeSystem(void);
 void USBTasks(void);
-void low_isr(void);
-void high_isr(void);
 
 // Vector remapping
 extern void _startup (void);        // See c018i.c in your C18 compiler dir
@@ -24,7 +23,10 @@ void _reset (void)
 {
 	_asm GOTO _startup _endasm
 }
+#pragma code
 
+// Remap the interrupt vectors (NB: Bootloader code resides between
+// 0x000 and 0x7FF, interrupt vectors have moved. See linker script.
 #pragma code high_vector=0x808
 void interrupt_at_high_vector(void)
 {
@@ -39,32 +41,14 @@ void interrupt_at_low_vector(void)
 }
 #pragma code
 
-#pragma interrupt high_isr
-void high_isr(void)
-{
-	LATDbits.LATD0 = 1; // Turn RD0 on
-}
-
-#pragma interruptlow low_isr
-void low_isr(void)
-{
-	LATDbits.LATD0 = 1; // Turn RD0 on
-}
-
-// End interrupt handling
-
-#pragma code
+// Main program loop
 void main(void)
 {
     InitializeSystem();
 
-	OpenTimer0(TIMER_INT_ON & T0_SOURCE_INT & T0_8BIT
-		& T0_PS_1_1);
-	INTCONbits.GIE = 1;
+	startTimer();
 
 	LATDbits.LATD0 = 0; // Check LED off
-
-	while(1);
 
     while(1)
     {
