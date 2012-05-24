@@ -33,7 +33,7 @@ Byte1	C:\datalogger\firmware\system\typedefs.h	74;"	m	line:74	struct:_DWORD::<an
 Byte2	C:\datalogger\firmware\system\typedefs.h	75;"	m	line:75	struct:_DWORD::<anonymous>
 Byte3	C:\datalogger\firmware\system\typedefs.h	76;"	m	line:76	struct:_DWORD::<anonymous>
 CFG01::romstruct\	C:\datalogger\firmware\autofiles\usbdsc.h	17;"	d	line:17
-CMD	C:\datalogger\firmware\user\user.h	40;"	m	line:40	struct:DATA_PACKET::<anonymous>
+CMD	C:\datalogger\firmware\user\user.h	42;"	m	line:42	struct:DATA_PACKET::<anonymous>
 CONFIGURED_STATE::6	C:\datalogger\firmware\system\usb\usbmmap.h	27;"	d	line:27
 CallDelay	C:\datalogger\firmware\user\user.c	288;"	f	line:288	signature:(int delay)
 CheckButtons	C:\datalogger\firmware\user\user.c	282;"	f	line:282	signature:(void)
@@ -41,7 +41,7 @@ ClearArray	C:\datalogger\firmware\system\usb\usbdrv\usbdrv.c	546;"	f	line:546	si
 Cnt	C:\datalogger\firmware\system\usb\usbmmap.h	79;"	m	line:79	struct:_BDT::<anonymous>
 CtrlTrfData	C:\datalogger\firmware\system\usb\usbmmap.c	269;"	v	line:269
 DATA_PACKET	C:\datalogger\firmware\user\user.h	16;"	u	line:16
-DATA_PACKET	C:\datalogger\firmware\user\user.h	59;"	t	line:59
+DATA_PACKET	C:\datalogger\firmware\user\user.h	61;"	t	line:61
 DEFAULT_STATE::3	C:\datalogger\firmware\system\usb\usbmmap.h	24;"	d	line:24
 DETACHED_STATE::0	C:\datalogger\firmware\system\usb\usbmmap.h	21;"	d	line:21
 DTS	C:\datalogger\firmware\system\usb\usbmmap.h	54;"	m	line:54	struct:_BD_STAT::<anonymous>
@@ -84,29 +84,31 @@ EP_CTRL::0x06	C:\datalogger\firmware\system\usb\usbdrv\usbdrv.h	59;"	d	line:59
 EP_IN::0x0A	C:\datalogger\firmware\system\usb\usbdrv\usbdrv.h	61;"	d	line:61
 EP_OUT::0x0C	C:\datalogger\firmware\system\usb\usbdrv\usbdrv.h	60;"	d	line:60
 EP_OUT_IN::0x0E	C:\datalogger\firmware\system\usb\usbdrv\usbdrv.h	62;"	d	line:62
-ERROR_CMD_NOT_FOUND::0x01	C:\datalogger\firmware\user\user.h	62;"	d	line:62
-ERROR_INVALID_SAMPLE_RATE::0x02	C:\datalogger\firmware\user\user.h	63;"	d	line:63
+ERROR_CMD_NOT_FOUND::0x01	C:\datalogger\firmware\user\user.h	64;"	d	line:64
+ERROR_INVALID_SAMPLE_RATE::0x02	C:\datalogger\firmware\user\user.h	65;"	d	line:65
 FAIL::FALSE	C:\datalogger\firmware\system\typedefs.h	123;"	d	line:123
 FALSE	C:\datalogger\firmware\system\typedefs.h	120;"	e	line:120	enum:_BOOL
 GET_ADC_COMMAND	C:\datalogger\firmware\user\user.h	28;"	e	line:28	enum:DATA_PACKET::<anonymous>::<anonymous>
 HSHK_EN::0x10	C:\datalogger\firmware\system\usb\usbdrv\usbdrv.h	63;"	d	line:63
 HighB	C:\datalogger\firmware\system\typedefs.h	46;"	m	line:46	struct:_WORD::<anonymous>
-ID	C:\datalogger\firmware\user\user.h	46;"	m	line:46	struct:DATA_PACKET::<anonymous>
+ID	C:\datalogger\firmware\user\user.h	48;"	m	line:48	struct:DATA_PACKET::<anonymous>
 ID_BOARD	C:\datalogger\firmware\user\user.h	25;"	e	line:25	enum:DATA_PACKET::<anonymous>::<anonymous>
 IN::1	C:\datalogger\firmware\system\usb\usbdrv\usbdrv.h	76;"	d	line:76
 INCDIS	C:\datalogger\firmware\system\usb\usbmmap.h	52;"	m	line:52	struct:_BD_STAT::<anonymous>
 INPUT_PIN::1	C:\datalogger\firmware\io_cfg.h	8;"	d	line:8
 IO_CFG_H	C:\datalogger\firmware\io_cfg.h	2;"	d	line:2
-InitializeSystem	C:\datalogger\firmware\main.c	14;"	p	line:14	file:	signature:(void)
+InitializeSystem	C:\datalogger\firmware\main.c	15;"	p	line:15	file:	signature:(void)
 KEN	C:\datalogger\firmware\system\usb\usbmmap.h	53;"	m	line:53	struct:_BD_STAT::<anonymous>
 LOGIC_ARM	C:\datalogger\firmware\user\user.h	35;"	e	line:35	enum:DATA_PACKET::<anonymous>::<anonymous>
 LOGIC_CONFIG	C:\datalogger\firmware\user\user.h	34;"	e	line:34	enum:DATA_PACKET::<anonymous>::<anonymous>
-LOGIC_DATA	C:\datalogger\firmware\user\user.h	38;"	e	line:38	enum:DATA_PACKET::<anonymous>::<anonymous>
-LOGIC_END	C:\datalogger\firmware\user\user.h	37;"	e	line:37	enum:DATA_PACKET::<anonymous>::<anonymous>
-LOGIC_ERROR	C:\datalogger\firmware\user\user.h	39;"	e	line:39	enum:DATA_PACKET::<anonymous>::<anonymous>
+LOGIC_DATA	C:\datalogger\firmware\user\user.h	40;"	e	line:40	enum:DATA_PACKET::<anonymous>::<anonymous>
+LOGIC_END	C:\datalogger\firmware\user\user.h	39;"	e	line:39	enum:DATA_PACKET::<anonymous>::<anonymous>
+LOGIC_ERROR	C:\datalogger\firmware\user\user.h	41;"	e	line:41	enum:DATA_PACKET::<anonymous>::<anonymous>
 LOGIC_GET_SRATE	C:\datalogger\firmware\user\user.h	33;"	e	line:33	enum:DATA_PACKET::<anonymous>::<anonymous>
+LOGIC_INPROGRESS	C:\datalogger\firmware\user\user.h	38;"	e	line:38	enum:DATA_PACKET::<anonymous>::<anonymous>
 LOGIC_SET_SRATE	C:\datalogger\firmware\user\user.h	32;"	e	line:32	enum:DATA_PACKET::<anonymous>::<anonymous>
-LOGIC_START	C:\datalogger\firmware\user\user.h	36;"	e	line:36	enum:DATA_PACKET::<anonymous>::<anonymous>
+LOGIC_START	C:\datalogger\firmware\user\user.h	37;"	e	line:37	enum:DATA_PACKET::<anonymous>::<anonymous>
+LOGIC_WAITING	C:\datalogger\firmware\user\user.h	36;"	e	line:36	enum:DATA_PACKET::<anonymous>::<anonymous>
 LOWER_LSB::(a)((a).v[0])	C:\datalogger\firmware\system\typedefs.h	88;"	d	line:88
 LOWER_MSB::(a)((a).v[1])	C:\datalogger\firmware\system\typedefs.h	89;"	d	line:89
 LSB::(a)((a).v[0])	C:\datalogger\firmware\system\typedefs.h	53;"	d	line:53
@@ -133,7 +135,7 @@ PID3	C:\datalogger\firmware\system\usb\usbmmap.h	63;"	m	line:63	struct:_BD_STAT:
 POINTER	C:\datalogger\firmware\system\typedefs.h	118;"	t	line:118
 POWERED_STATE::2	C:\datalogger\firmware\system\usb\usbmmap.h	23;"	d	line:23
 ProcessIO	C:\datalogger\firmware\user\user.c	51;"	f	line:51	signature:(void)
-ProcessIO	C:\datalogger\firmware\user\user.h	67;"	p	line:67	signature:(void)
+ProcessIO	C:\datalogger\firmware\user\user.h	69;"	p	line:69	signature:(void)
 READ_VERSION	C:\datalogger\firmware\user\user.h	24;"	e	line:24	enum:DATA_PACKET::<anonymous>::<anonymous>
 RESET	C:\datalogger\firmware\user\user.h	30;"	e	line:30	enum:DATA_PACKET::<anonymous>::<anonymous>
 ReadPOT	C:\datalogger\firmware\user\user.c	254;"	f	line:254	signature:(void)
@@ -212,7 +214,7 @@ USBStdSetCfgHandler	C:\datalogger\firmware\system\usb\usb9\usb9.c	12;"	p	line:12
 USBStdSetCfgHandler	C:\datalogger\firmware\system\usb\usb9\usb9.c	144;"	f	line:144	signature:(void)
 USBSuspend	C:\datalogger\firmware\system\usb\usbdrv\usbdrv.c	14;"	p	line:14	file:	signature:(void)
 USBSuspend	C:\datalogger\firmware\system\usb\usbdrv\usbdrv.c	265;"	f	line:265	signature:(void)
-USBTasks	C:\datalogger\firmware\main.c	15;"	p	line:15	file:	signature:(void)
+USBTasks	C:\datalogger\firmware\main.c	16;"	p	line:16	file:	signature:(void)
 USBWakeFromSuspend	C:\datalogger\firmware\system\usb\usbdrv\usbdrv.c	15;"	p	line:15	file:	signature:(void)
 USBWakeFromSuspend	C:\datalogger\firmware\system\usb\usbdrv\usbdrv.c	320;"	f	line:320	signature:(void)
 USB_BUS_ATTACHED::1	C:\datalogger\firmware\system\usb\usbdrv\usbdrv.c	46;"	d	line:46	file:
@@ -225,7 +227,7 @@ USB_SOF_Handler	C:\datalogger\firmware\system\usb\usbdrv\usbdrv.c	18;"	p	line:18
 USB_SOF_Handler	C:\datalogger\firmware\system\usb\usbdrv\usbdrv.c	410;"	f	line:410	signature:(void)
 USB_USE_GEN	C:\datalogger\firmware\autofiles\usbcfg.h	19;"	d	line:19
 UserInit	C:\datalogger\firmware\user\user.c	371;"	f	line:371	signature:(void)
-UserInit	C:\datalogger\firmware\user\user.h	66;"	p	line:66	signature:(void)
+UserInit	C:\datalogger\firmware\user\user.h	68;"	p	line:68	signature:(void)
 UserTasks	C:\datalogger\firmware\user\user.c	366;"	f	line:366	signature:(void)
 WORD	C:\datalogger\firmware\system\typedefs.h	52;"	t	line:52
 Word0	C:\datalogger\firmware\system\typedefs.h	80;"	m	line:80	struct:_DWORD::<anonymous>
@@ -265,8 +267,8 @@ _byte	C:\datalogger\firmware\system\usb\usbmmap.h	36;"	m	line:36	union:_USB_DEVI
 _byte	C:\datalogger\firmware\system\usb\usbmmap.h	46;"	m	line:46	union:_BD_STAT
 _byte	C:\datalogger\firmware\user\user.h	18;"	m	line:18	union:DATA_PACKET
 _dword	C:\datalogger\firmware\system\typedefs.h	58;"	m	line:58	union:_DWORD
-_reset	C:\datalogger\firmware\main.c	23;"	f	line:23	signature:(void)
-_startup	C:\datalogger\firmware\main.c	21;"	p	line:21	file:	signature:(void)
+_reset	C:\datalogger\firmware\main.c	24;"	f	line:24	signature:(void)
+_startup	C:\datalogger\firmware\main.c	22;"	p	line:22	file:	signature:(void)
 _word	C:\datalogger\firmware\system\typedefs.h	103;"	m	line:103	union:_POINTER
 _word	C:\datalogger\firmware\system\typedefs.h	32;"	m	line:32	union:_WORD
 _word	C:\datalogger\firmware\user\user.h	19;"	m	line:19	union:DATA_PACKET
@@ -344,7 +346,7 @@ finalTemp	C:\datalogger\firmware\user\user.c	328;"	l	line:328
 getSampleRate	C:\datalogger\firmware\logic\logic.c	42;"	f	line:42	signature:(void)
 getSampleRate	C:\datalogger\firmware\logic\logic.h	14;"	p	line:14	signature:(void)
 high	C:\datalogger\firmware\user\user.c	256;"	l	line:256
-high_isr	C:\datalogger\firmware\main.c	17;"	p	line:17	file:	signature:(void)
+high_isr	C:\datalogger\firmware\main.c	18;"	p	line:18	file:	signature:(void)
 i	C:\datalogger\firmware\system\usb\class\generic\usbgen.c	96;"	l	line:96
 i	C:\datalogger\firmware\system\usb\usbctrltrf\usbctrltrf.c	135;"	l	line:135
 i	C:\datalogger\firmware\user\user.c	272;"	l	line:272
@@ -355,15 +357,15 @@ i00a00	C:\datalogger\firmware\autofiles\usbdsc.h	19;"	v	line:19
 int16_t	C:\datalogger\firmware\system\typedefs.h	12;"	t	line:12
 int8_t	C:\datalogger\firmware\system\typedefs.h	10;"	t	line:10
 led_count	C:\datalogger\firmware\user\user.c	184;"	l	line:184	file:
-led_num	C:\datalogger\firmware\user\user.h	51;"	m	line:51	struct:DATA_PACKET::<anonymous>
-led_status	C:\datalogger\firmware\user\user.h	52;"	m	line:52	struct:DATA_PACKET::<anonymous>
-len	C:\datalogger\firmware\user\user.h	41;"	m	line:41	struct:DATA_PACKET::<anonymous>
+led_num	C:\datalogger\firmware\user\user.h	53;"	m	line:53	struct:DATA_PACKET::<anonymous>
+led_status	C:\datalogger\firmware\user\user.h	54;"	m	line:54	struct:DATA_PACKET::<anonymous>
+len	C:\datalogger\firmware\user\user.h	43;"	m	line:43	struct:DATA_PACKET::<anonymous>
 logicConfig	C:\datalogger\firmware\logic\logic.c	18;"	f	line:18	signature:(uint8_t options)
 logicConfig	C:\datalogger\firmware\logic\logic.h	11;"	p	line:11	signature:(uint8_t options)
 logicStart	C:\datalogger\firmware\logic\logic.c	27;"	f	line:27	signature:(void)
 logicStart	C:\datalogger\firmware\logic\logic.h	12;"	p	line:12	signature:(void)
 low	C:\datalogger\firmware\user\user.c	256;"	l	line:256
-low_isr	C:\datalogger\firmware\main.c	16;"	p	line:16	file:	signature:(void)
+low_isr	C:\datalogger\firmware\main.c	17;"	p	line:17	file:	signature:(void)
 mInitAllLEDs::LATD&=0xF0;TRISD&=0xF0;	C:\datalogger\firmware\io_cfg.h	43;"	d	line:43
 mInitPOT::TRISAbits.TRISA0=1;ADCON0=0x01	C:\datalogger\firmware\io_cfg.h	36;"	d	line:36
 mInitializeUSBDriver::{UCFG=UCFG_VAL;\	C:\datalogger\firmware\system\usb\usbdrv\usbdrv.h	135;"	d	line:135
@@ -438,4 +440,4 @@ wRom	C:\datalogger\firmware\system\typedefs.h	113;"	m	line:113	union:_POINTER
 word	C:\datalogger\firmware\system\typedefs.h	5;"	t	line:5
 word0	C:\datalogger\firmware\system\typedefs.h	68;"	m	line:68	struct:_DWORD::<anonymous>
 word1	C:\datalogger\firmware\system\typedefs.h	69;"	m	line:69	struct:_DWORD::<anonymous>
-word_data	C:\datalogger\firmware\user\user.h	57;"	m	line:57	struct:DATA_PACKET::<anonymous>
+word_data	C:\datalogger\firmware\user\user.h	59;"	m	line:59	struct:DATA_PACKET::<anonymous>
