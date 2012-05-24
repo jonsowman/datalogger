@@ -264,8 +264,8 @@ _byte	C:\datalogger\firmware\system\usb\usbmmap.h	36;"	m	line:36	union:_USB_DEVI
 _byte	C:\datalogger\firmware\system\usb\usbmmap.h	46;"	m	line:46	union:_BD_STAT
 _byte	C:\datalogger\firmware\user\user.h	18;"	m	line:18	union:DATA_PACKET
 _dword	C:\datalogger\firmware\system\typedefs.h	58;"	m	line:58	union:_DWORD
-_reset	C:\datalogger\firmware\main.c	24;"	f	line:24	signature:(void)
-_startup	C:\datalogger\firmware\main.c	22;"	p	line:22	file:	signature:(void)
+_reset	C:\datalogger\firmware\main.c	23;"	f	line:23	signature:(void)
+_startup	C:\datalogger\firmware\main.c	21;"	p	line:21	file:	signature:(void)
 _word	C:\datalogger\firmware\system\typedefs.h	103;"	m	line:103	union:_POINTER
 _word	C:\datalogger\firmware\system\typedefs.h	32;"	m	line:32	union:_WORD
 _word	C:\datalogger\firmware\user\user.h	19;"	m	line:19	union:DATA_PACKET

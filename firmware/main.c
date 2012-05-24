@@ -22,33 +22,31 @@ extern void _startup (void);        // See c018i.c in your C18 compiler dir
 #pragma code _RESET_INTERRUPT_VECTOR = 0x000800
 void _reset (void)
 {
-	_asm goto _startup _endasm
+	_asm GOTO _startup _endasm
 }
 
 #pragma code high_vector=0x08
 void interrupt_at_high_vector(void)
 {
-	_asm goto high_isr _endasm
+	_asm GOTO high_isr _endasm
 }
 
 #pragma code low_vector=0x18
 void interrupt_at_low_vector(void)
 {
-	_asm goto low_isr _endasm
+	_asm GOTO low_isr _endasm
 }
 
 #pragma interrupt high_isr
 void high_isr(void)
 {
-	if(PIR1bits.TMR2IF)
-		LATDbits.LATD0 = 1; // Turn RD0 on
+	LATDbits.LATD0 = 1; // Turn RD0 on
 }
 
 #pragma interruptlow low_isr
 void low_isr(void)
 {
-	if(PIR1bits.TMR2IF)
-		LATDbits.LATD0 = 1; // Turn RD0 on
+	LATDbits.LATD0 = 1; // Turn RD0 on
 }
 
 // End interrupt handling
@@ -58,26 +56,13 @@ void main(void)
 {
     InitializeSystem();
 
-	// Enable interrupt priority
-	RCONbits.IPEN = 1;
-			
-	// global interrupts
-	INTCONbits.GIEL  = 1;
-	INTCONbits.GIEH = 1;
-
-	OpenTimer2(TIMER_INT_ON & T2_PS_1_1 & T2_POST_1_1);
-
-	/*IPR1bits.TMR2IP = 1;
-	PIR1bits.TMR2IF = 0;
-	PIE1bits.TMR2IE = 1;*/
+	OpenTimer0(TIMER_INT_ON & T0_SOURCE_INT & T0_16BIT);
+	INTCONbits.GIE = 1;
 
 	LATDbits.LATD0 = 0; // Check LED off
 
     while(1)
     {
-		//if(PIR1bits.TMR2IF)
-		//	LATDbits.LATD0 = 1;
-
         USBTasks();         // USB Tasks
         ProcessIO();        // See user\user.c & .h
 		UserTasks();
