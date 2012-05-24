@@ -73,7 +73,7 @@ void main(void)
 	// Clock on instruction clock cycles
 	T0CONbits.T0CS = 0;
 
-	// 1:2 prescaler
+	// Turn off the prescalar so we clock on instruction clk cycles
 	T0CONbits.PSA = 1;
 	T0CONbits.T0PS2 = 0;
 	T0CONbits.T0PS1  = 0;
@@ -93,8 +93,6 @@ void main(void)
 	T0CONbits.TMR0ON = 1;
 
 	LATDbits.LATD0 = 0; // Check LED off
-
-	while(1);
 
     while(1)
     {
