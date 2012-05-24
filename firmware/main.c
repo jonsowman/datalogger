@@ -1,4 +1,4 @@
-/** I N C L U D E S **********************************************************/
+// Includes
 #include <p18cxxx.h>
 #include <timers.h>
 #include "system\typedefs.h"                        // Required
@@ -8,17 +8,16 @@
 #include "system\usb\usb_compile_time_validation.h" // Optional
 #include "user\user.h"                              // Modifiable
 
-/** V A R I A B L E S ********************************************************/
+// Variables
 #pragma udata
 
-/** P R I V A T E  P R O T O T Y P E S ***************************************/
+// Private prototypes
 static void InitializeSystem(void);
 void USBTasks(void);
 void low_isr(void);
 void high_isr(void);
 
-/** V E C T O R  R E M A P P I N G *******************************************/
-
+// Vector remapping
 extern void _startup (void);        // See c018i.c in your C18 compiler dir
 #pragma code _RESET_INTERRUPT_VECTOR = 0x000800
 void _reset (void)
@@ -85,7 +84,8 @@ void main(void)
     }
 }
 
-/* InitializeSystem is a centralize initialization routine.
+/**
+ * InitializeSystem is a centralized initialization routine.
  * All required USB initialization routines are called from
  * here.
  */
