@@ -17,9 +17,11 @@
 #define SYNC_EDGE_RISE			0x04
 #define SYNC_EDGE_FALL			0x08
 #define SYNC_EDGE_BOTH			0x10
+#define OPTIONS_VALID			0x80
 
 bool logicConfig(uint8_t options);
-void logicStart(void);
+bool verifyOptions(uint8_t options);
+bool logicStart(void);
 bool setSampleRate(uint32_t* samplerate);
 uint32_t getSampleRate(void);
 bool setSampleNumber(uint32_t* count);

@@ -14,12 +14,6 @@
 uint32_t samplenumber;
 uint32_t samplerate;
 uint8_t config;
-/*
-sync/mode
-clock edge for sync
-sample rate
-total no of samples
-*/
 
 /**
  * Configure the logic analyser, takes one byte bitfield
@@ -28,12 +22,28 @@ total no of samples
  */
 bool logicConfig(uint8_t options)
 {
+	if(!verifyOptions(options))
+	{
+		config = 0;
+		return false;
+	} else {
+		config = options;
+		return true;
+	}
+}
+
+/**
+ * Take a config byte and verify it.
+ */
+bool verifyOptions(uint8_t options)
+{
 	if((options & MODE_ASYNC) && (options & MODE_SYNC))
 		return false;
 	if((options & SYNC_EDGE_RISE) && (options && SYNC_EDGE_FALL)
 			&& (options && SYNC_EDGE_BOTH))
 		return false;
-	config = options;
+	if(!options & OPTIONS_VALID)
+		return false;
 	return true;
 }
 
@@ -42,12 +52,18 @@ bool logicConfig(uint8_t options)
  * buffer. If in sync mode, arm the analyser and start logging
  * on the clock trigger.
  */
-void logicStart(void)
+bool logicStart(void)
 {
+	// Check that all options are valid
+	if(!verifyOptions(config))
+		return false;
+
+	// Set up the timer according to the config
+	return true;
 }
 
 /**
- * Set the sample rate for the analyser in kHz . We always sample 
+ * Set the sample rate for the analyser in Hz . We always sample 
  * at the same rate, but oversample in the slower modes.
  */
 bool setSampleRate(uint32_t* rate)
@@ -63,10 +79,11 @@ bool setSampleRate(uint32_t* rate)
 }
 
 /**
- * Get the currently set sample rate in kHz.
+ * Get the currently set sample rate in Hz.
  */
 uint32_t getSampleRate(void)
 {
+	return samplerate;
 }
 
 /**
