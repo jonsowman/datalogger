@@ -74,7 +74,6 @@ void main(void)
     while(1)
     {
         USBTasks();         // USB Tasks
-		//UCAM
         ProcessIO();        // See user\user.c & .h
 		UserTasks();
     }
@@ -88,17 +87,15 @@ static void InitializeSystem(void)
 {
 
     #if defined(USE_USB_BUS_SENSE_IO)
-    //tris_usb_bus_sense = INPUT_PIN; // See io_cfg.h
+    tris_usb_bus_sense = INPUT_PIN; // See io_cfg.h
     #endif
     
     #if defined(USE_SELF_POWER_SENSE_IO)
-    //tris_self_power = INPUT_PIN;
+    tris_self_power = INPUT_PIN;
     #endif
     
-    //mInitializeUSBDriver();         // See usbdrv.h
-    
+    mInitializeUSBDriver();         // See usbdrv.h
     UserInit();                     // See user.c & .h
-
 }
 
 /*
