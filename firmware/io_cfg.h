@@ -52,41 +52,78 @@
 
 /***** Actual logic analyser pins ****************************/
 /******** SRAM Address Lines *******/
-#define A16		LATBbits.LATB2
+#define LATADDR16		LATBbits.LATB2
 
-#define A15		LATDbits.LATD7
-#define A14		LATDbits.LATD6
-#define A13		LATDbits.LATD5
-#define A12		LATDbits.LATD4
-#define A11		LATDbits.LATD3
-#define A10		LATDbits.LATD2
-#define A9		LATDbits.LATD1
-#define A8		LATDbits.LATD0
+#define LATADDR15		LATDbits.LATD7
+#define LATADDR14		LATDbits.LATD6
+#define LATADDR13		LATDbits.LATD5
+#define LATADDR12		LATDbits.LATD4
+#define LATADDR11		LATDbits.LATD3
+#define LATADDR10		LATDbits.LATD2
+#define LATADDR9		LATDbits.LATD1
+#define LATADDR8		LATDbits.LATD0
 
-#define A7		LATBbits.LATB7
-#define A6		LATBbits.LATB6
-#define A5		LATBbits.LATB5
-#define A4		LATBbits.LATB4
-#define A3		LATBbits.LATB3
+#define LATADDR7		LATBbits.LATB7
+#define LATADDR6		LATBbits.LATB6
+#define LATADDR5		LATBbits.LATB5
+#define LATADDR4		LATBbits.LATB4
+#define LATADDR3		LATBbits.LATB3
 
-#define A2		LATAbits.LATA5
-#define A1		LATAbits.LATA4
-#define A0		LATAbits.LATA3
+#define LATADDR2		LATAbits.LATA5
+#define LATADDR1		LATAbits.LATA4
+#define LATADDR0		LATAbits.LATA3
+
+#define TRISADDR16		TRISBbits.TRISB2
+
+#define TRISADDR15		TRISDbits.TRISD7
+#define TRISADDR14		TRISDbits.TRISD6
+#define TRISADDR13		TRISDbits.TRISD5
+#define TRISADDR12		TRISDbits.TRISD4
+#define TRISADDR11		TRISDbits.TRISD3
+#define TRISADDR10		TRISDbits.TRISD2
+#define TRISADDR9		TRISDbits.TRISD1
+#define TRISADDR8		TRISDbits.TRISD0
+
+#define TRISADDR7		TRISBbits.TRISB7
+#define TRISADDR6		TRISBbits.TRISB6
+#define TRISADDR5		TRISBbits.TRISB5
+#define TRISADDR4		TRISBbits.TRISB4
+#define TRISADDR3		TRISBbits.TRISB3
+
+#define TRISADDR2		TRISAbits.TRISA5
+#define TRISADDR1		TRISAbits.TRISA4
+#define TRISADDR0		TRISAbits.TRISA3
+
 
 /********* SRAM Control Lines ********/
-#define CE		LATCbits.LATC1
-#define OE		LATCbits.LATC0
-#define	WE		LATCbits.LATC2
-#define	CE2		LATCbits.LATC6
+#define LATCE		LATCbits.LATC1
+#define LATOE		LATCbits.LATC0
+#define	LATWE		LATCbits.LATC2
+#define	LATCE2		LATCbits.LATC6
+
+#define TRISCE		TRISCbits.TRISC1
+#define TRISOE		TRISCbits.TRISC0
+#define	TRISWE		TRISCbits.TRISC2
+#define	TRISCE2		TRISCbits.TRISC6
 
 /****Shift Regiser Control Lines *****/
-#define SR_CLK		LATEbits.LATE0
-#define SR_CLK_EN	LATEbits.LATE1
-#define SR_PLOAD	LATEbits.LATE2
-#define SR_SEROUT	LATAbits.LATA2
+#define LATSR_CLK		LATEbits.LATE0
+#define LATSR_CLK_EN	LATEbits.LATE1
+#define LATSR_PLOAD	LATEbits.LATE2
+
+#define PORTSR_SEROUT	PORTAbits.PORTA2
+
+#define TRISSR_CLK		TRISEbits.TRISE0
+#define TRISSR_CLK_EN	TRISEbits.TRISE1
+#define TRISSR_PLOAD	TRISEbits.TRISE2
+#define TRISSR_SEROUT	TRISAbits.TRISA2
 
 /**** Other *****/
-#define BUFFER_EN	LATCbits.LATC7
+#define LATBUFFER_EN	LATCbits.LATC7
 
+#define PORTDATA0		PORTBbits.PORTB0
+
+#define TRISBUFFER_EN	TRISCbits.TRIS7
+#define TRISDATA0		TRISBbits.TRISB0
 
 #endif //IO_CFG_H
