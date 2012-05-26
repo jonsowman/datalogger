@@ -41,10 +41,27 @@ void interrupt_at_low_vector(void)
 }
 #pragma code
 
+void pintest()
+{
+	// Plan is - Flash *all* pins in sync *except* the one we're testing.
+	// Makes it easy to check a) Each wire goes to the right place
+	// b) no shorts between wires
+
+
+
+
+}
+
+
+
 // Main program loop
 void main(void)
 {
     InitializeSystem();
+
+
+	pintest(); // dwt's wiring testing function. never returns.
+
 
 	startTimer();
 
