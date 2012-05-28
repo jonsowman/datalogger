@@ -36,7 +36,7 @@ void disableBuffer(void);
 void enableBuffer(void);
 
 // Shift register routines
-uint8_t SRGetByte(void);
+uint8_t getSRByte(void);
 
 // ISR prototypes
 void low_isr(void);
