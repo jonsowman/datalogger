@@ -94,22 +94,21 @@
 #define TRISADDR1		TRISAbits.TRISA4
 #define TRISADDR0		TRISAbits.TRISA3
 
-
 /********* SRAM Control Lines ********/
-#define LATCE		LATCbits.LATC1
-#define LATOE		LATCbits.LATC0
-#define	LATWE		LATCbits.LATC2
-#define	LATCE2		LATCbits.LATC6
+#define LATCE			LATCbits.LATC1
+#define LATOE			LATCbits.LATC0
+#define	LATWE			LATCbits.LATC2
+#define	LATCE2			LATCbits.LATC6
 
-#define TRISCE		TRISCbits.TRISC1
-#define TRISOE		TRISCbits.TRISC0
-#define	TRISWE		TRISCbits.TRISC2
-#define	TRISCE2		TRISCbits.TRISC6
+#define TRISCE			TRISCbits.TRISC1
+#define TRISOE			TRISCbits.TRISC0
+#define	TRISWE			TRISCbits.TRISC2
+#define	TRISCE2			TRISCbits.TRISC6
 
 /****Shift Regiser Control Lines *****/
 #define LATSR_CLK		LATEbits.LATE0
 #define LATSR_CLK_EN	LATEbits.LATE1
-#define LATSR_PLOAD	LATEbits.LATE2
+#define LATSR_PLOAD		LATEbits.LATE2
 
 #define PORTSR_SEROUT	PORTAbits.PORTA2
 
@@ -125,5 +124,10 @@
 
 #define TRISBUFFER_EN	TRISCbits.TRIS7
 #define TRISDATA0		TRISBbits.TRISB0
+
+#define TRISLEDA		TRISAbits.TRISA0
+#define TRISLEDB		TRISAbits.TRISA1
+#define LATLEDA			LATAbits.LATA0
+#define LATLEDB			LATAbits.LATA1
 
 #endif //IO_CFG_H
