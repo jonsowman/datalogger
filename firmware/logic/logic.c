@@ -148,6 +148,34 @@ void startTimer()
 	T0CONbits.TMR0ON = 1;
 }
 
+/**
+ * Write the given SRAM byte address to the IO pins.
+ */
+void setRAMAddress(uint32_t address)
+{
+	// Mask out the top 15 bits (17 bit address bus)
+	address &= 0x1FFFF;
+
+	// Write the address to the line
+	LATADDR0 = (address >> 0) & 0x01;
+	LATADDR1 = (address >> 1) & 0x01;
+	LATADDR2 = (address >> 2) & 0x01;
+	LATADDR3 = (address >> 3) & 0x01;
+	LATADDR4 = (address >> 4) & 0x01;
+	LATADDR5 = (address >> 5) & 0x01;
+	LATADDR6 = (address >> 6) & 0x01;
+	LATADDR7 = (address >> 7) & 0x01;
+	LATADDR8 = (address >> 8) & 0x01;
+	LATADDR9 = (address >> 9) & 0x01;
+	LATADDR10 = (address >> 10) & 0x01;
+	LATADDR11 = (address >> 11) & 0x01;
+	LATADDR12 = (address >> 12) & 0x01;
+	LATADDR13 = (address >> 13) & 0x01;
+	LATADDR14 = (address >> 14) & 0x01;
+	LATADDR15 = (address >> 15) & 0x01;
+	LATADDR16 = (address >> 16) & 0x01;
+}
+
 // Interrupt stuff here
 #pragma interrupt high_isr
 void high_isr(void)

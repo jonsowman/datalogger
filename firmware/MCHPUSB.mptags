@@ -100,6 +100,33 @@ INPUT_PIN::1	C:\datalogger\firmware\io_cfg.h	8;"	d	line:8
 IO_CFG_H	C:\datalogger\firmware\io_cfg.h	2;"	d	line:2
 InitializeSystem	C:\datalogger\firmware\main.c	16;"	p	line:16	file:	signature:(void)
 KEN	C:\datalogger\firmware\system\usb\usbmmap.h	53;"	m	line:53	struct:_BD_STAT::<anonymous>
+LATADDR0::LATAbits.LATA3	C:\datalogger\firmware\io_cfg.h	74;"	d	line:74
+LATADDR10::LATDbits.LATD2	C:\datalogger\firmware\io_cfg.h	62;"	d	line:62
+LATADDR11::LATDbits.LATD3	C:\datalogger\firmware\io_cfg.h	61;"	d	line:61
+LATADDR12::LATDbits.LATD4	C:\datalogger\firmware\io_cfg.h	60;"	d	line:60
+LATADDR13::LATDbits.LATD5	C:\datalogger\firmware\io_cfg.h	59;"	d	line:59
+LATADDR14::LATDbits.LATD6	C:\datalogger\firmware\io_cfg.h	58;"	d	line:58
+LATADDR15::LATDbits.LATD7	C:\datalogger\firmware\io_cfg.h	57;"	d	line:57
+LATADDR16::LATBbits.LATB2	C:\datalogger\firmware\io_cfg.h	55;"	d	line:55
+LATADDR1::LATAbits.LATA4	C:\datalogger\firmware\io_cfg.h	73;"	d	line:73
+LATADDR2::LATAbits.LATA5	C:\datalogger\firmware\io_cfg.h	72;"	d	line:72
+LATADDR3::LATBbits.LATB3	C:\datalogger\firmware\io_cfg.h	70;"	d	line:70
+LATADDR4::LATBbits.LATB4	C:\datalogger\firmware\io_cfg.h	69;"	d	line:69
+LATADDR5::LATBbits.LATB5	C:\datalogger\firmware\io_cfg.h	68;"	d	line:68
+LATADDR6::LATBbits.LATB6	C:\datalogger\firmware\io_cfg.h	67;"	d	line:67
+LATADDR7::LATBbits.LATB7	C:\datalogger\firmware\io_cfg.h	66;"	d	line:66
+LATADDR8::LATDbits.LATD0	C:\datalogger\firmware\io_cfg.h	64;"	d	line:64
+LATADDR9::LATDbits.LATD1	C:\datalogger\firmware\io_cfg.h	63;"	d	line:63
+LATBUFFER_EN::LATCbits.LATC7	C:\datalogger\firmware\io_cfg.h	121;"	d	line:121
+LATCE2::LATCbits.LATC6	C:\datalogger\firmware\io_cfg.h	101;"	d	line:101
+LATCE::LATCbits.LATC1	C:\datalogger\firmware\io_cfg.h	98;"	d	line:98
+LATLEDA::LATAbits.LATA0	C:\datalogger\firmware\io_cfg.h	130;"	d	line:130
+LATLEDB::LATAbits.LATA1	C:\datalogger\firmware\io_cfg.h	131;"	d	line:131
+LATOE::LATCbits.LATC0	C:\datalogger\firmware\io_cfg.h	99;"	d	line:99
+LATSR_CLK::LATEbits.LATE0	C:\datalogger\firmware\io_cfg.h	109;"	d	line:109
+LATSR_CLK_EN::LATEbits.LATE1	C:\datalogger\firmware\io_cfg.h	110;"	d	line:110
+LATSR_PLOAD::LATEbits.LATE2	C:\datalogger\firmware\io_cfg.h	111;"	d	line:111
+LATWE::LATCbits.LATC2	C:\datalogger\firmware\io_cfg.h	100;"	d	line:100
 LOGIC_ARM	C:\datalogger\firmware\user\user.h	35;"	e	line:35	enum:DATA_PACKET::<anonymous>::<anonymous>
 LOGIC_CONFIG	C:\datalogger\firmware\user\user.h	34;"	e	line:34	enum:DATA_PACKET::<anonymous>::<anonymous>
 LOGIC_DATA	C:\datalogger\firmware\user\user.h	40;"	e	line:40	enum:DATA_PACKET::<anonymous>::<anonymous>
@@ -127,6 +154,7 @@ MSB::(a)((a).v[1])	C:\datalogger\firmware\system\typedefs.h	56;"	d	line:56
 MUID_NULL::0	C:\datalogger\firmware\autofiles\usbcfg.h	26;"	d	line:26
 MUID_USB9::1	C:\datalogger\firmware\autofiles\usbcfg.h	27;"	d	line:27
 OK::TRUE	C:\datalogger\firmware\system\typedefs.h	128;"	d	line:128
+OPTIONS_VALID::0x80	C:\datalogger\firmware\logic\logic.h	20;"	d	line:20
 OUT::0	C:\datalogger\firmware\system\usb\usbdrv\usbdrv.h	75;"	d	line:75
 OUTPUT_PIN::0	C:\datalogger\firmware\io_cfg.h	9;"	d	line:9
 PICDEM_FS_DEMO_H	C:\datalogger\firmware\user\user.h	2;"	d	line:2
@@ -138,6 +166,8 @@ PID1	C:\datalogger\firmware\system\usb\usbmmap.h	61;"	m	line:61	struct:_BD_STAT:
 PID2	C:\datalogger\firmware\system\usb\usbmmap.h	62;"	m	line:62	struct:_BD_STAT::<anonymous>
 PID3	C:\datalogger\firmware\system\usb\usbmmap.h	63;"	m	line:63	struct:_BD_STAT::<anonymous>
 POINTER	C:\datalogger\firmware\system\typedefs.h	120;"	t	line:120
+PORTDATA0::PORTBbits.PORTB0	C:\datalogger\firmware\io_cfg.h	123;"	d	line:123
+PORTSR_SEROUT::PORTAbits.PORTA2	C:\datalogger\firmware\io_cfg.h	113;"	d	line:113
 POWERED_STATE::2	C:\datalogger\firmware\system\usb\usbmmap.h	23;"	d	line:23
 ProcessIO	C:\datalogger\firmware\user\user.c	51;"	f	line:51	signature:(void)
 ProcessIO	C:\datalogger\firmware\user\user.h	55;"	p	line:55	signature:(void)
@@ -160,6 +190,35 @@ TEMP_REAL_TIME::0x00	C:\datalogger\firmware\user\user.h	12;"	d	line:12
 TIMER0H_VAL::0x48	C:\datalogger\firmware\user\user.c	36;"	d	line:36	file:
 TIMER0L_VAL::0xE5	C:\datalogger\firmware\user\user.c	35;"	d	line:35	file:
 TIMER_PRELOAD::250	C:\datalogger\firmware\logic\logic.h	11;"	d	line:11
+TRISADDR0::TRISAbits.TRISA3	C:\datalogger\firmware\io_cfg.h	95;"	d	line:95
+TRISADDR10::TRISDbits.TRISD2	C:\datalogger\firmware\io_cfg.h	83;"	d	line:83
+TRISADDR11::TRISDbits.TRISD3	C:\datalogger\firmware\io_cfg.h	82;"	d	line:82
+TRISADDR12::TRISDbits.TRISD4	C:\datalogger\firmware\io_cfg.h	81;"	d	line:81
+TRISADDR13::TRISDbits.TRISD5	C:\datalogger\firmware\io_cfg.h	80;"	d	line:80
+TRISADDR14::TRISDbits.TRISD6	C:\datalogger\firmware\io_cfg.h	79;"	d	line:79
+TRISADDR15::TRISDbits.TRISD7	C:\datalogger\firmware\io_cfg.h	78;"	d	line:78
+TRISADDR16::TRISBbits.TRISB2	C:\datalogger\firmware\io_cfg.h	76;"	d	line:76
+TRISADDR1::TRISAbits.TRISA4	C:\datalogger\firmware\io_cfg.h	94;"	d	line:94
+TRISADDR2::TRISAbits.TRISA5	C:\datalogger\firmware\io_cfg.h	93;"	d	line:93
+TRISADDR3::TRISBbits.TRISB3	C:\datalogger\firmware\io_cfg.h	91;"	d	line:91
+TRISADDR4::TRISBbits.TRISB4	C:\datalogger\firmware\io_cfg.h	90;"	d	line:90
+TRISADDR5::TRISBbits.TRISB5	C:\datalogger\firmware\io_cfg.h	89;"	d	line:89
+TRISADDR6::TRISBbits.TRISB6	C:\datalogger\firmware\io_cfg.h	88;"	d	line:88
+TRISADDR7::TRISBbits.TRISB7	C:\datalogger\firmware\io_cfg.h	87;"	d	line:87
+TRISADDR8::TRISDbits.TRISD0	C:\datalogger\firmware\io_cfg.h	85;"	d	line:85
+TRISADDR9::TRISDbits.TRISD1	C:\datalogger\firmware\io_cfg.h	84;"	d	line:84
+TRISBUFFER_EN::TRISCbits.TRIS7	C:\datalogger\firmware\io_cfg.h	125;"	d	line:125
+TRISCE2::TRISCbits.TRISC6	C:\datalogger\firmware\io_cfg.h	106;"	d	line:106
+TRISCE::TRISCbits.TRISC1	C:\datalogger\firmware\io_cfg.h	103;"	d	line:103
+TRISDATA0::TRISBbits.TRISB0	C:\datalogger\firmware\io_cfg.h	126;"	d	line:126
+TRISLEDA::TRISAbits.TRISA0	C:\datalogger\firmware\io_cfg.h	128;"	d	line:128
+TRISLEDB::TRISAbits.TRISA1	C:\datalogger\firmware\io_cfg.h	129;"	d	line:129
+TRISOE::TRISCbits.TRISC0	C:\datalogger\firmware\io_cfg.h	104;"	d	line:104
+TRISSR_CLK::TRISEbits.TRISE0	C:\datalogger\firmware\io_cfg.h	115;"	d	line:115
+TRISSR_CLK_EN::TRISEbits.TRISE1	C:\datalogger\firmware\io_cfg.h	116;"	d	line:116
+TRISSR_PLOAD::TRISEbits.TRISE2	C:\datalogger\firmware\io_cfg.h	117;"	d	line:117
+TRISSR_SEROUT::TRISAbits.TRISA2	C:\datalogger\firmware\io_cfg.h	118;"	d	line:118
+TRISWE::TRISCbits.TRISC2	C:\datalogger\firmware\io_cfg.h	105;"	d	line:105
 TRUE	C:\datalogger\firmware\system\typedefs.h	122;"	e	line:122	enum:_BOOL
 TYPEDEFS_H	C:\datalogger\firmware\system\typedefs.h	2;"	d	line:2
 UCFG_VAL::_PUEN|_TRINT|_FS|MODE_PP	C:\datalogger\firmware\autofiles\usbcfg.h	10;"	d	line:10
@@ -351,13 +410,13 @@ ep8Bo	C:\datalogger\firmware\system\usb\usbmmap.c	214;"	v	line:214
 ep9Bi	C:\datalogger\firmware\system\usb\usbmmap.c	220;"	v	line:220
 ep9Bo	C:\datalogger\firmware\system\usb\usbmmap.c	219;"	v	line:219
 false::0	C:\datalogger\firmware\system\typedefs.h	126;"	d	line:126
-getSampleNumber	C:\datalogger\firmware\logic\logic.c	109;"	f	line:109	signature:(void)
-getSampleNumber	C:\datalogger\firmware\logic\logic.h	27;"	p	line:27	signature:(void)
-getSampleRate	C:\datalogger\firmware\logic\logic.c	85;"	f	line:85	signature:(void)
-getSampleRate	C:\datalogger\firmware\logic\logic.h	25;"	p	line:25	signature:(void)
+getSampleNumber	C:\datalogger\firmware\logic\logic.c	108;"	f	line:108	signature:(void)
+getSampleNumber	C:\datalogger\firmware\logic\logic.h	28;"	p	line:28	signature:(void)
+getSampleRate	C:\datalogger\firmware\logic\logic.c	84;"	f	line:84	signature:(void)
+getSampleRate	C:\datalogger\firmware\logic\logic.h	26;"	p	line:26	signature:(void)
 high	C:\datalogger\firmware\user\user.c	195;"	l	line:195
-high_isr	C:\datalogger\firmware\logic\logic.c	154;"	f	line:154	signature:(void)
-high_isr	C:\datalogger\firmware\logic\logic.h	32;"	p	line:32	signature:(void)
+high_isr	C:\datalogger\firmware\logic\logic.c	153;"	f	line:153	signature:(void)
+high_isr	C:\datalogger\firmware\logic\logic.h	33;"	p	line:33	signature:(void)
 i	C:\datalogger\firmware\system\usb\class\generic\usbgen.c	96;"	l	line:96
 i	C:\datalogger\firmware\system\usb\usbctrltrf\usbctrltrf.c	135;"	l	line:135
 i	C:\datalogger\firmware\user\user.c	211;"	l	line:211
@@ -367,32 +426,32 @@ int16_t	C:\datalogger\firmware\system\typedefs.h	12;"	t	line:12
 int32_t	C:\datalogger\firmware\system\typedefs.h	14;"	t	line:14
 int8_t	C:\datalogger\firmware\system\typedefs.h	10;"	t	line:10
 len	C:\datalogger\firmware\user\user.h	43;"	m	line:43	struct:DATA_PACKET::<anonymous>
-logicConfig	C:\datalogger\firmware\logic\logic.c	29;"	f	line:29	signature:(uint8_t options)
-logicConfig	C:\datalogger\firmware\logic\logic.h	21;"	p	line:21	signature:(uint8_t options)
-logicStart	C:\datalogger\firmware\logic\logic.c	59;"	f	line:59	signature:(void)
-logicStart	C:\datalogger\firmware\logic\logic.h	23;"	p	line:23	signature:(void)
+logicConfig	C:\datalogger\firmware\logic\logic.c	23;"	f	line:23	signature:(uint8_t options)
+logicConfig	C:\datalogger\firmware\logic\logic.h	22;"	p	line:22	signature:(uint8_t options)
+logicStart	C:\datalogger\firmware\logic\logic.c	55;"	f	line:55	signature:(void)
+logicStart	C:\datalogger\firmware\logic\logic.h	24;"	p	line:24	signature:(void)
 low	C:\datalogger\firmware\user\user.c	195;"	l	line:195
-low_isr	C:\datalogger\firmware\logic\logic.c	166;"	f	line:166	signature:(void)
-low_isr	C:\datalogger\firmware\logic\logic.h	31;"	p	line:31	signature:(void)
-mInitAllLEDs::LATD&=0xF0;TRISD&=0xF0;	C:\datalogger\firmware\io_cfg.h	43;"	d	line:43
-mInitPOT::TRISAbits.TRISA0=1;ADCON0=0x01	C:\datalogger\firmware\io_cfg.h	36;"	d	line:36
+low_isr	C:\datalogger\firmware\logic\logic.c	165;"	f	line:165	signature:(void)
+low_isr	C:\datalogger\firmware\logic\logic.h	32;"	p	line:32	signature:(void)
+mInitAllLEDs::LATD&=0xF0;TRISD&=0xF0;	C:\datalogger\firmware\io_cfg.h	31;"	d	line:31
+mInitPOT::TRISAbits.TRISA0=1;ADCON0=0x01	C:\datalogger\firmware\io_cfg.h	28;"	d	line:28
 mInitializeUSBDriver::{UCFG=UCFG_VAL;\	C:\datalogger\firmware\system\usb\usbdrv\usbdrv.h	135;"	d	line:135
-mLED_1::LATDbits.LATD0	C:\datalogger\firmware\io_cfg.h	48;"	d	line:48
-mLED_1_Off::mLED_1=0;	C:\datalogger\firmware\io_cfg.h	58;"	d	line:58
-mLED_1_On::mLED_1=1;	C:\datalogger\firmware\io_cfg.h	53;"	d	line:53
-mLED_1_Toggle::mLED_1=!mLED_1;	C:\datalogger\firmware\io_cfg.h	63;"	d	line:63
-mLED_2::LATDbits.LATD1	C:\datalogger\firmware\io_cfg.h	49;"	d	line:49
-mLED_2_Off::mLED_2=0;	C:\datalogger\firmware\io_cfg.h	59;"	d	line:59
-mLED_2_On::mLED_2=1;	C:\datalogger\firmware\io_cfg.h	54;"	d	line:54
-mLED_2_Toggle::mLED_2=!mLED_2;	C:\datalogger\firmware\io_cfg.h	64;"	d	line:64
-mLED_3::LATDbits.LATD2	C:\datalogger\firmware\io_cfg.h	50;"	d	line:50
-mLED_3_Off::mLED_3=0;	C:\datalogger\firmware\io_cfg.h	60;"	d	line:60
-mLED_3_On::mLED_3=1;	C:\datalogger\firmware\io_cfg.h	55;"	d	line:55
-mLED_3_Toggle::mLED_3=!mLED_3;	C:\datalogger\firmware\io_cfg.h	65;"	d	line:65
-mLED_4::LATDbits.LATD3	C:\datalogger\firmware\io_cfg.h	51;"	d	line:51
-mLED_4_Off::mLED_4=0;	C:\datalogger\firmware\io_cfg.h	61;"	d	line:61
-mLED_4_On::mLED_4=1;	C:\datalogger\firmware\io_cfg.h	56;"	d	line:56
-mLED_4_Toggle::mLED_4=!mLED_4;	C:\datalogger\firmware\io_cfg.h	66;"	d	line:66
+mLED_1::LATDbits.LATD0	C:\datalogger\firmware\io_cfg.h	33;"	d	line:33
+mLED_1_Off::mLED_1=0;	C:\datalogger\firmware\io_cfg.h	43;"	d	line:43
+mLED_1_On::mLED_1=1;	C:\datalogger\firmware\io_cfg.h	38;"	d	line:38
+mLED_1_Toggle::mLED_1=!mLED_1;	C:\datalogger\firmware\io_cfg.h	48;"	d	line:48
+mLED_2::LATDbits.LATD1	C:\datalogger\firmware\io_cfg.h	34;"	d	line:34
+mLED_2_Off::mLED_2=0;	C:\datalogger\firmware\io_cfg.h	44;"	d	line:44
+mLED_2_On::mLED_2=1;	C:\datalogger\firmware\io_cfg.h	39;"	d	line:39
+mLED_2_Toggle::mLED_2=!mLED_2;	C:\datalogger\firmware\io_cfg.h	49;"	d	line:49
+mLED_3::LATDbits.LATD2	C:\datalogger\firmware\io_cfg.h	35;"	d	line:35
+mLED_3_Off::mLED_3=0;	C:\datalogger\firmware\io_cfg.h	45;"	d	line:45
+mLED_3_On::mLED_3=1;	C:\datalogger\firmware\io_cfg.h	40;"	d	line:40
+mLED_3_Toggle::mLED_3=!mLED_3;	C:\datalogger\firmware\io_cfg.h	50;"	d	line:50
+mLED_4::LATDbits.LATD3	C:\datalogger\firmware\io_cfg.h	36;"	d	line:36
+mLED_4_Off::mLED_4=0;	C:\datalogger\firmware\io_cfg.h	46;"	d	line:46
+mLED_4_On::mLED_4=1;	C:\datalogger\firmware\io_cfg.h	41;"	d	line:41
+mLED_4_Toggle::mLED_4=!mLED_4;	C:\datalogger\firmware\io_cfg.h	51;"	d	line:51
 mUSBGenGetRxLength::usbgen_rx_len	C:\datalogger\firmware\system\usb\class\generic\usbgen.h	99;"	d	line:99
 mUSBGenRxIsBusy::USBGEN_BD_OUT.Stat.UOWN	C:\datalogger\firmware\system\usb\class\generic\usbgen.h	61;"	d	line:61
 mUSBGenTxIsBusy::USBGEN_BD_IN.Stat.UOWN	C:\datalogger\firmware\system\usb\class\generic\usbgen.h	80;"	d	line:80
@@ -410,22 +469,22 @@ samplerate	C:\datalogger\firmware\logic\logic.c	15;"	v	line:15
 sd000	C:\datalogger\firmware\autofiles\usbdsc.c	199;"	v	line:199
 sd001	C:\datalogger\firmware\autofiles\usbdsc.c	202;"	v	line:202
 sd002	C:\datalogger\firmware\autofiles\usbdsc.c	207;"	v	line:207
-self_power::1	C:\datalogger\firmware\io_cfg.h	28;"	d	line:28
-self_power::PORTAbits.RA2	C:\datalogger\firmware\io_cfg.h	26;"	d	line:26
-setSampleNumber	C:\datalogger\firmware\logic\logic.c	94;"	f	line:94	signature:(uint32_t* count)
-setSampleNumber	C:\datalogger\firmware\logic\logic.h	26;"	p	line:26	signature:(uint32_t* count)
-setSampleRate	C:\datalogger\firmware\logic\logic.c	70;"	f	line:70	signature:(uint32_t* rate)
-setSampleRate	C:\datalogger\firmware\logic\logic.h	24;"	p	line:24	signature:(uint32_t* samplerate)
-startTimer	C:\datalogger\firmware\logic\logic.c	118;"	f	line:118
-startTimer	C:\datalogger\firmware\logic\logic.h	28;"	p	line:28	signature:()
+self_power::1	C:\datalogger\firmware\io_cfg.h	21;"	d	line:21
+self_power::PORTAbits.RA2	C:\datalogger\firmware\io_cfg.h	19;"	d	line:19
+setSampleNumber	C:\datalogger\firmware\logic\logic.c	93;"	f	line:93	signature:(uint32_t* count)
+setSampleNumber	C:\datalogger\firmware\logic\logic.h	27;"	p	line:27	signature:(uint32_t* count)
+setSampleRate	C:\datalogger\firmware\logic\logic.c	69;"	f	line:69	signature:(uint32_t* rate)
+setSampleRate	C:\datalogger\firmware\logic\logic.h	25;"	p	line:25	signature:(uint32_t* samplerate)
+startTimer	C:\datalogger\firmware\logic\logic.c	117;"	f	line:117
+startTimer	C:\datalogger\firmware\logic\logic.h	29;"	p	line:29	signature:()
 string	C:\datalogger\firmware\autofiles\usbdsc.c	199;"	m	line:199	file:
 string	C:\datalogger\firmware\autofiles\usbdsc.c	202;"	m	line:202	file:
 string	C:\datalogger\firmware\autofiles\usbdsc.c	207;"	m	line:207	file:
-sw2::PORTBbits.RB4	C:\datalogger\firmware\io_cfg.h	33;"	d	line:33
+sw2::PORTBbits.RB4	C:\datalogger\firmware\io_cfg.h	25;"	d	line:25
 temp_data	C:\datalogger\firmware\user\user.c	29;"	v	line:29
-temp_sense::PORTDbits.RD7	C:\datalogger\firmware\io_cfg.h	20;"	d	line:20
+temp_sense::PORTDbits.RD7	C:\datalogger\firmware\io_cfg.h	14;"	d	line:14
 trf_state	C:\datalogger\firmware\user\user.c	22;"	v	line:22
-tris_self_power::TRISAbits.TRISA2	C:\datalogger\firmware\io_cfg.h	23;"	d	line:23
+tris_self_power::TRISAbits.TRISA2	C:\datalogger\firmware\io_cfg.h	16;"	d	line:16
 tris_usb_bus_sense::TRISAbits.TRISA1	C:\datalogger\firmware\io_cfg.h	12;"	d	line:12
 true::1	C:\datalogger\firmware\system\typedefs.h	125;"	d	line:125
 uint16_t	C:\datalogger\firmware\system\typedefs.h	11;"	t	line:11
@@ -433,7 +492,7 @@ uint32_t	C:\datalogger\firmware\system\typedefs.h	13;"	t	line:13
 uint8_t	C:\datalogger\firmware\system\typedefs.h	9;"	t	line:9
 usb_active_cfg	C:\datalogger\firmware\system\usb\usbmmap.c	159;"	v	line:159
 usb_alt_intf	C:\datalogger\firmware\system\usb\usbmmap.c	160;"	v	line:160
-usb_bus_sense::1	C:\datalogger\firmware\io_cfg.h	18;"	d	line:18
+usb_bus_sense::1	C:\datalogger\firmware\io_cfg.h	13;"	d	line:13
 usb_device_state	C:\datalogger\firmware\system\usb\usbmmap.c	157;"	v	line:157
 usb_stat	C:\datalogger\firmware\system\usb\usbmmap.c	158;"	v	line:158
 usbcmd	C:\datalogger\firmware\user\user.c	73;"	l	line:73
@@ -445,8 +504,8 @@ usbptr	C:\datalogger\firmware\user\user.c	72;"	l	line:72
 v	C:\datalogger\firmware\system\typedefs.h	52;"	m	line:52	struct:_WORD::<anonymous>
 v	C:\datalogger\firmware\system\typedefs.h	87;"	m	line:87	struct:_DWORD::<anonymous>
 valid_temp	C:\datalogger\firmware\user\user.c	28;"	v	line:28
-verifyOptions	C:\datalogger\firmware\logic\logic.c	44;"	f	line:44	signature:(uint8_t options)
-verifyOptions	C:\datalogger\firmware\logic\logic.h	22;"	p	line:22	signature:(uint8_t options)
+verifyOptions	C:\datalogger\firmware\logic\logic.c	38;"	f	line:38	signature:(uint8_t options)
+verifyOptions	C:\datalogger\firmware\logic\logic.h	23;"	p	line:23	signature:(uint8_t options)
 wCount	C:\datalogger\firmware\system\usb\usbctrltrf\usbctrltrf.c	49;"	v	line:49
 wRam	C:\datalogger\firmware\system\typedefs.h	111;"	m	line:111	union:_POINTER
 wRom	C:\datalogger\firmware\system\typedefs.h	115;"	m	line:115	union:_POINTER

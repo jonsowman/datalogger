@@ -248,8 +248,48 @@ void UserInit(void)
 	TRISBbits.TRISB0 = 1;
 	// RD0 and RD1 are outputs
 	TRISDbits.TRISD0 = 0;
-	TRISDbits.TRISD1 = 0; 
-}
+	TRISDbits.TRISD1 = 0;
 
+	// Set up LEDs as outputs
+	TRISLEDA = 0;
+	TRISLEDB = 0;
+
+	// SRAM Control lines as outputs
+	TRISCE = 0;
+	TRISOE = 0;
+	TRISWE = 0;
+	TRISCE = 0;
+	
+	// Shift reg control lines as outputs
+	TRISSR_CLK = 0;
+	TRISSR_CLK_EN = 0;
+	TRISSR_PLOAD = 0;
+	TRISSR_SEROUT = 0;
+	
+	// Tri-state buffer control line
+	TRISBUFFER_EN = 0;
+	
+	// Channel 0 (D0) as input
+	TRISDATA0 = 1;
+
+	// Set up ADDR lines as outputs
+	TRISADDR0 = 0;
+	TRISADDR1 = 0;
+	TRISADDR2 = 0;
+	TRISADDR3 = 0;
+	TRISADDR4 = 0;
+	TRISADDR5 = 0;
+	TRISADDR6 = 0;
+	TRISADDR7 = 0;
+	TRISADDR8 = 0;
+	TRISADDR9 = 0;
+	TRISADDR10 = 0;
+	TRISADDR11 = 0;
+	TRISADDR12 = 0;
+	TRISADDR13 = 0;
+	TRISADDR14 = 0;
+	TRISADDR15 = 0;
+	TRISADDR16 = 0;
+}
 
 /** EOF user.c ***************************************************************/
