@@ -110,7 +110,7 @@
 #define LATSR_CLK_EN	LATEbits.LATE1
 #define LATSR_PLOAD		LATEbits.LATE2
 
-#define PORTSR_SEROUT	PORTAbits.PORTA2
+#define PORTSR_SEROUT	PORTAbits.RA2
 
 #define TRISSR_CLK		TRISEbits.TRISE0
 #define TRISSR_CLK_EN	TRISEbits.TRISE1
@@ -120,7 +120,7 @@
 /**** Other *****/
 #define LATBUFFER_EN	LATCbits.LATC7
 
-#define PORTDATA0		PORTBbits.PORTB0
+#define PORTDATA0		PORTBbits.RB0
 
 #define TRISBUFFER_EN	TRISCbits.TRISC7
 #define TRISDATA0		TRISBbits.TRISB0

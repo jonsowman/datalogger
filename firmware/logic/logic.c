@@ -10,6 +10,7 @@
 #include "system\usb\usb.h"
 #include "io_cfg.h"
 #include "logic\logic.h"
+#include "user\user.h"
 
 uint32_t samplenumber;
 uint32_t samplerate;
@@ -146,6 +147,8 @@ void startTimer()
 
 	// Finally enable the timer
 	T0CONbits.TMR0ON = 1;
+	
+	return;
 }
 
 /**
@@ -168,6 +171,8 @@ void setRAMAddress(uint32_t address)
 
 	// Finally, ADDR16 is on PORTB[2]
 	LATADDR16 = (address >> 16);
+	
+	return;
 }
 
 /**
@@ -175,17 +180,20 @@ void setRAMAddress(uint32_t address)
  */
 void clockRAMDataIn(void)
 {
+	return;
 }
 
 // Buffer control stuff
 void disableBuffer(void)
 {
 	LATBUFFER_EN = 1;
+	return;
 }
 
 void enableBuffer(void)
 {
 	LATBUFFER_EN = 0;
+	return;
 }
 
 /**
@@ -197,20 +205,22 @@ uint8_t SRGetByte(void)
 	LATSR_PLOAD = 0;
 	CallDelay(1);
 	LATSR_PLOAD = 1;
-	
-	// Enable the clock
 	LATSR_CLK_EN = 0;
 	
-	// Clock the byte in serially, MSB first
-	uint8_t data;
-	for(uint8_t i = 7; i >= 0; i--)
+	// Clock the byte in, MSB first
+	uint8_t d = 0;
+	uint8_t i;
+	/*
+	for(i = 7; i >= 0; i--)
 	{
 		data |= PORTSR_SEROUT << i;
 		LATSR_CLK = 1;
 		CallDelay(1);
 		LATSR_CLK = 0;
 	}
-	
+	*/
+	// Disable the clock
+	LATSR_CLK_EN = 1;
 	return data;
 }
 
