@@ -43,25 +43,22 @@ void interrupt_at_low_vector(void)
 
 void pintest()
 {
-	// Plan is - Flash *all* pins in sync *except* the one we're testing.
-	// Makes it easy to check a) Each wire goes to the right place
-	// b) no shorts between wires
-
-
-
-
+	while(1)
+	{
+		uint32_t addr;
+		for(addr = 0; addr <= 0x1FFFF; addr++)
+		{
+			setRAMAddress(addr);
+		}
+	}
 }
-
-
 
 // Main program loop
 void main(void)
 {
     InitializeSystem();
-
-
-	pintest(); // dwt's wiring testing function. never returns.
-
+    
+	pintest();
 
 	startTimer();
 

@@ -207,7 +207,7 @@ TRISADDR6::TRISBbits.TRISB6	C:\datalogger\firmware\io_cfg.h	88;"	d	line:88
 TRISADDR7::TRISBbits.TRISB7	C:\datalogger\firmware\io_cfg.h	87;"	d	line:87
 TRISADDR8::TRISDbits.TRISD0	C:\datalogger\firmware\io_cfg.h	85;"	d	line:85
 TRISADDR9::TRISDbits.TRISD1	C:\datalogger\firmware\io_cfg.h	84;"	d	line:84
-TRISBUFFER_EN::TRISCbits.TRIS7	C:\datalogger\firmware\io_cfg.h	125;"	d	line:125
+TRISBUFFER_EN::TRISCbits.TRISC7	C:\datalogger\firmware\io_cfg.h	125;"	d	line:125
 TRISCE2::TRISCbits.TRISC6	C:\datalogger\firmware\io_cfg.h	106;"	d	line:106
 TRISCE::TRISCbits.TRISC1	C:\datalogger\firmware\io_cfg.h	103;"	d	line:103
 TRISDATA0::TRISBbits.TRISB0	C:\datalogger\firmware\io_cfg.h	126;"	d	line:126
@@ -415,8 +415,8 @@ getSampleNumber	C:\datalogger\firmware\logic\logic.h	28;"	p	line:28	signature:(v
 getSampleRate	C:\datalogger\firmware\logic\logic.c	84;"	f	line:84	signature:(void)
 getSampleRate	C:\datalogger\firmware\logic\logic.h	26;"	p	line:26	signature:(void)
 high	C:\datalogger\firmware\user\user.c	195;"	l	line:195
-high_isr	C:\datalogger\firmware\logic\logic.c	153;"	f	line:153	signature:(void)
-high_isr	C:\datalogger\firmware\logic\logic.h	33;"	p	line:33	signature:(void)
+high_isr	C:\datalogger\firmware\logic\logic.c	172;"	f	line:172	signature:(void)
+high_isr	C:\datalogger\firmware\logic\logic.h	34;"	p	line:34	signature:(void)
 i	C:\datalogger\firmware\system\usb\class\generic\usbgen.c	96;"	l	line:96
 i	C:\datalogger\firmware\system\usb\usbctrltrf\usbctrltrf.c	135;"	l	line:135
 i	C:\datalogger\firmware\user\user.c	211;"	l	line:211
@@ -431,8 +431,8 @@ logicConfig	C:\datalogger\firmware\logic\logic.h	22;"	p	line:22	signature:(uint8
 logicStart	C:\datalogger\firmware\logic\logic.c	55;"	f	line:55	signature:(void)
 logicStart	C:\datalogger\firmware\logic\logic.h	24;"	p	line:24	signature:(void)
 low	C:\datalogger\firmware\user\user.c	195;"	l	line:195
-low_isr	C:\datalogger\firmware\logic\logic.c	165;"	f	line:165	signature:(void)
-low_isr	C:\datalogger\firmware\logic\logic.h	32;"	p	line:32	signature:(void)
+low_isr	C:\datalogger\firmware\logic\logic.c	184;"	f	line:184	signature:(void)
+low_isr	C:\datalogger\firmware\logic\logic.h	33;"	p	line:33	signature:(void)
 mInitAllLEDs::LATD&=0xF0;TRISD&=0xF0;	C:\datalogger\firmware\io_cfg.h	31;"	d	line:31
 mInitPOT::TRISAbits.TRISA0=1;ADCON0=0x01	C:\datalogger\firmware\io_cfg.h	28;"	d	line:28
 mInitializeUSBDriver::{UCFG=UCFG_VAL;\	C:\datalogger\firmware\system\usb\usbdrv\usbdrv.h	135;"	d	line:135
@@ -471,6 +471,8 @@ sd001	C:\datalogger\firmware\autofiles\usbdsc.c	202;"	v	line:202
 sd002	C:\datalogger\firmware\autofiles\usbdsc.c	207;"	v	line:207
 self_power::1	C:\datalogger\firmware\io_cfg.h	21;"	d	line:21
 self_power::PORTAbits.RA2	C:\datalogger\firmware\io_cfg.h	19;"	d	line:19
+setRAMAddress	C:\datalogger\firmware\logic\logic.c	154;"	f	line:154	signature:(uint32_t address)
+setRAMAddress	C:\datalogger\firmware\logic\logic.h	30;"	p	line:30	signature:(uint32_t address)
 setSampleNumber	C:\datalogger\firmware\logic\logic.c	93;"	f	line:93	signature:(uint32_t* count)
 setSampleNumber	C:\datalogger\firmware\logic\logic.h	27;"	p	line:27	signature:(uint32_t* count)
 setSampleRate	C:\datalogger\firmware\logic\logic.c	69;"	f	line:69	signature:(uint32_t* rate)
