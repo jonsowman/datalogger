@@ -1,6 +1,4 @@
 * Figure out multiple panels in labview
-* SW Flow Diagram
-* Gantt chart
 
 * Connect D0 and LED0 & LED1 on main board
 * Finish resistive divider for comps on sub-board
