@@ -17,16 +17,28 @@
 #define  PANEL2                          1
 #define  PANEL2_quit_button              2       /* callback function: quit_button_hit */
 #define  PANEL2_DISPLAYTAB               3
-#define  PANEL2_RADIOBUTTON              4
-#define  PANEL2_RADIOBUTTON_2            5
-#define  PANEL2_NUMERIC                  6
-#define  PANEL2_RADIOBUTTON_3            7
-#define  PANEL2_RADIOBUTTON_4            8
-#define  PANEL2_RADIOBUTTON_5            9
-#define  PANEL2_TEXTMSG                  10
-#define  PANEL2_DECORATION               11
-#define  PANEL2_DECORATION_2             12
-#define  PANEL2_TEXTMSG_2                13
+#define  PANEL2_TEXTMSG_3                4
+#define  PANEL2_TEXTMSG_2                5
+#define  PANEL2_TEXTMSG                  6
+#define  PANEL2_TAB                      7
+#define  PANEL2_COMMANDBUTTON            8
+#define  PANEL2_LISTBOX                  9
+
+     /* tab page panel controls */
+#define  LISTPANEL_TEXTBOX               2
+
+     /* tab page panel controls */
+#define  TABPANEL_NUMERIC                2
+#define  TABPANEL_RADIOBUTTON_3          3
+#define  TABPANEL_RADIOBUTTON_4          4
+
+     /* tab page panel controls */
+#define  TABPANEL_2_TEXTMSG_2            2
+#define  TABPANEL_2_RADIOBUTTON          3
+#define  TABPANEL_2_RADIOBUTTON_2        4
+
+     /* tab page panel controls */
+#define  TIMPANEL_DIGGRAPH               2
 
 
      /* Menu Bars, Menus, and Menu Items: */
