@@ -170,6 +170,50 @@ void setRAMAddress(uint32_t address)
 	LATADDR16 = (address >> 16);
 }
 
+/**
+ * Clock the data on the address bus into RAM
+ */
+void clockRAMDataIn(void)
+{
+}
+
+// Buffer control stuff
+void disableBuffer(void)
+{
+	LATBUFFER_EN = 1;
+}
+
+void enableBuffer(void)
+{
+	LATBUFFER_EN = 0;
+}
+
+/**
+ * Load a byte from the parallel data bus and clock it in.
+ */
+uint8_t SRGetByte(void)
+{
+	// Dump parallel data into the SR
+	LATSR_PLOAD = 0;
+	CallDelay(1);
+	LATSR_PLOAD = 1;
+	
+	// Enable the clock
+	LATSR_CLK_EN = 0;
+	
+	// Clock the byte in serially, MSB first
+	uint8_t data;
+	for(uint8_t i = 7; i >= 0; i--)
+	{
+		data |= PORTSR_SEROUT << i;
+		LATSR_CLK = 1;
+		CallDelay(1);
+		LATSR_CLK = 0;
+	}
+	
+	return data;
+}
+
 // Interrupt stuff here
 #pragma interrupt high_isr
 void high_isr(void)

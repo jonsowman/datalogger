@@ -256,15 +256,15 @@ void UserInit(void)
 
 	// SRAM Control lines as outputs
 	TRISCE = 0;
+	TRISCE2 = 0;
 	TRISOE = 0;
 	TRISWE = 0;
-	TRISCE = 0;
 	
 	// Shift reg control lines as outputs
 	TRISSR_CLK = 0;
 	TRISSR_CLK_EN = 0;
 	TRISSR_PLOAD = 0;
-	TRISSR_SEROUT = 0;
+	TRISSR_SEROUT = 1;
 	
 	// Tri-state buffer control line
 	TRISBUFFER_EN = 0;
@@ -290,6 +290,15 @@ void UserInit(void)
 	TRISADDR14 = 0;
 	TRISADDR15 = 0;
 	TRISADDR16 = 0;
+	
+	// Put the SRAM into standby
+	LATCE = 1;
+	LATCE2 = 0;
+	
+	// Put the shift register into standby
+	LATSR_PLOAD = 1;
+	LATSR_CLK_EN = 1;
+	LATSR_CLK = 0;
 }
 
 /** EOF user.c ***************************************************************/

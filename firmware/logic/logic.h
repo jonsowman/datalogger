@@ -27,7 +27,16 @@ uint32_t getSampleRate(void);
 bool setSampleNumber(uint32_t* count);
 uint32_t getSampleNumber(void);
 void startTimer();
+
+// SRAM Control Methods
 void setRAMAddress(uint32_t address);
+
+// Buffer control
+void disableBuffer(void);
+void enableBuffer(void);
+
+// Shift register routines
+uint8_t SRGetByte(void);
 
 // ISR prototypes
 void low_isr(void);
