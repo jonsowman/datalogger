@@ -154,18 +154,19 @@ void startTimer()
 void setRAMAddress(uint32_t address)
 {
 	// Write the address to the line
-	LATADDR0 = address >> 0;
-	LATADDR1 = address >> 1;
-	LATADDR2 = address >> 2;
+	// This is horrifically hacky due to the C18 compiler being a 
+	// steaming pile of poo, and PICs being rubbish. 
 
-	LATADDR3 = address >> 3;
-	LATADDR4 = address >> 4;
-	LATADDR5 = address >> 5;
-	LATADDR6 = address >> 6;
-	LATADDR7 = address >> 7;
+	// ADDR[0-2] lie in bits [3-5] of PORTA
+	LATA = ((address & 0x07) << 3) | (LATA & 0xC7);
 
+	// ADDR[3-7] lie in bits [3-7] of PORTB
+	LATB = (address & 0xF8) | (LATB & 0x07);
+
+	// ADDR[8-15] lie bytewise on PORTD
 	LATD = address >> 8;
 
+	// Finally, ADDR16 is on PORTB[2]
 	LATADDR16 = (address >> 16);
 }
 
