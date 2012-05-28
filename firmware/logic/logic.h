@@ -27,6 +27,7 @@ uint32_t getSampleRate(void);
 bool setSampleNumber(uint32_t* count);
 uint32_t getSampleNumber(void);
 void startTimer();
+void setRAMAddress(uint32_t address);
 
 // ISR prototypes
 void low_isr(void);
