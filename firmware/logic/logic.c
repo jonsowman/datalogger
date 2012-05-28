@@ -197,29 +197,31 @@ void enableBuffer(void)
 }
 
 /**
- * Load a byte from the parallel data bus and clock it in.
+ * Get a byte from the parallel data bus (MSB first).
  */
 uint8_t getSRByte(void)
 {
 	uint8_t data = 0;
 	uint8_t i;
 	
-	LATSR_PLOAD = 0;
+	// Dump parallel data into the SR
+	LATEbits.LATE0 = 0;
 	CallDelay(1);
 	LATSR_PLOAD = 1;
-	
 	LATSR_CLK_EN = 0;
-
-	for(i=0; i<8; i++)
+	
+	// Clock the byte in, MSB first
+	for(i = 7; i >= 0; i--)
 	{
-		// actually read the port here
+		data |= PORTSR_SEROUT << i;
 		LATSR_CLK = 1;
 		CallDelay(1);
 		LATSR_CLK = 0;
 	}
 	
+	// Disable the clock
 	LATSR_CLK_EN = 1;
-	return 0;
+	return data;
 }
 
 // Interrupt stuff here
