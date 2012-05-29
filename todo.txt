@@ -1,3 +1,3 @@
 * Connect D0 and LED0 & LED1 on main board
-* Finish resistive divider for comps on sub-board
+* Connect LEDs on sub-board
 * Finish input filters on sub-board
