@@ -92,7 +92,7 @@ void ServiceRequests(void)
             	rate |= *(usbptr + 2);
             	rate <<= 8;
             	rate |= *(usbptr + 3);
-            	setSampleRate(rate);
+            	setSampleRate(&rate);
             	// Return CMD along with 1 for success [CMD, 0x03, 0x01]
             	*usbptr = 0x01;
             	*usblen = 3;
@@ -118,7 +118,7 @@ void ServiceRequests(void)
 					break;
 				}
 				// Now the sample rate
-				if(!setSampleRate(usbptr))
+				if(!setSampleRate((uint32_t*)usbptr))
 				{
 					*usbcmd = LOGIC_ERROR;
 					*usbptr = ERROR_INVALID_SAMPLE_RATE;
@@ -127,7 +127,7 @@ void ServiceRequests(void)
 				}
 				// And finally the number of samples
 				usbptr += 4;
-				if(!setSampleNumber(usbptr))
+				if(!setSampleNumber((uint32_t*)usbptr))
 				{
 					*usbcmd = LOGIC_ERROR;
 					*usbptr = ERROR_INVALID_SAMPLE_NUMBER;

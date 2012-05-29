@@ -55,7 +55,7 @@ void pintest()
 
 // Main program loop
 void main(void)
-{
+{        
     InitializeSystem();
     
 	pintest();
