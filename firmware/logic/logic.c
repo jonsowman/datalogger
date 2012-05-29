@@ -158,7 +158,7 @@ void startTimer()
 void setRAMAddress(uint32_t address)
 {
 	// Write the address to the line
-	// This is horrifically hacky due to the C18 compiler being a 
+	// This is horrifically hacky due to C18 being a 
 	// steaming pile of poo, and PICs being rubbish. 
 
 	// ADDR[0-2] lie in bits [3-5] of PORTA
@@ -178,25 +178,24 @@ void setRAMAddress(uint32_t address)
 
 /**
  * Clock the data on the address bus into RAM using the
- * WE# controlled write cycle (see datasheet).
+ * CE#/CE2 controlled write cycle (see datasheet).
  */
 void writeRAM(uint32_t address)
 {
 	setRAMAddress(address);
 	
-	// Remove SRAM from standby
-	LATCE = 0;
-	LATCE2 = 1;
-	
-	// Drop write-enable and wait around 50ns (lol)
-	LATWE = 0;
+	// WE must drop with or before CE#/CE2 for outputs
+	// to remain Hi-Z after write
+
+	// Start RAM write by dropping CE# and WE# and
+	// raising CE2.
+	LATC = 0x40 | (LATC & 0xB9);
+
 	Delay1TCY(); // One clock cycle ~80ns
 	
-	LATWE = 1;
+	// End write by dropping CE2 and raising CE# and WE#
+	LATC = 0x06 | (LATC & 0xB9);
 	
-	// Place SRAM back in standby
-	LATCE = 1;
-	LATCE2 = 0;
 	return;
 }
 

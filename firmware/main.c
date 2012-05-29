@@ -58,6 +58,8 @@ void main(void)
 {
     InitializeSystem();
     
+    writeRAM(0);
+    
 	pintest();
 
 	startTimer();
