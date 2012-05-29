@@ -6,6 +6,7 @@
 #include <p18cxxx.h>
 #include <usart.h>
 #include <timers.h>
+#include <delays.h>
 #include "system\typedefs.h"
 #include "system\usb\usb.h"
 #include "io_cfg.h"
@@ -176,10 +177,26 @@ void setRAMAddress(uint32_t address)
 }
 
 /**
- * Clock the data on the address bus into RAM
+ * Clock the data on the address bus into RAM using the
+ * WE# controlled write cycle (see datasheet).
  */
-void clockRAMDataIn(void)
+void writeRAM(uint32_t address)
 {
+	setRAMAddress(address);
+	
+	// Remove SRAM from standby
+	LATCE = 0;
+	LATCE2 = 1;
+	
+	// Drop write-enable and wait around 50ns (lol)
+	LATWE = 0;
+	Delay1TCY(); // One clock cycle ~80ns
+	
+	LATWE = 1;
+	
+	// Place SRAM back in standby
+	LATCE = 1;
+	LATCE2 = 0;
 	return;
 }
 
@@ -206,7 +223,9 @@ uint8_t getSRByte(void)
 	
 	// Dump parallel data into the SR
 	LATSR_PLOAD = 0;
-	CallDelay(1);
+	
+	// Wait 5us
+	Delay10TCYx(6); // (1/12) * 10 * 6 (us)
 	LATSR_PLOAD = 1;
 	LATSR_CLK_EN = 0;
 	
@@ -215,7 +234,7 @@ uint8_t getSRByte(void)
 	{
 		data |= PORTSR_SEROUT << i;
 		LATSR_CLK = 1;
-		CallDelay(1);
+		Delay10TCYx(6);
 		LATSR_CLK = 0;
 	}
 	

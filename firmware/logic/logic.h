@@ -30,6 +30,7 @@ void startTimer();
 
 // SRAM Control Methods
 void setRAMAddress(uint32_t address);
+void writeRAM(uint32_t address);
 
 // Buffer control
 void disableBuffer(void);
