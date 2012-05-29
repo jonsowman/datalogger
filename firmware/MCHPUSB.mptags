@@ -35,7 +35,7 @@ Byte3	C:\datalogger\firmware\system\typedefs.h	78;"	m	line:78	struct:_DWORD::<an
 CFG01::romstruct\	C:\datalogger\firmware\autofiles\usbdsc.h	17;"	d	line:17
 CMD	C:\datalogger\firmware\user\user.h	42;"	m	line:42	struct:DATA_PACKET::<anonymous>
 CONFIGURED_STATE::6	C:\datalogger\firmware\system\usb\usbmmap.h	27;"	d	line:27
-CallDelay	C:\datalogger\firmware\user\user.c	222;"	f	line:222	signature:(int delay)
+CallDelay	C:\datalogger\firmware\user\user.c	206;"	f	line:206	signature:(int delay)
 CallDelay	C:\datalogger\firmware\user\user.h	60;"	p	line:60	signature:(int delay)
 ClearArray	C:\datalogger\firmware\system\usb\usbdrv\usbdrv.c	546;"	f	line:546	signature:(byte* startAdr,byte count)
 Cnt	C:\datalogger\firmware\system\usb\usbmmap.h	79;"	m	line:79	struct:_BDT::<anonymous>
@@ -144,7 +144,7 @@ LowB	C:\datalogger\firmware\system\typedefs.h	47;"	m	line:47	struct:_WORD::<anon
 MAJOR_VERSION::0x01	C:\datalogger\firmware\user\user.h	9;"	d	line:9
 MAX_EP_NUMBER::2	C:\datalogger\firmware\autofiles\usbcfg.h	41;"	d	line:41
 MAX_NUM_INT::1	C:\datalogger\firmware\autofiles\usbcfg.h	6;"	d	line:6
-MAX_SAMPLE_NUM::131072UL	C:\datalogger\firmware\logic\logic.h	13;"	d	line:13
+MAX_SAMPLE_NUM::0x1FFFF	C:\datalogger\firmware\logic\logic.h	13;"	d	line:13
 MAX_SAMPLE_RATE::250000UL	C:\datalogger\firmware\logic\logic.h	12;"	d	line:12
 MINOR_VERSION::0x00	C:\datalogger\firmware\user\user.h	8;"	d	line:8
 MODE_ASYNC::0x01	C:\datalogger\firmware\logic\logic.h	15;"	d	line:15
@@ -291,9 +291,9 @@ USB_SD_Ptr	C:\datalogger\firmware\autofiles\usbdsc.c	214;"	v	line:214
 USB_SOF_Handler	C:\datalogger\firmware\system\usb\usbdrv\usbdrv.c	18;"	p	line:18	file:	signature:(void)
 USB_SOF_Handler	C:\datalogger\firmware\system\usb\usbdrv\usbdrv.c	410;"	f	line:410	signature:(void)
 USB_USE_GEN	C:\datalogger\firmware\autofiles\usbcfg.h	19;"	d	line:19
-UserInit	C:\datalogger\firmware\user\user.c	236;"	f	line:236	signature:(void)
+UserInit	C:\datalogger\firmware\user\user.c	220;"	f	line:220	signature:(void)
 UserInit	C:\datalogger\firmware\user\user.h	54;"	p	line:54	signature:(void)
-UserTasks	C:\datalogger\firmware\user\user.c	231;"	f	line:231	signature:(void)
+UserTasks	C:\datalogger\firmware\user\user.c	215;"	f	line:215	signature:(void)
 UserTasks	C:\datalogger\firmware\user\user.h	61;"	p	line:61	signature:(void)
 WORD	C:\datalogger\firmware\system\typedefs.h	54;"	t	line:54
 Word0	C:\datalogger\firmware\system\typedefs.h	82;"	m	line:82	struct:_DWORD::<anonymous>
@@ -427,8 +427,7 @@ high_isr	C:\datalogger\firmware\logic\logic.h	44;"	p	line:44	signature:(void)
 i	C:\datalogger\firmware\logic\logic.c	221;"	l	line:221
 i	C:\datalogger\firmware\system\usb\class\generic\usbgen.c	96;"	l	line:96
 i	C:\datalogger\firmware\system\usb\usbctrltrf\usbctrltrf.c	135;"	l	line:135
-i	C:\datalogger\firmware\user\user.c	211;"	l	line:211
-i	C:\datalogger\firmware\user\user.c	224;"	l	line:224
+i	C:\datalogger\firmware\user\user.c	208;"	l	line:208
 i00a00	C:\datalogger\firmware\autofiles\usbdsc.h	19;"	v	line:19
 int16_t	C:\datalogger\firmware\system\typedefs.h	12;"	t	line:12
 int32_t	C:\datalogger\firmware\system\typedefs.h	14;"	t	line:14
@@ -463,7 +462,6 @@ mLED_4_Toggle::mLED_4=!mLED_4;	C:\datalogger\firmware\io_cfg.h	51;"	d	line:51
 mUSBGenGetRxLength::usbgen_rx_len	C:\datalogger\firmware\system\usb\class\generic\usbgen.h	99;"	d	line:99
 mUSBGenRxIsBusy::USBGEN_BD_OUT.Stat.UOWN	C:\datalogger\firmware\system\usb\class\generic\usbgen.h	61;"	d	line:61
 mUSBGenTxIsBusy::USBGEN_BD_IN.Stat.UOWN	C:\datalogger\firmware\system\usb\class\generic\usbgen.h	80;"	d	line:80
-nullSampler	C:\datalogger\firmware\user\user.c	209;"	f	line:209	signature:(void)
 nullSampler	C:\datalogger\firmware\user\user.c	47;"	p	line:47	file:	signature:(void)
 nullSampler	C:\datalogger\firmware\user\user.h	59;"	p	line:59	signature:(void)
 pDst	C:\datalogger\firmware\system\usb\usbctrltrf\usbctrltrf.c	48;"	v	line:48

@@ -65,7 +65,7 @@ void ProcessIO(void)
  */
 void ServiceRequests(void)
 {
-	uint16_t rate;
+	uint32_t rate;
     if(USBGenRead((byte*)&dataPacket,sizeof(dataPacket)))
     {   
 	    // Pointer to the data packet
@@ -84,10 +84,14 @@ void ServiceRequests(void)
                 break;
                 
             case LOGIC_SET_SRATE:
-            	// Rate is 16 bit, MSB first
-            	rate = (uint16_t)(*usbptr);
+            	// Rate is 32 bit, MSB first
+            	rate = (uint32_t)(*usbptr);
             	rate <<= 8;
             	rate |= *(usbptr + 1);
+            	rate <<= 8;
+            	rate |= *(usbptr + 2);
+            	rate <<= 8;
+            	rate |= *(usbptr + 3);
             	setSampleRate(rate);
             	// Return CMD along with 1 for success [CMD, 0x03, 0x01]
             	*usbptr = 0x01;
@@ -96,10 +100,12 @@ void ServiceRequests(void)
             	
             case LOGIC_GET_SRATE:
             	rate = getSampleRate();
-            	*usbptr = (rate >> 8) & 0xFF;
-            	*usbptr = rate & 0xFF;
-            	// Returned is like [CMD, 0x04, MSB, LSB]
-            	*usblen = 4;
+            	*usbptr++ = (rate >> 24) & 0xFF;
+            	*usbptr++ = (rate >> 16) & 0xFF;
+            	*usbptr++ = (rate >> 8) & 0xFF;
+            	*usbptr++ = rate & 0xFF;
+            	// Returned is like [CMD, 0x04, MSB, {}, {}, LSB]
+            	*usblen = 6;
             	break;
             
             case LOGIC_CONFIG:
@@ -202,22 +208,6 @@ byte ReadPOT(void)
     return (low | high);
 }
 
-/**
- * Run lots of ADC samples and toggle an IO
- * to test sampling rate.
- */
-void nullSampler(void)
-{
-	uint16_t i;
-	for( i = 0; i < 65535; i++)
-	{
-		ADCON0bits.GO = 1;
-    	while(ADCON0bits.NOT_DONE);
-		LATD = ~(LATDbits.LATD0) & 0x01;
-	}
-	return;
-}
-
 //Delay of 1 gives 6-8us (this is a totally useless number)
 void CallDelay(int delay)
 {
@@ -235,11 +225,6 @@ void UserTasks(void)
 
 void UserInit(void)
 {
-    //mInitAllLEDs();
-	//TRISAbits.TRISA0=1;
-	//ADCON0=0x01;
-	//ADCON2=0x3C;
-    //ADCON2bits.ADFM = 1;   // ADC result right justified
 	// Set RD0 and RD1 as output
 	ADCON1bits.PCFG0 = 1;
 	ADCON1bits.PCFG1 = 1;

@@ -46,7 +46,7 @@ void pintest()
 	while(1)
 	{
 		uint32_t addr;
-		for(addr = 0; addr <= 0x1FFFF; addr++)
+		for(addr = 0; addr <= MAX_SAMPLE_NUM; addr++)
 		{
 			setRAMAddress(addr);
 		}
@@ -57,8 +57,6 @@ void pintest()
 void main(void)
 {
     InitializeSystem();
-    
-    writeRAM(0);
     
 	pintest();
 
