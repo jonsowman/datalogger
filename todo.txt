@@ -1,3 +1,2 @@
-* Connect D0 and LED0 & LED1 on main board
+* Connect LED0 & LED1 on main board
 * Connect LEDs on sub-board
-* Finish input filters on sub-board
