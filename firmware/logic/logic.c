@@ -205,7 +205,7 @@ uint8_t getSRByte(void)
 	uint8_t i;
 	
 	// Dump parallel data into the SR
-	LATEbits.LATE0 = 0;
+	LATSR_PLOAD = 0;
 	CallDelay(1);
 	LATSR_PLOAD = 1;
 	LATSR_CLK_EN = 0;
