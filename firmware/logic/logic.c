@@ -191,7 +191,8 @@ void writeRAM(uint32_t address)
 	// raising CE2.
 	LATC = 0x40 | (LATC & 0xB9);
 
-	Delay1TCY(); // One clock cycle ~80ns
+	Delay1TCY(); // These two are about 50ns (want 45)
+	Delay1TCY();
 	
 	// End write by dropping CE2 and raising CE# and WE#
 	LATC = 0x06 | (LATC & 0xB9);
