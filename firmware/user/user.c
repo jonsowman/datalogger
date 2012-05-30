@@ -156,7 +156,7 @@ void ServiceRequests(void)
                 break;
 
            	case GET_ADC_COMMAND: // [0xED. 8-bit data]
-                *usbptr = ReadPOT();
+                *usbptr = readRAM(0);
                 *usblen = 2; // returns[0xED, command]
                 break;
  

@@ -191,12 +191,51 @@ void writeRAM(uint32_t address)
 	// raising CE2.
 	LATC = 0x40 | (LATC & 0xB9);
 
-	Delay1TCY(); // One clock cycle ~80ns
+	Delay1TCY(); // These two are about 50ns (want 45)
+	Delay1TCY();
 	
 	// End write by dropping CE2 and raising CE# and WE#
 	LATC = 0x06 | (LATC & 0xB9);
 	
 	return;
+}
+
+/**
+ * Read a byte from the RAM at the given address.
+ */
+uint8_t readRAM(uint32_t address)
+{
+	uint8_t data;
+	
+	setRAMAddress(address);
+	
+	// WE# must remain high during a read cycle
+	LATWE = 1;
+	LATCE = 0;
+	LATCE2 = 1;
+	LATOE = 0;
+	
+	// Wait 30ns for the DOUT to become valid
+	Delay1TCY();
+	
+	// Disable the buffer so the RAM can take control of
+	// the data bus.
+	disableBuffer();
+	
+	data = getSRByte();
+	
+	LATOE = 1;
+	LATCE2 = 0;
+	LATCE = 1;
+	
+	// Wait 20ns for the outputs to go Hi-Z
+	Delay1TCY();
+	
+	// Reenable the buffer to give control back to the
+	// input channels
+	enableBuffer();
+	
+	return data;
 }
 
 // Buffer control stuff
@@ -218,7 +257,7 @@ void enableBuffer(void)
 uint8_t getSRByte(void)
 {
 	uint8_t data = 0;
-	uint8_t i;
+	int8_t i;
 	
 	// Dump parallel data into the SR
 	LATSR_PLOAD = 0;

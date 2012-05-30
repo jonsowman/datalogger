@@ -48,7 +48,7 @@ void pintest()
 		uint32_t addr;
 		for(addr = 0; addr <= MAX_SAMPLE_NUM; addr++)
 		{
-			setRAMAddress(addr);
+			readRAM(addr);
 		}
 	}
 }
@@ -58,11 +58,9 @@ void main(void)
 {        
     InitializeSystem();
     
-	pintest();
-
-	startTimer();
-
-	LATDbits.LATD0 = 0; // Check LED off
+	//pintest();
+	
+	writeRAM(0); // write data to byte 0 on boot
 
     while(1)
     {
