@@ -105,7 +105,7 @@
 #define	TRISWE			TRISCbits.TRISC2
 #define	TRISCE2			TRISCbits.TRISC6
 
-/****Shift Regiser Control Lines *****/
+/**** Shift Register Control Lines *****/
 #define LATSR_CLK		LATEbits.LATE0
 #define LATSR_CLK_EN	LATEbits.LATE1
 #define LATSR_PLOAD		LATEbits.LATE2

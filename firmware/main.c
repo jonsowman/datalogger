@@ -58,7 +58,7 @@ void main(void)
 {        
     InitializeSystem();
     
-	pintest();
+	while(1) { getSRByte(); Delay10TCYx(60); }
 
 	//startTimer();
 

@@ -219,7 +219,7 @@ void enableBuffer(void)
 uint8_t getSRByte(void)
 {
 	uint8_t data = 0;
-	uint8_t i;
+	int8_t i;
 	
 	// Dump parallel data into the SR
 	LATSR_PLOAD = 0;
