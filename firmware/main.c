@@ -48,7 +48,7 @@ void pintest()
 		uint32_t addr;
 		for(addr = 0; addr <= MAX_SAMPLE_NUM; addr++)
 		{
-			writeRAM(addr);
+			readRAM(addr);
 		}
 	}
 }
@@ -58,7 +58,7 @@ void main(void)
 {        
     InitializeSystem();
     
-	while(1) { getSRByte(); Delay10TCYx(60); }
+	pintest();
 
 	//startTimer();
 

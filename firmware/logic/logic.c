@@ -200,6 +200,44 @@ void writeRAM(uint32_t address)
 	return;
 }
 
+/**
+ * Read a byte from the RAM at the given address.
+ */
+uint8_t readRAM(uint32_t address)
+{
+	uint8_t data;
+	
+	setRAMAddress(address);
+	
+	// WE# must remain high during a read cycle
+	LATWE = 1;
+	LATCE = 0;
+	LATCE2 = 1;
+	LATOE = 0;
+	
+	// Wait 30ns for the DOUT to become valid
+	Delay1TCY();
+	
+	// Disable the buffer so the RAM can take control of
+	// the data bus.
+	disableBuffer();
+	
+	data = getSRByte();
+	
+	LATOE = 1;
+	LATCE2 = 0;
+	LATCE = 1;
+	
+	// Wait 20ns for the outputs to go Hi-Z
+	Delay1TCY();
+	
+	// Reenable the buffer to give control back to the
+	// input channels
+	enableBuffer();
+	
+	return data;
+}
+
 // Buffer control stuff
 void disableBuffer(void)
 {
