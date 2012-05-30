@@ -284,6 +284,9 @@ void UserInit(void)
 	LATSR_PLOAD = 1;
 	LATSR_CLK_EN = 1;
 	LATSR_CLK = 0;
+	
+	LATLEDA = 0;
+	LATLEDB = 0;
 }
 
 /** EOF user.c ***************************************************************/
