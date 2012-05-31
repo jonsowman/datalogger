@@ -19,7 +19,7 @@ uint32_t samplerate;
 uint8_t config;
 
 // State of the analyser (see user.h)
-volatile uint8_t logic_state = 0;
+volatile uint8_t logic_state = LOGIC_IDLE;
 
 // Next empty sample slot in SRAM
 volatile uint32_t sampleptr;

@@ -38,6 +38,7 @@ typedef union DATA_PACKET
 			LOGIC_INPROGRESS	= 0x63,
 			LOGIC_END			= 0x64,
 			LOGIC_DATA			= 0x65,
+			LOGIC_IDLE			= 0x66,
 			LOGIC_ERROR			= 0xAA
         } CMD;
         byte len;

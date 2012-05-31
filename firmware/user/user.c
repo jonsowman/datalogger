@@ -97,22 +97,21 @@ void ServiceRequests(void)
             
             case LOGIC_CONFIG:
 				// Firstly configure the analyser options
-            	if(!logicConfig(*usbptr++))
+            	if(!logicConfig(*usbptr))
 				{
 					*usbcmd = LOGIC_ERROR;
 					*usbptr++ = ERROR_INVALID_CONFIG;
 					break;
 				}
 				// Now the sample rate
-				if(!setSampleRate((uint32_t*)usbptr))
+				if(!setSampleRate((uint32_t*)(usbptr+1)))
 				{
 					*usbcmd = LOGIC_ERROR;
 					*usbptr++ = ERROR_INVALID_SAMPLE_RATE;
 					break;
 				}
 				// And finally the number of samples
-				usbptr += 4;
-				if(!setSampleNumber((uint32_t*)usbptr))
+				if(!setSampleNumber((uint32_t*)(usbptr+5)))
 				{
 					*usbcmd = LOGIC_ERROR;
 					*usbptr++ = ERROR_INVALID_SAMPLE_NUMBER;
@@ -128,9 +127,17 @@ void ServiceRequests(void)
             	*usbptr++ = 0x01;
             	break;
             	
-            case LOGIC_DATA:
-            	*usbptr++ = getLogicState();
+            case LOGIC_DATA: // return [CMD, LEN]
+            	*usbcmd = getLogicState();
             	break;
+            	
+            // The following command breaks the the command/response
+            // protocol defined for the Logic Analyser, in order that they be
+            // back compatible with the provided example PC interface.
+            // (They are missing length field).
+            case BLINK_LED_COMMAND: // [0xEE, Onstate]
+				LATDbits.LATD1 = *++usbcmd;
+                break;
             	
            	case GET_ADC_COMMAND: // [0xED. 8-bit data]
                 *usbptr++ = readRAM(0); // returns[0xED, len, data]
