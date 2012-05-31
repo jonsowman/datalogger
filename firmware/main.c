@@ -9,6 +9,7 @@
 #include "system\usb\usb_compile_time_validation.h" // Optional
 #include "user\user.h"                              // Modifiable
 #include "logic\logic.h"
+#include "periph\periph.h"
 
 // Variables
 #pragma udata
@@ -42,24 +43,11 @@ void interrupt_at_low_vector(void)
 }
 #pragma code
 
-void pintest()
-{
-	while(1)
-	{
-		uint32_t addr;
-		for(addr = 0; addr <= MAX_SAMPLE_NUM; addr++)
-		{
-			readRAM(addr);
-		}
-	}
-}
-
 // Main program loop
 void main(void)
 {        
     InitializeSystem();
 	
-	//pintest();
 	enableBuffer();
 	
 	writeRAM(0); // write data to byte 0 on boot

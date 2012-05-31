@@ -7,6 +7,7 @@ C:\datalogger\firmware\system\usb\usbctrltrf\usbctrltrf.c
 C:\datalogger\firmware\user\user.c
 C:\datalogger\firmware\system\usb\class\generic\usbgen.c
 C:\datalogger\firmware\logic\logic.c
+C:\datalogger\firmware\periph\periph.c
 C:\datalogger\firmware\io_cfg.h
 C:\datalogger\firmware\system\usb\usbmmap.h
 C:\datalogger\firmware\autofiles\usbcfg.h
@@ -17,3 +18,4 @@ C:\datalogger\firmware\system\usb\class\generic\usbgen.h
 C:\datalogger\firmware\user\user.h
 C:\datalogger\firmware\system\usb\usbdrv\usbdrv.h
 C:\datalogger\firmware\logic\logic.h
+C:\datalogger\firmware\periph\periph.h
