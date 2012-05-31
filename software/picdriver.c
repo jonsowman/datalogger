@@ -118,18 +118,18 @@ int init_usb()
         myInPipe = MPUSBOpen(0,vid_pid,out_pipe,MP_READ,0);
             
        if(myOutPipe == INVALID_HANDLE_VALUE )
-          return 0;
+          return USB_ERROR;
        if(myInPipe == INVALID_HANDLE_VALUE)
-          return 0;
+          return USB_ERROR;
    
        //UCAM HACK NOT SURE WHY
    	   send_buf[0]=0xEE;
        SendReceivePacket(send_buf, 1, receive_buf,&RecvLength,1000,1000);          
           
-      return 1; 
+      return USB_NO_ERROR; 
      }
             
-     return 0;  
+     return USB_ERROR;  
 
 }
 
@@ -155,11 +155,11 @@ DWORD SendReceivePacket(BYTE *SendData, DWORD SendLength, BYTE *ReceiveData,
             {
                 if(*ReceiveLength == ExpectedReceiveLength)
                 {
-                    return 1;   // Success!
+                    return USB_NO_ERROR;   // Success!
                 }
                 else if(*ReceiveLength < ExpectedReceiveLength)
                 {
-                    return 2;   // Partially failed, incorrect receive length
+                    return USB_ERROR;   // Partially failed, incorrect receive length
                 }//end if else
             }
              
@@ -169,7 +169,7 @@ DWORD SendReceivePacket(BYTE *SendData, DWORD SendLength, BYTE *ReceiveData,
           
     }//end if
 
-    return 0;  // Operation Failed
+    return USB_ERROR;  // Operation Failed
 }
 
 //-------------------------------

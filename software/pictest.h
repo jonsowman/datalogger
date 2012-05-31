@@ -23,6 +23,9 @@
 #define  PANEL_COMMANDBUTTON             7       /* callback function: commandbutton_click */
 
 
+		
+		
+		
      /* Menu Bars, Menus, and Menu Items: */
 
           /* (no menu bars in the resource file) */

@@ -25,6 +25,7 @@
 #define  IFACEPANEL_STATUSBOX            9
 #define  IFACEPANEL_DEBUGBUTTON          10      /* callback function: DEBUGBUTTON_hit */
 #define  IFACEPANEL_DEBUGBYTE            11
+#define  IFACEPANEL_RECONNECTBUTTON      12      /* callback function: RECONNECTBUTTON_hit */
 
      /* tab page panel controls */
 #define  LISTPANEL_TEXTBOX               2
@@ -56,6 +57,7 @@ int  CVICALLBACK DISPLAYTAB_hit(int panel, int control, int event, void *callbac
 int  CVICALLBACK FALLINGEDGE_hit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK IFACEPANEL_hit(int panel, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK QUITBUTTON_hit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK RECONNECTBUTTON_hit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK RISINGEDGE_hit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK SYNCASYNCTAB_hit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 

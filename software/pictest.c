@@ -5,21 +5,35 @@
 #include "interface.h"
 #include <stdio.h>
 
-#define true 1
-#define false 0
 
-static int panelHandle;
+//static int panelHandle;
+bool AnalyserConnected;
 
 int main (int argc, char *argv[])
 {
+	int panelHandle;
+	
 	if (InitCVIRTE (0, argv, 0) == 0)
 		return -1;	/* out of memory */
 	if ((panelHandle = LoadPanel (0, "interface.uir", IFACEPANEL)) < 0)
 		return -1;
 	DisplayPanel (panelHandle);
-	init_usb();
+	
+	if(init_usb() == USB_NO_ERROR)
+	{
+		AnalyserConnected=true;
+		InsertListItem(panelHandle, IFACEPANEL_STATUSBOX, 0, "Connected to logic analyser!", 0);
+	}
+	else
+	{
+		AnalyserConnected=false;
+		InsertListItem(panelHandle, IFACEPANEL_STATUSBOX, 0, "Failed to connect to logic analyser...", 0);
+	}
+	
 	RunUserInterface ();
+	
 	close_usb();
+	
 	DiscardPanel (panelHandle);
 	return 0;
 }
@@ -134,6 +148,39 @@ int CVICALLBACK DISPLAYTAB_hit (int panel, int control, int event,
 	switch (event)
 	{
 		case EVENT_ACTIVE_TAB_CHANGE:
+
+			break;
+	}
+	return 0;
+}
+
+int CVICALLBACK RECONNECTBUTTON_hit (int panel, int control, int event,
+		void *callbackData, int eventData1, int eventData2)
+{
+	switch (event)
+	{
+		case EVENT_COMMIT:
+			if(close_usb() == USB_NO_ERROR)
+			{
+				AnalyserConnected=false;
+				InsertListItem(panel, IFACEPANEL_STATUSBOX, 0, "Disconnected from logic analyser.", 0);
+			}
+			else
+				InsertListItem(panel, IFACEPANEL_STATUSBOX, 0, "Failed to disconnect from logic analyser...", 0);
+				
+				
+				
+			if(init_usb() == USB_NO_ERROR)
+			{
+				AnalyserConnected=true;
+				InsertListItem(panel, IFACEPANEL_STATUSBOX, 0, "Connected to logic analyser!", 0);
+			}
+			else
+			{
+				InsertListItem(panel, IFACEPANEL_STATUSBOX, 0, "Failed to connect to logic analyser...", 0);
+				AnalyserConnected=false;
+				close_usb();
+			}
 
 			break;
 	}
