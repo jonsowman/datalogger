@@ -1,4 +1,4 @@
-#include <ansi_c.h>
+//#include <ansi_c.h>
 #include <cvirte.h>		
 #include <userint.h>
  
@@ -248,6 +248,38 @@ int read_debug_byte (int *value)
 #endif
 		return USB_ERROR;
 	}
+}
+
+int send_config_message(bool async, bool sync, bool rising, bool falling, bool both,
+	unsigned long rate, unsigned long samplenumber)
+{
+	if( (!async && !sync) || (async && sync) )
+	{
+		printf("Error in send_config_message - one and only one of async or sync must be high!\n");
+		return USB_ERROR;
+	}
+	
+	
+	if(sync)
+	{
+		if( (!rising && !falling && !both) || (rising && falling) || (falling && both) || (rising && both) )
+		{
+			printf("Error in send_config_message - one and only one of rising or falling or both must be high if synch!\n");
+			return USB_ERROR;
+		}
+	}
+	
+#ifdef DEBUG
+	printf("config: async %d sync %d rise %d fall %d both %d\n", async, sync, rising, falling, both);
+	printf("config: rate %d number %d\n", rate, samplenumber);
+#endif
+	
+	send_buf[0] = 0x42; // config command code
+	send_buf[1] = 11; // fixed length for config
+	send_buf[2] = (async & 1) | ((sync & 1) << 1) | ((rising & 1) << 2) | ((falling & 1) << 3) | ((both & 1) << 4) | (1 << 7);
+	
+	
+	return USB_NO_ERROR;
 }
 
 /*

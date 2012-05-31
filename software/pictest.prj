@@ -4,7 +4,7 @@ Pathname = "/c/datalogger/software/pictest.prj"
 CVI Dir = "/c/program files/national instruments/cvi81"
 IVI Standard Root Dir = "/C/Program Files/IVI Foundation/IVI"
 VXIplug&play Framework Dir = "/C/Program Files/IVI Foundation/VISA/winnt"
-Number of Files = 6
+Number of Files = 7
 Target Type = "Executable"
 Flags = 16
 
@@ -76,11 +76,22 @@ Exclude = False
 Project Flags = 0
 Folder = "Include Files"
 
+[File 0007]
+File Type = "Function Panel"
+Res Id = 7
+Path Is Rel = True
+Path Rel To = "CVI"
+Path Rel Path = "toolslib/custctrl/radioGroup.fp"
+Path = "/c/Program Files/National Instruments/CVI81/toolslib/custctrl/radioGroup.fp"
+Exclude = False
+Project Flags = 0
+Folder = "Instrument Files"
+
 [Folders]
-Instrument Files Folder Not Added Yet = True
 Folder 0 = "Source Files"
 Folder 1 = "Include Files"
 Folder 2 = "User Interface Files"
+Folder 3 = "Instrument Files"
 
 [Compiler Options]
 Default Calling Convention = "cdecl"

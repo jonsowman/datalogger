@@ -1,1 +1,1 @@
-
+* add sample freq/rate stuff to config byte thing

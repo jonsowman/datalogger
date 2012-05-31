@@ -26,6 +26,7 @@
 #define  IFACEPANEL_DEBUGBUTTON          10      /* callback function: DEBUGBUTTON_hit */
 #define  IFACEPANEL_DEBUGBYTE            11
 #define  IFACEPANEL_RECONNECTBUTTON      12      /* callback function: RECONNECTBUTTON_hit */
+#define  IFACEPANEL_SAMPLENUMBER         13
 
      /* tab page panel controls */
 #define  LISTPANEL_TEXTBOX               2
@@ -36,9 +37,7 @@
 #define  TABPANEL_SAMPLEFREQ_KHZ         4
 
      /* tab page panel controls */
-#define  TABPANEL_2_TEXTMSG_2            2
-#define  TABPANEL_2_RISINGEDGE           3       /* callback function: RISINGEDGE_hit */
-#define  TABPANEL_2_FALLINGEDGE          4       /* callback function: FALLINGEDGE_hit */
+#define  TABPANEL_2_EDGE                 2       /* callback function: EDGE_hit */
 
      /* tab page panel controls */
 #define  TIMPANEL_DIGGRAPH               2
@@ -54,11 +53,10 @@
 int  CVICALLBACK CAPTUREBUTTON_hit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK DEBUGBUTTON_hit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK DISPLAYTAB_hit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
-int  CVICALLBACK FALLINGEDGE_hit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK EDGE_hit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK IFACEPANEL_hit(int panel, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK QUITBUTTON_hit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK RECONNECTBUTTON_hit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
-int  CVICALLBACK RISINGEDGE_hit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK SYNCASYNCTAB_hit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 
 

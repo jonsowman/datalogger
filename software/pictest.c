@@ -1,9 +1,15 @@
+#include "radioGroup.h"
+#include <ansi_c.h>
 #include <cvirte.h>		
 #include <userint.h>
+
+static int tabpanel2;
+
 //#include "pictest.h"
 #include "picdriver.h"  
 #include "interface.h"
 #include <stdio.h>
+
 
 
 //static int panelHandle;
@@ -25,6 +31,8 @@ int main (int argc, char *argv[])
 		return -1;	/* out of memory */
 	if ((panelHandle = LoadPanel (0, "interface.uir", IFACEPANEL)) < 0)
 		return -1;
+	GetPanelHandleFromTabPage (panelHandle, IFACEPANEL_SYNCASYNCTAB, 1, &tabpanel2);
+    Radio_ConvertFromTree (tabpanel2, TABPANEL_2_EDGE);
 	DisplayPanel (panelHandle);
 	
 	if(init_usb() == USB_NO_ERROR)
@@ -93,11 +101,68 @@ int CVICALLBACK DEBUGBUTTON_hit (int panel, int control, int event,
 int CVICALLBACK CAPTUREBUTTON_hit (int panel, int control, int event,
 		void *callbackData, int eventData1, int eventData2)
 {
+	int async, sync, rising, falling, both;
+	unsigned long rate, samplenumber;
+	int asyncsynctab;
+	int edge;
+
+	
+	
 	switch (event)
 	{
 		case EVENT_COMMIT:
+			// Generate config byte, send it
+			// check whether config was valid
+			// Rest is TODO.
+			
+			
+			
+			GetActiveTabPage(panel, IFACEPANEL_SYNCASYNCTAB, &asyncsynctab);
+			if(asyncsynctab==0) // async
+			{
+				async=1;
+				sync=rising=falling=both=0;
+				
+				// TODO:
+				rate=0;
+				
+				//GetCtrlVal(panel, s
+			}
+			else // sync
+			{
+				sync=1;
+				async=rate=0;
+			
+				Radio_GetMarkedOption(panel, TABPANEL_2_EDGE, &edge);
+				printf("%d", edge);
+				switch(edge)
+				{
+					case 0:
+						rising = true;
+						falling = both = false;
+						break;
+						
+					case 1:
+						falling = true;
+						rising = both = false;
+						break;
+						
+					case 2:
+						both = true;
+						rising = falling = false;
+						break;
+			}
+			
+			GetCtrlVal(panel, IFACEPANEL_SAMPLENUMBER, &samplenumber);
+			
+				
+				
+			
+			send_config_message(async, sync, rising, falling, both, rate, samplenumber);
+			
+
+		}			
 		
-			break;
 	}
 	return 0;
 }
