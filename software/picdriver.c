@@ -178,7 +178,7 @@ int read_debug_byte (int *value)
 {
      send_buf[0] = 0xED;      // Command
     
-    RecvLength = 2; //set expected receive length 
+    RecvLength = 3; //set expected receive length 
 	
     if (SendReceivePacket(send_buf,1,receive_buf,&RecvLength,1000,1000) == 1)
     {
