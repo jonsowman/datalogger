@@ -1,1 +1,1 @@
-* add sample freq/rate stuff to config byte thing
+* check for error after sending config cmd
