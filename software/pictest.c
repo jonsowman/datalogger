@@ -49,11 +49,13 @@ int main (int argc, char *argv[])
 	{
 		AnalyserConnected=true;
 		StatusMessage(panelHandle, IFACEPANEL_STATUSBOX, "Connected to logic analyser!");
+		SetCtrlVal(panelHandle, IFACEPANEL_CONNECTEDLED, 1);
 	}
 	else
 	{
 		AnalyserConnected=false;
 		StatusMessage(panelHandle, IFACEPANEL_STATUSBOX, "Failed to connect to logic analyser...");
+		SetCtrlVal(panelHandle, IFACEPANEL_CONNECTEDLED, 0);
 	}
 	
 	RunUserInterface ();
@@ -99,6 +101,7 @@ int CVICALLBACK DEBUGBUTTON_hit (int panel, int control, int event,
 			{
 				SetCtrlVal(panel,IFACEPANEL_DEBUGBYTE, "error");
 				StatusMessage(panel, IFACEPANEL_STATUSBOX, "Error retrieving debug byte...");
+				SetCtrlVal(panel, IFACEPANEL_CONNECTEDLED, 0);
 			}
 			
 			break;
@@ -174,7 +177,11 @@ int CVICALLBACK CAPTUREBUTTON_hit (int panel, int control, int event,
 			
 			GetCtrlVal(panel, IFACEPANEL_SAMPLENUMBER, &samplenumber);
 				
-			send_config_message(async, sync, rising, falling, both, rate, samplenumber);
+			if(send_config_message(async, sync, rising, falling, both, rate, samplenumber) != USB_NO_ERROR)
+			{
+				SetCtrlVal(panel, IFACEPANEL_CONNECTEDLED, 0);
+			}
+			
 		
 	}
 	return 0;
@@ -271,6 +278,7 @@ int CVICALLBACK RECONNECTBUTTON_hit (int panel, int control, int event,
 			{
 				AnalyserConnected=false;
 				StatusMessage(panel, IFACEPANEL_STATUSBOX, "Disconnected from logic analyser.");
+				SetCtrlVal(panel, IFACEPANEL_CONNECTEDLED, 0);
 			}
 			else
 				StatusMessage(panel, IFACEPANEL_STATUSBOX, "Failed to disconnect from logic analyser...");
@@ -281,11 +289,13 @@ int CVICALLBACK RECONNECTBUTTON_hit (int panel, int control, int event,
 			{
 				AnalyserConnected=true;
 				StatusMessage(panel, IFACEPANEL_STATUSBOX, "Connected to logic analyser!");
+				SetCtrlVal(panel, IFACEPANEL_CONNECTEDLED, 1);
 			}
 			else
 			{
 				StatusMessage(panel, IFACEPANEL_STATUSBOX, "Failed to connect to logic analyser...");
 				AnalyserConnected=false;
+				SetCtrlVal(panel, IFACEPANEL_CONNECTEDLED, 0);
 				close_usb();
 			}
 

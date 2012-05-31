@@ -27,6 +27,7 @@
 #define  IFACEPANEL_DEBUGBYTE            11
 #define  IFACEPANEL_RECONNECTBUTTON      12      /* callback function: RECONNECTBUTTON_hit */
 #define  IFACEPANEL_SAMPLENUMBER         13
+#define  IFACEPANEL_CONNECTEDLED         14
 
      /* tab page panel controls */
 #define  LISTPANEL_TEXTBOX               2
