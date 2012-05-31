@@ -46,7 +46,7 @@ int CVICALLBACK DEBUGBUTTON_hit (int panel, int control, int event,
 			
 			if(read_analog_input (&received) == USB_NO_ERROR) // Blocks til value returned
 			{
-				sprintf(displaystring, "%x");
+				sprintf(displaystring, "%x", received);
 			
 				SetCtrlVal(panel,IFACEPANEL_DEBUGBYTE, displaystring); // Display as decimal (currently)
 			}
