@@ -114,19 +114,20 @@ int init_usb()
             
        if(myOutPipe == INVALID_HANDLE_VALUE )
 	   {
-#ifdef DEBUG
-    	   printf("Invalid output handle value from init_usb\n");
+
+
+		   if(debug) printf("Invalid output handle value from init_usb\n");
 		   // These outputs are considered debug, as they will be printed if
 		   // the analyser is not connected, which is a rather normal case.
-#endif
+
+		   
           return USB_ERROR;
 	   }
 	   
        if(myInPipe == INVALID_HANDLE_VALUE)
 	   {
-#ifdef DEBUG
-		   printf("Invalid input handle value from init_usb\n");
-#endif
+		   if(debug) printf("Invalid input handle value from init_usb\n");
+
           return USB_ERROR;
 	   }
    
@@ -185,35 +186,37 @@ DWORD SendReceivePacket(BYTE *SendData, DWORD SendLength, BYTE *ReceiveData,
                 
 				else// if(*ReceiveLength < ExpectedReceiveLength)
                 {
-#ifdef DEBUG
-					printf("SendReceivePacket failed: Incorrect receive length, cmd type %x\n", ReceiveData[0]);
-					printf("Expected length %d, actual length %d\n", ExpectedReceiveLength, *ReceiveLength);
-#endif
+					if(debug)
+					{
+						printf("SendReceivePacket failed: Incorrect receive length, cmd type %x\n", ReceiveData[0]);
+						printf("Expected length %d, actual length %d\n", ExpectedReceiveLength, *ReceiveLength);
+					}
+
                     return USB_ERROR;   // Partially failed, incorrect receive length
                 }
             }
 			else
 			{
-#ifdef DEBUG
-				printf("SendReceivePacket failed - error from MPUSBRead\n");
-#endif
+
+				if(debug) printf("SendReceivePacket failed - error from MPUSBRead\n");
+
 				return USB_ERROR;
 			}
         }
 		else
 		{
-#ifdef DEBUG
-			printf("SendReceivePacket failed - error from MPUSBWrite\n");
-#endif
+
+			if(debug) printf("SendReceivePacket failed - error from MPUSBWrite\n");
+
 			return USB_ERROR;
 		}
         
           
     }
 
-#ifdef DEBUG
-	printf("SendReceivePacket failed - Input or Output pipe handle invalid\n");
-#endif
+
+	if(debug) printf("SendReceivePacket failed - Input or Output pipe handle invalid\n");
+
     return USB_ERROR;  // Operation Failed
 }
 
@@ -234,18 +237,18 @@ int read_debug_byte (int *value)
         }
 		else
 		{
-#ifdef DEBUG
-			printf("Debug byte received is incorrect length or incorrect command type\n");
-#endif
+
+			if(debug) printf("Debug byte received is incorrect length or incorrect command type\n");
+
 			return USB_ERROR;
 		}
 		
     }
     else
     {
-#ifdef DEBUG
-        printf("Failed to retrieve debug byte - error from SendReceivePacket\n");
-#endif
+
+        if(debug) printf("Failed to retrieve debug byte - error from SendReceivePacket\n");
+
 		return USB_ERROR;
 	}
 }
@@ -269,10 +272,13 @@ int send_config_message(bool async, bool sync, bool rising, bool falling, bool b
 		}
 	}
 	
-#ifdef DEBUG
-	printf("config: async %d sync %d rise %d fall %d both %d\n", async, sync, rising, falling, both);
-	printf("config: rate %d number %d\n", rate, samplenumber);
-#endif
+
+	if(debug)
+	{
+		printf("config: async %d sync %d rise %d fall %d both %d\n", async, sync, rising, falling, both);
+		printf("config: rate %d number %d\n", rate, samplenumber);
+	}
+
 	
 	send_buf[0] = 0x42; // config command code
 	send_buf[1] = 11; // fixed length for config
@@ -283,17 +289,15 @@ int send_config_message(bool async, bool sync, bool rising, bool falling, bool b
     {
         if (RecvLength != 3)
         {
-#ifdef DEBUG
-			printf("Config response incorrect length!");
-#endif
+			if(debug) printf("Config response incorrect length!");
+
 			return USB_ERROR;
        	}
 		
 		if(receive_buf[2] != 1)
 		{
-#ifdef DEBUG
-			printf("Config response says we failed");
-#endif
+			if(debug) printf("Config response says we failed");
+
 			return CONFIG_ERROR;
 		}
 		
@@ -302,9 +306,8 @@ int send_config_message(bool async, bool sync, bool rising, bool falling, bool b
     }
     else
     {
-#ifdef DEBUG
-        printf("USB Operation Failed\r\n");
-#endif
+        if(debug) printf("USB Operation Failed\r\n");
+
 		return USB_ERROR;
 	}
 }
