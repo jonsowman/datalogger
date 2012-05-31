@@ -8595,10 +8595,10 @@ W = angled&lt;p&gt;
 <part name="FRAME1" library="frames" deviceset="DINA3_L" device=""/>
 <part name="GND5" library="SparkFun" deviceset="GND" device=""/>
 <part name="MCU" library="microchip" deviceset="PIC18F4*_40" device="" technology="550"/>
-<part name="R1" library="rcl" deviceset="R-EU_" device="0207/10" value="100R"/>
+<part name="R1" library="rcl" deviceset="R-EU_" device="0207/10" value="120R"/>
 <part name="LED1" library="led" deviceset="LED" device="5MM"/>
 <part name="GND6" library="SparkFun" deviceset="GND" device=""/>
-<part name="R2" library="rcl" deviceset="R-EU_" device="0207/10" value="100R"/>
+<part name="R2" library="rcl" deviceset="R-EU_" device="0207/10" value="56R"/>
 <part name="LED2" library="led" deviceset="LED" device="5MM"/>
 <part name="GND7" library="SparkFun" deviceset="GND" device=""/>
 <part name="OPAMP1" library="linear" deviceset="LM2902" device="N"/>
