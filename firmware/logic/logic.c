@@ -18,6 +18,9 @@ uint32_t samplenumber;
 uint32_t samplerate;
 uint8_t config;
 
+// Next empty sample slot in SRAM
+uint32_t sampleptr;
+
 /**
  * Configure the logic analyser, takes one byte bitfield
  * containing the configuration options. See documentation
@@ -60,6 +63,8 @@ bool logicStart(void)
 	// Check that all options are valid
 	if(!verifyOptions(config))
 		return false;
+		
+	sampleptr = 0;
 
 	// Set up the timer according to the config
 	return true;

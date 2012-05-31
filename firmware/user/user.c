@@ -15,6 +15,7 @@
 #include "io_cfg.h"             // I/O pin mapping
 #include "user\user.h"
 #include "logic\logic.h"
+#include "periph\periph.h"
 
 // Variables
 #pragma udata
