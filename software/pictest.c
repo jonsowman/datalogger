@@ -16,7 +16,6 @@ static int TABPANEL_2; // labwindows doesn't give us
 
 
 //static int panelHandle;
-bool AnalyserConnected;
 
 void StatusMessage(int panel, int statusbox, char *message)
 {
@@ -47,13 +46,11 @@ int main (int argc, char *argv[])
 	
 	if(init_usb() == SUCCESS)
 	{
-		AnalyserConnected=true;
 		StatusMessage(panelHandle, IFACEPANEL_STATUSBOX, "Connected to logic analyser!");
 		SetCtrlVal(panelHandle, IFACEPANEL_CONNECTEDLED, 1);
 	}
 	else
 	{
-		AnalyserConnected=false;
 		StatusMessage(panelHandle, IFACEPANEL_STATUSBOX, "Failed to connect to logic analyser...");
 		SetCtrlVal(panelHandle, IFACEPANEL_CONNECTEDLED, 0);
 	}
@@ -285,7 +282,6 @@ int CVICALLBACK RECONNECTBUTTON_hit (int panel, int control, int event,
 		case EVENT_COMMIT:
 			if(close_usb() == SUCCESS)
 			{
-				AnalyserConnected=false;
 				StatusMessage(panel, IFACEPANEL_STATUSBOX, "Disconnected from logic analyser.");
 				SetCtrlVal(panel, IFACEPANEL_CONNECTEDLED, 0);
 			}
@@ -296,14 +292,12 @@ int CVICALLBACK RECONNECTBUTTON_hit (int panel, int control, int event,
 				
 			if(init_usb() == SUCCESS)
 			{
-				AnalyserConnected=true;
 				StatusMessage(panel, IFACEPANEL_STATUSBOX, "Connected to logic analyser!");
 				SetCtrlVal(panel, IFACEPANEL_CONNECTEDLED, 1);
 			}
 			else
 			{
 				StatusMessage(panel, IFACEPANEL_STATUSBOX, "Failed to connect to logic analyser...");
-				AnalyserConnected=false;
 				SetCtrlVal(panel, IFACEPANEL_CONNECTEDLED, 0);
 				close_usb();
 			}
