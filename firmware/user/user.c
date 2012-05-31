@@ -128,6 +128,10 @@ void ServiceRequests(void)
             	*usbptr++ = 0x01;
             	break;
             	
+            case LOGIC_DATA:
+            	*usbptr++ = getLogicState();
+            	break;
+            	
            	case GET_ADC_COMMAND: // [0xED. 8-bit data]
                 *usbptr++ = readRAM(0); // returns[0xED, len, data]
                 break;
@@ -147,11 +151,8 @@ void ServiceRequests(void)
 		*usblen = usbptr - usbcmd;
 
 		// If we've put data into the send buffer, then transmit
-        if(*usblen != 0)
-        {
-            if(!mUSBGenTxIsBusy())
-                USBGenWrite((byte*)&dataPacket,*usblen);
-        }
+        if(*usblen != 0 && !mUSBGenTxIsBusy())
+        	USBGenWrite((byte*)&dataPacket,*usblen);
     }
 return;
 }
