@@ -73,7 +73,10 @@ void ServiceRequests(void)
 	    uint8_t* usbptr = dataPacket._byte;
 	    uint8_t* usbcmd = usbptr;
 	    uint8_t* usblen = usbptr + 1;
-	    usbptr += 2; // Now points to beginning of payload
+	    usbptr += 2; // Points to beginning of payload
+		
+		// When writing data to the buffer, usbptr must always
+		// point to the next free byte in the buffer.
 		
 		// Switch on the command byte of the USB packet we got from the PC
         switch(dataPacket.CMD)
@@ -81,23 +84,7 @@ void ServiceRequests(void)
             case READ_VERSION:
                 *usbptr++ = MINOR_VERSION;
                 *usbptr++ = MAJOR_VERSION;
-                *usblen = 4;
                 break;
-                
-            case LOGIC_SET_SRATE:
-            	// Rate is 32 bit, MSB first
-            	rate = (uint32_t)(*usbptr);
-            	rate <<= 8;
-            	rate |= *(usbptr + 1);
-            	rate <<= 8;
-            	rate |= *(usbptr + 2);
-            	rate <<= 8;
-            	rate |= *(usbptr + 3);
-            	setSampleRate(&rate);
-            	// Return CMD along with 1 for success [CMD, 0x03, 0x01]
-            	*usbptr = 0x01;
-            	*usblen = 3;
-            	break;
             	
             case LOGIC_GET_SRATE:
             	rate = getSampleRate();
@@ -106,7 +93,6 @@ void ServiceRequests(void)
             	*usbptr++ = (rate >> 8) & 0xFF;
             	*usbptr++ = rate & 0xFF;
             	// Returned is like [CMD, 0x04, MSB, {}, {}, LSB]
-            	*usblen = 6;
             	break;
             
             case LOGIC_CONFIG:
@@ -114,16 +100,14 @@ void ServiceRequests(void)
             	if(!logicConfig(*usbptr++))
 				{
 					*usbcmd = LOGIC_ERROR;
-					*usbptr = ERROR_INVALID_CONFIG;
-					*usblen = 3;
+					*usbptr++ = ERROR_INVALID_CONFIG;
 					break;
 				}
 				// Now the sample rate
 				if(!setSampleRate((uint32_t*)usbptr))
 				{
 					*usbcmd = LOGIC_ERROR;
-					*usbptr = ERROR_INVALID_SAMPLE_RATE;
-					*usblen = 3;
+					*usbptr++ = ERROR_INVALID_SAMPLE_RATE;
 					break;
 				}
 				// And finally the number of samples
@@ -131,34 +115,21 @@ void ServiceRequests(void)
 				if(!setSampleNumber((uint32_t*)usbptr))
 				{
 					*usbcmd = LOGIC_ERROR;
-					*usbptr = ERROR_INVALID_SAMPLE_NUMBER;
-					*usblen = 3;
+					*usbptr++ = ERROR_INVALID_SAMPLE_NUMBER;
 					break;
 				}
             	// Return 3 bytes, payload is '1' for success [CMD, 0x03, 0x01]
-            	*usbptr = 0x01;
-            	*usblen = 3;
+            	*usbptr++ = 0x01;
             	break;
             	
             case LOGIC_ARM:
             	logicStart();
             	// Return 3 bytes, payload is '1' for success [CMD, 0x03, 0x01]
-            	*usbptr = 0x01;
-            	*usblen = 3;
+            	*usbptr++ = 0x01;
             	break;
-
-            // The following command breaks the the command/response
-            // protocol defined for the Logic Analyser, in order that they be
-            // back compatible with the provided example PC interface.
-            // (They are missing length field).
-            case BLINK_LED_COMMAND: // [0xEE, Onstate]
-				LATDbits.LATD1 = *++usbcmd;
-                *usblen = 2; // sends back same command
-                break;
-
+            	
            	case GET_ADC_COMMAND: // [0xED. 8-bit data]
-                *usbptr = readRAM(0); // returns[0xED, len, data]
-                *usblen = 3;
+                *usbptr++ = readRAM(0); // returns[0xED, len, data]
                 break;
  
             case RESET:
@@ -169,12 +140,11 @@ void ServiceRequests(void)
             	// We didn't understand the command the PC sent, so error
             	*usbcmd = LOGIC_ERROR;
             	*usbptr++ = ERROR_CMD_NOT_FOUND;
-            	*usblen = 3;
                 break;
         }
 
 		// Calculate the length of the data in the transmit buffer
-		// *usblen = usbptr - usbcmd;
+		*usblen = usbptr - usbcmd;
 
 		// If we've put data into the send buffer, then transmit
         if(*usblen != 0)
