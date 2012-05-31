@@ -17,7 +17,6 @@ void StatusMessage(int panel, int statusbox, char *message)
 	SetCtrlIndex (panel, statusbox, count-1);
 }
 
-
 int main (int argc, char *argv[])
 {
 	int panelHandle;
@@ -75,14 +74,13 @@ int CVICALLBACK DEBUGBUTTON_hit (int panel, int control, int event,
 				sprintf(displaystring, "%x", received);
 			
 				SetCtrlVal(panel,IFACEPANEL_DEBUGBYTE, displaystring); // Display as decimal (currently)
-				
 				sprintf(statusmessage, "Retrieved debug byte: %s", displaystring);
 				StatusMessage(panel, IFACEPANEL_STATUSBOX, statusmessage);
 			}
 			else
 			{
 				SetCtrlVal(panel,IFACEPANEL_DEBUGBYTE, "error");
-				StatusMessage(panel, IFACEPANEL_STATUSBOX, "Error retrieving status byte...");
+				StatusMessage(panel, IFACEPANEL_STATUSBOX, "Error retrieving debug byte...");
 			}
 			
 			break;

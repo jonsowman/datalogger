@@ -114,13 +114,19 @@ int init_usb()
             
        if(myOutPipe == INVALID_HANDLE_VALUE )
 	   {
+#ifdef DEBUG
     	   printf("Invalid output handle value from init_usb\n");
+		   // These outputs are considered debug, as they will be printed if
+		   // the analyser is not connected, which is a rather normal case.
+#endif
           return USB_ERROR;
 	   }
 	   
        if(myInPipe == INVALID_HANDLE_VALUE)
 	   {
+#ifdef DEBUG
 		   printf("Invalid input handle value from init_usb\n");
+#endif
           return USB_ERROR;
 	   }
    
@@ -131,7 +137,8 @@ int init_usb()
       return USB_NO_ERROR; 
      }
             
-	  printf("Failed to load msusbapi.dll...\n");
+	  printf("Failed to load msusbapi.dll...\n"); // This shouldn't happen in any sensible case, and so
+	  // is printed even if debug is disabled.
      return USB_ERROR;  
 
 }
@@ -178,27 +185,35 @@ DWORD SendReceivePacket(BYTE *SendData, DWORD SendLength, BYTE *ReceiveData,
                 
 				else// if(*ReceiveLength < ExpectedReceiveLength)
                 {
+#ifdef DEBUG
 					printf("SendReceivePacket failed: Incorrect receive length, cmd type %x\n", ReceiveData[0]);
 					printf("Expected length %d, actual length %d\n", ExpectedReceiveLength, *ReceiveLength);
+#endif
                     return USB_ERROR;   // Partially failed, incorrect receive length
                 }
             }
 			else
 			{
+#ifdef DEBUG
 				printf("SendReceivePacket failed - error from MPUSBRead\n");
+#endif
 				return USB_ERROR;
 			}
         }
 		else
 		{
+#ifdef DEBUG
 			printf("SendReceivePacket failed - error from MPUSBWrite\n");
+#endif
 			return USB_ERROR;
 		}
         
           
     }
 
+#ifdef DEBUG
 	printf("SendReceivePacket failed - Input or Output pipe handle invalid\n");
+#endif
     return USB_ERROR;  // Operation Failed
 }
 
@@ -219,18 +234,23 @@ int read_debug_byte (int *value)
         }
 		else
 		{
+#ifdef DEBUG
 			printf("Debug byte received is incorrect length or incorrect command type\n");
+#endif
 			return USB_ERROR;
 		}
 		
     }
     else
     {
+#ifdef DEBUG
         printf("Failed to retrieve debug byte - error from SendReceivePacket\n");
+#endif
 		return USB_ERROR;
 	}
 }
 
+/*
 int set_led (int value)
 {
     send_buf[0] = 0xEE;      // Command
@@ -250,4 +270,4 @@ int set_led (int value)
 		return USB_ERROR;
 	}
  
-}
+}			 */
