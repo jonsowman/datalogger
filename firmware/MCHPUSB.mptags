@@ -440,7 +440,7 @@ logicConfig	C:\datalogger\firmware\logic\logic.h	22;"	p	line:22	signature:(uint8
 logicStart	C:\datalogger\firmware\logic\logic.c	62;"	f	line:62	signature:(void)
 logicStart	C:\datalogger\firmware\logic\logic.h	24;"	p	line:24	signature:(void)
 low	C:\datalogger\firmware\user\user.c	202;"	l	line:202
-low_isr	C:\datalogger\firmware\logic\logic.c	189;"	f	line:189	signature:(void)
+low_isr	C:\datalogger\firmware\logic\logic.c	187;"	f	line:187	signature:(void)
 low_isr	C:\datalogger\firmware\logic\logic.h	32;"	p	line:32	signature:(void)
 mInitAllLEDs::LATD&=0xF0;TRISD&=0xF0;	C:\datalogger\firmware\io_cfg.h	31;"	d	line:31
 mInitPOT::TRISAbits.TRISA0=1;ADCON0=0x01	C:\datalogger\firmware\io_cfg.h	28;"	d	line:28
