@@ -147,7 +147,7 @@ void ServiceRequests(void)
             	*usblen = 3;
             	break;
 
-            // The following two commands break the the command/response
+            // The following command breaks the the command/response
             // protocol defined for the Logic Analyser, in order that they be
             // back compatible with the provided example PC interface.
             // (They are missing length field).
@@ -288,6 +288,9 @@ void UserInit(void)
 	
 	LATLEDA = 0;
 	LATLEDB = 0;
+	
+	// RB1 is a debug thing
+	TRISBbits.TRISB1 = 0;
 }
 
 /** EOF user.c ***************************************************************/

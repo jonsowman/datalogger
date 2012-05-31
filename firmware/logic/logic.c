@@ -17,7 +17,7 @@
 uint32_t samplenumber;
 uint32_t samplerate;
 uint8_t config;
-volatile bool sampling_complete;
+volatile bool sampling_complete = false;
 
 // Next empty sample slot in SRAM
 volatile uint32_t sampleptr;
@@ -67,9 +67,37 @@ bool logicStart(void)
 	
 	sampling_complete = false;
 	sampleptr = 0;
-
-	// Set up the timer according to the config
+	
+	// Set up interrupts and leave the hardware to it...
+	beginSampling(config);
 	return true;
+}
+
+/**
+ * Configure the timer or the external interrupt pin depending
+ * on how the config is set.
+ */
+void beginSampling(uint8_t config)
+{
+	if(config & MODE_ASYNC)
+	{
+		startTimer();
+	}
+	else if(config & MODE_SYNC)
+	{
+		startExtInterrupt(config);
+	}
+}
+
+/**
+ * Return true once sampling is complete.
+ */
+bool samplingComplete(void)
+{
+	if(sampling_complete)
+		return true;
+	else
+		return false;
 }
 
 /**
@@ -121,7 +149,7 @@ uint32_t getSampleNumber(void)
 }
 
 /**
- * Set up an interrupt to run at the samplerate,
+ * Set up an interrupt to run at the samplerate for async mode,
  * discard data for now.
  */
 void startTimer()
@@ -160,21 +188,50 @@ void startTimer()
 	return;
 }
 
+/**
+ * Set up the external interrupt for sync mode, firing on the required
+ * edges.
+ */
+void startExtInterrupt(uint8_t config)
+{
+	// Configure the edge for interrupt
+	if(config & SYNC_EDGE_RISE)
+		INTCON2bits.INTEDG0 = 1;
+	else if(config & SYNC_EDGE_FALL)
+		INTCON2bits.INTEDG0 = 0;
+		
+	// Clear the flag and enable the interrupt
+	RCONbits.IPEN = 1;
+	INTCONbits.GIEL  = 1;
+	INTCONbits.GIEH = 1;
+	INTCONbits.INT0IF = 0;
+	INTCONbits.INT0IE = 1;
+}  
+
 // Interrupt stuff here
 #pragma interrupt high_isr
 void high_isr(void)
 {
-	if(INTCONbits.TMR0IF)
+	if(INTCONbits.TMR0IF || INTCONbits.INT0IF)
 	{
-		if(sampleptr < samplenumber && sampleptr < MAX_SAMPLE_NUM)
+		LATB = LATB ^ 0x02;
+		if(sampleptr < samplenumber) // check against max sample num
 		{
 			writeRAM(sampleptr);
 			sampleptr++;
-			TMR0L = TIMER_PRELOAD;
-			INTCONbits.TMR0IF = 0;
+			if(INTCONbits.TMR0IF)
+			{
+				TMR0L = TIMER_PRELOAD;
+				INTCONbits.TMR0IF = 0;
+			}
+			else if(INTCONbits.INT0IF)
+			{
+				INTCONbits.INT0IF = 0;
+			}
 		}
 		else // Done sampling, stop interrupting
 		{
+			INTCONbits.INT0IE = 0;
 			INTCONbits.TMR0IE = 0;
 			T0CONbits.TMR0ON = 0;
 			sampling_complete = true;

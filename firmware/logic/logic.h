@@ -26,7 +26,10 @@ bool setSampleRate(uint32_t* samplerate);
 uint32_t getSampleRate(void);
 bool setSampleNumber(uint32_t* count);
 uint32_t getSampleNumber(void);
+void beginSampling(uint8_t config);
+bool samplingComplete(void);
 void startTimer();
+void startExtInterrupt(uint8_t config);
 
 // ISR prototypes
 void low_isr(void);

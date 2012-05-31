@@ -45,20 +45,29 @@ void interrupt_at_low_vector(void)
 
 // Main program loop
 void main(void)
-{        
+{   
+	uint32_t snum = 0xFFFF;
     InitializeSystem();
-	
 	enableBuffer();
 	
+	/*
 	writeRAM(0); // write data to byte 0 on boot
-	/*while(1) {
+	while(1) {
 		uint8_t b = readRAM(0);
 		if(b & 0x02) LATLEDA = 1;
 		Delay10TCYx(60);
-	}*/
+	}
+	*/
 	
 	// Configure to async mode
 	logicConfig(0x81);
+	if(!setSampleNumber(&snum));
+	if(!logicStart()) LATLEDB = 1;
+	while(1)
+	{
+		if(samplingComplete())
+			LATLEDA = 1;
+	}
 		
     while(1)
     {
