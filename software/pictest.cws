@@ -1,17 +1,17 @@
 [Workspace Header]
 Version = 810
-Pathname = "/c/Users/david/Desktop/git/datalogger/software/pictest.cws"
-CVI Dir = "/c/program files (x86)/national instruments/cvi81"
-IVI Standard Root Dir = "/C/Program Files (x86)/IVI"
-VXIplug&play Framework Dir = "/c/vxipnp/winnt"
+Pathname = "/c/datalogger/software/pictest.cws"
+CVI Dir = "/c/program files/national instruments/cvi81"
+IVI Standard Root Dir = "/C/Program Files/IVI Foundation/IVI"
+VXIplug&play Framework Dir = "/C/Program Files/IVI Foundation/VISA/winnt"
 Number of Projects = 1
 Active Project = 1
 Project 0001 = "pictest.prj"
 Drag Bar Left = 208
 Window Top = 258
-Window Left = 983
-Window Bottom = 961
-Window Right = 1773
+Window Left = 26
+Window Bottom = 760
+Window Right = 816
 Maximized = True
 Maximized Children = True
 Max Number Of Errors = 20
@@ -25,7 +25,7 @@ Hide Windows = False
 Global Hot Key = False
 Break At First Statement = False
 Sort Type = "File Name"
-Number of Opened Files = 5
+Number of Opened Files = 6
 Window Confinement Region Enabled = True
 MainColumnWidth = 189
 FileDateColumnWidth = 70
@@ -43,55 +43,73 @@ Batch Build Debug = False
 Force Rebuild = False
 
 [File 0001]
-Path = "/c/Users/david/Desktop/git/datalogger/software/pictest.uir"
+Path = "/c/datalogger/software/pictest.uir"
 File Type = "User Interface Resource"
-Disk Date = 3420045057
+Disk Date = 3420087035
 In Projects = "1,"
 Window Top = 33
 Window Left = 5
 Window Height = 521
 Window Width = 669
-Window Z-Order = 3
+Window Z-Order = 6
 
 [File 0002]
-Path = "/c/Users/david/Desktop/git/datalogger/software/picdriver.c"
+Path = "/c/datalogger/software/picdriver.c"
 File Type = "CSource"
-Disk Date = 3419865194
+Disk Date = 3421316669
 In Projects = "1,"
 Window Top = 32
 Window Left = 6
-Window Z-Order = 4
-Source Window State = "1,0,0,0,0,0,0,0,0,61,0,0,0,0,0,19,149,0,190,78,271,524,1,0,"
+Window Z-Order = 3
+Source Window State = "1,214,214,214,2,21,21,0,0,61,0,0,0,0,0,19,160,0,190,45,271,524,1,0,"
 
 [File 0003]
-Path = "/c/Users/david/Desktop/git/datalogger/software/picdriver.h"
+Path = "/c/datalogger/software/picdriver.h"
 File Type = "Include"
-Disk Date = 3419865194
+Disk Date = 3421315680
 In Projects = "1,"
 Window Top = 62
 Window Left = 22
-Window Z-Order = 5
-Source Window State = "1,0,0,0,0,0,0,0,0,61,0,0,0,0,0,19,0,0,0,0,271,524,1,0,"
+Window Z-Order = 4
+Source Window State = "1,0,0,0,8,16,16,0,0,61,0,0,0,0,0,19,0,0,1,12,271,524,1,0,"
 
 [File 0004]
-Path = "/c/Users/david/Desktop/git/datalogger/software/pictest.c"
+Path = "/c/datalogger/software/pictest.c"
 File Type = "CSource"
-Disk Date = 3420052545
+Disk Date = 3421316767
 In Projects = "1,"
 Window Top = 32
 Window Left = 6
-Window Z-Order = 1
-Source Window State = "1,61,61,61,37,38,37,0,0,210,0,0,0,0,0,73,10,0,62,80,271,524,1,0,"
+Window Z-Order = 2
+Source Window State = "1,16,16,16,38,44,38,0,0,61,0,0,0,0,0,19,0,0,14,8,271,524,1,0,"
 
 [File 0005]
-Path = "/c/Users/david/Desktop/git/datalogger/software/pictest.h"
+Path = "/c/datalogger/software/pictest.h"
 File Type = "Include"
-Disk Date = 3420045057
+Disk Date = 3420026961
 In Projects = "1,"
 Window Top = 86
 Window Left = 40
-Window Z-Order = 2
-Source Window State = "1,21,21,21,9,23,23,0,3,89,0,0,0,0,0,25,0,0,21,9,349,748,1,0,"
+Window Z-Order = 5
+Source Window State = "1,21,21,21,9,23,23,0,0,89,0,0,0,0,0,25,0,0,14,26,349,748,1,0,"
+
+[File 0006]
+Path = "/c/datalogger/software/interface.uir"
+File Type = "User Interface Resource"
+Disk Date = 3421314579
+In Projects = "1,"
+Window Top = 32
+Window Left = 10
+Window Height = 349
+Window Width = 676
+Window Z-Order = 1
+
+[File 0007]
+Path = "/c/datalogger/software/interface.h"
+File Type = "Include"
+Disk Date = 3421314579
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
 
 [Build Options 0001]
 Generate Browse Info = True

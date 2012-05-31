@@ -4,24 +4,35 @@ Pathname = "/c/datalogger/software/pictest.prj"
 CVI Dir = "/c/program files/national instruments/cvi81"
 IVI Standard Root Dir = "/C/Program Files/IVI Foundation/IVI"
 VXIplug&play Framework Dir = "/C/Program Files/IVI Foundation/VISA/winnt"
-Number of Files = 6
+Number of Files = 7
 Target Type = "Executable"
 Flags = 16
 
 [File 0001]
-File Type = "User Interface Resource"
+File Type = "Include"
 Res Id = 1
 Path Is Rel = True
 Path Rel To = "Project"
-Path Rel Path = "dummy_interface.uir"
-Path = "/c/datalogger/software/dummy_interface.uir"
+Path Rel Path = "interface.h"
+Path = "/c/datalogger/software/interface.h"
+Exclude = False
+Project Flags = 0
+Folder = "Include Files"
+
+[File 0002]
+File Type = "User Interface Resource"
+Res Id = 2
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "interface.uir"
+Path = "/c/datalogger/software/interface.uir"
 Exclude = False
 Project Flags = 0
 Folder = "User Interface Files"
 
-[File 0002]
+[File 0003]
 File Type = "CSource"
-Res Id = 2
+Res Id = 3
 Path Is Rel = True
 Path Rel To = "Project"
 Path Rel Path = "picdriver.c"
@@ -31,9 +42,9 @@ Compile Into Object File = False
 Project Flags = 0
 Folder = "Source Files"
 
-[File 0003]
+[File 0004]
 File Type = "Include"
-Res Id = 3
+Res Id = 4
 Path Is Rel = True
 Path Rel To = "Project"
 Path Rel Path = "picdriver.h"
@@ -42,9 +53,9 @@ Exclude = False
 Project Flags = 0
 Folder = "Include Files"
 
-[File 0004]
+[File 0005]
 File Type = "CSource"
-Res Id = 4
+Res Id = 5
 Path Is Rel = True
 Path Rel To = "Project"
 Path Rel Path = "pictest.c"
@@ -54,9 +65,9 @@ Compile Into Object File = False
 Project Flags = 0
 Folder = "Source Files"
 
-[File 0005]
+[File 0006]
 File Type = "Include"
-Res Id = 5
+Res Id = 6
 Path Is Rel = True
 Path Rel To = "Project"
 Path Rel Path = "pictest.h"
@@ -65,9 +76,9 @@ Exclude = False
 Project Flags = 0
 Folder = "Include Files"
 
-[File 0006]
+[File 0007]
 File Type = "User Interface Resource"
-Res Id = 6
+Res Id = 7
 Path Is Rel = True
 Path Rel To = "Project"
 Path Rel Path = "pictest.uir"
