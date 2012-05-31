@@ -23,6 +23,8 @@
 #define  PANEL2_TAB                      7
 #define  PANEL2_COMMANDBUTTON            8
 #define  PANEL2_LISTBOX                  9
+#define  PANEL2_COMMANDBUTTON_2          10      /* callback function: debug_hit */
+#define  PANEL2_DEBUGBYTE                11
 
      /* tab page panel controls */
 #define  LISTPANEL_TEXTBOX               2
@@ -48,6 +50,7 @@
 
      /* Callback Prototypes: */ 
 
+int  CVICALLBACK debug_hit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK quit_button_hit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 
 

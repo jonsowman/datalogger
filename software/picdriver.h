@@ -1,4 +1,5 @@
-#define no_error 0
+#define USB_NO_ERROR 0
+#define USB_ERROR 1
 
 int init_usb (void);
 int close_usb (void);

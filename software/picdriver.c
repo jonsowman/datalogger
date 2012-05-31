@@ -185,13 +185,13 @@ int read_analog_input (int *value)
         {
             *value = receive_buf[1] & 0xFF;
         }
+		return USB_NO_ERROR;
     }
     else
     {
         printf("USB Operation Failed\r\n");
+		return USB_ERROR;
 	}
-
-  return no_error;
 }
 
 int set_led (int value)
@@ -204,13 +204,13 @@ int set_led (int value)
     {
         if ((RecvLength == 2) && (receive_buf[0] == 0xEE))
         {
-        }
+        }					 // !?
+		return USB_NO_ERROR;
     }
     else
     {    
         printf("USB Operation Failed\r\n");
-
+		return USB_ERROR;
 	}
-  
-  return no_error;
+ 
 }
