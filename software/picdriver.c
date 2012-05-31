@@ -287,14 +287,16 @@ int send_config_message(bool async, bool sync, bool rising, bool falling, bool b
 	RecvLength = 3; // Expected recv len
     if (SendReceivePacket(send_buf, 3, receive_buf,&RecvLength,1000,1000) == SUCCESS)
     {
-        if (RecvLength != 3)
+        if( (RecvLength != 3) || ( (receive_buf[0] != 0x42) && (receive_buf[0] != 0xAA) ) ) 
         {
-			if(debug) printf("Config response incorrect length!");
+			if(debug) printf("Config response incorrect length or incorrect command code!!");
 
 			return USB_ERROR;
        	}
 		
-		if(receive_buf[2] != 1)
+		
+		
+		if( ( (receive_buf[0]==0x42) && (receive_buf[2] != 0x01) ) || (receive_buf[0]==0xAA) )
 		{
 			if(debug) printf("Config response says we failed");
 
