@@ -1,5 +1,6 @@
-#define USB_NO_ERROR 0
+#define SUCCESS 0
 #define USB_ERROR 1
+#define CONFIG_ERROR 2
 
 #define true 1
 #define false 0

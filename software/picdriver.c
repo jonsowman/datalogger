@@ -134,7 +134,7 @@ int init_usb()
    	   send_buf[0]=0xEE;
        SendReceivePacket(send_buf, 1, receive_buf,&RecvLength,1000,1000);          
           
-      return USB_NO_ERROR; 
+      return SUCCESS; 
      }
             
 	  printf("Failed to load msusbapi.dll...\n"); // This shouldn't happen in any sensible case, and so
@@ -158,7 +158,7 @@ int close_usb()
 	  }
 	  
       if(FreeLibrary(hinstLib) != 0)
-		  return USB_NO_ERROR;
+		  return SUCCESS;
 	  else
 		  return USB_ERROR;
 }
@@ -181,7 +181,7 @@ DWORD SendReceivePacket(BYTE *SendData, DWORD SendLength, BYTE *ReceiveData,
 					// 0xEE is some magic command in the usb init - seems to return 
 					// incorrect length when logic analyser is reset without being
 					// unplugged.  Return len shouldn't matter anywho.
-                    return USB_NO_ERROR;   // Success!
+                    return SUCCESS;   // Success!
                 
 				else// if(*ReceiveLength < ExpectedReceiveLength)
                 {
@@ -225,12 +225,12 @@ int read_debug_byte (int *value)
     
     RecvLength = 3; //set expected receive length 
 	
-    if (SendReceivePacket(send_buf,1,receive_buf,&RecvLength,1000,1000) == USB_NO_ERROR)
+    if (SendReceivePacket(send_buf,1,receive_buf,&RecvLength,1000,1000) == SUCCESS)
     {
         if ((RecvLength == 3) && (receive_buf[0] == 0xED))
         {
             *value = receive_buf[2] & 0xFF;
-			return USB_NO_ERROR;
+			return SUCCESS;
         }
 		else
 		{
@@ -277,9 +277,36 @@ int send_config_message(bool async, bool sync, bool rising, bool falling, bool b
 	send_buf[0] = 0x42; // config command code
 	send_buf[1] = 11; // fixed length for config
 	send_buf[2] = (async & 1) | ((sync & 1) << 1) | ((rising & 1) << 2) | ((falling & 1) << 3) | ((both & 1) << 4) | (1 << 7);
-	
-	
-	return USB_NO_ERROR;
+
+	RecvLength = 3; // Expected recv len
+    if (SendReceivePacket(send_buf, 3, receive_buf,&RecvLength,1000,1000) == SUCCESS)
+    {
+        if (RecvLength != 3)
+        {
+#ifdef DEBUG
+			printf("Config response incorrect length!");
+#endif
+			return USB_ERROR;
+       	}
+		
+		if(receive_buf[2] != 1)
+		{
+#ifdef DEBUG
+			printf("Config response says we failed");
+#endif
+			return CONFIG_ERROR;
+		}
+		
+		// Correct length, claims to have succeeded, USB happy
+		return SUCCESS;
+    }
+    else
+    {
+#ifdef DEBUG
+        printf("USB Operation Failed\r\n");
+#endif
+		return USB_ERROR;
+	}
 }
 
 /*
@@ -294,7 +321,7 @@ int set_led (int value)
         if ((RecvLength == 2) && (receive_buf[0] == 0xEE))
         {
         }					 // !?
-		return USB_NO_ERROR;
+		return SUCCESS;
     }
     else
     {    

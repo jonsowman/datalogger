@@ -45,7 +45,7 @@ int main (int argc, char *argv[])
 	
 	DisplayPanel (panelHandle);
 	
-	if(init_usb() == USB_NO_ERROR)
+	if(init_usb() == SUCCESS)
 	{
 		AnalyserConnected=true;
 		StatusMessage(panelHandle, IFACEPANEL_STATUSBOX, "Connected to logic analyser!");
@@ -89,7 +89,7 @@ int CVICALLBACK DEBUGBUTTON_hit (int panel, int control, int event,
 	{
 		case EVENT_COMMIT: // Button clicked...
 			
-			if(read_debug_byte (&received) == USB_NO_ERROR) // Blocks til value returned
+			if(read_debug_byte (&received) == SUCCESS) // Blocks til value returned
 			{
 				sprintf(displaystring, "%x", received);
 			
@@ -120,70 +120,79 @@ int CVICALLBACK CAPTUREBUTTON_hit (int panel, int control, int event,
 	int edge;
 	double ratedouble;
 	int multiplier;
+	int result;
 
+	if(event != EVENT_COMMIT)
+		return 0;
+
+	// Generate config byte, send it
+	// check whether config was valid
+	// Rest is TODO.
 	
 	
-	switch (event)
+	
+	GetActiveTabPage(panel, IFACEPANEL_SYNCASYNCTAB, &asyncsynctab);
+	if(asyncsynctab==0) // async
 	{
-		case EVENT_COMMIT:
-			// Generate config byte, send it
-			// check whether config was valid
-			// Rest is TODO.
-			
-			
-			
-			GetActiveTabPage(panel, IFACEPANEL_SYNCASYNCTAB, &asyncsynctab);
-			if(asyncsynctab==0) // async
-			{
-				async=1;
-				sync=rising=falling=both=0;
-				
-				GetCtrlVal(TABPANEL, TABPANEL_SAMPLEFREQ, &ratedouble);
-				
-				Radio_GetMarkedOption (TABPANEL, TABPANEL_RATEMULTIPLIER, &multiplier);
-				
-				if(multiplier==1)
-					ratedouble*=1000;
-				
-				rate = floor(ratedouble+0.5); // C doesn't have a round function, this is equivilent.
-			}
-			else // sync
-			{
-				sync=1;
-				async=rate=0;
-			
-				Radio_GetMarkedOption (TABPANEL_2, TABPANEL_2_EDGE, &edge);
-				
-				switch(edge)
-				{
-					case 0:
-						rising = true;
-						falling = both = false;
-						break;
-						
-					case 1:
-						falling = true;
-						rising = both = false;
-						break;
-						
-					case 2:
-						both = true;
-						rising = falling = false;
-						break;
-				}
-			
-
-			}
-			
-			GetCtrlVal(panel, IFACEPANEL_SAMPLENUMBER, &samplenumber);
-				
-			if(send_config_message(async, sync, rising, falling, both, rate, samplenumber) != USB_NO_ERROR)
-			{
-				SetCtrlVal(panel, IFACEPANEL_CONNECTEDLED, 0);
-			}
-			
+		async=1;
+		sync=rising=falling=both=0;
 		
+		GetCtrlVal(TABPANEL, TABPANEL_SAMPLEFREQ, &ratedouble);
+		
+		Radio_GetMarkedOption (TABPANEL, TABPANEL_RATEMULTIPLIER, &multiplier);
+		
+		if(multiplier==1)
+			ratedouble*=1000;
+		
+		rate = floor(ratedouble+0.5); // C doesn't have a round function, this is equivilent.
 	}
+	else // sync
+	{
+		sync=1;
+		async=rate=0;
+	
+		Radio_GetMarkedOption (TABPANEL_2, TABPANEL_2_EDGE, &edge);
+		
+		switch(edge)
+		{
+			case 0:
+				rising = true;
+				falling = both = false;
+				break;
+				
+			case 1:
+				falling = true;
+				rising = both = false;
+				break;
+				
+			case 2:
+				both = true;
+				rising = falling = false;
+				break;
+		}
+	
+
+	}
+	
+	GetCtrlVal(panel, IFACEPANEL_SAMPLENUMBER, &samplenumber);
+		
+	result = send_config_message(async, sync, rising, falling, both, rate, samplenumber);
+	
+	if(result == USB_ERROR)
+	{
+		StatusMessage(panel, IFACEPANEL_STATUSBOX, "Failed to configure analyser - connection fault");
+		SetCtrlVal(panel, IFACEPANEL_CONNECTEDLED, 0);
+		return 0;
+	}
+	
+	if(result == CONFIG_ERROR)
+	{
+		StatusMessage(panel,IFACEPANEL_STATUSBOX, "Failed to configure analyser - configuration invalid");
+		return 0;
+	}
+	
+	StatusMessage(panel, IFACEPANEL_STATUSBOX, "Successfully configured analyser");
+		
 	return 0;
 }
 
@@ -274,7 +283,7 @@ int CVICALLBACK RECONNECTBUTTON_hit (int panel, int control, int event,
 	switch (event)
 	{
 		case EVENT_COMMIT:
-			if(close_usb() == USB_NO_ERROR)
+			if(close_usb() == SUCCESS)
 			{
 				AnalyserConnected=false;
 				StatusMessage(panel, IFACEPANEL_STATUSBOX, "Disconnected from logic analyser.");
@@ -285,7 +294,7 @@ int CVICALLBACK RECONNECTBUTTON_hit (int panel, int control, int event,
 				
 				
 				
-			if(init_usb() == USB_NO_ERROR)
+			if(init_usb() == SUCCESS)
 			{
 				AnalyserConnected=true;
 				StatusMessage(panel, IFACEPANEL_STATUSBOX, "Connected to logic analyser!");
