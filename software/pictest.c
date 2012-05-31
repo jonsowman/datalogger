@@ -32,6 +32,8 @@ int main (int argc, char *argv[])
 	
 	RunUserInterface ();
 	
+	InsertListItem(panelHandle, IFACEPANEL_STATUSBOX, 0, "Done for now!", 0);
+	
 	close_usb();
 	
 	DiscardPanel (panelHandle);
@@ -53,6 +55,7 @@ int CVICALLBACK DEBUGBUTTON_hit (int panel, int control, int event,
 {
 	int received=0;
 	char displaystring[33];
+	char statusmessage[64];
 	
 	switch (event)
 	{
@@ -63,9 +66,15 @@ int CVICALLBACK DEBUGBUTTON_hit (int panel, int control, int event,
 				sprintf(displaystring, "%x", received);
 			
 				SetCtrlVal(panel,IFACEPANEL_DEBUGBYTE, displaystring); // Display as decimal (currently)
+				
+				sprintf(statusmessage, "Retrieved debug byte: %s", displaystring);
+				InsertListItem(panel, IFACEPANEL_STATUSBOX, 0, statusmessage, 0);
 			}
 			else
+			{
 				SetCtrlVal(panel,IFACEPANEL_DEBUGBYTE, "error");
+				InsertListItem(panel, IFACEPANEL_STATUSBOX, 0, "Error retrieving status byte...", 0);
+			}
 			
 			break;
 		

@@ -88,22 +88,17 @@ int init_usb()
 	  if (hinstLib != NULL) 
      { 
         //MPUSBGetDLLVersion = (DWORD)GetProcAddress(hinstLib, "DWORD _MPUSBGetDLLVersion"); 
- 		 MPUSBGetDLLVersion=(DWORD(*)(void))\
-                    GetProcAddress(hinstLib,"_MPUSBGetDLLVersion");
-         MPUSBGetDeviceCount=(DWORD(*)(PCHAR))\
-                    GetProcAddress(hinstLib,"_MPUSBGetDeviceCount");
+ 		 MPUSBGetDLLVersion=(DWORD(*)(void))GetProcAddress(hinstLib,"_MPUSBGetDLLVersion");
+		 
+         MPUSBGetDeviceCount=(DWORD(*)(PCHAR))GetProcAddress(hinstLib,"_MPUSBGetDeviceCount");
                     
-         MPUSBOpen=(HANDLE(*)(DWORD,PCHAR,PCHAR,DWORD,DWORD))\
-                    GetProcAddress(hinstLib,"_MPUSBOpen");
+         MPUSBOpen=(HANDLE(*)(DWORD,PCHAR,PCHAR,DWORD,DWORD))GetProcAddress(hinstLib,"_MPUSBOpen");
                     
-        MPUSBWrite=(DWORD(*)(HANDLE,PVOID,DWORD,PDWORD,DWORD))\
-                    GetProcAddress(hinstLib,"_MPUSBWrite");
+        MPUSBWrite=(DWORD(*)(HANDLE,PVOID,DWORD,PDWORD,DWORD))GetProcAddress(hinstLib,"_MPUSBWrite");
                     
-        MPUSBRead=(DWORD(*)(HANDLE,PVOID,DWORD,PDWORD,DWORD))\
-                    GetProcAddress(hinstLib,"_MPUSBRead");
+        MPUSBRead=(DWORD(*)(HANDLE,PVOID,DWORD,PDWORD,DWORD))GetProcAddress(hinstLib,"_MPUSBRead");
                     
-        MPUSBReadInt=(DWORD(*)(HANDLE,PVOID,DWORD,PDWORD,DWORD))\
-                    GetProcAddress(hinstLib,"_MPUSBReadInt");
+        MPUSBReadInt=(DWORD(*)(HANDLE,PVOID,DWORD,PDWORD,DWORD))GetProcAddress(hinstLib,"_MPUSBReadInt");
                     
         MPUSBClose=(BOOL(*)(HANDLE))GetProcAddress(hinstLib,"_MPUSBClose");
                 
@@ -118,9 +113,16 @@ int init_usb()
         myInPipe = MPUSBOpen(0,vid_pid,out_pipe,MP_READ,0);
             
        if(myOutPipe == INVALID_HANDLE_VALUE )
+	   {
+    	   printf("Invalid output handle value from init_usb\n");
           return USB_ERROR;
+	   }
+	   
        if(myInPipe == INVALID_HANDLE_VALUE)
+	   {
+		   printf("Invalid input handle value from init_usb\n");
           return USB_ERROR;
+	   }
    
        //UCAM HACK NOT SURE WHY
    	   send_buf[0]=0xEE;
@@ -129,14 +131,20 @@ int init_usb()
       return USB_NO_ERROR; 
      }
             
+	  printf("Failed to load msusbapi.dll...\n");
      return USB_ERROR;  
 
 }
 
 int close_usb()
 {
-      fFreeResult = FreeLibrary(hinstLib);   
-	  return fFreeResult;
+	  MPUSBClose(myOutPipe);
+	  MPUSBClose(myInPipe);
+	  
+      if(FreeLibrary(hinstLib) != 0)
+		  return USB_NO_ERROR;
+	  else
+		  return USB_ERROR;
 }
 
 DWORD SendReceivePacket(BYTE *SendData, DWORD SendLength, BYTE *ReceiveData,
