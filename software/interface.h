@@ -14,30 +14,30 @@
 
      /* Panels and Controls: */
 
-#define  PANEL2                          1
-#define  PANEL2_quit_button              2       /* callback function: quit_button_hit */
-#define  PANEL2_DISPLAYTAB               3
-#define  PANEL2_TEXTMSG_3                4
-#define  PANEL2_TEXTMSG_2                5
-#define  PANEL2_TEXTMSG                  6
-#define  PANEL2_TAB                      7
-#define  PANEL2_COMMANDBUTTON            8
-#define  PANEL2_LISTBOX                  9
-#define  PANEL2_COMMANDBUTTON_2          10      /* callback function: debug_hit */
-#define  PANEL2_DEBUGBYTE                11
+#define  IFACEPANEL                      1       /* callback function: IFACEPANEL_hit */
+#define  IFACEPANEL_QUITBUTTON           2       /* callback function: QUITBUTTON_hit */
+#define  IFACEPANEL_DISPLAYTAB           3       /* callback function: DISPLAYTAB_hit */
+#define  IFACEPANEL_TEXTMSG_3            4
+#define  IFACEPANEL_TEXTMSG_2            5
+#define  IFACEPANEL_TEXTMSG              6
+#define  IFACEPANEL_SYNCASYNCTAB         7       /* callback function: SYNCASYNCTAB_hit */
+#define  IFACEPANEL_CAPTUREBUTTON        8       /* callback function: CAPTUREBUTTON_hit */
+#define  IFACEPANEL_STATUSBOX            9
+#define  IFACEPANEL_DEBUGBUTTON          10      /* callback function: DEBUGBUTTON_hit */
+#define  IFACEPANEL_DEBUGBYTE            11
 
      /* tab page panel controls */
 #define  LISTPANEL_TEXTBOX               2
 
      /* tab page panel controls */
-#define  TABPANEL_NUMERIC                2
-#define  TABPANEL_RADIOBUTTON_3          3
-#define  TABPANEL_RADIOBUTTON_4          4
+#define  TABPANEL_SAMPLEFREQ             2
+#define  TABPANEL_SAMPLEFREQ_HZ          3
+#define  TABPANEL_SAMPLEFREQ_KHZ         4
 
      /* tab page panel controls */
 #define  TABPANEL_2_TEXTMSG_2            2
-#define  TABPANEL_2_RADIOBUTTON          3
-#define  TABPANEL_2_RADIOBUTTON_2        4
+#define  TABPANEL_2_RISINGEDGE           3       /* callback function: RISINGEDGE_hit */
+#define  TABPANEL_2_FALLINGEDGE          4       /* callback function: FALLINGEDGE_hit */
 
      /* tab page panel controls */
 #define  TIMPANEL_DIGGRAPH               2
@@ -50,8 +50,14 @@
 
      /* Callback Prototypes: */ 
 
-int  CVICALLBACK debug_hit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
-int  CVICALLBACK quit_button_hit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK CAPTUREBUTTON_hit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK DEBUGBUTTON_hit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK DISPLAYTAB_hit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK FALLINGEDGE_hit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK IFACEPANEL_hit(int panel, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK QUITBUTTON_hit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK RISINGEDGE_hit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK SYNCASYNCTAB_hit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 
 
 #ifdef __cplusplus
