@@ -9,6 +9,15 @@
 //static int panelHandle;
 bool AnalyserConnected;
 
+void StatusMessage(int panel, int statusbox, char *message)
+{
+	int count;
+	InsertListItem(panel, statusbox, -1, message, 0);
+	GetNumListItems(panel,statusbox,&count);
+	SetCtrlIndex (panel, statusbox, count-1);
+}
+
+
 int main (int argc, char *argv[])
 {
 	int panelHandle;
@@ -22,17 +31,17 @@ int main (int argc, char *argv[])
 	if(init_usb() == USB_NO_ERROR)
 	{
 		AnalyserConnected=true;
-		InsertListItem(panelHandle, IFACEPANEL_STATUSBOX, 0, "Connected to logic analyser!", 0);
+		StatusMessage(panelHandle, IFACEPANEL_STATUSBOX, "Connected to logic analyser!");
 	}
 	else
 	{
 		AnalyserConnected=false;
-		InsertListItem(panelHandle, IFACEPANEL_STATUSBOX, 0, "Failed to connect to logic analyser...", 0);
+		StatusMessage(panelHandle, IFACEPANEL_STATUSBOX, "Failed to connect to logic analyser...");
 	}
 	
 	RunUserInterface ();
 	
-	InsertListItem(panelHandle, IFACEPANEL_STATUSBOX, 0, "Done for now!", 0);
+	StatusMessage(panelHandle, IFACEPANEL_STATUSBOX, "Done for now!");
 	
 	close_usb();
 	
@@ -68,12 +77,12 @@ int CVICALLBACK DEBUGBUTTON_hit (int panel, int control, int event,
 				SetCtrlVal(panel,IFACEPANEL_DEBUGBYTE, displaystring); // Display as decimal (currently)
 				
 				sprintf(statusmessage, "Retrieved debug byte: %s", displaystring);
-				InsertListItem(panel, IFACEPANEL_STATUSBOX, 0, statusmessage, 0);
+				StatusMessage(panel, IFACEPANEL_STATUSBOX, statusmessage);
 			}
 			else
 			{
 				SetCtrlVal(panel,IFACEPANEL_DEBUGBYTE, "error");
-				InsertListItem(panel, IFACEPANEL_STATUSBOX, 0, "Error retrieving status byte...", 0);
+				StatusMessage(panel, IFACEPANEL_STATUSBOX, "Error retrieving status byte...");
 			}
 			
 			break;
@@ -172,21 +181,21 @@ int CVICALLBACK RECONNECTBUTTON_hit (int panel, int control, int event,
 			if(close_usb() == USB_NO_ERROR)
 			{
 				AnalyserConnected=false;
-				InsertListItem(panel, IFACEPANEL_STATUSBOX, 0, "Disconnected from logic analyser.", 0);
+				StatusMessage(panel, IFACEPANEL_STATUSBOX, "Disconnected from logic analyser.");
 			}
 			else
-				InsertListItem(panel, IFACEPANEL_STATUSBOX, 0, "Failed to disconnect from logic analyser...", 0);
+				StatusMessage(panel, IFACEPANEL_STATUSBOX, "Failed to disconnect from logic analyser...");
 				
 				
 				
 			if(init_usb() == USB_NO_ERROR)
 			{
 				AnalyserConnected=true;
-				InsertListItem(panel, IFACEPANEL_STATUSBOX, 0, "Connected to logic analyser!", 0);
+				StatusMessage(panel, IFACEPANEL_STATUSBOX, "Connected to logic analyser!");
 			}
 			else
 			{
-				InsertListItem(panel, IFACEPANEL_STATUSBOX, 0, "Failed to connect to logic analyser...", 0);
+				StatusMessage(panel, IFACEPANEL_STATUSBOX, "Failed to connect to logic analyser...");
 				AnalyserConnected=false;
 				close_usb();
 			}

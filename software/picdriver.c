@@ -138,8 +138,17 @@ int init_usb()
 
 int close_usb()
 {
-	  MPUSBClose(myOutPipe);
-	  MPUSBClose(myInPipe);
+	  if(myOutPipe != INVALID_HANDLE_VALUE)
+	  {
+	  	MPUSBClose(myOutPipe);
+	  	myOutPipe = INVALID_HANDLE_VALUE;
+	  }
+	  
+	  if(myInPipe != INVALID_HANDLE_VALUE)
+	  {
+		MPUSBClose(myInPipe);
+	  	myInPipe = INVALID_HANDLE_VALUE;
+	  }
 	  
       if(FreeLibrary(hinstLib) != 0)
 		  return USB_NO_ERROR;
@@ -161,22 +170,35 @@ DWORD SendReceivePacket(BYTE *SendData, DWORD SendLength, BYTE *ReceiveData,
             if(MPUSBRead(myInPipe,ReceiveData, ExpectedReceiveLength,
                         ReceiveLength,ReceiveDelay))
             {
-                if(*ReceiveLength == ExpectedReceiveLength)
-                {
+                if((*ReceiveLength == ExpectedReceiveLength) || (ReceiveData[0] == 0xee))
+					// 0xEE is some magic command in the usb init - seems to return 
+					// incorrect length when logic analyser is reset without being
+					// unplugged.  Return len shouldn't matter anywho.
                     return USB_NO_ERROR;   // Success!
-                }
-                else if(*ReceiveLength < ExpectedReceiveLength)
+                
+				else// if(*ReceiveLength < ExpectedReceiveLength)
                 {
+					printf("SendReceivePacket failed: Incorrect receive length, cmd type %x\n", ReceiveData[0]);
+					printf("Expected length %d, actual length %d\n", ExpectedReceiveLength, *ReceiveLength);
                     return USB_ERROR;   // Partially failed, incorrect receive length
-                }//end if else
+                }
             }
-             
-  
+			else
+			{
+				printf("SendReceivePacket failed - error from MPUSBRead\n");
+				return USB_ERROR;
+			}
         }
+		else
+		{
+			printf("SendReceivePacket failed - error from MPUSBWrite\n");
+			return USB_ERROR;
+		}
         
           
-    }//end if
+    }
 
+	printf("SendReceivePacket failed - Input or Output pipe handle invalid\n");
     return USB_ERROR;  // Operation Failed
 }
 
@@ -188,17 +210,23 @@ int read_debug_byte (int *value)
     
     RecvLength = 3; //set expected receive length 
 	
-    if (SendReceivePacket(send_buf,1,receive_buf,&RecvLength,1000,1000) == 1)
+    if (SendReceivePacket(send_buf,1,receive_buf,&RecvLength,1000,1000) == USB_NO_ERROR)
     {
         if ((RecvLength == 3) && (receive_buf[0] == 0xED))
         {
             *value = receive_buf[2] & 0xFF;
+			return USB_NO_ERROR;
         }
-		return USB_NO_ERROR;
+		else
+		{
+			printf("Debug byte received is incorrect length or incorrect command type\n");
+			return USB_ERROR;
+		}
+		
     }
     else
     {
-        printf("Failed to retrieve debug byte\r\n");
+        printf("Failed to retrieve debug byte - error from SendReceivePacket\n");
 		return USB_ERROR;
 	}
 }
