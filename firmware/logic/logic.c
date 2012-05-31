@@ -17,7 +17,9 @@
 uint32_t samplenumber;
 uint32_t samplerate;
 uint8_t config;
-volatile bool sampling_complete = false;
+
+// State of the analyser (see user.h)
+volatile uint8_t logic_state = 0;
 
 // Next empty sample slot in SRAM
 volatile uint32_t sampleptr;
@@ -65,7 +67,7 @@ bool logicStart(void)
 	if(!verifyOptions(config))
 		return false;
 	
-	sampling_complete = false;
+	logic_state = LOGIC_ARM;
 	sampleptr = 0;
 	
 	// Set up interrupts and leave the hardware to it...
@@ -90,14 +92,12 @@ void beginSampling(uint8_t config)
 }
 
 /**
- * Return true once sampling is complete.
+ * Get the current state of the logic analyser so we can
+ * monitor what it's doing when asked by the PC.
  */
-bool samplingComplete(void)
+uint8_t getLogicState(void)
 {
-	if(sampling_complete)
-		return true;
-	else
-		return false;
+	return logic_state;
 }
 
 /**
@@ -206,6 +206,8 @@ void startExtInterrupt(uint8_t config)
 	INTCONbits.GIEH = 1;
 	INTCONbits.INT0IF = 0;
 	INTCONbits.INT0IE = 1;
+	
+	logic_state = LOGIC_WAITING;
 }  
 
 // Interrupt stuff here
@@ -214,11 +216,12 @@ void high_isr(void)
 {
 	if(INTCONbits.TMR0IF || INTCONbits.INT0IF)
 	{
-		LATB = LATB ^ 0x02;
+		LATB = LATB ^ 0x02; // FIXME
 		if(sampleptr < samplenumber) // check against max sample num
 		{
 			writeRAM(sampleptr);
 			sampleptr++;
+			logic_state = LOGIC_INPROGRESS;
 			if(INTCONbits.TMR0IF)
 			{
 				TMR0L = TIMER_PRELOAD;
@@ -234,7 +237,7 @@ void high_isr(void)
 			INTCONbits.INT0IE = 0;
 			INTCONbits.TMR0IE = 0;
 			T0CONbits.TMR0ON = 0;
-			sampling_complete = true;
+			logic_state = LOGIC_END;
 		}
 	}
 }

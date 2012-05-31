@@ -63,12 +63,9 @@ void main(void)
 	logicConfig(0x81);
 	if(!setSampleNumber(&snum));
 	if(!logicStart()) LATLEDB = 1;
-	while(1)
-	{
-		if(samplingComplete())
-			LATLEDA = 1;
-	}
-		
+	while(getLogicState() != LOGIC_END);
+	LATLEDA = 1;
+	
     while(1)
     {
         USBTasks();         // USB Tasks
