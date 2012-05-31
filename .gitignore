@@ -7,4 +7,5 @@ firmware/hex/*
 reports/*/*.aux
 reports/*/*.log
 software/cvibuild.LogicAnalyser/*
+.~lock*
 
