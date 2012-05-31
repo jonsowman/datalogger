@@ -192,17 +192,17 @@ void writeRAM(uint32_t address)
 	LATC = 0x40 | (LATC & 0xB9);
 	
 	// Wait 20ns for data to go Hi-Z then enable buffer
-	Delay1TCY();
-	enableBuffer();
+	//Delay1TCY();
+	//enableBuffer();
 
 	Delay1TCY(); // These two are about 50ns (want 45)
-	Delay1TCY();
+	//Delay1TCY();
 	
 	// End write by dropping CE2 and raising CE# and WE#
 	LATC = 0x06 | (LATC & 0xB9);
 	
 	// Disable the buffer
-	disableBuffer();
+	//disableBuffer();
 	
 	return;
 }

@@ -1,6 +1,7 @@
 // Includes
 #include <p18cxxx.h>
 #include <timers.h>
+#include <delays.h>
 #include "system\typedefs.h"                        // Required
 #include "system\usb\usb.h"                         // Required
 #include "io_cfg.h"                                 // Required
@@ -57,17 +58,17 @@ void pintest()
 void main(void)
 {        
     InitializeSystem();
-    
+	
 	//pintest();
+	enableBuffer();
 	
 	writeRAM(0); // write data to byte 0 on boot
 	while(1) {
 		uint8_t b = readRAM(0);
-		if(b & 0x01) LATLEDA = 1;
+		if(b & 0x02) LATLEDA = 1;
 		Delay10TCYx(60);
 	}
 		
-
     while(1)
     {
         USBTasks();         // USB Tasks

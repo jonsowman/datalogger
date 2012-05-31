@@ -98,7 +98,7 @@ IN::1	C:\datalogger\firmware\system\usb\usbdrv\usbdrv.h	76;"	d	line:76
 INCDIS	C:\datalogger\firmware\system\usb\usbmmap.h	52;"	m	line:52	struct:_BD_STAT::<anonymous>
 INPUT_PIN::1	C:\datalogger\firmware\io_cfg.h	8;"	d	line:8
 IO_CFG_H	C:\datalogger\firmware\io_cfg.h	2;"	d	line:2
-InitializeSystem	C:\datalogger\firmware\main.c	16;"	p	line:16	file:	signature:(void)
+InitializeSystem	C:\datalogger\firmware\main.c	17;"	p	line:17	file:	signature:(void)
 KEN	C:\datalogger\firmware\system\usb\usbmmap.h	53;"	m	line:53	struct:_BD_STAT::<anonymous>
 LATADDR0::LATAbits.LATA3	C:\datalogger\firmware\io_cfg.h	74;"	d	line:74
 LATADDR10::LATDbits.LATD2	C:\datalogger\firmware\io_cfg.h	62;"	d	line:62
@@ -279,7 +279,7 @@ USBStdSetCfgHandler	C:\datalogger\firmware\system\usb\usb9\usb9.c	12;"	p	line:12
 USBStdSetCfgHandler	C:\datalogger\firmware\system\usb\usb9\usb9.c	144;"	f	line:144	signature:(void)
 USBSuspend	C:\datalogger\firmware\system\usb\usbdrv\usbdrv.c	14;"	p	line:14	file:	signature:(void)
 USBSuspend	C:\datalogger\firmware\system\usb\usbdrv\usbdrv.c	265;"	f	line:265	signature:(void)
-USBTasks	C:\datalogger\firmware\main.c	17;"	p	line:17	file:	signature:(void)
+USBTasks	C:\datalogger\firmware\main.c	18;"	p	line:18	file:	signature:(void)
 USBWakeFromSuspend	C:\datalogger\firmware\system\usb\usbdrv\usbdrv.c	15;"	p	line:15	file:	signature:(void)
 USBWakeFromSuspend	C:\datalogger\firmware\system\usb\usbdrv\usbdrv.c	320;"	f	line:320	signature:(void)
 USB_BUS_ATTACHED::1	C:\datalogger\firmware\system\usb\usbdrv\usbdrv.c	46;"	d	line:46	file:
@@ -333,8 +333,8 @@ _byte	C:\datalogger\firmware\system\usb\usbmmap.h	36;"	m	line:36	union:_USB_DEVI
 _byte	C:\datalogger\firmware\system\usb\usbmmap.h	46;"	m	line:46	union:_BD_STAT
 _byte	C:\datalogger\firmware\user\user.h	18;"	m	line:18	union:DATA_PACKET
 _dword	C:\datalogger\firmware\system\typedefs.h	60;"	m	line:60	union:_DWORD
-_reset	C:\datalogger\firmware\main.c	22;"	f	line:22	signature:(void)
-_startup	C:\datalogger\firmware\main.c	20;"	p	line:20	file:	signature:(void)
+_reset	C:\datalogger\firmware\main.c	23;"	f	line:23	signature:(void)
+_startup	C:\datalogger\firmware\main.c	21;"	p	line:21	file:	signature:(void)
 _word	C:\datalogger\firmware\system\typedefs.h	105;"	m	line:105	union:_POINTER
 _word	C:\datalogger\firmware\system\typedefs.h	34;"	m	line:34	union:_WORD
 _word	C:\datalogger\firmware\user\user.h	19;"	m	line:19	union:DATA_PACKET
