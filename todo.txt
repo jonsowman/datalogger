@@ -1,4 +1,1 @@
-* Connect LED0 & LED1 on main board
-* Connect LEDs on sub-board
-* Ground ground channel
-* Tie LE on buffer high, not low
+
