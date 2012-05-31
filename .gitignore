@@ -6,5 +6,5 @@ firmware/hex/*
 *.err
 reports/*/*.aux
 reports/*/*.log
-software/cvibuild.pictest/*
+software/cvibuild.LogicAnalyser/*
 

@@ -1,12 +1,12 @@
 [Workspace Header]
 Version = 810
-Pathname = "/c/Users/david/Desktop/datalogger/software/pictest.cws"
+Pathname = "/c/Users/david/Desktop/datalogger/software/LogicAnalyser.cws"
 CVI Dir = "/c/program files (x86)/national instruments/cvi81"
 IVI Standard Root Dir = "/C/Program Files (x86)/IVI"
 VXIplug&play Framework Dir = "/c/vxipnp/winnt"
 Number of Projects = 1
 Active Project = 1
-Project 0001 = "pictest.prj"
+Project 0001 = "LogicAnalyser.prj"
 Drag Bar Left = 208
 Window Top = 65
 Window Left = 485
@@ -25,7 +25,7 @@ Hide Windows = False
 Global Hot Key = False
 Break At First Statement = False
 Sort Type = "File Name"
-Number of Opened Files = 6
+Number of Opened Files = 5
 Window Confinement Region Enabled = True
 MainColumnWidth = 189
 FileDateColumnWidth = 70
@@ -50,36 +50,6 @@ Disk Date = 3245652000
 In Projects = "1,"
 
 [File 0002]
-Path = "/c/Users/david/Desktop/datalogger/software/picdriver.c"
-File Type = "CSource"
-Disk Date = 3421345047
-In Projects = "1,"
-Window Top = 32
-Window Left = 6
-Window Z-Order = 2
-Source Window State = "1,289,289,289,48,49,49,0,0,61,0,0,0,0,0,19,115,0,312,76,271,524,1,0,"
-
-[File 0003]
-Path = "/c/Users/david/Desktop/datalogger/software/picdriver.h"
-File Type = "Include"
-Disk Date = 3421343741
-In Projects = "1,"
-Window Top = 62
-Window Left = 22
-Window Z-Order = 4
-Source Window State = "1,10,10,10,11,18,18,0,0,61,0,0,0,0,0,19,0,0,22,26,271,524,1,0,"
-
-[File 0004]
-Path = "/c/Users/david/Desktop/datalogger/software/pictest.c"
-File Type = "CSource"
-Disk Date = 3421345315
-In Projects = "1,"
-Window Top = 32
-Window Left = 6
-Window Z-Order = 1
-Source Window State = "1,15,15,15,83,84,84,0,0,210,0,1,0,1,0,73,0,0,31,40,271,524,1,0,"
-
-[File 0005]
 Path = "/c/Users/david/Desktop/datalogger/software/interface.uir"
 File Type = "User Interface Resource"
 Disk Date = 3421342149
@@ -90,17 +60,17 @@ Window Height = 349
 Window Width = 676
 Window Z-Order = 3
 
-[File 0006]
+[File 0003]
 Path = "/c/Users/david/Desktop/datalogger/software/interface.h"
 File Type = "Include"
 Disk Date = 3421342150
 In Projects = "1,"
 Window Top = 32
 Window Left = 10
-Window Z-Order = 5
+Window Z-Order = 4
 Source Window State = "1,29,29,29,9,32,32,0,3,80,0,0,0,0,0,25,4,0,29,9,349,676,1,0,"
 
-[File 0007]
+[File 0004]
 Path = "/c/Program Files (x86)/National Instruments/CVI81/samples/userint/treemark.uir"
 File Type = "User Interface Resource"
 Disk Date = 3245652000
@@ -109,7 +79,32 @@ Window Top = 114
 Window Left = 55
 Window Height = 349
 Window Width = 748
-Window Z-Order = 6
+Window Z-Order = 5
+
+[File 0005]
+Path = "/c/Users/david/Desktop/datalogger/software/LogicAnalyser.c"
+File Type = "CSource"
+Disk Date = 3421345955
+In Projects = "1,"
+Window Z-Order = 1
+Source Window State = "1,10,10,10,10,19,10,0,0,210,0,0,0,0,0,73,0,0,10,15,0,0,0,0,"
+
+[File 0006]
+Path = "/c/Users/david/Desktop/datalogger/software/comms.h"
+File Type = "Include"
+Disk Date = 3421343741
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0007]
+Path = "/c/Users/david/Desktop/datalogger/software/comms.c"
+File Type = "CSource"
+Disk Date = 3421345949
+In Projects = "1,"
+Window Top = 30
+Window Left = 10
+Window Z-Order = 2
+Source Window State = "1,9,9,9,10,19,10,0,0,89,0,0,0,0,0,25,0,0,9,15,349,748,1,0,"
 
 [Build Options 0001]
 Generate Browse Info = True

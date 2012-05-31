@@ -7,7 +7,7 @@
 #include "mpusbapi.h"
 
 
-#include "picdriver.h"
+#include "comms.h"
 
 
 #define READ_VERSION    0

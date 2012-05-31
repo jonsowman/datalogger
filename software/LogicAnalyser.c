@@ -8,7 +8,7 @@ static int TABPANEL; // These two are async/sync tabs
 static int TABPANEL_2; // labwindows doesn't give us
 					// constants for pages in tabs
 
-#include "picdriver.h"  
+#include "comms.h"  
 #include "interface.h"
 #include <stdio.h>
 
