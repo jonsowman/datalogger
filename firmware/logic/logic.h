@@ -8,7 +8,7 @@
 
 #include "system\typedefs.h"
 
-#define TIMER_PRELOAD			0
+#define TIMER_PRELOAD			111
 #define MAX_SAMPLE_RATE			250000UL
 #define MAX_SAMPLE_NUM			0x1FFFF
 
