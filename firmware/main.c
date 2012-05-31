@@ -50,12 +50,14 @@ void main(void)
 	
 	enableBuffer();
 	
+	startTimer();
+	
 	writeRAM(0); // write data to byte 0 on boot
-	while(1) {
+	/*while(1) {
 		uint8_t b = readRAM(0);
 		if(b & 0x02) LATLEDA = 1;
 		Delay10TCYx(60);
-	}
+	}*/
 		
     while(1)
     {

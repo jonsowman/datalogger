@@ -139,10 +139,10 @@ void startTimer()
 	T0CONbits.T0CS = 0;
 
 	// Turn off the prescalar so we clock on instruction clk cycles
-	T0CONbits.PSA = 1;
+	T0CONbits.PSA = 0;
 	T0CONbits.T0PS2 = 0;
 	T0CONbits.T0PS1  = 0;
-	T0CONbits.T0PS0 = 0;
+	T0CONbits.T0PS0 = 1;
 
 	// Enable TIMER0 OVF interrupt, periph interrupt
 	// and global interrupts
@@ -166,19 +166,21 @@ void high_isr(void)
 {
 	if(INTCONbits.TMR0IF)
 	{
-		if(sampleptr < samplenumber && sampleptr < MAX_SAMPLE_NUM)
+		/*if(sampleptr < samplenumber && sampleptr < MAX_SAMPLE_NUM)
 		{
 			writeRAM(sampleptr);
-			sampleptr++;
+			sampleptr++;*/
+			//LATAbits.LATA3 = 1;
+			LATA = LATA ^ 0x08;
 			TMR0L = TIMER_PRELOAD;
 			INTCONbits.TMR0IF = 0;
-		}
+		/*}
 		else // Done sampling, stop interrupting
 		{
 			INTCONbits.TMR0IE = 0;
 			T0CONbits.TMR0ON = 0;
 			sampling_complete = true;
-		}
+		}*/
 	}
 }
 #pragma code
