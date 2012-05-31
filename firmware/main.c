@@ -58,18 +58,12 @@ void main(void)
 {        
     InitializeSystem();
     
-    LATLEDA = 1;
-    LATLEDB = 1;
-    
 	//pintest();
-	
-	//enableBuffer();
-	while(1);
 	
 	writeRAM(0); // write data to byte 0 on boot
 	while(1) {
 		uint8_t b = readRAM(0);
-		if(b & 0x02) LATLEDA = 1;
+		if(b & 0x01) LATLEDA = 1;
 		Delay10TCYx(60);
 	}
 		
