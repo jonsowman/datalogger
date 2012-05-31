@@ -166,21 +166,19 @@ void high_isr(void)
 {
 	if(INTCONbits.TMR0IF)
 	{
-		/*if(sampleptr < samplenumber && sampleptr < MAX_SAMPLE_NUM)
+		if(sampleptr < samplenumber && sampleptr < MAX_SAMPLE_NUM)
 		{
 			writeRAM(sampleptr);
-			sampleptr++;*/
-			//LATAbits.LATA3 = 1;
-			LATA = LATA ^ 0x08;
+			sampleptr++;
 			TMR0L = TIMER_PRELOAD;
 			INTCONbits.TMR0IF = 0;
-		/*}
+		}
 		else // Done sampling, stop interrupting
 		{
 			INTCONbits.TMR0IE = 0;
 			T0CONbits.TMR0ON = 0;
 			sampling_complete = true;
-		}*/
+		}
 	}
 }
 #pragma code
