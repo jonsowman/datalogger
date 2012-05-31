@@ -17,9 +17,10 @@
 uint32_t samplenumber;
 uint32_t samplerate;
 uint8_t config;
+volatile bool sampling_complete;
 
 // Next empty sample slot in SRAM
-uint32_t sampleptr;
+volatile uint32_t sampleptr;
 
 /**
  * Configure the logic analyser, takes one byte bitfield
@@ -63,7 +64,8 @@ bool logicStart(void)
 	// Check that all options are valid
 	if(!verifyOptions(config))
 		return false;
-		
+	
+	sampling_complete = false;
 	sampleptr = 0;
 
 	// Set up the timer according to the config
@@ -164,9 +166,19 @@ void high_isr(void)
 {
 	if(INTCONbits.TMR0IF)
 	{
-		LATDbits.LATD0 ^= 1; // Turn RD0 on
-		TMR0L = TIMER_PRELOAD;
-		INTCONbits.TMR0IF = 0;
+		if(sampleptr < samplenumber && sampleptr < MAX_SAMPLE_NUM)
+		{
+			writeRAM(sampleptr);
+			sampleptr++;
+			TMR0L = TIMER_PRELOAD;
+			INTCONbits.TMR0IF = 0;
+		}
+		else // Done sampling, stop interrupting
+		{
+			INTCONbits.TMR0IE = 0;
+			T0CONbits.TMR0ON = 0;
+			sampling_complete = true;
+		}
 	}
 }
 #pragma code
