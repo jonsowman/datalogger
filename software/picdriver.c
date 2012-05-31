@@ -174,22 +174,23 @@ DWORD SendReceivePacket(BYTE *SendData, DWORD SendLength, BYTE *ReceiveData,
 
 //-------------------------------
 
-int read_analog_input (int *value)
+int read_debug_byte (int *value)
 {
      send_buf[0] = 0xED;      // Command
     
     RecvLength = 2; //set expected receive length 
+	
     if (SendReceivePacket(send_buf,1,receive_buf,&RecvLength,1000,1000) == 1)
     {
-        if ((RecvLength == 2) && (receive_buf[0] == 0xED))
+        if ((RecvLength == 3) && (receive_buf[0] == 0xED))
         {
-            *value = receive_buf[1] & 0xFF;
+            *value = receive_buf[2] & 0xFF;
         }
 		return USB_NO_ERROR;
     }
     else
     {
-        printf("USB Operation Failed\r\n");
+        printf("Failed to retrieve debug byte\r\n");
 		return USB_ERROR;
 	}
 }

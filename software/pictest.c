@@ -44,7 +44,7 @@ int CVICALLBACK DEBUGBUTTON_hit (int panel, int control, int event,
 	{
 		case EVENT_COMMIT: // Button clicked...
 			
-			if(read_analog_input (&received) == USB_NO_ERROR) // Blocks til value returned
+			if(read_debug_byte (&received) == USB_NO_ERROR) // Blocks til value returned
 			{
 				sprintf(displaystring, "%x", received);
 			
