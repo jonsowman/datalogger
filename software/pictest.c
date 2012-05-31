@@ -133,7 +133,7 @@ int CVICALLBACK CAPTUREBUTTON_hit (int panel, int control, int event,
 				sync=1;
 				async=rate=0;
 			
-				Radio_GetMarkedOption(panel, TABPANEL_2_EDGE, &edge);
+				GetCtrlIndex(panel, TABPANEL_2_EDGE, &edge);
 				printf("%d", edge);
 				switch(edge)
 				{
@@ -222,6 +222,19 @@ int CVICALLBACK FALLINGEDGE_hit (int panel, int control, int event,
 	}
 	return 0;
 }
+
+int CVICALLBACK EDGE_hit (int panel, int control, int event,
+		void *callbackData, int eventData1, int eventData2)
+{
+	switch (event)
+	{
+		case EVENT_COMMIT:
+
+			break;
+	}
+	return 0;
+}
+
 
 int CVICALLBACK DISPLAYTAB_hit (int panel, int control, int event,
 		void *callbackData, int eventData1, int eventData2)
