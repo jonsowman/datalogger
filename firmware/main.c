@@ -58,13 +58,13 @@ void main(void)
 {        
     InitializeSystem();
     
+    LATLEDA = 1;
+    LATLEDB = 1;
+    
 	//pintest();
 	
-	while(1)
-	{
-		enableBuffer();
-	}
-		
+	//enableBuffer();
+	while(1);
 	
 	writeRAM(0); // write data to byte 0 on boot
 	while(1) {

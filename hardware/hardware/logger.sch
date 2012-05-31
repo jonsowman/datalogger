@@ -9436,9 +9436,9 @@ W = angled&lt;p&gt;
 <label x="205.74" y="226.06" size="1.27" layer="95" rot="R180" xref="yes"/>
 </segment>
 <segment>
-<pinref part="R2" gate="G$1" pin="2"/>
-<wire x1="137.16" y1="223.52" x2="137.16" y2="220.98" width="0.1524" layer="91"/>
-<label x="137.16" y="223.52" size="1.27" layer="95" rot="R90" xref="yes"/>
+<pinref part="R1" gate="G$1" pin="2"/>
+<wire x1="149.86" y1="223.52" x2="149.86" y2="220.98" width="0.1524" layer="91"/>
+<label x="149.86" y="223.52" size="1.27" layer="95" rot="R90" xref="yes"/>
 </segment>
 </net>
 <net name="LEDB" class="0">
@@ -9448,9 +9448,9 @@ W = angled&lt;p&gt;
 <label x="205.74" y="223.52" size="1.27" layer="95" rot="R180" xref="yes"/>
 </segment>
 <segment>
-<pinref part="R1" gate="G$1" pin="2"/>
-<wire x1="149.86" y1="223.52" x2="149.86" y2="220.98" width="0.1524" layer="91"/>
-<label x="149.86" y="223.52" size="1.27" layer="95" rot="R90" xref="yes"/>
+<pinref part="R2" gate="G$1" pin="2"/>
+<wire x1="137.16" y1="223.52" x2="137.16" y2="220.98" width="0.1524" layer="91"/>
+<label x="137.16" y="223.52" size="1.27" layer="95" rot="R90" xref="yes"/>
 </segment>
 </net>
 <net name="N$1" class="0">
