@@ -4,7 +4,7 @@ Pathname = "/c/datalogger/software/pictest.prj"
 CVI Dir = "/c/program files/national instruments/cvi81"
 IVI Standard Root Dir = "/C/Program Files/IVI Foundation/IVI"
 VXIplug&play Framework Dir = "/C/Program Files/IVI Foundation/VISA/winnt"
-Number of Files = 7
+Number of Files = 6
 Target Type = "Executable"
 Flags = 16
 
@@ -75,17 +75,6 @@ Path = "/c/datalogger/software/pictest.h"
 Exclude = False
 Project Flags = 0
 Folder = "Include Files"
-
-[File 0007]
-File Type = "User Interface Resource"
-Res Id = 7
-Path Is Rel = True
-Path Rel To = "Project"
-Path Rel Path = "pictest.uir"
-Path = "/c/datalogger/software/pictest.uir"
-Exclude = False
-Project Flags = 0
-Folder = "User Interface Files"
 
 [Folders]
 Instrument Files Folder Not Added Yet = True

@@ -25,7 +25,7 @@ Hide Windows = False
 Global Hot Key = False
 Break At First Statement = False
 Sort Type = "File Name"
-Number of Opened Files = 6
+Number of Opened Files = 7
 Window Confinement Region Enabled = True
 MainColumnWidth = 189
 FileDateColumnWidth = 70
@@ -51,52 +51,52 @@ Window Top = 33
 Window Left = 5
 Window Height = 521
 Window Width = 669
-Window Z-Order = 6
+Window Z-Order = 7
 
 [File 0002]
 Path = "/c/datalogger/software/picdriver.c"
 File Type = "CSource"
-Disk Date = 3421316669
+Disk Date = 3421324889
 In Projects = "1,"
 Window Top = 32
 Window Left = 6
-Window Z-Order = 3
-Source Window State = "1,214,214,214,2,21,21,0,0,61,0,0,0,0,0,19,160,0,190,45,271,524,1,0,"
+Window Z-Order = 4
+Source Window State = "1,272,272,272,61,63,61,0,0,61,0,0,0,0,0,19,249,0,276,4,271,524,1,0,"
 
 [File 0003]
 Path = "/c/datalogger/software/picdriver.h"
 File Type = "Include"
-Disk Date = 3421315680
+Disk Date = 3421324880
 In Projects = "1,"
 Window Top = 62
 Window Left = 22
-Window Z-Order = 4
-Source Window State = "1,0,0,0,8,16,16,0,0,61,0,0,0,0,0,19,0,0,1,12,271,524,1,0,"
+Window Z-Order = 5
+Source Window State = "1,14,14,14,0,133,0,0,3,61,0,0,0,0,0,19,0,36,14,133,271,524,1,0,"
 
 [File 0004]
 Path = "/c/datalogger/software/pictest.c"
 File Type = "CSource"
-Disk Date = 3421316767
+Disk Date = 3421325058
 In Projects = "1,"
 Window Top = 32
 Window Left = 6
-Window Z-Order = 2
-Source Window State = "1,16,16,16,38,44,38,0,0,61,0,0,0,0,0,19,0,0,14,8,271,524,1,0,"
+Window Z-Order = 3
+Source Window State = "1,108,108,108,0,144,0,0,0,61,0,1,0,1,0,19,84,0,110,39,271,524,1,0,"
 
 [File 0005]
 Path = "/c/datalogger/software/pictest.h"
 File Type = "Include"
-Disk Date = 3420026961
+Disk Date = 3421319732
 In Projects = "1,"
 Window Top = 86
 Window Left = 40
-Window Z-Order = 5
-Source Window State = "1,21,21,21,9,23,23,0,0,89,0,0,0,0,0,25,0,0,14,26,349,748,1,0,"
+Window Z-Order = 6
+Source Window State = "1,21,21,21,9,23,23,0,0,89,0,0,0,0,0,25,0,0,5,18,349,748,1,0,"
 
 [File 0006]
 Path = "/c/datalogger/software/interface.uir"
 File Type = "User Interface Resource"
-Disk Date = 3421314579
+Disk Date = 3421325059
 In Projects = "1,"
 Window Top = 32
 Window Left = 10
@@ -107,9 +107,12 @@ Window Z-Order = 1
 [File 0007]
 Path = "/c/datalogger/software/interface.h"
 File Type = "Include"
-Disk Date = 3421314579
+Disk Date = 3421325059
 In Projects = "1,"
-Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+Window Top = 32
+Window Left = 10
+Window Z-Order = 2
+Source Window State = "1,22,22,22,9,32,32,0,3,80,0,0,0,0,0,25,0,0,22,9,349,676,1,0,"
 
 [Build Options 0001]
 Generate Browse Info = True
