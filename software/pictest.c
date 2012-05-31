@@ -2,8 +2,11 @@
 #include <ansi_c.h>
 #include <cvirte.h>		
 #include <userint.h>
+#include <math.h>
 
-static int tabpanel2;
+static int TABPANEL; // These two are async/sync tabs
+static int TABPANEL_2; // labwindows doesn't give us
+					// constants for pages in tabs
 
 //#include "pictest.h"
 #include "picdriver.h"  
@@ -31,8 +34,15 @@ int main (int argc, char *argv[])
 		return -1;	/* out of memory */
 	if ((panelHandle = LoadPanel (0, "interface.uir", IFACEPANEL)) < 0)
 		return -1;
-	GetPanelHandleFromTabPage (panelHandle, IFACEPANEL_SYNCASYNCTAB, 1, &tabpanel2);
-    Radio_ConvertFromTree (tabpanel2, TABPANEL_2_EDGE);
+	
+	
+	GetPanelHandleFromTabPage (panelHandle, IFACEPANEL_SYNCASYNCTAB, 0, &TABPANEL);
+	GetPanelHandleFromTabPage (panelHandle, IFACEPANEL_SYNCASYNCTAB, 1, &TABPANEL_2);
+	
+    Radio_ConvertFromTree (TABPANEL, TABPANEL_RATEMULTIPLIER);
+	Radio_ConvertFromTree (TABPANEL_2, TABPANEL_2_EDGE);
+	
+	
 	DisplayPanel (panelHandle);
 	
 	if(init_usb() == USB_NO_ERROR)
@@ -105,6 +115,8 @@ int CVICALLBACK CAPTUREBUTTON_hit (int panel, int control, int event,
 	unsigned long rate, samplenumber;
 	int asyncsynctab;
 	int edge;
+	double ratedouble;
+	int multiplier;
 
 	
 	
@@ -123,18 +135,22 @@ int CVICALLBACK CAPTUREBUTTON_hit (int panel, int control, int event,
 				async=1;
 				sync=rising=falling=both=0;
 				
-				// TODO:
-				rate=0;
+				GetCtrlVal(TABPANEL, TABPANEL_SAMPLEFREQ, &ratedouble);
 				
-				//GetCtrlVal(panel, s
+				Radio_GetMarkedOption (TABPANEL, TABPANEL_RATEMULTIPLIER, &multiplier);
+				
+				if(multiplier==1)
+					ratedouble*=1000;
+				
+				rate = floor(ratedouble+0.5); // C doesn't have a round function, this is equivilent.
 			}
 			else // sync
 			{
 				sync=1;
 				async=rate=0;
 			
-				GetCtrlIndex(panel, TABPANEL_2_EDGE, &edge);
-				printf("%d", edge);
+				Radio_GetMarkedOption (TABPANEL_2, TABPANEL_2_EDGE, &edge);
+				
 				switch(edge)
 				{
 					case 0:
@@ -151,17 +167,14 @@ int CVICALLBACK CAPTUREBUTTON_hit (int panel, int control, int event,
 						both = true;
 						rising = falling = false;
 						break;
+				}
+			
+
 			}
 			
 			GetCtrlVal(panel, IFACEPANEL_SAMPLENUMBER, &samplenumber);
-			
 				
-				
-			
 			send_config_message(async, sync, rising, falling, both, rate, samplenumber);
-			
-
-		}			
 		
 	}
 	return 0;

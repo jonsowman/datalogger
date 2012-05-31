@@ -33,8 +33,7 @@
 
      /* tab page panel controls */
 #define  TABPANEL_SAMPLEFREQ             2
-#define  TABPANEL_SAMPLEFREQ_HZ          3
-#define  TABPANEL_SAMPLEFREQ_KHZ         4
+#define  TABPANEL_RATEMULTIPLIER         3
 
      /* tab page panel controls */
 #define  TABPANEL_2_EDGE                 2       /* callback function: EDGE_hit */
