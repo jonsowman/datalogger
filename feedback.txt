@@ -1,0 +1,2 @@
+* No thermal relief on PCB - pads merged with MASSIVE ground plane
+* char SendData[]="why?"; // This is an initialisation.  SendData is just a char pointer to a string constant which is then overwritten, rather than, say, making space on the stack or, say, using the heap.  Aside from the poeticness, this is horrifically wrong and would probably have caused later "buffer" (Actually string literal) overflows.
