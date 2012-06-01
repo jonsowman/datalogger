@@ -224,15 +224,15 @@ DWORD SendReceivePacket(BYTE *SendData, DWORD SendLength, BYTE *ReceiveData,
 
 int read_debug_byte (int *value)
 {
-     send_buf[0] = 0xED;      // Command
+     send_buf[0] = CMD_DEBUG_RQ;      // Command
     
-    RecvLength = 3; //set expected receive length 
+    RecvLength = LEN_DEBUG_RS; //set expected receive length 
 	
-    if (SendReceivePacket(send_buf,1,receive_buf,&RecvLength,1000,1000) == SUCCESS)
+    if (SendReceivePacket(send_buf,LEN_DEBUG_RQ,receive_buf,&RecvLength,1000,1000) == SUCCESS)
     {
-        if ((RecvLength == 3) && (receive_buf[0] == 0xED))
+        if ((RecvLength == LEN_DEBUG_RS) && (receive_buf[0] == CMD_DEBUG_RS))
         {
-            *value = receive_buf[2] & 0xFF;
+            *value = receive_buf[2] & 0xFF; // & ensures we only get one byte
 			return SUCCESS;
         }
 		else
@@ -280,14 +280,14 @@ int send_config_message(bool async, bool sync, bool rising, bool falling, bool b
 	}
 
 	
-	send_buf[0] = 0x42; // config command code
-	send_buf[1] = 11; // fixed length for config
+	send_buf[0] = CMD_CONFIG_RQ; // config command code
+	send_buf[1] = LEN_CONFIG_RQ; // fixed length for config
 	send_buf[2] = (async & 1) | ((sync & 1) << 1) | ((rising & 1) << 2) | ((falling & 1) << 3) | ((both & 1) << 4) | (1 << 7);
 
-	RecvLength = 3; // Expected recv len
-    if (SendReceivePacket(send_buf, 3, receive_buf,&RecvLength,1000,1000) == SUCCESS)
+	RecvLength = LEN_CONFIG_RS; // Expected recv len
+    if (SendReceivePacket(send_buf, LEN_CONFIG_RQ, receive_buf,&RecvLength,1000,1000) == SUCCESS)
     {
-        if( (RecvLength != 3) || ( (receive_buf[0] != 0x42) && (receive_buf[0] != 0xAA) ) ) 
+        if( (RecvLength != LEN_CONFIG_RS) || ( (receive_buf[0] != CMD_CONFIG_RS) && (receive_buf[0] != CMD_ERROR_RS) ) ) 
         {
 			if(debug) printf("Config response incorrect length or incorrect command code!!");
 
@@ -296,7 +296,7 @@ int send_config_message(bool async, bool sync, bool rising, bool falling, bool b
 		
 		
 		
-		if( ( (receive_buf[0]==0x42) && (receive_buf[2] != 0x01) ) || (receive_buf[0]==0xAA) )
+		if( ( (receive_buf[0]==CMD_CONFIG_RS) && (receive_buf[2] != CONFIG_FAIL) ) || (receive_buf[0]==CMD_ERROR_RS) )
 		{
 			if(debug) printf("Config response says we failed");
 
