@@ -18,10 +18,12 @@ static int TABPANEL_2; // labwindows doesn't give us
 
 void StatusMessage(int panel, int statusbox, char *message)
 {
-	int count;
-	InsertListItem(panel, statusbox, -1, message, 0);
-	GetNumListItems(panel,statusbox,&count);
-	SetCtrlIndex (panel, statusbox, count-1);
+	//int count;
+	InsertListItem(panel, statusbox, 0, message, 0);
+	//GetNumListItems(panel,statusbox,&count);
+	SetCtrlIndex (panel, statusbox, 0);
+	
+	// for new items at bottom, uncomment 1st and 3rd line and change 0 in 4th line to count-1
 }
 
 int main (int argc, char *argv[])
