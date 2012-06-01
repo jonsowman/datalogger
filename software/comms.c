@@ -299,10 +299,7 @@ int send_config_message(bool async, bool sync, bool rising, bool falling, bool b
     {
         if( (RecvLength != LEN_CONFIG_RS) || ( (receive_buf[0] != CMD_CONFIG_RS) && (receive_buf[0] != CMD_ERROR_RS) ) ) 
         {
-			if(debug)
-			{
-				printf("Config response incorrect length or incorrect command code!!\n");
-			}
+			if(debug) printf("Config response incorrect length or incorrect command code!!\n");
 
 			return USB_ERROR;
        	}
@@ -311,7 +308,8 @@ int send_config_message(bool async, bool sync, bool rising, bool falling, bool b
 		
 		if( ( (receive_buf[0]==CMD_CONFIG_RS) && (receive_buf[2] == CONFIG_FAIL) ) || (receive_buf[0]==CMD_ERROR_RS) )
 		{
-			if(debug) printf("Config response says we failed - command returned is 0x%x\n", receive_buf[0]);
+			if(debug) printf("Config response says we failed - command returned is 0x%x, payload 0x%x\n",
+						  receive_buf[0], receive_buf[2]);
 
 			return CONFIG_ERROR;
 		}
