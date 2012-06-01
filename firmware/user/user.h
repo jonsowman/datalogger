@@ -25,6 +25,7 @@ typedef union DATA_PACKET
             ID_BOARD      	 	= 0x31,
             UPDATE_LED			= 0x32,
             //UCAM
+            PING				= 0xDD,
 			GET_ADC_COMMAND		= 0xED,
             BLINK_LED_COMMAND	= 0xEE,
             RESET				= 0xFF,
