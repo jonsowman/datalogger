@@ -142,6 +142,9 @@ void ServiceRequests(void)
            	case GET_ADC_COMMAND: // [0xED. 8-bit data]
                 *usbptr++ = readRAM(0); // returns[0xED, len, data]
                 break;
+                
+           	case PING:
+           		break;
  
             case RESET:
                 Reset();
