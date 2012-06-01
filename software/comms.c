@@ -299,7 +299,7 @@ int send_config_message(bool async, bool sync, bool rising, bool falling, bool b
 		
 		
 		
-		if( ( (receive_buf[0]==CMD_CONFIG_RS) && (receive_buf[2] != CONFIG_FAIL) ) || (receive_buf[0]==CMD_ERROR_RS) )
+		if( ( (receive_buf[0]==CMD_CONFIG_RS) && (receive_buf[2] == CONFIG_FAIL) ) || (receive_buf[0]==CMD_ERROR_RS) )
 		{
 			if(debug) printf("Config response says we failed - command returned is 0x%x", receive_buf[0]);
 
