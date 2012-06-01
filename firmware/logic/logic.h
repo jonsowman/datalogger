@@ -10,7 +10,7 @@
 
 #define TIMER_PRELOAD			111
 #define MAX_SAMPLE_RATE			250000UL
-#define MAX_SAMPLE_NUM			0x1FFFF
+#define MAX_SAMPLE_NUM			0x20000
 
 #define MODE_ASYNC				0x01
 #define MODE_SYNC				0x02
