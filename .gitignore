@@ -3,6 +3,9 @@
 *.s#*
 *.b#*
 firmware/hex/*
+firmware/MCHPUSB.mcp
+firmware/MCHPUSB.mcw
+firmware/MCHPUSB.mcs
 *.err
 reports/*/*.aux
 reports/*/*.log
