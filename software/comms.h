@@ -1,5 +1,5 @@
-#ifndef PICDRIVER_H
-#define PICDRIVER_H
+#ifndef COMMS_H
+#define COMMS_H
 
 #define SUCCESS 0
 #define USB_ERROR 1
@@ -16,7 +16,12 @@ int init_usb (void);
 int close_usb (void);
 int read_debug_byte (int *value);
 
-int send_config_message(bool async, bool sync, bool rising, bool falling, bool both, unsigned long rate, unsigned long samplenumber);
+int do_ping(void);
+
+int send_config_message(bool async, bool sync, bool rising, bool falling, bool both,
+	unsigned long rate, unsigned long samplenumber);
+
+
 
 //int set_led (int value);
 

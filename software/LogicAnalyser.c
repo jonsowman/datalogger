@@ -303,3 +303,26 @@ int CVICALLBACK RECONNECTBUTTON_hit (int panel, int control, int event,
 	}
 	return 0;
 }
+
+int CVICALLBACK PINGTIMER_hit (int panel, int control, int event,
+		void *callbackData, int eventData1, int eventData2)
+{
+	int AnalyserConnected;
+	
+	if(event != EVENT_TIMER_TICK)
+		return 0; // not a tick!
+	
+	GetCtrlVal(panel, IFACEPANEL_CONNECTEDLED, &AnalyserConnected);
+	if(AnalyserConnected != 1)
+		return 0;
+	
+	if(do_ping() != SUCCESS)
+	{
+		StatusMessage(panel, IFACEPANEL_STATUSBOX, "Logic analyser stopped responding - disconnecting");
+		// Say disconnecting - in reality do_ping() has already called the usb_disconnect, since that's in comm.c
+		
+		SetCtrlVal(panel, IFACEPANEL_CONNECTEDLED, 0);
+	}
+	
+	return 0;
+}

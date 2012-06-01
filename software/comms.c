@@ -166,13 +166,16 @@ DWORD SendReceivePacket(BYTE *SendData, DWORD SendLength, BYTE *ReceiveData,
 
     if(myOutPipe != INVALID_HANDLE_VALUE && myInPipe != INVALID_HANDLE_VALUE)
     {
-		if(debug) printf("About to send command 0x%x\n", SendData[0]);
+		if(debug && SendData[0] != 0xdd) printf("About to send command 0x%x\n", SendData[0]);
+		// Squelch ping/pongs
+		
         if(MPUSBWrite(myOutPipe,SendData,SendLength,&SentDataLength,SendDelay))
         {
             if(MPUSBRead(myInPipe,ReceiveData, ExpectedReceiveLength,
                         ReceiveLength,ReceiveDelay))
             {
-				if(debug) printf("Received command 0x%x\n", ReceiveData[0]);
+				if(debug && ReceiveData[0] != 0xdd) printf("Received command 0x%x\n", ReceiveData[0]);
+				// Squelch ping/pongs
 				
                 if((*ReceiveLength == ExpectedReceiveLength) || (ReceiveData[0] == 0xee))
 					// 0xEE is some magic command in the usb init - seems to return 
@@ -321,6 +324,29 @@ int send_config_message(bool async, bool sync, bool rising, bool falling, bool b
     {
         if(debug) printf("USB Operation Failed\r\n");
 
+		return USB_ERROR;
+	}
+}
+
+int do_ping()
+{
+	DWORD RecvLength = LEN_PING_RS;
+	send_buf[0] = CMD_PING_RQ;
+	send_buf[1] = LEN_PING_RQ;
+	
+	if (SendReceivePacket(send_buf, LEN_PING_RQ, receive_buf,&RecvLength,1000,1000) == SUCCESS)
+	{
+		if(receive_buf[0] == CMD_PING_RS)
+			return SUCCESS;
+		else
+		{
+			close_usb();
+			return USB_ERROR;
+		}
+	}
+	else
+	{
+		close_usb();
 		return USB_ERROR;
 	}
 }
