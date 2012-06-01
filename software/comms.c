@@ -172,12 +172,15 @@ DWORD SendReceivePacket(BYTE *SendData, DWORD SendLength, BYTE *ReceiveData,
 
     if(myOutPipe != INVALID_HANDLE_VALUE && myInPipe != INVALID_HANDLE_VALUE)
     {
+		if(debug) printf("About to send command 0x%x\n", SendData[0]);
         if(MPUSBWrite(myOutPipe,SendData,SendLength,&SentDataLength,SendDelay))
         {
 
             if(MPUSBRead(myInPipe,ReceiveData, ExpectedReceiveLength,
                         ReceiveLength,ReceiveDelay))
             {
+				if(debug) printf("Received command 0x%x\n", ReceiveData[0]);
+				
                 if((*ReceiveLength == ExpectedReceiveLength) || (ReceiveData[0] == 0xee))
 					// 0xEE is some magic command in the usb init - seems to return 
 					// incorrect length when logic analyser is reset without being
@@ -291,7 +294,7 @@ int send_config_message(bool async, bool sync, bool rising, bool falling, bool b
         {
 			if(debug)
 			{
-				printf("Config response incorrect length or incorrect command code!!");
+				printf("Config response incorrect length or incorrect command code!!\n");
 			}
 
 			return USB_ERROR;
@@ -301,7 +304,7 @@ int send_config_message(bool async, bool sync, bool rising, bool falling, bool b
 		
 		if( ( (receive_buf[0]==CMD_CONFIG_RS) && (receive_buf[2] == CONFIG_FAIL) ) || (receive_buf[0]==CMD_ERROR_RS) )
 		{
-			if(debug) printf("Config response says we failed - command returned is 0x%x", receive_buf[0]);
+			if(debug) printf("Config response says we failed - command returned is 0x%x\n", receive_buf[0]);
 
 			return CONFIG_ERROR;
 		}
