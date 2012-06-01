@@ -119,11 +119,7 @@ int CVICALLBACK CAPTUREBUTTON_hit (int panel, int control, int event,
 	int result;
 
 	if(event != EVENT_COMMIT)
-		return 0;
-
-	// Generate config byte, send it
-	// check whether config was valid
-	// Rest is TODO.
+		return 0; // not a click! mouseover etc.
 	
 	
 	

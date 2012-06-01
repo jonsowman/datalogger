@@ -58,24 +58,18 @@ HINSTANCE hinstLib;
 char vid_pid[]= "vid_04d8&pid_000c"; 
 char out_pipe[]= "\\MCHP_EP1";
 
-char SendData[]="why?";
-DWORD SendLength=4;
-DWORD SentDataLength=0;
-DWORD SendDelay=1000;
-char ReceiveData[4];
-DWORD ExpectedReceiveLength=4;
-DWORD ReceiveLength=0;
-DWORD ReceiveDelay=5000;
+
 BYTE send_buf[64],receive_buf[64];
-DWORD RecvLength=4;
 
 
-
-//--------------driver implementation from example code------------
 
 int init_usb()
 {
    WORD Version=0; 
+   DWORD HackReceiveLength=4;
+   
+   send_buf[0] = 0x00;
+   receive_buf[0] = 0x00;
     
  
     // Get a handle to the DLL module.
@@ -133,7 +127,7 @@ int init_usb()
    
        //UCAM HACK NOT SURE WHY
    	   send_buf[0]=0xEE;
-       SendReceivePacket(send_buf, 1, receive_buf,&RecvLength,1000,1000);          
+       SendReceivePacket(send_buf, 1, receive_buf,&HackReceiveLength,1000,1000);          
           
       return SUCCESS; 
      }
@@ -175,7 +169,6 @@ DWORD SendReceivePacket(BYTE *SendData, DWORD SendLength, BYTE *ReceiveData,
 		if(debug) printf("About to send command 0x%x\n", SendData[0]);
         if(MPUSBWrite(myOutPipe,SendData,SendLength,&SentDataLength,SendDelay))
         {
-
             if(MPUSBRead(myInPipe,ReceiveData, ExpectedReceiveLength,
                         ReceiveLength,ReceiveDelay))
             {
@@ -227,9 +220,10 @@ DWORD SendReceivePacket(BYTE *SendData, DWORD SendLength, BYTE *ReceiveData,
 
 int read_debug_byte (int *value)
 {
+	DWORD RecvLength = LEN_DEBUG_RS; //set expected receive length;
+	
      send_buf[0] = CMD_DEBUG_RQ;      // Command
-    
-    RecvLength = LEN_DEBUG_RS; //set expected receive length 
+   
 	
     if (SendReceivePacket(send_buf,LEN_DEBUG_RQ,receive_buf,&RecvLength,1000,1000) == SUCCESS)
     {
@@ -259,6 +253,12 @@ int read_debug_byte (int *value)
 int send_config_message(bool async, bool sync, bool rising, bool falling, bool both,
 	unsigned long rate, unsigned long samplenumber)
 {
+	DWORD RecvLength = LEN_CONFIG_RS; // Expected recv len
+	
+	unsigned long *lptr;
+	char *cptr;
+	
+	
 	if( (!async && !sync) || (async && sync) )
 	{
 		printf("Error in send_config_message - one and only one of async or sync must be high!\n");
@@ -286,8 +286,15 @@ int send_config_message(bool async, bool sync, bool rising, bool falling, bool b
 	send_buf[0] = CMD_CONFIG_RQ; // config command code
 	send_buf[1] = LEN_CONFIG_RQ; // fixed length for config
 	send_buf[2] = (async & 1) | ((sync & 1) << 1) | ((rising & 1) << 2) | ((falling & 1) << 3) | ((both & 1) << 4) | (1 << 7);
+	
+	*( (unsigned int *)(&(send_buf[3])) ) = rate; // Have to be careful
+	// VC's runtime stuff sometimes detects when you do "creative" things
+	// with pointers and complains.
+	
+	*( (unsigned int *)(&(send_buf[7])) ) = samplenumber;
 
-	RecvLength = LEN_CONFIG_RS; // Expected recv len
+	
+	
     if (SendReceivePacket(send_buf, LEN_CONFIG_RQ, receive_buf,&RecvLength,1000,1000) == SUCCESS)
     {
         if( (RecvLength != LEN_CONFIG_RS) || ( (receive_buf[0] != CMD_CONFIG_RS) && (receive_buf[0] != CMD_ERROR_RS) ) ) 
