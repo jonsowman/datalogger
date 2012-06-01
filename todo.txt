@@ -1,1 +1,2 @@
-
+* Add commands and other constants to DEFINEs somewhere
+* Make config work (debug text with error type?)
