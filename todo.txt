@@ -1,1 +1,2 @@
 * Make config work (debug text with error type?)
+* Add timed pings to sw
