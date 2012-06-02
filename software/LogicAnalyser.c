@@ -57,12 +57,12 @@ int main (int argc, char *argv[])
 	
 	if(init_usb() == SUCCESS)
 	{
-		StatusMessage(panelHandle, IFACEPANEL_STATUSBOX, "Connected to logic analyser!");
+		StatusMessage(panelHandle, IFACEPANEL_STATUSBOX, "Connected to logic analyser");
 		SetCtrlVal(panelHandle, IFACEPANEL_CONNECTEDLED, 1);
 	}
 	else
 	{
-		StatusMessage(panelHandle, IFACEPANEL_STATUSBOX, "Failed to connect to logic analyser...");
+		StatusMessage(panelHandle, IFACEPANEL_STATUSBOX, "Failed to connect to logic analyser");
 		SetCtrlVal(panelHandle, IFACEPANEL_CONNECTEDLED, 0);
 	}
 	
@@ -108,7 +108,7 @@ int CVICALLBACK DEBUGBUTTON_hit (int panel, int control, int event,
 			else
 			{
 				SetCtrlVal(panel,IFACEPANEL_DEBUGBYTE, "error");
-				StatusMessage(panel, IFACEPANEL_STATUSBOX, "Error retrieving debug byte...");
+				StatusMessage(panel, IFACEPANEL_STATUSBOX, "Error retrieving debug byte");
 				SetCtrlVal(panel, IFACEPANEL_CONNECTEDLED, 0);
 			}
 			
@@ -289,22 +289,22 @@ int CVICALLBACK RECONNECTBUTTON_hit (int panel, int control, int event,
 		case EVENT_COMMIT:
 			if(close_usb() == SUCCESS)
 			{
-				StatusMessage(panel, IFACEPANEL_STATUSBOX, "Disconnected from logic analyser.");
+				StatusMessage(panel, IFACEPANEL_STATUSBOX, "Disconnected from logic analyser");
 				SetCtrlVal(panel, IFACEPANEL_CONNECTEDLED, 0);
 			}
 			else
-				StatusMessage(panel, IFACEPANEL_STATUSBOX, "Failed to disconnect from logic analyser...");
+				StatusMessage(panel, IFACEPANEL_STATUSBOX, "Failed to disconnect from logic analyser");
 				
 				
 				
 			if(init_usb() == SUCCESS)
 			{
-				StatusMessage(panel, IFACEPANEL_STATUSBOX, "Connected to logic analyser!");
+				StatusMessage(panel, IFACEPANEL_STATUSBOX, "Connected to logic analyser");
 				SetCtrlVal(panel, IFACEPANEL_CONNECTEDLED, 1);
 			}
 			else
 			{
-				StatusMessage(panel, IFACEPANEL_STATUSBOX, "Failed to connect to logic analyser...");
+				StatusMessage(panel, IFACEPANEL_STATUSBOX, "Failed to connect to logic analyser");
 				SetCtrlVal(panel, IFACEPANEL_CONNECTEDLED, 0);
 				close_usb();
 			}
