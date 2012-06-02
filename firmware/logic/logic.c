@@ -71,6 +71,7 @@ bool logicStart(void)
 		return false;
 	
 	logicReset();
+	LATLEDB = 0;
 	logic_state = LOGIC_ARM;
 	
 	// Set up interrupts and leave the hardware to it...
