@@ -28,7 +28,8 @@
 #define  IFACEPANEL_RECONNECTBUTTON      12      /* callback function: RECONNECTBUTTON_hit */
 #define  IFACEPANEL_SAMPLENUMBER         13
 #define  IFACEPANEL_CONNECTEDLED         14
-#define  IFACEPANEL_PINGTIMER            15      /* callback function: PINGTIMER_hit */
+#define  IFACEPANEL_DEBUGCHECKBOX        15      /* callback function: DEBUGCHECKBOX_hit */
+#define  IFACEPANEL_PINGTIMER            16      /* callback function: PINGTIMER_hit */
 
      /* tab page panel controls */
 #define  LISTPANEL_TEXTBOX               2
@@ -53,6 +54,7 @@
 
 int  CVICALLBACK CAPTUREBUTTON_hit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK DEBUGBUTTON_hit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK DEBUGCHECKBOX_hit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK DISPLAYTAB_hit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK EDGE_hit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK IFACEPANEL_hit(int panel, int event, void *callbackData, int eventData1, int eventData2);

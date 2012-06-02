@@ -8,7 +8,11 @@
 #define true 1
 #define false 0
 
-static int debug=1;
+#ifdef LOGICANALYSER_C
+int debug;
+#else
+extern int debug;
+#endif
 
 typedef char bool;
 

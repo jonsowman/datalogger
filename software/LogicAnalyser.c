@@ -1,3 +1,5 @@
+#define LOGICANALYSER_C
+
 #include "radioGroup.h"
 #include <ansi_c.h>
 #include <cvirte.h>		
@@ -54,6 +56,8 @@ int main (int argc, char *argv[])
 	
 	
 	DisplayPanel (panelHandle);
+	
+	GetCtrlVal(panelHandle, IFACEPANEL_DEBUGCHECKBOX, &debug);
 	
 	if(init_usb() == SUCCESS)
 	{
@@ -333,6 +337,17 @@ int CVICALLBACK PINGTIMER_hit (int panel, int control, int event,
 		
 		SetCtrlVal(panel, IFACEPANEL_CONNECTEDLED, 0);
 	}
+	
+	return 0;
+}
+
+int CVICALLBACK DEBUGCHECKBOX_hit (int panel, int control, int event,
+		void *callbackData, int eventData1, int eventData2)
+{
+	if(event != EVENT_COMMIT)
+		return 0; // Not a click!
+
+	GetCtrlVal(panel, IFACEPANEL_DEBUGCHECKBOX, &debug);
 	
 	return 0;
 }
