@@ -25,7 +25,7 @@ volatile uint8_t logic_state = LOGIC_IDLE;
 volatile uint32_t writeptr;
 
 // Next unread slot in SRAM
-volatile uint32_t readptr;
+uint32_t readptr;
 
 /**
  * Configure the logic analyser, takes one byte bitfield
@@ -154,10 +154,22 @@ uint32_t getSampleNumber(void)
 /**
  * Put up to 62 bytes into the USB buffer from SRAM,
  * updating read pointers as required. 'usbptr' must
- * be maintained as the next available space.
+ * be maintained as the next available space, and
+ * 'readptr' must be maintained as the next unread byte.
  */
 void fillUSBBuffer(uint8_t* usbptr)
 {
+	uint8_t i;
+	for(i=0; i<(USBGEN_EP_SIZE - 1); i++)
+	{
+		if(readptr = writeptr)
+		{
+			logic_state = LOGIC_END_DATA;
+			break;
+		}
+		*usbptr++ = readRAM(readptr++);
+	}
+	return;
 }
 
 /**

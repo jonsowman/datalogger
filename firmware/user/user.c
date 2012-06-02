@@ -126,8 +126,8 @@ void ServiceRequests(void)
             	*usbptr++ = 0x01;
             	break;
             	
-            case LOGIC_POLL: // return [CMD, LEN]
-            	*usbcmd = getLogicState();
+            case LOGIC_POLL: // return [POLL, LEN, STATE]
+            	*usbptr++ = getLogicState();
             	break;
             	
             case LOGIC_DATA:

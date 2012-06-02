@@ -32,15 +32,22 @@ typedef union DATA_PACKET
 			// Logic analyser commands
 			LOGIC_SET_SRATE		= 0x40,
 			LOGIC_GET_SRATE		= 0x41,
+			
+			// Analyser setup and sampling
 			LOGIC_CONFIG		= 0x42,
 			LOGIC_ARM			= 0x60,
 			LOGIC_WAITING		= 0x61,
 			LOGIC_START			= 0x62,
 			LOGIC_INPROGRESS	= 0x63,
 			LOGIC_END			= 0x64,
-			LOGIC_DATA			= 0x65,
-			LOGIC_IDLE			= 0x66,
-			LOGIC_POLL			= 0x6F,
+			LOGIC_POLL 			= 0x65,
+			
+			// Getting data back from analyser
+			LOGIC_DATA			= 0x66,
+			LOGIC_END_DATA		= 0x67,
+			
+			// Other
+			LOGIC_IDLE			= 0x6F,
 			LOGIC_ERROR			= 0xAA
         } CMD;
         byte len;
