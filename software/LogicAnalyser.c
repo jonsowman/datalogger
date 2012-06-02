@@ -535,3 +535,29 @@ int CVICALLBACK IFACEPANEL_hit (int panel, int event, void *callbackData,
 	}
 	return 0;
 }
+
+int CVICALLBACK ALLCHBUTTON_hit (int panel, int control, int event,
+		void *callbackData, int eventData1, int eventData2)
+{
+	if(event != EVENT_COMMIT) return 0; // not a click
+	
+	SetCtrlVal(panel, IFACEPANEL_CH7_CHECKBOX, 1); SetCtrlVal(panel, IFACEPANEL_CH6_CHECKBOX, 1);
+	SetCtrlVal(panel, IFACEPANEL_CH5_CHECKBOX, 1); SetCtrlVal(panel, IFACEPANEL_CH4_CHECKBOX, 1);
+	SetCtrlVal(panel, IFACEPANEL_CH3_CHECKBOX, 1); SetCtrlVal(panel, IFACEPANEL_CH2_CHECKBOX, 1);
+	SetCtrlVal(panel, IFACEPANEL_CH1_CHECKBOX, 1); SetCtrlVal(panel, IFACEPANEL_CH0_CHECKBOX, 1);
+	
+	return 0;
+}
+
+int CVICALLBACK NONECHBUTTON_hit (int panel, int control, int event,
+		void *callbackData, int eventData1, int eventData2)
+{
+	if(event != EVENT_COMMIT) return 0; // not a click
+	
+	SetCtrlVal(panel, IFACEPANEL_CH7_CHECKBOX, 0); SetCtrlVal(panel, IFACEPANEL_CH6_CHECKBOX, 0);
+	SetCtrlVal(panel, IFACEPANEL_CH5_CHECKBOX, 0); SetCtrlVal(panel, IFACEPANEL_CH4_CHECKBOX, 0);
+	SetCtrlVal(panel, IFACEPANEL_CH3_CHECKBOX, 0); SetCtrlVal(panel, IFACEPANEL_CH2_CHECKBOX, 0);
+	SetCtrlVal(panel, IFACEPANEL_CH1_CHECKBOX, 0); SetCtrlVal(panel, IFACEPANEL_CH0_CHECKBOX, 0);
+	
+	return 0;
+}

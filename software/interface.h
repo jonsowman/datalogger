@@ -39,6 +39,8 @@
 #define  IFACEPANEL_CH0_CHECKBOX         23
 #define  IFACEPANEL_CH6_CHECKBOX         24
 #define  IFACEPANEL_CH7_CHECKBOX         25
+#define  IFACEPANEL_ALLCHBUTTON          26      /* callback function: ALLCHBUTTON_hit */
+#define  IFACEPANEL_NONECHBUTTON         27      /* callback function: NONECHBUTTON_hit */
 
      /* tab page panel controls */
 #define  LISTPANEL_DATALISTING           2
@@ -61,12 +63,14 @@
 
      /* Callback Prototypes: */ 
 
+int  CVICALLBACK ALLCHBUTTON_hit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK CAPTUREBUTTON_hit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK DEBUGBUTTON_hit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK DEBUGCHECKBOX_hit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK DUMMYDATABUTTON_hit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK GENERATELISTINGBUTTON_hit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK IFACEPANEL_hit(int panel, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK NONECHBUTTON_hit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK PINGTIMER_hit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK QUITBUTTON_hit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK RECONNECTBUTTON_hit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
