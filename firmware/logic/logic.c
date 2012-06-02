@@ -163,7 +163,7 @@ void fillUSBBuffer(uint8_t* usbptr)
 	uint8_t i;
 	for(i=0; i<(USBGEN_EP_SIZE - 1); i++)
 	{
-		if(readptr = writeptr)
+		if(readptr == writeptr)
 		{
 			logic_state = LOGIC_END_DATA;
 			break;
