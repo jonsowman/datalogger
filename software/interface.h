@@ -16,24 +16,32 @@
 
 #define  IFACEPANEL                      1       /* callback function: IFACEPANEL_hit */
 #define  IFACEPANEL_QUITBUTTON           2       /* callback function: QUITBUTTON_hit */
-#define  IFACEPANEL_DISPLAYTAB           3
-#define  IFACEPANEL_SYNCASYNCTAB         4
-#define  IFACEPANEL_CAPTUREBUTTON        5       /* callback function: CAPTUREBUTTON_hit */
-#define  IFACEPANEL_STATUSBOX            6
-#define  IFACEPANEL_DEBUGBUTTON          7       /* callback function: DEBUGBUTTON_hit */
-#define  IFACEPANEL_DEBUGBYTE            8
-#define  IFACEPANEL_RECONNECTBUTTON      9       /* callback function: RECONNECTBUTTON_hit */
-#define  IFACEPANEL_SAMPLENUMBER         10
-#define  IFACEPANEL_CONNECTEDLED         11
-#define  IFACEPANEL_DEBUGCHECKBOX        12      /* callback function: DEBUGCHECKBOX_hit */
-#define  IFACEPANEL_PINGTIMER            13      /* callback function: PINGTIMER_hit */
-#define  IFACEPANEL_CAPTUREPROGRESS      14
-#define  IFACEPANEL_RETRIEVETIMER        15      /* callback function: RETRIEVETIMER_hit */
-#define  IFACEPANEL_DUMMYDATABUTTON      16      /* callback function: DUMMYDATABUTTON_hit */
+#define  IFACEPANEL_GENERATELISTINGBUTTON 3      /* callback function: GENERATELISTINGBUTTON_hit */
+#define  IFACEPANEL_DISPLAYTAB           4
+#define  IFACEPANEL_SYNCASYNCTAB         5
+#define  IFACEPANEL_CAPTUREBUTTON        6       /* callback function: CAPTUREBUTTON_hit */
+#define  IFACEPANEL_STATUSBOX            7
+#define  IFACEPANEL_DEBUGBUTTON          8       /* callback function: DEBUGBUTTON_hit */
+#define  IFACEPANEL_DEBUGBYTE            9
+#define  IFACEPANEL_RECONNECTBUTTON      10      /* callback function: RECONNECTBUTTON_hit */
+#define  IFACEPANEL_SAMPLENUMBER         11
+#define  IFACEPANEL_CONNECTEDLED         12
+#define  IFACEPANEL_DEBUGCHECKBOX        13      /* callback function: DEBUGCHECKBOX_hit */
+#define  IFACEPANEL_PINGTIMER            14      /* callback function: PINGTIMER_hit */
+#define  IFACEPANEL_CAPTUREPROGRESS      15
+#define  IFACEPANEL_RETRIEVETIMER        16      /* callback function: RETRIEVETIMER_hit */
+#define  IFACEPANEL_DUMMYDATABUTTON      17      /* callback function: DUMMYDATABUTTON_hit */
+#define  IFACEPANEL_CH1_CHECKBOX         18
+#define  IFACEPANEL_CH2_CHECKBOX         19
+#define  IFACEPANEL_CH3_CHECKBOX         20
+#define  IFACEPANEL_CH4_CHECKBOX         21
+#define  IFACEPANEL_CH5_CHECKBOX         22
+#define  IFACEPANEL_CH0_CHECKBOX         23
+#define  IFACEPANEL_CH6_CHECKBOX         24
+#define  IFACEPANEL_CH7_CHECKBOX         25
 
      /* tab page panel controls */
 #define  LISTPANEL_DATALISTING           2
-#define  LISTPANEL_GENERATELISTINGBUTTON 3       /* callback function: GENERATELISTINGBUTTON_hit */
 
      /* tab page panel controls */
 #define  TABPANEL_SAMPLEFREQ             2

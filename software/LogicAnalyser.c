@@ -13,6 +13,9 @@ static int TABPANEL; // These two are async/sync tabs
 static int TABPANEL_2; // labwindows doesn't give us
 					// constants for pages in tabs
 
+static int DISPLAYTABPANEL1;
+static int DISPLAYTABPANEL2;
+
 #include "comms.h"  
 #include "interface.h"
 #include <stdio.h>
@@ -70,6 +73,11 @@ int main (int argc, char *argv[])
 	
 	GetPanelHandleFromTabPage (panelHandle, IFACEPANEL_SYNCASYNCTAB, 0, &TABPANEL);
 	GetPanelHandleFromTabPage (panelHandle, IFACEPANEL_SYNCASYNCTAB, 1, &TABPANEL_2);
+	
+	GetPanelHandleFromTabPage (panelHandle, IFACEPANEL_DISPLAYTAB, 0, &DISPLAYTABPANEL1);
+	GetPanelHandleFromTabPage (panelHandle, IFACEPANEL_DISPLAYTAB, 1, &DISPLAYTABPANEL2);
+	
+	
 	
     Radio_ConvertFromTree (TABPANEL, TABPANEL_RATEMULTIPLIER);
 	Radio_ConvertFromTree (TABPANEL_2, TABPANEL_2_EDGE);
@@ -454,7 +462,7 @@ int CVICALLBACK GENERATELISTINGBUTTON_hit (int panel, int control, int event,
 	}
 
 	// SetCtrlVal on textbox appends - reset replaces, which is what we want.
-	ResetTextBox(panel, LISTPANEL_DATALISTING, "CH7 CH6 CH5 CH4 CH3 CH2 CH1 CH0\n");
+	ResetTextBox(DISPLAYTABPANEL2, LISTPANEL_DATALISTING, "CH7 CH6 CH5 CH4 CH3 CH2 CH1 CH0\n");
 	
 	for(i=0; i<datalength; i++)
 	{
@@ -462,7 +470,7 @@ int CVICALLBACK GENERATELISTINGBUTTON_hit (int panel, int control, int event,
 			(datastore[i]>>5)&1, (datastore[i]>>4)&1, (datastore[i]>>3)&1, (datastore[i]>>2)&1,
 			(datastore[i]>>1)&1, (datastore[i])&1);
 		
-		SetCtrlVal(panel, LISTPANEL_DATALISTING, buf); // Set on textbox actually appends
+		SetCtrlVal(DISPLAYTABPANEL2, LISTPANEL_DATALISTING, buf); // Set on textbox actually appends
 	}
 	
 	return 0;
