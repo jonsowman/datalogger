@@ -127,9 +127,21 @@ void ServiceRequests(void)
             	*usbptr++ = 0x01;
             	break;
             	
-            case LOGIC_DATA: // return [CMD, LEN]
+            case LOGIC_POLL: // return [CMD, LEN]
             	*usbcmd = getLogicState();
             	break;
+            	
+            case LOGIC_DATA:
+            	if(getLogicState() == LOGIC_END)
+            	{
+            		fillUSBBuffer(usbptr);
+            		break;
+            	} else {
+	            	*usbcmd = LOGIC_ERROR;
+	            	*usbptr++ = ERROR_DATA_UNAVAILABLE;
+	            	*usbptr++ = getLogicState();
+            		break;
+            	}
             	
             // The following command breaks the the command/response
             // protocol defined for the Logic Analyser, in order that they be

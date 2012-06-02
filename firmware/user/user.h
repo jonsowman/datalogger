@@ -40,6 +40,7 @@ typedef union DATA_PACKET
 			LOGIC_END			= 0x64,
 			LOGIC_DATA			= 0x65,
 			LOGIC_IDLE			= 0x66,
+			LOGIC_POLL			= 0x6F,
 			LOGIC_ERROR			= 0xAA
         } CMD;
         byte len;
@@ -51,6 +52,7 @@ typedef union DATA_PACKET
 #define ERROR_INVALID_SAMPLE_RATE		0x02
 #define ERROR_INVALID_SAMPLE_NUMBER		0x03
 #define ERROR_INVALID_CONFIG			0x04
+#define ERROR_DATA_UNAVAILABLE			0x05
 
 // Public prototypes
 void UserInit(void);

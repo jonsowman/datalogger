@@ -71,7 +71,7 @@ bool logicStart(void)
 	sampleptr = 0;
 	
 	// Set up interrupts and leave the hardware to it...
-	beginSampling(config);
+	_beginSampling(config);
 	return true;
 }
 
@@ -79,15 +79,15 @@ bool logicStart(void)
  * Configure the timer or the external interrupt pin depending
  * on how the config is set.
  */
-void beginSampling(uint8_t config)
+void _beginSampling(uint8_t config)
 {
 	if(config & MODE_ASYNC)
 	{
-		startTimer();
+		_startTimer();
 	}
 	else if(config & MODE_SYNC)
 	{
-		startExtInterrupt(config);
+		_startExtInterrupt(config);
 	}
 }
 
@@ -149,10 +149,19 @@ uint32_t getSampleNumber(void)
 }
 
 /**
+ * Put up to 62 bytes into the USB buffer from SRAM,
+ * updating read pointers as required. 'usbptr' must
+ * be maintained as the next available space.
+ */
+void fillUSBBuffer(uint8_t* usbptr)
+{
+}
+
+/**
  * Set up an interrupt to run at the samplerate for async mode,
  * discard data for now.
  */
-void startTimer()
+void _startTimer()
 {	
 	// Enable interrupt priority
 	RCONbits.IPEN = 1;
@@ -192,7 +201,7 @@ void startTimer()
  * Set up the external interrupt for sync mode, firing on the required
  * edges.
  */
-void startExtInterrupt(uint8_t config)
+void _startExtInterrupt(uint8_t config)
 {
 	// Configure the edge for interrupt
 	if(config & SYNC_EDGE_RISE)

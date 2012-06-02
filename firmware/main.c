@@ -65,6 +65,7 @@ void main(void)
 	if(!logicStart()) LATLEDB = 1;
 	while(getLogicState() != LOGIC_END);
 	LATLEDA = 1;
+	LATLEDB = 1;
 	
     while(1)
     {
