@@ -51,8 +51,8 @@ bool verifyOptions(uint8_t options)
 {
 	if((options & MODE_ASYNC) && (options & MODE_SYNC))
 		return false;
-	if((options & SYNC_EDGE_RISE) && (options && SYNC_EDGE_FALL)
-			&& (options && SYNC_EDGE_BOTH))
+	if((options & SYNC_EDGE_RISE) && (options & SYNC_EDGE_FALL)
+			&& (options & SYNC_EDGE_BOTH))
 		return false;
 	if(!options & OPTIONS_VALID)
 		return false;
@@ -71,6 +71,7 @@ bool logicStart(void)
 		return false;
 	
 	logicReset();
+	LATLEDB = 0;
 	logic_state = LOGIC_ARM;
 	
 	// Set up interrupts and leave the hardware to it...
@@ -275,6 +276,7 @@ void high_isr(void)
 			INTCONbits.TMR0IE = 0;
 			T0CONbits.TMR0ON = 0;
 			logic_state = LOGIC_END;
+			LATLEDB = 1;
 		}
 	}
 }

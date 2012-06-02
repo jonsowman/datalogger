@@ -51,12 +51,14 @@ void main(void)
 	enableBuffer();
 	
 	// Configure to async mode
+	/*
 	LATLEDB = 1;
 	logicConfig(0x81);
 	setSampleNumber(&snum);
 	logicStart();
 	while(getLogicState() != LOGIC_END);
 	LATLEDA = 1;
+	*/
 	
     while(1)
     {
