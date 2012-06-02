@@ -3,6 +3,7 @@
 #include <cvirte.h>		
 #include <userint.h>
 #include <math.h>
+#include <time.h>
 
 static int TABPANEL; // These two are async/sync tabs
 static int TABPANEL_2; // labwindows doesn't give us
@@ -18,12 +19,21 @@ static int TABPANEL_2; // labwindows doesn't give us
 
 void StatusMessage(int panel, int statusbox, char *message)
 {
-	//int count;
-	InsertListItem(panel, statusbox, 0, message, 0);
-	//GetNumListItems(panel,statusbox,&count);
-	SetCtrlIndex (panel, statusbox, 0);
+	struct tm *timeinfo;
+	time_t now = time(NULL);
+	char buf[128];
+	int count;
 	
-	// for new items at bottom, uncomment 1st and 3rd line and change 0 in 4th line to count-1
+	timeinfo = localtime(&now);
+	
+	sprintf(buf,"%d:%02d:%02d - ", timeinfo->tm_hour, timeinfo->tm_min, timeinfo->tm_sec);
+	
+	strncat(buf,message,128-sizeof("00:00:00 - "));
+	
+	
+	InsertListItem(panel, statusbox, -1, buf, 0);
+	GetNumListItems(panel,statusbox,&count);
+	SetCtrlIndex (panel, statusbox, count-1);
 }
 
 int main (int argc, char *argv[])
