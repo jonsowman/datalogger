@@ -1,4 +1,6 @@
 #define LOGICANALYSER_C
+// Used to correctly wangle extern variables
+
 
 #include "radioGroup.h"
 #include <ansi_c.h>
@@ -17,6 +19,11 @@ static int TABPANEL_2; // labwindows doesn't give us
 
 // Couple of static state variables:
 BOOL capture_begun;
+BOOL retrieval_begun;
+
+
+char *datastore=NULL;
+char *datastoreptr=NULL;
 
 
 //static int panelHandle;
@@ -48,6 +55,15 @@ int main (int argc, char *argv[])
 		return -1;	/* out of memory */
 	if ((panelHandle = LoadPanel (0, "interface.uir", IFACEPANEL)) < 0)
 		return -1;
+	
+	// Create datastore:
+	datastore = malloc(sizeof(char) * DATASTORE_SIZE);
+	if(datastore == NULL)
+	{
+		printf("Out of memory!\n");
+		return -1;
+	}
+	
 	
 	
 	GetPanelHandleFromTabPage (panelHandle, IFACEPANEL_SYNCASYNCTAB, 0, &TABPANEL);
@@ -224,6 +240,8 @@ int CVICALLBACK CAPTUREBUTTON_hit (int panel, int control, int event,
 
 	
 	capture_begun = false; // state used later - set once samples have been taken
+	retrieval_begun = false; // Set once capture finished
+	datastoreptr=datastore;
 	// Start the retrieve timer:
 	
 	SetCtrlAttribute(panel, IFACEPANEL_RETRIEVETIMER, ATTR_ENABLED, 1); // Start the timer
@@ -231,86 +249,6 @@ int CVICALLBACK CAPTUREBUTTON_hit (int panel, int control, int event,
 	return 0;
 }
 
-int CVICALLBACK IFACEPANEL_hit (int panel, int event, void *callbackData,
-		int eventData1, int eventData2)
-{
-	switch (event)
-	{
-		case EVENT_GOT_FOCUS:
-
-			break;
-		case EVENT_LOST_FOCUS:
-
-			break;
-		case EVENT_CLOSE:
-
-			QuitUserInterface(0);
-	
-			break;
-	}
-	return 0;
-}
-
-int CVICALLBACK SYNCASYNCTAB_hit (int panel, int control, int event,
-		void *callbackData, int eventData1, int eventData2)
-{
-	switch (event)
-	{
-		case EVENT_ACTIVE_TAB_CHANGE:
-
-			break;
-	}
-	return 0;
-}
-
-int CVICALLBACK RISINGEDGE_hit (int panel, int control, int event,
-		void *callbackData, int eventData1, int eventData2)
-{
-	switch (event)
-	{
-		case EVENT_COMMIT:
-
-			break;
-	}
-	return 0;
-}
-
-int CVICALLBACK FALLINGEDGE_hit (int panel, int control, int event,
-		void *callbackData, int eventData1, int eventData2)
-{
-	switch (event)
-	{
-		case EVENT_COMMIT:
-
-			break;
-	}
-	return 0;
-}
-
-int CVICALLBACK EDGE_hit (int panel, int control, int event,
-		void *callbackData, int eventData1, int eventData2)
-{
-	switch (event)
-	{
-		case EVENT_COMMIT:
-
-			break;
-	}
-	return 0;
-}
-
-
-int CVICALLBACK DISPLAYTAB_hit (int panel, int control, int event,
-		void *callbackData, int eventData1, int eventData2)
-{
-	switch (event)
-	{
-		case EVENT_ACTIVE_TAB_CHANGE:
-
-			break;
-	}
-	return 0;
-}
 
 int CVICALLBACK RECONNECTBUTTON_hit (int panel, int control, int event,
 		void *callbackData, int eventData1, int eventData2)
@@ -387,46 +325,80 @@ int CVICALLBACK RETRIEVETIMER_hit (int panel, int control, int event,
 	if(event != EVENT_TIMER_TICK)
 		return 0; // not a tick!
 	
-	if(poll_state(&sampleptr, &state) != SUCCESS)
+	
+	if(!retrieval_begun) // Still in the capture phase - poll!
 	{
-		if(debug) printf("poll_state returned non-success\n");
-		return 0;
+		if(poll_state(&sampleptr, &state) != SUCCESS)
+		{
+			if(debug) printf("poll_state returned non-success\n");
+			return 0;
+		}
+	
+		switch(state) // Sampleptr is only set if STATE_PROG.
+		{
+			case STATE_START:
+				// Just wait for the next tick and hope the state is something more helpful
+				return 0;
+			
+			case STATE_WAIT:
+				// Waiting for capture to begin
+				StatusMessage(panel, IFACEPANEL_STATUSBOX, "Waiting for trigger/clock");
+				return 0;
+			
+			case STATE_PROG:
+				// Capture in progress!
+			
+				if(!capture_begun)
+				{
+					// Output status message only once!
+					StatusMessage(panel, IFACEPANEL_STATUSBOX, "Capture begun");
+					capture_begun=true;
+				}
+			
+				SetCtrlVal(panel, IFACEPANEL_CAPTUREPROGRESS, sampleptr);
+				return 0;
+			
+			case STATE_FIN:
+				// Capture finished!
+				StatusMessage(panel, IFACEPANEL_STATUSBOX, "Capture finished");
+			
+				retrieval_begun = true;
+			
+				return 0;
+			
+			default:
+				// This really shouldn't happen - invalid state
+				printf("Invalid state received from poll: 0x%x", state);
+				return 0;
+		}
 	}
 	
-	switch(state) // Sampleptr is only set if STATE_PROG.
+	// So now capture has finished and retrieval begun:
+	switch(getdata(datastore, &datastoreptr))
 	{
-		case STATE_START:
-			// Just wait for the next tick and hope the state is something more helpful
+		case GETDATA_SUCCESS:
+			// We have nabbed some more data into datastore
+			// Update the tank.  We make it count back down as we retrieve:
+			GetCtrlAttribute(panel, IFACEPANEL_CAPTUREPROGRESS, ATTR_MAX_VALUE, &numsamples);
+			SetCtrlVal(panel, IFACEPANEL_CAPTUREPROGRESS, numsamples-(datastoreptr-datastore));
 			return 0;
 			
-		case STATE_WAIT:
-			// Waiting for capture to begin
-			StatusMessage(panel, IFACEPANEL_STATUSBOX, "Waiting for trigger/clock");
-			return 0;
-			
-		case STATE_PROG:
-			// Capture in progress!
-			
-			if(!capture_begun)
-			{
-				// Output status message only once!
-				StatusMessage(panel, IFACEPANEL_STATUSBOX, "Capture begun");
-				capture_begun=true;
-			}
-			
-			SetCtrlVal(panel, IFACEPANEL_CAPTUREPROGRESS, sampleptr);
-			return 0;
-			
-		case STATE_FIN:
-			// Capture finished!
-			StatusMessage(panel, IFACEPANEL_STATUSBOX, "Capture finished");
-			// TODO: For now just stop the counter. In future we'll start retrieval.
+		case GETDATA_EOF:
+			// We have finished getting data
+			StatusMessage(panel, IFACEPANEL_STATUSBOX, "Finished data retrieval");
+			// TODO: Something
+			// For now just stop the timer.
 			SetCtrlAttribute(panel, IFACEPANEL_RETRIEVETIMER, ATTR_ENABLED, 0);
 			return 0;
 			
-		default:
-			// This really shouldn't happen - invalid state
-			printf("Invalid state received from poll: 0x%x", state);
+		default: // i.e. GETDATA_ERROR
+			// Any other return is some sort of error...
+			printf("Unexpected error from getdata\n");
+			// TODO: Abort capture?
+			// For now just stop the timer.
+			SetCtrlAttribute(panel, IFACEPANEL_RETRIEVETIMER, ATTR_ENABLED, 0);
+			return 0;
+		
 	}
 	
 	return 0;
