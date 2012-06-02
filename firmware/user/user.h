@@ -36,8 +36,8 @@ typedef union DATA_PACKET
 			// Analyser setup and sampling
 			LOGIC_CONFIG		= 0x42,
 			LOGIC_ARM			= 0x60,
-			LOGIC_WAITING		= 0x61,
-			LOGIC_START			= 0x62,
+			LOGIC_START			= 0x61,
+			LOGIC_WAITING		= 0x62,
 			LOGIC_INPROGRESS	= 0x63,
 			LOGIC_END			= 0x64,
 			LOGIC_POLL 			= 0x65,
@@ -47,6 +47,7 @@ typedef union DATA_PACKET
 			LOGIC_END_DATA		= 0x67,
 			
 			// Other
+			LOGIC_RESET			= 0x6E,
 			LOGIC_IDLE			= 0x6F,
 			LOGIC_ERROR			= 0xAA
         } CMD;

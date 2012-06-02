@@ -149,6 +149,11 @@ void ServiceRequests(void)
                 *usbptr++ = readRAM(0); // returns[0xED, len, data]
                 break;
                 
+            case LOGIC_RESET:
+            	logicReset();
+            	*usbptr++ = 0x01;
+            	break;
+                
            	case PING:
            		break;
  
