@@ -328,6 +328,44 @@ int send_config_message(bool async, bool sync, bool rising, bool falling, bool b
 	}
 }
 
+int send_arm_request(void)
+{
+	DWORD RecvLength = LEN_ARM_RS; // Expected recv len == 0x03
+	
+	if(debug) printf("Attempting to arm...\n");
+	
+	send_buf[0] = CMD_ARM_RQ;
+	send_buf[1] = LEN_ARM_RQ;
+	
+    if (SendReceivePacket(send_buf, LEN_ARM_RQ, receive_buf,&RecvLength,1000,1000) == SUCCESS)
+    {
+        if( (RecvLength != LEN_ARM_RS) || (receive_buf[0] != CMD_ARM_RS) ) 
+        {
+			if(debug) printf("Arm response incorrect length or incorrect command code!\n");
+
+			return USB_ERROR;
+       	}
+		
+		if( receive_buf[2] != ARM_SUCCESS )
+		{
+			if(debug) printf("Analyser refused to arm....\n");
+
+			return ARM_ERROR;
+		}
+		
+		// Looks like it's armed ok!
+		return SUCCESS;
+    }
+    else
+    {
+        if(debug) printf("USB Operation Failed\r\n");
+
+		return USB_ERROR;
+	}
+	
+	
+}
+
 int do_ping()
 {
 	DWORD RecvLength = LEN_PING_RS;

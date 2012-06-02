@@ -204,6 +204,20 @@ int CVICALLBACK CAPTUREBUTTON_hit (int panel, int control, int event,
 	SetCtrlAttribute(panel, IFACEPANEL_CAPTUREPROGRESS, ATTR_MAX_VALUE, samplenumber);
 	SetCtrlVal(panel, IFACEPANEL_CAPTUREPROGRESS, 0);
 		
+	// Get the capture started:
+	
+	// We send an ARM request:
+	if(send_arm_request() != SUCCESS)
+	{
+		// Failed to arm :(
+		StatusMessage(panel, IFACEPANEL_STATUSBOX, "Failed to arm analyser");
+		return 0;
+	}
+	
+	StatusMessage(panel, IFACEPANEL_STATUSBOX, "Analyser armed");
+	// Now we are armed we hand off to the timer to poll and retrieve data.
+	
+	
 	// Start the retrieve timer:
 	SetCtrlAttribute(panel, IFACEPANEL_RETRIEVETIMER, ATTR_ENABLED, 1);
 		
