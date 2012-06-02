@@ -1,4 +1,4 @@
 * UI for triggering with async
 * cancel button
 * mid-capture error handling
-* change all sprintf to snprintf
+
