@@ -410,8 +410,8 @@ int poll_state(unsigned int *sampleptr, unsigned int *state)
 		// Yoink 4 bytes starting at send_buf[3] and stick them in *sampleptr.
 		// Assumes both PIC and PC are running with LSB in lowest address.
 		if(receive_buf[2] == STATE_PROG)
-			*sampleptr = *( (unsigned int *)( send_buf+3 ) );
-		
+			*sampleptr = *( (unsigned int *)( receive_buf+3 ) );
+
 		// Otherwise, we really don't care about the state of *sampleptr
 			
 		// Return state:
