@@ -22,16 +22,13 @@ int send_config_message(bool async, bool sync, bool rising, bool falling, bool b
 	unsigned long rate, unsigned long samplenumber);
 int send_arm_request(void);
 int poll_state(unsigned int *sampleptr, unsigned int *state);
+int getdata(char *datastore, char **datastoreptr);
 
 
 
-//int set_led (int value);
+#define DATASTORE_SIZE 131072
 
 
-#define SUCCESS			0
-#define USB_ERROR		1
-#define CONFIG_ERROR	2
-#define ARM_ERROR		3
 
 
 // Various commands - described in spec.ods in the repo root.
@@ -83,13 +80,30 @@ int poll_state(unsigned int *sampleptr, unsigned int *state);
 
 
 
-// Various response codes:
+// Response codes used internally:
+
+#define SUCCESS			0x00
+#define USB_ERROR		0x01
+#define CONFIG_ERROR	0x02
+#define ARM_ERROR		0x03
+#define GETDATA_SUCCESS	0x04
+#define GETDATA_EOF		0x05
+#define GETDATA_ERROR	0x06
+
+// Response codes from the PIC:
 
 #define CONFIG_SUCCESS	0x01
 #define CONFIG_FAIL		0x00
 
 #define ARM_SUCCESS		0x01
 #define ARM_FAIL		0x00
+
+// Error command payloads from PIC (copied directly from bottom of firmware/user/user.h
+#define	ERROR_PAYLOAD_CMD_NOT_FOUND				0x01
+#define ERROR_PAYLOAD_INVALID_SAMPLE_RATE		0x02
+#define ERROR_PAYLOAD_INVALID_SAMPLE_NUMBER		0x03
+#define ERROR_PAYLOAD_INVALID_CONFIG			0x04
+#define ERROR_PAYLOAD_DATA_UNAVAILABLE			0x05
 
 
 

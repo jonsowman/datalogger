@@ -14,10 +14,10 @@
 
      /* Panels and Controls: */
 
-#define  IFACEPANEL                      1       /* callback function: IFACEPANEL_hit */
+#define  IFACEPANEL                      1
 #define  IFACEPANEL_QUITBUTTON           2       /* callback function: QUITBUTTON_hit */
-#define  IFACEPANEL_DISPLAYTAB           3       /* callback function: DISPLAYTAB_hit */
-#define  IFACEPANEL_SYNCASYNCTAB         4       /* callback function: SYNCASYNCTAB_hit */
+#define  IFACEPANEL_DISPLAYTAB           3
+#define  IFACEPANEL_SYNCASYNCTAB         4
 #define  IFACEPANEL_CAPTUREBUTTON        5       /* callback function: CAPTUREBUTTON_hit */
 #define  IFACEPANEL_STATUSBOX            6
 #define  IFACEPANEL_DEBUGBUTTON          7       /* callback function: DEBUGBUTTON_hit */
@@ -38,7 +38,7 @@
 #define  TABPANEL_RATEMULTIPLIER         3
 
      /* tab page panel controls */
-#define  TABPANEL_2_EDGE                 2       /* callback function: EDGE_hit */
+#define  TABPANEL_2_EDGE                 2
 
      /* tab page panel controls */
 #define  TIMPANEL_DIGGRAPH               2
@@ -54,14 +54,10 @@
 int  CVICALLBACK CAPTUREBUTTON_hit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK DEBUGBUTTON_hit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK DEBUGCHECKBOX_hit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
-int  CVICALLBACK DISPLAYTAB_hit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
-int  CVICALLBACK EDGE_hit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
-int  CVICALLBACK IFACEPANEL_hit(int panel, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK PINGTIMER_hit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK QUITBUTTON_hit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK RECONNECTBUTTON_hit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK RETRIEVETIMER_hit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
-int  CVICALLBACK SYNCASYNCTAB_hit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 
 
 #ifdef __cplusplus

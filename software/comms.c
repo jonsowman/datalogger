@@ -432,6 +432,55 @@ int poll_state(unsigned int *sampleptr, unsigned int *state)
 	return 0;
 }
 
+int getdata(char *datastore, char **datastoreptr)
+{
+	DWORD RecvLength = LEN_GETDATA_RS;
+	send_buf[0] = CMD_GETDATA_RQ;
+	send_buf[1] = LEN_GETDATA_RQ;
+	
+	if (SendReceivePacket(send_buf, LEN_GETDATA_RQ, receive_buf,&RecvLength,1000,1000) != SUCCESS)
+	{
+		if(debug) printf("USB error in getdata\n");
+		return USB_ERROR;
+	}
+	
+	if( (receive_buf[0] != CMD_GETDATA_RS) && (receive_buf[0] != CMD_ERROR_RS) )
+	{
+		if(debug) printf("Unexpected command returned from getdata request: 0x%x\n", receive_buf[0]);
+		return USB_ERROR;
+	}
+	
+	// Check for EOF or other errors:
+	if(receive_buf[0] == CMD_ERROR_RS)
+	{
+		// Check payload:
+		if(receive_buf[2] == ERROR_PAYLOAD_DATA_UNAVAILABLE)
+			return GETDATA_EOF; // Finished receiving data!
+		
+		// else:
+		if(debug) printf("Getdata returned error packet from analyser, payload 0x%x\n", receive_buf[2]);
+			return GETDATA_ERROR; // Not an EOF - is a real error
+		
+	}
+	
+	
+	// Check we won't overflow the datastore:
+	// (Sub 2 from recvlength to remove cmd&len bytes)
+	if( *datastoreptr + (RecvLength-2) > datastore + DATASTORE_SIZE)
+	{
+		printf("Analyser tried to overflow our datastore!\n");
+		return USB_ERROR;
+	}
+	
+	// Right, copy data:
+	memcpy(*datastoreptr, receive_buf, RecvLength - 2);
+	
+	*datastoreptr += RecvLength - 2;
+	
+	return GETDATA_SUCCESS;
+	
+}
+
 int do_ping()
 {
 	DWORD RecvLength = LEN_PING_RS;
