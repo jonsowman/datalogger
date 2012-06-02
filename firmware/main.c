@@ -46,7 +46,7 @@ void interrupt_at_low_vector(void)
 // Main program loop
 void main(void)
 {   
-	uint32_t snum = 0x8FF;
+	uint32_t snum = 0x1000;
     InitializeSystem();
 	enableBuffer();
 	
