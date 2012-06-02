@@ -92,6 +92,7 @@ void _beginSampling(uint8_t config)
 	{
 		_startExtInterrupt(config);
 	}
+	return;
 }
 
 /**
@@ -179,7 +180,6 @@ void fillUSBBuffer(uint8_t* usbptr)
  */
 void logicReset(void)
 {
-	config = 0;
 	writeptr = 0;
 	readptr = 0;
 	logic_state = LOGIC_IDLE;
@@ -189,7 +189,7 @@ void logicReset(void)
  * Set up an interrupt to run at the samplerate for async mode,
  * discard data for now.
  */
-void _startTimer()
+void _startTimer(void)
 {	
 	// Enable interrupt priority
 	RCONbits.IPEN = 1;

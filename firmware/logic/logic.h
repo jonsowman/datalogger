@@ -45,7 +45,7 @@ void logicReset(void);
 
 // Private prototypes
 void _beginSampling(uint8_t config);
-void _startTimer();
+void _startTimer(void);
 void _startExtInterrupt(uint8_t config);
 
 // ISR prototypes

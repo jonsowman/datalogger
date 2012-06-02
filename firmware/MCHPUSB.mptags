@@ -344,8 +344,8 @@ _dword	C:\datalogger\firmware\system\typedefs.h	60;"	m	line:60	union:_DWORD
 _reset	C:\datalogger\firmware\main.c	24;"	f	line:24	signature:(void)
 _startExtInterrupt	C:\datalogger\firmware\logic\logic.c	232;"	f	line:232	signature:(uint8_t config)
 _startExtInterrupt	C:\datalogger\firmware\logic\logic.h	49;"	p	line:49	signature:(uint8_t config)
-_startTimer	C:\datalogger\firmware\logic\logic.c	192;"	f	line:192
-_startTimer	C:\datalogger\firmware\logic\logic.h	48;"	p	line:48	signature:()
+_startTimer	C:\datalogger\firmware\logic\logic.c	192;"	f	line:192	signature:(void)
+_startTimer	C:\datalogger\firmware\logic\logic.h	48;"	p	line:48	signature:(void)
 _startup	C:\datalogger\firmware\main.c	22;"	p	line:22	file:	signature:(void)
 _word	C:\datalogger\firmware\system\typedefs.h	105;"	m	line:105	union:_POINTER
 _word	C:\datalogger\firmware\system\typedefs.h	34;"	m	line:34	union:_WORD
@@ -428,20 +428,20 @@ ep8Bo	C:\datalogger\firmware\system\usb\usbmmap.c	214;"	v	line:214
 ep9Bi	C:\datalogger\firmware\system\usb\usbmmap.c	220;"	v	line:220
 ep9Bo	C:\datalogger\firmware\system\usb\usbmmap.c	219;"	v	line:219
 false::0	C:\datalogger\firmware\system\typedefs.h	126;"	d	line:126
-fillUSBBuffer	C:\datalogger\firmware\logic\logic.c	160;"	f	line:160	signature:(uint8_t* usbptr)
+fillUSBBuffer	C:\datalogger\firmware\logic\logic.c	161;"	f	line:161	signature:(uint8_t* usbptr)
 fillUSBBuffer	C:\datalogger\firmware\logic\logic.h	41;"	p	line:41	signature:(uint8_t* usbptr)
-getLogicState	C:\datalogger\firmware\logic\logic.c	101;"	f	line:101	signature:(void)
+getLogicState	C:\datalogger\firmware\logic\logic.c	102;"	f	line:102	signature:(void)
 getLogicState	C:\datalogger\firmware\logic\logic.h	38;"	p	line:38	signature:(void)
 getSRByte	C:\datalogger\firmware\periph\periph.c	123;"	f	line:123	signature:(void)
 getSRByte	C:\datalogger\firmware\periph\periph.h	21;"	p	line:21	signature:(void)
-getSampleNumber	C:\datalogger\firmware\logic\logic.c	149;"	f	line:149	signature:(void)
+getSampleNumber	C:\datalogger\firmware\logic\logic.c	150;"	f	line:150	signature:(void)
 getSampleNumber	C:\datalogger\firmware\logic\logic.h	35;"	p	line:35	signature:(void)
-getSampleRate	C:\datalogger\firmware\logic\logic.c	125;"	f	line:125	signature:(void)
+getSampleRate	C:\datalogger\firmware\logic\logic.c	126;"	f	line:126	signature:(void)
 getSampleRate	C:\datalogger\firmware\logic\logic.h	33;"	p	line:33	signature:(void)
 high	C:\datalogger\firmware\user\user.c	194;"	l	line:194
 high_isr	C:\datalogger\firmware\logic\logic.c	252;"	f	line:252	signature:(void)
 high_isr	C:\datalogger\firmware\logic\logic.h	53;"	p	line:53	signature:(void)
-i	C:\datalogger\firmware\logic\logic.c	162;"	l	line:162
+i	C:\datalogger\firmware\logic\logic.c	163;"	l	line:163
 i	C:\datalogger\firmware\periph\periph.c	126;"	l	line:126
 i	C:\datalogger\firmware\system\usb\class\generic\usbgen.c	96;"	l	line:96
 i	C:\datalogger\firmware\system\usb\usbctrltrf\usbctrltrf.c	135;"	l	line:135
@@ -453,7 +453,7 @@ int8_t	C:\datalogger\firmware\system\typedefs.h	10;"	t	line:10
 len	C:\datalogger\firmware\user\user.h	53;"	m	line:53	struct:DATA_PACKET::<anonymous>
 logicConfig	C:\datalogger\firmware\logic\logic.c	35;"	f	line:35	signature:(uint8_t options)
 logicConfig	C:\datalogger\firmware\logic\logic.h	23;"	p	line:23	signature:(uint8_t options)
-logicReset	C:\datalogger\firmware\logic\logic.c	180;"	f	line:180	signature:(void)
+logicReset	C:\datalogger\firmware\logic\logic.c	181;"	f	line:181	signature:(void)
 logicReset	C:\datalogger\firmware\logic\logic.h	44;"	p	line:44	signature:(void)
 logicStart	C:\datalogger\firmware\logic\logic.c	67;"	f	line:67	signature:(void)
 logicStart	C:\datalogger\firmware\logic\logic.h	29;"	p	line:29	signature:(void)
@@ -503,9 +503,9 @@ self_power::1	C:\datalogger\firmware\io_cfg.h	21;"	d	line:21
 self_power::PORTAbits.RA2	C:\datalogger\firmware\io_cfg.h	19;"	d	line:19
 setRAMAddress	C:\datalogger\firmware\periph\periph.c	17;"	f	line:17	signature:(uint32_t address)
 setRAMAddress	C:\datalogger\firmware\periph\periph.h	12;"	p	line:12	signature:(uint32_t address)
-setSampleNumber	C:\datalogger\firmware\logic\logic.c	134;"	f	line:134	signature:(uint32_t* count)
+setSampleNumber	C:\datalogger\firmware\logic\logic.c	135;"	f	line:135	signature:(uint32_t* count)
 setSampleNumber	C:\datalogger\firmware\logic\logic.h	34;"	p	line:34	signature:(uint32_t* count)
-setSampleRate	C:\datalogger\firmware\logic\logic.c	110;"	f	line:110	signature:(uint32_t* rate)
+setSampleRate	C:\datalogger\firmware\logic\logic.c	111;"	f	line:111	signature:(uint32_t* rate)
 setSampleRate	C:\datalogger\firmware\logic\logic.h	32;"	p	line:32	signature:(uint32_t* samplerate)
 string	C:\datalogger\firmware\autofiles\usbdsc.c	199;"	m	line:199	file:
 string	C:\datalogger\firmware\autofiles\usbdsc.c	202;"	m	line:202	file:

@@ -60,12 +60,12 @@ void main(void)
 	*/
 	
 	// Configure to async mode
+	LATLEDB = 1;
 	logicConfig(0x81);
-	if(!setSampleNumber(&snum));
-	if(!logicStart()) LATLEDB = 1;
+	setSampleNumber(&snum);
+	logicStart();
 	while(getLogicState() != LOGIC_END);
 	LATLEDA = 1;
-	LATLEDB = 1;
 	
     while(1)
     {
