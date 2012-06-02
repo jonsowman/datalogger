@@ -20,6 +20,7 @@ static int TABPANEL_2; // labwindows doesn't give us
 // Couple of static state variables:
 BOOL capture_begun;
 BOOL retrieval_begun;
+unsigned int GetDatasPerTick;
 
 
 char *datastore=NULL;
@@ -244,6 +245,7 @@ int CVICALLBACK CAPTUREBUTTON_hit (int panel, int control, int event,
 	datastoreptr=datastore;
 	// Start the retrieve timer:
 	
+	SetCtrlAttribute(panel, IFACEPANEL_RETRIEVETIMER, ATTR_INTERVAL, 0.1); // 10Hz for capture stage
 	SetCtrlAttribute(panel, IFACEPANEL_RETRIEVETIMER, ATTR_ENABLED, 1); // Start the timer
 		
 	return 0;
@@ -363,7 +365,23 @@ int CVICALLBACK RETRIEVETIMER_hit (int panel, int control, int event,
 				StatusMessage(panel, IFACEPANEL_STATUSBOX, "Capture finished");
 			
 				retrieval_begun = true;
-			
+				
+				// Need to calculate GetDatasPerTick and TickRate
+				GetCtrlVal(panel, IFACEPANEL_CAPTUREPROGRESS, &numsamples);
+				if(numsamples < 100 * 64)
+				{
+					GetDatasPerTick = 1;
+					SetCtrlAttribute(panel, IFACEPANEL_RETRIEVETIMER, ATTR_INTERVAL, 0.002); // Max tick rate, i.e. 500Hz
+				}
+				else
+				{
+					GetDatasPerTick = ceil((double)numsamples / 64.0 / 100.0);
+					if(GetDatasPerTick > 50) GetDatasPerTick=50; // Cap to limit latency at ~50-100ms
+					if(GetDatasPerTick<1) GetDatasPerTick = 1; // Ensure at least 1!
+					SetCtrlAttribute(panel, IFACEPANEL_RETRIEVETIMER, ATTR_INTERVAL, (double)GetDatasPerTick / 500.0);
+						// tickrate = 500Hz / GetDatasPerTick assuming about 2ms per GetData
+				}
+				
 				return 0;
 			
 			default:
@@ -375,7 +393,7 @@ int CVICALLBACK RETRIEVETIMER_hit (int panel, int control, int event,
 	
 	// So now capture has finished and retrieval begun
 	// Do multiple getdatas per tick:
-	for(i=0; i<50; i++)
+	for(i=0; i<GetDatasPerTick; i++)
 	{
 		switch(getdata(datastore, &datastoreptr))
 		{
