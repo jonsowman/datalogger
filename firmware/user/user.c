@@ -22,22 +22,12 @@
 
 byte trf_state;
 
+// Write pointer from the logic subsystem
+extern volatile uint32_t writeptr;
+
 DATA_PACKET dataPacket;
 
-byte pTemp;                     // Pointer to current logging position, will
-                                // loop to zero once the max index is reached
-byte valid_temp;                // Keeps count of the valid data points
-word temp_data[30];             // 30 points of data
-
-// Timer0 - 1 second interval setup.
-// Fosc/4 = 12MHz
-// Use /256 prescalar, this brings counter freq down to 46,875 Hz
-// Timer0 should = 65536 - 46875 = 18661 or 0x48E5
-#define TIMER0L_VAL         0xE5
-#define TIMER0H_VAL         0x48
-
 // Private prototypes
-
 void BlinkUSBStatus(void);
 void ServiceRequests(void);
 void ResetTempLog(void);
@@ -128,6 +118,11 @@ void ServiceRequests(void)
             	
             case LOGIC_POLL: // return [POLL, LEN, STATE]
             	*usbptr++ = getLogicState();
+            	if(getLogicState() == LOGIC_INPROGRESS)
+            	{
+	            	*(uint32_t*)usbptr = writeptr;
+	            	usbptr += 4;
+	            }
             	break;
             	
             case LOGIC_DATA:
