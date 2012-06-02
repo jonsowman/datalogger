@@ -473,7 +473,7 @@ int getdata(char *datastore, char **datastoreptr)
 	}
 	
 	// Right, copy data:
-	memcpy(*datastoreptr, receive_buf, RecvLength - 2);
+	memcpy(*datastoreptr, receive_buf+2, RecvLength - 2);
 	
 	*datastoreptr += RecvLength - 2;
 	
