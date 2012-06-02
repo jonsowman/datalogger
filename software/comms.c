@@ -174,25 +174,35 @@ DWORD SendReceivePacket(BYTE *SendData, DWORD SendLength, BYTE *ReceiveData,
             if(MPUSBRead(myInPipe,ReceiveData, ExpectedReceiveLength,
                         ReceiveLength,ReceiveDelay))
             {
+				// Read went ok!
+				
 				if(debug && ReceiveData[0] != 0xdd) printf("Received command 0x%x\n", ReceiveData[0]);
 				// Squelch ping/pongs
 				
-                if((*ReceiveLength == ExpectedReceiveLength) || (ReceiveData[0] == 0xee))
-					// 0xEE is some magic command in the usb init - seems to return 
-					// incorrect length when logic analyser is reset without being
-					// unplugged.  Return len shouldn't matter anywho.
-                    return SUCCESS;   // Success!
-                
-				else// if(*ReceiveLength < ExpectedReceiveLength)
-                {
+				// We have some commands which can validly return unexpected lengths:
+				// "The UCAM hack" - who knows what's going on, but it doesn't really matter
+				// Poll response - length is either 0x03 or 0x07 depending on state - length is checked in poll_state
+				// The data request/response thingy.
+				// Error responses
+				
+				// For all other commands length should be as expected - so do length check here.
+				
+				if( (ReceiveData[0] != 0xEE) && (ReceiveData[0] != CMD_ERROR_RS) && (ReceiveData[0] != CMD_POLL_RS) &&
+					(ReceiveData[0] != CMD_GETDATA_RS) && (*ReceiveLength != ExpectedReceiveLength) )
+				{
+					// We have an unexpected receive length on a packet for which this is *NOT* ok
 					if(debug)
 					{
 						printf("SendReceivePacket failed: Incorrect receive length, cmd type %x\n", ReceiveData[0]);
 						printf("Expected length %d, actual length %d\n", ExpectedReceiveLength, *ReceiveLength);
 					}
 
-                    return USB_ERROR;   // Partially failed, incorrect receive length
-                }
+                    return USB_ERROR;
+				}
+				
+                return SUCCESS;
+                
+				
             }
 			else
 			{
