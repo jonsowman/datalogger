@@ -290,11 +290,11 @@ int send_config_message(bool async, bool sync, bool rising, bool falling, bool b
 	send_buf[1] = LEN_CONFIG_RQ; // fixed length for config
 	send_buf[2] = (async & 1) | ((sync & 1) << 1) | ((rising & 1) << 2) | ((falling & 1) << 3) | ((both & 1) << 4) | (1 << 7);
 	
-	*( (unsigned int *)(&(send_buf[3])) ) = rate; // Have to be careful
+	*( (unsigned int *)( send_buf+3 ) ) = rate; // Have to be careful
 	// VC's runtime stuff sometimes detects when you do "creative" things
 	// with pointers and complains.
 	
-	*( (unsigned int *)(&(send_buf[7])) ) = samplenumber;
+	*( (unsigned int *)( send_buf+7 ) ) = samplenumber;
 
 	
 	
@@ -364,6 +364,62 @@ int send_arm_request(void)
 	}
 	
 	
+}
+
+int poll_state(unsigned int *sampleptr, unsigned int *state)
+{
+	DWORD RecvLength = LEN_POLL_RS; // NB variable!
+	send_buf[0] = CMD_POLL_RQ;
+	send_buf[1] = LEN_POLL_RQ;
+	
+	if (SendReceivePacket(send_buf, LEN_POLL_RQ, receive_buf,&RecvLength,1000,1000) == SUCCESS)
+	{
+		// Error/sanity checks:
+		if(receive_buf[0] != CMD_POLL_RS)
+		{
+			if(debug) printf("Invalid command code received from poll request\n");
+			return USB_ERROR;
+		}
+		
+		if( (receive_buf[2] == STATE_PROG) && (RecvLength != 0x07) )
+		{
+			if(debug) printf("In_progress poll response packet is invalid length\n");
+			return USB_ERROR;
+		}
+		
+		if( (receive_buf[2] != STATE_PROG) && (RecvLength != 0x03) )
+		{
+			if(debug) printf("Poll response packet (Not in_progress state) is invalid length\n");
+			return USB_ERROR;
+		}
+		
+		// Ok, so everything is valid/happy at least.
+		
+		
+		// If in_progress, set sampleptr:
+		// Yoink 4 bytes starting at send_buf[3] and stick them in *sampleptr.
+		// Assumes both PIC and PC are running with LSB in lowest address.
+		if(receive_buf[2] == STATE_PROG)
+			*sampleptr = *( (unsigned int *)( send_buf+3 ) );
+		
+		// Otherwise, we really don't care about the state of *sampleptr
+			
+		// Return state:
+		*state = receive_buf[2];
+			
+		// All good
+		return SUCCESS;
+		
+		
+	}
+	else
+	{
+		if(debug) printf("USB error when trying to poll\n");
+		return USB_ERROR;
+	}
+	
+	
+	return 0;
 }
 
 int do_ping()

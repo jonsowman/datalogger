@@ -15,6 +15,8 @@ static int TABPANEL_2; // labwindows doesn't give us
 #include "interface.h"
 #include <stdio.h>
 
+// Couple of static state variables:
+BOOL capture_begun;
 
 
 //static int panelHandle;
@@ -202,9 +204,12 @@ int CVICALLBACK CAPTUREBUTTON_hit (int panel, int control, int event,
 	StatusMessage(panel, IFACEPANEL_STATUSBOX, "Successfully configured analyser");
 	
 	SetCtrlAttribute(panel, IFACEPANEL_CAPTUREPROGRESS, ATTR_MAX_VALUE, samplenumber);
+	// Set sample counter widget max to samplenumber
+	
 	SetCtrlVal(panel, IFACEPANEL_CAPTUREPROGRESS, 0);
+	// reset sample counter widget
 		
-	// Get the capture started:
+	// Let's get this capture started:
 	
 	// We send an ARM request:
 	if(send_arm_request() != SUCCESS)
@@ -214,12 +219,14 @@ int CVICALLBACK CAPTUREBUTTON_hit (int panel, int control, int event,
 		return 0;
 	}
 	
-	StatusMessage(panel, IFACEPANEL_STATUSBOX, "Analyser armed");
 	// Now we are armed we hand off to the timer to poll and retrieve data.
+	StatusMessage(panel, IFACEPANEL_STATUSBOX, "Analyser armed");
+
 	
-	
+	capture_begun = false; // state used later - set once samples have been taken
 	// Start the retrieve timer:
-	SetCtrlAttribute(panel, IFACEPANEL_RETRIEVETIMER, ATTR_ENABLED, 1);
+	
+	SetCtrlAttribute(panel, IFACEPANEL_RETRIEVETIMER, ATTR_ENABLED, 1); // Start the timer
 		
 	return 0;
 }
@@ -375,18 +382,52 @@ int CVICALLBACK DEBUGCHECKBOX_hit (int panel, int control, int event,
 int CVICALLBACK RETRIEVETIMER_hit (int panel, int control, int event,
 		void *callbackData, int eventData1, int eventData2)
 {
-	int numsamples, max;
-	
+	unsigned int numsamples, max, sampleptr, state;
+
 	if(event != EVENT_TIMER_TICK)
 		return 0; // not a tick!
 	
-	GetCtrlAttribute(panel, IFACEPANEL_CAPTUREPROGRESS, ATTR_MAX_VALUE, &max);
-	GetCtrlVal(panel, IFACEPANEL_CAPTUREPROGRESS, &numsamples);
+	if(poll_state(&sampleptr, &state) != SUCCESS)
+	{
+		if(debug) printf("poll_state returned non-success\n");
+		return 0;
+	}
 	
-	if(numsamples == max)
-		SetCtrlAttribute(panel, IFACEPANEL_RETRIEVETIMER, ATTR_ENABLED, 0);
-	else
-		SetCtrlVal(panel, IFACEPANEL_CAPTUREPROGRESS, numsamples+1);
+	switch(state) // Sampleptr is only set if STATE_PROG.
+	{
+		case STATE_START:
+			// Just wait for the next tick and hope the state is something more helpful
+			return 0;
+			
+		case STATE_WAIT:
+			// Waiting for capture to begin
+			StatusMessage(panel, IFACEPANEL_STATUSBOX, "Waiting for trigger/clock");
+			return 0;
+			
+		case STATE_PROG:
+			// Capture in progress!
+			
+			if(!capture_begun)
+			{
+				// Output status message only once!
+				StatusMessage(panel, IFACEPANEL_STATUSBOX, "Capture begun");
+				capture_begun=true;
+			}
+			
+			SetCtrlVal(panel, IFACEPANEL_CAPTUREPROGRESS, sampleptr);
+			return 0;
+			
+		case STATE_FIN:
+			// Capture finished!
+			StatusMessage(panel, IFACEPANEL_STATUSBOX, "Capture finished");
+			// TODO: For now just stop the counter. In future we'll start retrieval.
+			SetCtrlAttribute(panel, IFACEPANEL_RETRIEVETIMER, ATTR_ENABLED, 0);
+			return 0;
+			
+		default:
+			// This really shouldn't happen - invalid state
+			printf("Invalid state received from poll: 0x%x", state);
+	}
 	
 	return 0;
 }

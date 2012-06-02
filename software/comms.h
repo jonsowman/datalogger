@@ -21,6 +21,7 @@ int do_ping(void);
 int send_config_message(bool async, bool sync, bool rising, bool falling, bool both,
 	unsigned long rate, unsigned long samplenumber);
 int send_arm_request(void);
+int poll_state(unsigned int *sampleptr, unsigned int *state);
 
 
 
@@ -71,6 +72,18 @@ int send_arm_request(void);
 #define LEN_GETDATA_RS	0x40 // Variable length - anywhere between 0x02 and 0x40 depending on
 								// data len
 
+// States returned in POLL_RS:
+
+#define STATE_START		0x61 // We shouldn't really see this state but it might occur in some race conditions
+								// so we should handle it gracefully.  Basically just ignore it.
+#define STATE_WAIT		0x62 // Either waiting for async trigger or waiting for first sync clock. No samps yet captured
+#define STATE_PROG		0x63 // Capture is in progress - we have captured at least one sample.
+								// This state returns a longer packet with the number of samples captured as payload
+#define STATE_FIN		0x64 // Capture has finished - PIC is hopefully ready for retrieve.
+
+
+
+// Various response codes:
 
 #define CONFIG_SUCCESS	0x01
 #define CONFIG_FAIL		0x00
