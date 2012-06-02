@@ -22,7 +22,10 @@ uint8_t config;
 volatile uint8_t logic_state = LOGIC_IDLE;
 
 // Next empty sample slot in SRAM
-volatile uint32_t sampleptr;
+volatile uint32_t writeptr;
+
+// Next unread slot in SRAM
+volatile uint32_t readptr;
 
 /**
  * Configure the logic analyser, takes one byte bitfield
@@ -67,8 +70,8 @@ bool logicStart(void)
 	if(!verifyOptions(config))
 		return false;
 	
+	logicReset();
 	logic_state = LOGIC_ARM;
-	sampleptr = 0;
 	
 	// Set up interrupts and leave the hardware to it...
 	_beginSampling(config);
@@ -158,6 +161,19 @@ void fillUSBBuffer(uint8_t* usbptr)
 }
 
 /**
+ * Reset the analyser from whatever state it is currently
+ * in, ready for another sampling run followed by
+ * returning the data to the PC.
+ */
+void logicReset(void)
+{
+	config = 0;
+	writeptr = 0;
+	readptr = 0;
+	logic_state = LOGIC_IDLE;
+}
+
+/**
  * Set up an interrupt to run at the samplerate for async mode,
  * discard data for now.
  */
@@ -226,10 +242,10 @@ void high_isr(void)
 	if(INTCONbits.TMR0IF || INTCONbits.INT0IF)
 	{
 		LATB = LATB ^ 0x02; // FIXME
-		if(sampleptr < samplenumber) // check against max sample num
+		if(writeptr < samplenumber) // check against max sample num
 		{
-			writeRAM(sampleptr);
-			sampleptr++;
+			writeRAM(writeptr);
+			writeptr++;
 			logic_state = LOGIC_INPROGRESS;
 			if(INTCONbits.TMR0IF)
 			{

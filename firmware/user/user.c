@@ -121,9 +121,8 @@ void ServiceRequests(void)
             	*usbptr++ = 0x01;
             	break;
             	
-            case LOGIC_ARM:
+            case LOGIC_ARM: // return [CMD, LEN, RESULT]
             	logicStart();
-            	// Return 3 bytes, payload is '1' for success [CMD, 0x03, 0x01]
             	*usbptr++ = 0x01;
             	break;
             	

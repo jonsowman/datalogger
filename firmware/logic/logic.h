@@ -40,6 +40,9 @@ uint8_t getLogicState(void);
 // Fill the USB buffer with data from SRAM
 void fillUSBBuffer(uint8_t* usbptr);
 
+// Reset the analyser
+void logicReset(void);
+
 // Private prototypes
 void _beginSampling(uint8_t config);
 void _startTimer();
