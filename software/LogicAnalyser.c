@@ -449,8 +449,9 @@ int CVICALLBACK RETRIEVETIMER_hit (int panel, int control, int event,
 int CVICALLBACK GENERATELISTINGBUTTON_hit (int panel, int control, int event,
 		void *callbackData, int eventData1, int eventData2)
 {
-	unsigned int i;
-	char buf[128];
+	unsigned int i, j;
+	char buf[8];
+	int CHenable[8]; // Waste of space, but 32 bytes makes the code so much nicer and neater
 	
 	if(event != EVENT_COMMIT)
 		return 0; // Not a click
@@ -460,17 +461,39 @@ int CVICALLBACK GENERATELISTINGBUTTON_hit (int panel, int control, int event,
 		printf("I'm sorry Dave, I can't let you do that (datalen>1000)\n");
 		return 0;
 	}
-
-	// SetCtrlVal on textbox appends - reset replaces, which is what we want.
-	ResetTextBox(DISPLAYTABPANEL2, LISTPANEL_DATALISTING, "CH7 CH6 CH5 CH4 CH3 CH2 CH1 CH0\n");
 	
+	// Fill CHenable:
+	// Note reverse order - Because left to right, CH7 is first.
+	GetCtrlVal(panel, IFACEPANEL_CH7_CHECKBOX, CHenable);   GetCtrlVal(panel, IFACEPANEL_CH6_CHECKBOX, CHenable+1);
+	GetCtrlVal(panel, IFACEPANEL_CH5_CHECKBOX, CHenable+2); GetCtrlVal(panel, IFACEPANEL_CH4_CHECKBOX, CHenable+3);
+	GetCtrlVal(panel, IFACEPANEL_CH3_CHECKBOX, CHenable+4); GetCtrlVal(panel, IFACEPANEL_CH2_CHECKBOX, CHenable+5);
+	GetCtrlVal(panel, IFACEPANEL_CH1_CHECKBOX, CHenable+6); GetCtrlVal(panel, IFACEPANEL_CH0_CHECKBOX, CHenable+7);
+	
+	// Do headers:
+	// Reset textbox:
+	ResetTextBox(DISPLAYTABPANEL2, LISTPANEL_DATALISTING, "");
+	
+	for(j=0; j<8; j++)
+		if(CHenable[j])
+		{
+			sprintf(buf, "CH%d ", 7-j);
+			SetCtrlVal(DISPLAYTABPANEL2, LISTPANEL_DATALISTING, buf);  // append buf - CH headers
+		}
+		
+	SetCtrlVal(DISPLAYTABPANEL2, LISTPANEL_DATALISTING, "\n");  // append newline
+
+	// Do data:
 	for(i=0; i<datalength; i++)
 	{
-		sprintf(buf, "%d   %d   %d   %d   %d   %d   %d   %d\n", (datastore[i]>>7)&1, (datastore[i]>>6)&1,
-			(datastore[i]>>5)&1, (datastore[i]>>4)&1, (datastore[i]>>3)&1, (datastore[i]>>2)&1,
-			(datastore[i]>>1)&1, (datastore[i])&1);
+		for(j=0; j<8; j++)
+			if(CHenable[j])
+			{
+				sprintf(buf, "%d   ", (datastore[i]>>(7-j)) & 1 ); // Again, lazyily aligning with space padding
+									// This is a way of retrieving a single bit - shift, then filter out the LSbit with the &
+				SetCtrlVal(DISPLAYTABPANEL2, LISTPANEL_DATALISTING, buf);  // append CH values, spaces to align lazily
+			}
 		
-		SetCtrlVal(DISPLAYTABPANEL2, LISTPANEL_DATALISTING, buf); // Set on textbox actually appends
+		SetCtrlVal(DISPLAYTABPANEL2, LISTPANEL_DATALISTING, "\n"); // finally newline
 	}
 	
 	return 0;
