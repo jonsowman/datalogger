@@ -25,6 +25,7 @@ unsigned int GetDatasPerTick;
 
 char *datastore=NULL;
 char *datastoreptr=NULL;
+unsigned int datalength=0;
 
 
 //static int panelHandle;
@@ -200,6 +201,9 @@ int CVICALLBACK CAPTUREBUTTON_hit (int panel, int control, int event,
 	
 
 	}
+	
+	// Clear out old data:
+	datalength = 0;
 	
 	GetCtrlVal(panel, IFACEPANEL_SAMPLENUMBER, &samplenumber);
 		
@@ -405,9 +409,13 @@ int CVICALLBACK RETRIEVETIMER_hit (int panel, int control, int event,
 			case GETDATA_EOF:
 				// We have finished getting data
 				StatusMessage(panel, IFACEPANEL_STATUSBOX, "Finished data retrieval");
-				// TODO: Something
+				
 				// For now just stop the timer.
 				SetCtrlAttribute(panel, IFACEPANEL_RETRIEVETIMER, ATTR_ENABLED, 0);
+				
+				// Mark data length:
+				datalength = datastoreptr-datastore;
+				
 				return 0;
 			
 			default: // i.e. GETDATA_ERROR
@@ -427,5 +435,72 @@ int CVICALLBACK RETRIEVETIMER_hit (int panel, int control, int event,
 	SetCtrlVal(panel, IFACEPANEL_CAPTUREPROGRESS, numsamples-(datastoreptr-datastore));
 	
 	
+	return 0;
+}
+
+int CVICALLBACK GENERATELISTINGBUTTON_hit (int panel, int control, int event,
+		void *callbackData, int eventData1, int eventData2)
+{
+	unsigned int i;
+	char buf[128];
+	
+	if(event != EVENT_COMMIT)
+		return 0; // Not a click
+	
+	if(datalength>1000)
+	{
+		printf("I'm sorry Dave, I can't let you do that (datalen>1000)\n");
+		return 0;
+	}
+
+	// SetCtrlVal on textbox appends - reset replaces, which is what we want.
+	ResetTextBox(panel, LISTPANEL_DATALISTING, "CH7 CH6 CH5 CH4 CH3 CH2 CH1 CH0\n");
+	
+	for(i=0; i<datalength; i++)
+	{
+		sprintf(buf, "%d   %d   %d   %d   %d   %d   %d   %d\n", (datastore[i]>>7)&1, (datastore[i]>>6)&1,
+			(datastore[i]>>5)&1, (datastore[i]>>4)&1, (datastore[i]>>3)&1, (datastore[i]>>2)&1,
+			(datastore[i]>>1)&1, (datastore[i])&1);
+		
+		SetCtrlVal(panel, LISTPANEL_DATALISTING, buf); // Set on textbox actually appends
+	}
+	
+	return 0;
+}
+
+int CVICALLBACK DUMMYDATABUTTON_hit (int panel, int control, int event,
+		void *callbackData, int eventData1, int eventData2)
+{
+	unsigned int i;
+	
+	if(event != EVENT_COMMIT)
+		return 0; // Not a click
+	
+	GetCtrlVal(panel, IFACEPANEL_SAMPLENUMBER, &datalength);
+	
+	for(i=0; i<datalength; i++)
+		datastore[i]=0x42;
+	
+	if(debug) printf("Data Dummied - length %d\n", datalength);
+	
+	return 0;
+}
+
+int CVICALLBACK IFACEPANEL_hit (int panel, int event, void *callbackData,
+		int eventData1, int eventData2)
+{
+	switch (event)
+	{
+		case EVENT_GOT_FOCUS:
+
+			break;
+		case EVENT_LOST_FOCUS:
+
+			break;
+		case EVENT_CLOSE:
+			QuitUserInterface (0);
+
+			break;
+	}
 	return 0;
 }

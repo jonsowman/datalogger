@@ -14,7 +14,7 @@
 
      /* Panels and Controls: */
 
-#define  IFACEPANEL                      1
+#define  IFACEPANEL                      1       /* callback function: IFACEPANEL_hit */
 #define  IFACEPANEL_QUITBUTTON           2       /* callback function: QUITBUTTON_hit */
 #define  IFACEPANEL_DISPLAYTAB           3
 #define  IFACEPANEL_SYNCASYNCTAB         4
@@ -29,9 +29,11 @@
 #define  IFACEPANEL_PINGTIMER            13      /* callback function: PINGTIMER_hit */
 #define  IFACEPANEL_CAPTUREPROGRESS      14
 #define  IFACEPANEL_RETRIEVETIMER        15      /* callback function: RETRIEVETIMER_hit */
+#define  IFACEPANEL_DUMMYDATABUTTON      16      /* callback function: DUMMYDATABUTTON_hit */
 
      /* tab page panel controls */
-#define  LISTPANEL_TEXTBOX               2
+#define  LISTPANEL_DATALISTING           2
+#define  LISTPANEL_GENERATELISTINGBUTTON 3       /* callback function: GENERATELISTINGBUTTON_hit */
 
      /* tab page panel controls */
 #define  TABPANEL_SAMPLEFREQ             2
@@ -54,6 +56,9 @@
 int  CVICALLBACK CAPTUREBUTTON_hit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK DEBUGBUTTON_hit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK DEBUGCHECKBOX_hit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK DUMMYDATABUTTON_hit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK GENERATELISTINGBUTTON_hit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK IFACEPANEL_hit(int panel, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK PINGTIMER_hit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK QUITBUTTON_hit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK RECONNECTBUTTON_hit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
