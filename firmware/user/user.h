@@ -60,7 +60,8 @@ typedef union DATA_PACKET
 #define ERROR_INVALID_SAMPLE_RATE		0x02
 #define ERROR_INVALID_SAMPLE_NUMBER		0x03
 #define ERROR_INVALID_CONFIG			0x04
-#define ERROR_DATA_UNAVAILABLE			0x05
+#define ERROR_END_OF_DATA				0x05
+#define ERROR_DATA_UNAVAILABLE			0x06
 
 // Public prototypes
 void UserInit(void);

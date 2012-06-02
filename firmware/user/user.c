@@ -130,12 +130,17 @@ void ServiceRequests(void)
             	{
             		fillUSBBuffer(usbptr);
             		break;
-            	} else {
+            	} else if(getLogicState() == LOGIC_END_DATA)
+	            {
+	            	*usbcmd = LOGIC_ERROR;
+	            	*usbptr++ = ERROR_END_OF_DATA;
+            		break;
+            	} else
+            	{
 	            	*usbcmd = LOGIC_ERROR;
 	            	*usbptr++ = ERROR_DATA_UNAVAILABLE;
-	            	*usbptr++ = getLogicState();
-            		break;
-            	}
+	            	break;
+	            }
             	
             // The following command breaks the the command/response
             // protocol defined for the Logic Analyser, in order that they be
