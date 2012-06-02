@@ -17,19 +17,18 @@
 #define  IFACEPANEL                      1       /* callback function: IFACEPANEL_hit */
 #define  IFACEPANEL_QUITBUTTON           2       /* callback function: QUITBUTTON_hit */
 #define  IFACEPANEL_DISPLAYTAB           3       /* callback function: DISPLAYTAB_hit */
-#define  IFACEPANEL_TEXTMSG_3            4
-#define  IFACEPANEL_TEXTMSG_2            5
-#define  IFACEPANEL_TEXTMSG              6
-#define  IFACEPANEL_SYNCASYNCTAB         7       /* callback function: SYNCASYNCTAB_hit */
-#define  IFACEPANEL_CAPTUREBUTTON        8       /* callback function: CAPTUREBUTTON_hit */
-#define  IFACEPANEL_STATUSBOX            9
-#define  IFACEPANEL_DEBUGBUTTON          10      /* callback function: DEBUGBUTTON_hit */
-#define  IFACEPANEL_DEBUGBYTE            11
-#define  IFACEPANEL_RECONNECTBUTTON      12      /* callback function: RECONNECTBUTTON_hit */
-#define  IFACEPANEL_SAMPLENUMBER         13
-#define  IFACEPANEL_CONNECTEDLED         14
-#define  IFACEPANEL_DEBUGCHECKBOX        15      /* callback function: DEBUGCHECKBOX_hit */
-#define  IFACEPANEL_PINGTIMER            16      /* callback function: PINGTIMER_hit */
+#define  IFACEPANEL_SYNCASYNCTAB         4       /* callback function: SYNCASYNCTAB_hit */
+#define  IFACEPANEL_CAPTUREBUTTON        5       /* callback function: CAPTUREBUTTON_hit */
+#define  IFACEPANEL_STATUSBOX            6
+#define  IFACEPANEL_DEBUGBUTTON          7       /* callback function: DEBUGBUTTON_hit */
+#define  IFACEPANEL_DEBUGBYTE            8
+#define  IFACEPANEL_RECONNECTBUTTON      9       /* callback function: RECONNECTBUTTON_hit */
+#define  IFACEPANEL_SAMPLENUMBER         10
+#define  IFACEPANEL_CONNECTEDLED         11
+#define  IFACEPANEL_DEBUGCHECKBOX        12      /* callback function: DEBUGCHECKBOX_hit */
+#define  IFACEPANEL_PINGTIMER            13      /* callback function: PINGTIMER_hit */
+#define  IFACEPANEL_CAPTUREPROGRESS      14
+#define  IFACEPANEL_RETRIEVETIMER        15      /* callback function: RETRIEVETIMER_hit */
 
      /* tab page panel controls */
 #define  LISTPANEL_TEXTBOX               2
@@ -61,6 +60,7 @@ int  CVICALLBACK IFACEPANEL_hit(int panel, int event, void *callbackData, int ev
 int  CVICALLBACK PINGTIMER_hit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK QUITBUTTON_hit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK RECONNECTBUTTON_hit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK RETRIEVETIMER_hit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK SYNCASYNCTAB_hit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 
 

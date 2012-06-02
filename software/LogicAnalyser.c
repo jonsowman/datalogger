@@ -200,6 +200,12 @@ int CVICALLBACK CAPTUREBUTTON_hit (int panel, int control, int event,
 	}
 	
 	StatusMessage(panel, IFACEPANEL_STATUSBOX, "Successfully configured analyser");
+	
+	SetCtrlAttribute(panel, IFACEPANEL_CAPTUREPROGRESS, ATTR_MAX_VALUE, samplenumber);
+	SetCtrlVal(panel, IFACEPANEL_CAPTUREPROGRESS, 0);
+		
+	// Start the retrieve timer:
+	SetCtrlAttribute(panel, IFACEPANEL_RETRIEVETIMER, ATTR_ENABLED, 1);
 		
 	return 0;
 }
@@ -348,6 +354,25 @@ int CVICALLBACK DEBUGCHECKBOX_hit (int panel, int control, int event,
 		return 0; // Not a click!
 
 	GetCtrlVal(panel, IFACEPANEL_DEBUGCHECKBOX, &debug);
+	
+	return 0;
+}
+
+int CVICALLBACK RETRIEVETIMER_hit (int panel, int control, int event,
+		void *callbackData, int eventData1, int eventData2)
+{
+	int numsamples, max;
+	
+	if(event != EVENT_TIMER_TICK)
+		return 0; // not a tick!
+	
+	GetCtrlAttribute(panel, IFACEPANEL_CAPTUREPROGRESS, ATTR_MAX_VALUE, &max);
+	GetCtrlVal(panel, IFACEPANEL_CAPTUREPROGRESS, &numsamples);
+	
+	if(numsamples == max)
+		SetCtrlAttribute(panel, IFACEPANEL_RETRIEVETIMER, ATTR_ENABLED, 0);
+	else
+		SetCtrlVal(panel, IFACEPANEL_CAPTUREPROGRESS, numsamples+1);
 	
 	return 0;
 }
