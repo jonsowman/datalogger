@@ -320,7 +320,7 @@ int CVICALLBACK DEBUGCHECKBOX_hit (int panel, int control, int event,
 int CVICALLBACK RETRIEVETIMER_hit (int panel, int control, int event,
 		void *callbackData, int eventData1, int eventData2)
 {
-	unsigned int numsamples, max, sampleptr, state;
+	unsigned int numsamples, max, sampleptr, state, i;
 
 	if(event != EVENT_TIMER_TICK)
 		return 0; // not a tick!
@@ -373,33 +373,41 @@ int CVICALLBACK RETRIEVETIMER_hit (int panel, int control, int event,
 		}
 	}
 	
-	// So now capture has finished and retrieval begun:
-	switch(getdata(datastore, &datastoreptr))
+	// So now capture has finished and retrieval begun
+	// Do multiple getdatas per tick:
+	for(i=0; i<50; i++)
 	{
-		case GETDATA_SUCCESS:
-			// We have nabbed some more data into datastore
-			// Update the tank.  We make it count back down as we retrieve:
-			GetCtrlAttribute(panel, IFACEPANEL_CAPTUREPROGRESS, ATTR_MAX_VALUE, &numsamples);
-			SetCtrlVal(panel, IFACEPANEL_CAPTUREPROGRESS, numsamples-(datastoreptr-datastore));
-			return 0;
+		switch(getdata(datastore, &datastoreptr))
+		{
+			case GETDATA_SUCCESS:
+				// We have nabbed some more data into datastore
+				// Break out of the switch so we can get some more
+				break;
+
+			case GETDATA_EOF:
+				// We have finished getting data
+				StatusMessage(panel, IFACEPANEL_STATUSBOX, "Finished data retrieval");
+				// TODO: Something
+				// For now just stop the timer.
+				SetCtrlAttribute(panel, IFACEPANEL_RETRIEVETIMER, ATTR_ENABLED, 0);
+				return 0;
 			
-		case GETDATA_EOF:
-			// We have finished getting data
-			StatusMessage(panel, IFACEPANEL_STATUSBOX, "Finished data retrieval");
-			// TODO: Something
-			// For now just stop the timer.
-			SetCtrlAttribute(panel, IFACEPANEL_RETRIEVETIMER, ATTR_ENABLED, 0);
-			return 0;
-			
-		default: // i.e. GETDATA_ERROR
-			// Any other return is some sort of error...
-			printf("Unexpected error from getdata\n");
-			// TODO: Abort capture?
-			// For now just stop the timer.
-			SetCtrlAttribute(panel, IFACEPANEL_RETRIEVETIMER, ATTR_ENABLED, 0);
-			return 0;
+			default: // i.e. GETDATA_ERROR
+				// Any other return is some sort of error...
+				printf("Unexpected error from getdata\n");
+				// TODO: Abort capture?
+				// For now just stop the timer.
+				SetCtrlAttribute(panel, IFACEPANEL_RETRIEVETIMER, ATTR_ENABLED, 0);
+				return 0;
 		
-	}
+		}
+	} // Only keeps looping while data was got successfully.
+	
+	// Only update the UI once per tick
+	// Update the tank.  We make it count back down as we retrieve:
+	GetCtrlAttribute(panel, IFACEPANEL_CAPTUREPROGRESS, ATTR_MAX_VALUE, &numsamples);
+	SetCtrlVal(panel, IFACEPANEL_CAPTUREPROGRESS, numsamples-(datastoreptr-datastore));
+	
 	
 	return 0;
 }
