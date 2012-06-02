@@ -38,7 +38,7 @@ uint32_t getSampleNumber(void);
 uint8_t getLogicState(void);
 
 // Fill the USB buffer with data from SRAM
-void fillUSBBuffer(uint8_t* usbptr);
+uint8_t* fillUSBBuffer(uint8_t* usbptr);
 
 // Reset the analyser
 void logicReset(void);

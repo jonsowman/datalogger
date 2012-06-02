@@ -128,7 +128,7 @@ void ServiceRequests(void)
             case LOGIC_DATA:
             	if(getLogicState() == LOGIC_END)
             	{
-            		fillUSBBuffer(usbptr);
+            		usbptr = fillUSBBuffer(usbptr);
             		break;
             	} else if(getLogicState() == LOGIC_END_DATA)
 	            {
