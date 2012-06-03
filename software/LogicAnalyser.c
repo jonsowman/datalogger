@@ -85,6 +85,7 @@ void UpdateDisplay(int panel)
 	char buf[8]="";
 	char buf2[128]="";
 	int CHenable[8]; // Waste of space, but 32 bytes makes the code so much nicer and neater
+	double value;
 	
 	unsigned short int numchannels=0;
 	char *timingdata = NULL;
@@ -141,7 +142,22 @@ void UpdateDisplay(int panel)
 	
 	PlotDigitalLines(TIMINGTAB, TIMPANEL_TIMINGDIAGRAM, timingdata, range*numchannels, VAL_CHAR, numchannels);
 	
+	// Replace axis lables with CH?
 	
+	i=0;
+	for(j=0; j<8; j++)
+	{
+		if(CHenable[7-j]) // Remember, CHenable is backwards, hence 7-j
+		{
+			GetAxisItem(TIMINGTAB, TIMPANEL_TIMINGDIAGRAM, VAL_LEFT_YAXIS, i, buf2, &value); // temp store auto gen value
+			// Temp store label in buf2
+			
+			sprintf(buf2, "CH%d", j); // Generate new label
+			ReplaceAxisItem(TIMINGTAB, TIMPANEL_TIMINGDIAGRAM, VAL_LEFT_YAXIS, i, buf2, value); // replace label
+			i++; // count channels done
+		}
+	}
+
 	
 	/******************** LISTING **********************************/
 	
