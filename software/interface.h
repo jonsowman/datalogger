@@ -52,6 +52,11 @@
 #define  LISTPANEL_LISTINGHEADING        3
 
      /* tab page panel controls */
+#define  RS232TAB_CHANNEL                2
+#define  RS232TAB_TEXTBOX                3
+#define  RS232TAB_DECODEBUTTON           4
+
+     /* tab page panel controls */
 #define  TIMPANEL_TIMINGDIAGRAM          2
 
 
