@@ -56,7 +56,7 @@
 #define  TABPANEL_2_EDGE                 2
 
      /* tab page panel controls */
-#define  TIMPANEL_DIGGRAPH               2
+#define  TIMPANEL_TIMINGDIAGRAM          2
 
 
      /* Menu Bars, Menus, and Menu Items: */

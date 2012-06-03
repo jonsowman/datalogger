@@ -9,12 +9,12 @@
 #include <math.h>
 #include <time.h>
 
-static int TABPANEL; // These two are async/sync tabs
-static int TABPANEL_2; // labwindows doesn't give us
+static int ASYNCTAB; // These two are async/sync tabs
+static int SYNCTAB; // labwindows doesn't give us
 					// constants for pages in tabs
 
-static int DISPLAYTABPANEL1;
-static int DISPLAYTABPANEL2;
+static int TIMINGTAB;
+static int LISTINGTAB;
 
 #include "comms.h"  
 #include "interface.h"
@@ -86,6 +86,11 @@ void UpdateDisplay(int panel)
 	char buf2[128]="";
 	int CHenable[8]; // Waste of space, but 32 bytes makes the code so much nicer and neater
 	
+	unsigned short int numchannels=0;
+	char *timingdata = NULL;
+	char *chunkptr = NULL;
+	
+	
 	// Fill CHenable:
 	// Note reverse order - Because left to right, CH7 is first.
 	GetCtrlVal(panel, IFACEPANEL_CH7_CHECKBOX, CHenable);   GetCtrlVal(panel, IFACEPANEL_CH6_CHECKBOX, CHenable+1);
@@ -93,18 +98,49 @@ void UpdateDisplay(int panel)
 	GetCtrlVal(panel, IFACEPANEL_CH3_CHECKBOX, CHenable+4); GetCtrlVal(panel, IFACEPANEL_CH2_CHECKBOX, CHenable+5);
 	GetCtrlVal(panel, IFACEPANEL_CH1_CHECKBOX, CHenable+6); GetCtrlVal(panel, IFACEPANEL_CH0_CHECKBOX, CHenable+7);
 	
+	GetCtrlVal(panel, IFACEPANEL_POSITIONSLIDER, &position);
+	GetCtrlVal(panel, IFACEPANEL_RANGESLIDER, &range);
 	
-	// TODO: IF LISTING SELECTED NOT TIMING DIAGRAM:
-	
-	
-	
-	// Do headers:
 	// Reset textbox(s):
-	ResetTextBox(DISPLAYTABPANEL2, LISTPANEL_DATALISTING, "");
-	SetCtrlVal(DISPLAYTABPANEL2, LISTPANEL_LISTINGHEADING, "");  // Note headers are in a string not textbox
+	ResetTextBox(LISTINGTAB, LISTPANEL_DATALISTING, "");
+	SetCtrlVal(LISTINGTAB, LISTPANEL_LISTINGHEADING, "");  // Note headers are in a string not textbox
 	
 	if(datalength == 0)
 		return;
+	
+	
+	/***************** TIMING DIAGRAM *****************************/
+	
+	// We need to chunk up the appropriate chunk of datastore into a timing diagram friendly format
+	// Which is: [CH0 Sample 0, CH1 Sample 0, CH0 Sample 1, CH1 Sample 1, ....] i.e. interleaved
+	// First we work out how long we need to allocate the data chunk is, and allocate it:
+	
+	for(i=0; i<8; i++)
+		if(CHenable[i])
+			numchannels++;
+		
+	if(numchannels == 0) return;
+	
+	timingdata = malloc(sizeof(short int)*range*numchannels);
+	if(timingdata == NULL) return; // Out of mem!?
+	
+	chunkptr = timingdata;
+		
+	for(i=0; i<range; i++)
+		for(j=0; j<8; j++)
+			if(CHenable[j])
+			{
+				*chunkptr = (datastore[i+position]>>(7-j)) & 1;
+				chunkptr++;
+			}
+	
+	PlotDigitalLines(TIMINGTAB, TIMPANEL_TIMINGDIAGRAM, timingdata, range*numchannels, VAL_CHAR, numchannels);
+	
+	
+	
+	/******************** LISTING **********************************/
+	
+	// Do headers:
 	
 	for(j=0; j<8; j++)
 		if(CHenable[j])
@@ -114,13 +150,10 @@ void UpdateDisplay(int panel)
 			
 		}
 		
-	SetCtrlVal(DISPLAYTABPANEL2, LISTPANEL_LISTINGHEADING, buf2);  // Note headers are in a string not textbox
+	SetCtrlVal(LISTINGTAB, LISTPANEL_LISTINGHEADING, buf2);  // Note headers are in a string not textbox
 	// So set actually sets instead of appending
 		
 	// Do data:
-	GetCtrlVal(panel, IFACEPANEL_POSITIONSLIDER, &position);
-	GetCtrlVal(panel, IFACEPANEL_RANGESLIDER, &range);
-	
 	for(i=0; i<range; i++)
 	{
 		for(j=0; j<8; j++)
@@ -128,10 +161,10 @@ void UpdateDisplay(int panel)
 			{
 				sprintf(buf, "%d   ", (datastore[i+position]>>(7-j)) & 1 ); // Again, lazyily aligning with space padding
 									// This is a way of retrieving a single bit - shift, then filter out the LSbit with the &
-				SetCtrlVal(DISPLAYTABPANEL2, LISTPANEL_DATALISTING, buf);  // append CH values, spaces to align lazily
+				SetCtrlVal(LISTINGTAB, LISTPANEL_DATALISTING, buf);  // append CH values, spaces to align lazily
 			}
 		
-		SetCtrlVal(DISPLAYTABPANEL2, LISTPANEL_DATALISTING, "\n"); // finally newline
+		SetCtrlVal(LISTINGTAB, LISTPANEL_DATALISTING, "\n"); // finally newline
 	}
 	
 	
@@ -157,16 +190,16 @@ int main (int argc, char *argv[])
 	
 	
 	
-	GetPanelHandleFromTabPage (panelHandle, IFACEPANEL_SYNCASYNCTAB, 0, &TABPANEL);
-	GetPanelHandleFromTabPage (panelHandle, IFACEPANEL_SYNCASYNCTAB, 1, &TABPANEL_2);
+	GetPanelHandleFromTabPage (panelHandle, IFACEPANEL_SYNCASYNCTAB, 0, &ASYNCTAB);
+	GetPanelHandleFromTabPage (panelHandle, IFACEPANEL_SYNCASYNCTAB, 1, &SYNCTAB);
 	
-	GetPanelHandleFromTabPage (panelHandle, IFACEPANEL_DISPLAYTAB, 0, &DISPLAYTABPANEL1);
-	GetPanelHandleFromTabPage (panelHandle, IFACEPANEL_DISPLAYTAB, 1, &DISPLAYTABPANEL2);
+	GetPanelHandleFromTabPage (panelHandle, IFACEPANEL_DISPLAYTAB, 0, &TIMINGTAB);
+	GetPanelHandleFromTabPage (panelHandle, IFACEPANEL_DISPLAYTAB, 1, &LISTINGTAB);
 	
+	SetCtrlAttribute(TIMINGTAB, TIMPANEL_TIMINGDIAGRAM, ATTR_DIGWAVEFORM_SHOW_STATE_LABEL, 0); // disable state labels. 
 	
-	
-    Radio_ConvertFromTree (TABPANEL, TABPANEL_RATEMULTIPLIER);
-	Radio_ConvertFromTree (TABPANEL_2, TABPANEL_2_EDGE);
+    Radio_ConvertFromTree (ASYNCTAB, TABPANEL_RATEMULTIPLIER);
+	Radio_ConvertFromTree (SYNCTAB, TABPANEL_2_EDGE);
 	
 	
 	DisplayPanel (panelHandle);
@@ -203,6 +236,9 @@ int CVICALLBACK QUITBUTTON_hit (int panel, int control, int event,
 		void *callbackData, int eventData1, int eventData2)
 {
     if (event!=EVENT_COMMIT) return 0;  
+	
+	free(datastore);
+	
     QuitUserInterface (0);
     return 0;
 }
@@ -262,9 +298,9 @@ int CVICALLBACK CAPTUREBUTTON_hit (int panel, int control, int event,
 		async=1;
 		sync=rising=falling=both=0;
 		
-		GetCtrlVal(TABPANEL, TABPANEL_SAMPLEFREQ, &ratedouble);
+		GetCtrlVal(ASYNCTAB, TABPANEL_SAMPLEFREQ, &ratedouble);
 		
-		Radio_GetMarkedOption (TABPANEL, TABPANEL_RATEMULTIPLIER, &multiplier);
+		Radio_GetMarkedOption (ASYNCTAB, TABPANEL_RATEMULTIPLIER, &multiplier);
 		
 		if(multiplier==1)
 			ratedouble*=1000;
@@ -276,7 +312,7 @@ int CVICALLBACK CAPTUREBUTTON_hit (int panel, int control, int event,
 		sync=1;
 		async=rate=0;
 	
-		Radio_GetMarkedOption (TABPANEL_2, TABPANEL_2_EDGE, &edge);
+		Radio_GetMarkedOption (SYNCTAB, TABPANEL_2_EDGE, &edge);
 		
 		switch(edge)
 		{
@@ -620,7 +656,7 @@ int CVICALLBACK NONECHBUTTON_hit (int panel, int control, int event,
 int CVICALLBACK RANGESLIDER_hit (int panel, int control, int event,
 		void *callbackData, int eventData1, int eventData2)
 {
-	if(event != EVENT_COMMIT)
+	if((event != EVENT_COMMIT) && (event != EVENT_VAL_CHANGED))
 		return 0; // not a click
 	
 	UpdateSliders(panel);
@@ -631,8 +667,11 @@ int CVICALLBACK RANGESLIDER_hit (int panel, int control, int event,
 int CVICALLBACK POSITIONSLIDER_hit (int panel, int control, int event,
 		void *callbackData, int eventData1, int eventData2)
 {
-	if(event == EVENT_COMMIT)
-		UpdateDisplay(panel);
+	if((event != EVENT_COMMIT) && (event != EVENT_VAL_CHANGED))
+		return 0;
+	
+	UpdateDisplay(panel);
+	
 	return 0;
 }
 
