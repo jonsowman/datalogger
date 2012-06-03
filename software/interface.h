@@ -31,21 +31,22 @@
 #define  IFACEPANEL_CAPTUREPROGRESS      15
 #define  IFACEPANEL_RETRIEVETIMER        16      /* callback function: RETRIEVETIMER_hit */
 #define  IFACEPANEL_DUMMYDATABUTTON      17      /* callback function: DUMMYDATABUTTON_hit */
-#define  IFACEPANEL_CH1_CHECKBOX         18
-#define  IFACEPANEL_CH2_CHECKBOX         19
-#define  IFACEPANEL_CH3_CHECKBOX         20
-#define  IFACEPANEL_CH4_CHECKBOX         21
-#define  IFACEPANEL_CH5_CHECKBOX         22
-#define  IFACEPANEL_CH0_CHECKBOX         23
-#define  IFACEPANEL_CH6_CHECKBOX         24
-#define  IFACEPANEL_CH7_CHECKBOX         25
+#define  IFACEPANEL_CH1_CHECKBOX         18      /* callback function: CH_CHECKBOX_hit */
+#define  IFACEPANEL_CH2_CHECKBOX         19      /* callback function: CH_CHECKBOX_hit */
+#define  IFACEPANEL_CH3_CHECKBOX         20      /* callback function: CH_CHECKBOX_hit */
+#define  IFACEPANEL_CH4_CHECKBOX         21      /* callback function: CH_CHECKBOX_hit */
+#define  IFACEPANEL_CH5_CHECKBOX         22      /* callback function: CH_CHECKBOX_hit */
+#define  IFACEPANEL_CH0_CHECKBOX         23      /* callback function: CH_CHECKBOX_hit */
+#define  IFACEPANEL_CH6_CHECKBOX         24      /* callback function: CH_CHECKBOX_hit */
+#define  IFACEPANEL_CH7_CHECKBOX         25      /* callback function: CH_CHECKBOX_hit */
 #define  IFACEPANEL_ALLCHBUTTON          26      /* callback function: ALLCHBUTTON_hit */
 #define  IFACEPANEL_NONECHBUTTON         27      /* callback function: NONECHBUTTON_hit */
 #define  IFACEPANEL_RANGESLIDER          28      /* callback function: RANGESLIDER_hit */
-#define  IFACEPANEL_POSITIONSLIDER       29
+#define  IFACEPANEL_POSITIONSLIDER       29      /* callback function: POSITIONSLIDER_hit */
 
      /* tab page panel controls */
 #define  LISTPANEL_DATALISTING           2
+#define  LISTPANEL_LISTINGHEADING        3
 
      /* tab page panel controls */
 #define  TABPANEL_SAMPLEFREQ             2
@@ -67,6 +68,7 @@
 
 int  CVICALLBACK ALLCHBUTTON_hit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK CAPTUREBUTTON_hit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK CH_CHECKBOX_hit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK DEBUGBUTTON_hit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK DEBUGCHECKBOX_hit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK DUMMYDATABUTTON_hit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
@@ -74,6 +76,7 @@ int  CVICALLBACK GENERATELISTINGBUTTON_hit(int panel, int control, int event, vo
 int  CVICALLBACK IFACEPANEL_hit(int panel, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK NONECHBUTTON_hit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK PINGTIMER_hit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK POSITIONSLIDER_hit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK QUITBUTTON_hit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK RANGESLIDER_hit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK RECONNECTBUTTON_hit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);

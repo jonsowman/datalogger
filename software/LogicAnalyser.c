@@ -30,8 +30,9 @@ char *datastore=NULL;
 char *datastoreptr=NULL;
 unsigned int datalength=0;
 
-
-//static int panelHandle;
+void StatusMessage(int panel, int statusbox, char *message);
+void UpdateSliders(int panel);
+void UpdateDisplay(int panel);
 
 void StatusMessage(int panel, int statusbox, char *message)
 {
@@ -59,7 +60,7 @@ void UpdateSliders(int panel) // Call this any time you update datalength or mov
 	// Set max range to 20 or datalength, whichever is smaller, unless datalength=0 in which case set max range to 1
 	// (Doesn't like min = max = 0)
 	if(datalength>20)
-		SetCtrlAttribute(panel, IFACEPANEL_RANGESLIDER, ATTR_MAX_VALUE, 20);
+		SetCtrlAttribute(panel, IFACEPANEL_RANGESLIDER, ATTR_MAX_VALUE, 50); // Master Max Range Option!
 	else
 		if(datalength == 0)
 			SetCtrlAttribute(panel, IFACEPANEL_RANGESLIDER, ATTR_MAX_VALUE, 1);
@@ -74,6 +75,63 @@ void UpdateSliders(int panel) // Call this any time you update datalength or mov
 		SetCtrlAttribute(panel, IFACEPANEL_POSITIONSLIDER, ATTR_MAX_VALUE, 1);
 	else
 		SetCtrlAttribute(panel, IFACEPANEL_POSITIONSLIDER, ATTR_MAX_VALUE, datalength-range);
+	
+	UpdateDisplay(panel);
+}
+
+void UpdateDisplay(int panel)
+{
+	unsigned int i, j, range, position;
+	char buf[8]="";
+	char buf2[128]="";
+	int CHenable[8]; // Waste of space, but 32 bytes makes the code so much nicer and neater
+	
+	// Fill CHenable:
+	// Note reverse order - Because left to right, CH7 is first.
+	GetCtrlVal(panel, IFACEPANEL_CH7_CHECKBOX, CHenable);   GetCtrlVal(panel, IFACEPANEL_CH6_CHECKBOX, CHenable+1);
+	GetCtrlVal(panel, IFACEPANEL_CH5_CHECKBOX, CHenable+2); GetCtrlVal(panel, IFACEPANEL_CH4_CHECKBOX, CHenable+3);
+	GetCtrlVal(panel, IFACEPANEL_CH3_CHECKBOX, CHenable+4); GetCtrlVal(panel, IFACEPANEL_CH2_CHECKBOX, CHenable+5);
+	GetCtrlVal(panel, IFACEPANEL_CH1_CHECKBOX, CHenable+6); GetCtrlVal(panel, IFACEPANEL_CH0_CHECKBOX, CHenable+7);
+	
+	
+	// TODO: IF LISTING SELECTED NOT TIMING DIAGRAM:
+	
+	
+	
+	// Do headers:
+	// Reset textbox:
+	ResetTextBox(DISPLAYTABPANEL2, LISTPANEL_DATALISTING, "");
+	
+	for(j=0; j<8; j++)
+		if(CHenable[j])
+		{
+			sprintf(buf, "CH%d ", 7-j);
+			strncat(buf2, buf, 5);
+			
+		}
+		
+	SetCtrlVal(DISPLAYTABPANEL2, LISTPANEL_LISTINGHEADING, buf2);  // Note headers are in a string not textbox
+	// So set actually sets instead of appending
+		
+	// Do data:
+	GetCtrlVal(panel, IFACEPANEL_POSITIONSLIDER, &position);
+	GetCtrlVal(panel, IFACEPANEL_RANGESLIDER, &range);
+	
+	for(i=0; i<range; i++)
+	{
+		for(j=0; j<8; j++)
+			if(CHenable[j])
+			{
+				sprintf(buf, "%d   ", (datastore[i+position]>>(7-j)) & 1 ); // Again, lazyily aligning with space padding
+									// This is a way of retrieving a single bit - shift, then filter out the LSbit with the &
+				SetCtrlVal(DISPLAYTABPANEL2, LISTPANEL_DATALISTING, buf);  // append CH values, spaces to align lazily
+			}
+		
+		SetCtrlVal(DISPLAYTABPANEL2, LISTPANEL_DATALISTING, "\n"); // finally newline
+	}
+	
+	
+	
 }
 
 int main (int argc, char *argv[])
@@ -478,53 +536,11 @@ int CVICALLBACK RETRIEVETIMER_hit (int panel, int control, int event,
 int CVICALLBACK GENERATELISTINGBUTTON_hit (int panel, int control, int event,
 		void *callbackData, int eventData1, int eventData2)
 {
-	unsigned int i, j;
-	char buf[8];
-	int CHenable[8]; // Waste of space, but 32 bytes makes the code so much nicer and neater
-	
 	if(event != EVENT_COMMIT)
 		return 0; // Not a click
 	
-	if(datalength>1000)
-	{
-		printf("I'm sorry Dave, I can't let you do that (datalen>1000)\n");
-		return 0;
-	}
-	
-	// Fill CHenable:
-	// Note reverse order - Because left to right, CH7 is first.
-	GetCtrlVal(panel, IFACEPANEL_CH7_CHECKBOX, CHenable);   GetCtrlVal(panel, IFACEPANEL_CH6_CHECKBOX, CHenable+1);
-	GetCtrlVal(panel, IFACEPANEL_CH5_CHECKBOX, CHenable+2); GetCtrlVal(panel, IFACEPANEL_CH4_CHECKBOX, CHenable+3);
-	GetCtrlVal(panel, IFACEPANEL_CH3_CHECKBOX, CHenable+4); GetCtrlVal(panel, IFACEPANEL_CH2_CHECKBOX, CHenable+5);
-	GetCtrlVal(panel, IFACEPANEL_CH1_CHECKBOX, CHenable+6); GetCtrlVal(panel, IFACEPANEL_CH0_CHECKBOX, CHenable+7);
-	
-	// Do headers:
-	// Reset textbox:
-	ResetTextBox(DISPLAYTABPANEL2, LISTPANEL_DATALISTING, "");
-	
-	for(j=0; j<8; j++)
-		if(CHenable[j])
-		{
-			sprintf(buf, "CH%d ", 7-j);
-			SetCtrlVal(DISPLAYTABPANEL2, LISTPANEL_DATALISTING, buf);  // append buf - CH headers
-		}
-		
-	SetCtrlVal(DISPLAYTABPANEL2, LISTPANEL_DATALISTING, "\n");  // append newline
+	UpdateDisplay(panel);   
 
-	// Do data:
-	for(i=0; i<datalength; i++)
-	{
-		for(j=0; j<8; j++)
-			if(CHenable[j])
-			{
-				sprintf(buf, "%d   ", (datastore[i]>>(7-j)) & 1 ); // Again, lazyily aligning with space padding
-									// This is a way of retrieving a single bit - shift, then filter out the LSbit with the &
-				SetCtrlVal(DISPLAYTABPANEL2, LISTPANEL_DATALISTING, buf);  // append CH values, spaces to align lazily
-			}
-		
-		SetCtrlVal(DISPLAYTABPANEL2, LISTPANEL_DATALISTING, "\n"); // finally newline
-	}
-	
 	return 0;
 }
 
@@ -539,7 +555,7 @@ int CVICALLBACK DUMMYDATABUTTON_hit (int panel, int control, int event,
 	GetCtrlVal(panel, IFACEPANEL_SAMPLENUMBER, &datalength);
 	
 	for(i=0; i<datalength; i++)
-		datastore[i]=0x42;
+		datastore[i]=i;
 	
 	if(debug) printf("Data Dummied - length %d\n", datalength);
 	
@@ -577,6 +593,8 @@ int CVICALLBACK ALLCHBUTTON_hit (int panel, int control, int event,
 	SetCtrlVal(panel, IFACEPANEL_CH3_CHECKBOX, 1); SetCtrlVal(panel, IFACEPANEL_CH2_CHECKBOX, 1);
 	SetCtrlVal(panel, IFACEPANEL_CH1_CHECKBOX, 1); SetCtrlVal(panel, IFACEPANEL_CH0_CHECKBOX, 1);
 	
+	UpdateDisplay(panel);
+	
 	return 0;
 }
 
@@ -590,6 +608,8 @@ int CVICALLBACK NONECHBUTTON_hit (int panel, int control, int event,
 	SetCtrlVal(panel, IFACEPANEL_CH3_CHECKBOX, 0); SetCtrlVal(panel, IFACEPANEL_CH2_CHECKBOX, 0);
 	SetCtrlVal(panel, IFACEPANEL_CH1_CHECKBOX, 0); SetCtrlVal(panel, IFACEPANEL_CH0_CHECKBOX, 0);
 	
+	UpdateDisplay(panel);
+	
 	return 0;
 }
 
@@ -601,5 +621,21 @@ int CVICALLBACK RANGESLIDER_hit (int panel, int control, int event,
 	
 	UpdateSliders(panel);
 	
+	return 0;
+}
+
+int CVICALLBACK POSITIONSLIDER_hit (int panel, int control, int event,
+		void *callbackData, int eventData1, int eventData2)
+{
+	if(event == EVENT_COMMIT)
+		UpdateDisplay(panel);
+	return 0;
+}
+
+int CVICALLBACK CH_CHECKBOX_hit (int panel, int control, int event,
+		void *callbackData, int eventData1, int eventData2)
+{
+	if(event == EVENT_COMMIT)
+		UpdateDisplay(panel);
 	return 0;
 }
