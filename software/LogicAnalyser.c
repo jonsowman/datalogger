@@ -160,7 +160,7 @@ void UpdateDisplay(int panel)
 	/******************** LISTING **********************************/
 	
 	// Do headers:
-	
+	buf2[0]='\0'; // Empty buf2
 	for(j=0; j<8; j++)
 		if(CHenable[j])
 		{
