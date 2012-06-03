@@ -27,6 +27,9 @@ volatile uint32_t writeptr;
 // Next unread slot in SRAM
 uint32_t readptr;
 
+// The preload value of the sample timer
+uint8_t timer_preload = TIMER_PRELOAD;
+
 /**
  * Configure the logic analyser, takes one byte bitfield
  * containing the configuration options. See documentation
@@ -73,6 +76,9 @@ bool logicStart(void)
 	logicReset();
 	LATLEDB = 0;
 	logic_state = LOGIC_ARM;
+	
+	// Calculate and load the prescaler and preload
+	_initTimer();
 	
 	// Set up interrupts and leave the hardware to it...
 	_beginSampling(config);
@@ -131,7 +137,7 @@ uint8_t getLogicState(void)
  */
 bool setSampleRate(uint32_t* rate)
 {
-	if(*rate <= MAX_SAMPLE_RATE)
+	if(*rate <= MAX_SAMPLE_RATE && *rate >= MIN_SAMPLE_RATE)
 	{
 		samplerate = *rate;
 		return true;
@@ -207,11 +213,47 @@ void logicReset(void)
 }
 
 /**
- * Set up an interrupt to run at the samplerate for async mode,
- * discard data for now.
+ * Calculate the required prescaler for a given sample
+ * rate.
  */
-void _startTimer(void)
-{	
+uint8_t _calcPrescaler(uint32_t rate)
+{
+	uint32_t tickrate = TIMER_PSICLK;
+	// Divide down from the 1:2 (000) prescaler
+	uint8_t i;
+	for(i=0; i<8; i++)
+	{
+		if(tickrate < rate) break;
+		tickrate /= 2;
+	}
+	return i;
+}
+
+/**
+ * Calculate the timer preload value.
+ */
+uint8_t _calcPreload(uint32_t targetrate, uint8_t ps)
+{
+	uint32_t preload = targetrate - (TIMER_PSICLK >> ps);
+	preload *= 256UL;
+	preload /= targetrate;
+	return (uint8_t)preload;
+}
+
+/**
+ * Calculate and set the prescaler and preload values
+ * for the current configuration.
+ */
+void _initTimer(void)
+{
+	uint8_t ps;
+	
+	// Turn on the prescaler and set the preload
+	ps = _calcPrescaler(samplerate);
+	T0CON = (ps & 0x07) | (T0CON & 0xF8);
+	timer_preload = _calcPreload(samplerate, ps);
+	T0CONbits.PSA = 0;
+	
 	// Enable interrupt priority
 	RCONbits.IPEN = 1;
 
@@ -222,23 +264,23 @@ void _startTimer(void)
 	T0CONbits.T08BIT = 1;
 
 	// Clock on instruction clock cycles
-	T0CONbits.T0CS = 0;
-
-	// Turn off the prescalar so we clock on instruction clk cycles
-	T0CONbits.PSA = 0;
-	T0CONbits.T0PS2 = 0;
-	T0CONbits.T0PS1  = 0;
-	T0CONbits.T0PS0 = 1;
-
-	// Enable TIMER0 OVF interrupt, periph interrupt
-	// and global interrupts
+	T0CONbits.T0CS = 0;	
+	
 	INTCONbits.GIEL  = 1;
 	INTCONbits.GIEH = 1;
-	INTCONbits.TMR0IE = 1;
-	INTCONbits.TMR0IF = 0;
-
+	
 	// Set TIMER0 OVF to high priority
 	INTCON2bits.TMR0IP = 1;
+}
+
+/**
+ * Set up an interrupt to run at the samplerate for async mode,
+ * discard data for now.
+ */
+void _startTimer(void)
+{	
+	INTCONbits.TMR0IF = 0;
+	INTCONbits.TMR0IE = 1;
 
 	// Finally enable the timer
 	T0CONbits.TMR0ON = 1;
@@ -279,42 +321,40 @@ void high_isr(void)
 	// Check whether we're triggering or sampling
 	if(logic_state == LOGIC_INPROGRESS)
 	{
-		if(INTCONbits.TMR0IF || INTCONbits.INT0IF)
+		if(writeptr < samplenumber)
 		{
-			if(writeptr < samplenumber)
+			writeRAM(writeptr);
+			writeptr++;
+			if(INTCONbits.TMR0IF)
 			{
-				writeRAM(writeptr);
-				writeptr++;
-				if(INTCONbits.TMR0IF)
-				{
-					TMR0L = TIMER_PRELOAD;
-					INTCONbits.TMR0IF = 0;
-				}
-				else if(INTCONbits.INT0IF)
-				{
-					if(config & EDGE_BOTH) INTCON2 ^= 0x40;
-					INTCONbits.INT0IF = 0;
-				}
+				TMR0L = timer_preload;
+				INTCONbits.TMR0IF = 0;
 			}
-			else // Done sampling, stop interrupting
+			else
 			{
-				INTCONbits.INT0IE = 0;
-				INTCONbits.TMR0IE = 0;
-				T0CONbits.TMR0ON = 0;
-				logic_state = LOGIC_END;
-				LATLEDB = 1;
+				if(config & EDGE_BOTH) INTCON2 ^= 0x40;
+				INTCONbits.INT0IF = 0;
 			}
+		}
+		else // Done sampling, stop interrupting
+		{
+			INTCONbits.INT0IE = 0;
+			INTCONbits.TMR0IE = 0;
+			logic_state = LOGIC_END;
 		}
 	} else if(logic_state == LOGIC_WAITING)
 	{
-		if(config & MODE_ASYNC && INTCONbits.INT0IF)
+		if(config & MODE_ASYNC)
 		{
 			INTCONbits.INT0IE = 0;
 			INTCONbits.INT0IF = 0;
 			logic_state = LOGIC_INPROGRESS;
-			_startTimer();
+			// Start the async capture timer
+			INTCONbits.TMR0IF = 0;
+			INTCONbits.TMR0IE = 1;
+			T0CONbits.TMR0ON = 1;
 		}
-		else if(config & MODE_SYNC && INTCONbits.INT0IF)
+		else if(config & MODE_SYNC)
 		{
 			INTCONbits.INT0IF = 0;
 			logic_state = LOGIC_INPROGRESS;

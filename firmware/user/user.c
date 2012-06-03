@@ -151,7 +151,7 @@ void ServiceRequests(void)
                 break;
             	
            	case GET_ADC_COMMAND: // [0xED. 8-bit data]
-                *usbptr++ = readRAM(0); // returns[0xED, len, data]
+                *usbptr++ = _calcPrescaler(1000UL);
                 break;
                 
             case LOGIC_RESET:

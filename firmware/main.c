@@ -47,18 +47,9 @@ void interrupt_at_low_vector(void)
 void main(void)
 {   
 	uint32_t snum = 0x1000;
+	uint32_t rate = 5000UL;
     InitializeSystem();
 	enableBuffer();
-	
-	// Configure to async mode
-	/*
-	LATLEDB = 1;
-	logicConfig(0x81);
-	setSampleNumber(&snum);
-	logicStart();
-	while(getLogicState() != LOGIC_END);
-	LATLEDA = 1;
-	*/
 	
     while(1)
     {

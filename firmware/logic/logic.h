@@ -9,7 +9,10 @@
 #include "system\typedefs.h"
 
 #define TIMER_PRELOAD			111
-#define MAX_SAMPLE_RATE			250000UL
+#define TIMER_ICLK				46875UL
+#define TIMER_PSICLK			23437UL
+#define MAX_SAMPLE_RATE			20000UL
+#define MIN_SAMPLE_RATE			100UL
 #define MAX_SAMPLE_NUM			0x20000
 
 #define INT_MODE_TRIGGER		0x00
@@ -47,7 +50,10 @@ uint8_t* fillUSBBuffer(uint8_t* usbptr);
 void logicReset(void);
 
 // Private prototypes
+uint8_t _calcPrescaler(uint32_t rate);
+uint8_t _calcPreload(uint32_t targetrate, uint8_t ps);
 void _beginSampling(uint8_t config);
+void _initTimer(void);
 void _startTimer(void);
 void _startExtInterrupt(uint8_t config);
 
