@@ -9,12 +9,9 @@
 #include <math.h>
 #include <time.h>
 
-static int ASYNCTAB; // These two are async/sync tabs
-static int SYNCTAB; // labwindows doesn't give us
-					// constants for pages in tabs
 
-static int TIMINGTAB;
-static int LISTINGTAB;
+static int TIMINGTAB; // Labwindows doesn't give us constants for tab panels
+static int LISTINGTAB; // So do our own - these are set in main()
 
 #include "comms.h"  
 #include "interface.h"
@@ -33,6 +30,7 @@ unsigned int datalength=0;
 void StatusMessage(int panel, int statusbox, char *message);
 void UpdateSliders(int panel);
 void UpdateDisplay(int panel);
+void UpdateConfig(int panel);
 
 void StatusMessage(int panel, int statusbox, char *message)
 {
@@ -192,6 +190,38 @@ void UpdateDisplay(int panel)
 	
 }
 
+void UpdateConfig(int panel)
+{
+	int capturemode, asynctrigger;
+	
+	// Disable ASYNCTRIGGER unless CAPTUREMODE=async
+	// Disable CLOCKEDGE unless ASYNCTRIGGER or CAPTUREMODE=sync
+	// Disable SAMPLERATE unless CAPTUREMODE=async
+	
+	// Retrieve CAPTUREMODE:
+	Radio_GetMarkedOption(panel, IFACEPANEL_CAPTUREMODE, &capturemode);
+	
+	// Do ASYNCTRIGGER:
+	if(capturemode == 0) // async
+		SetCtrlAttribute(panel, IFACEPANEL_ASYNCTRIGGER, ATTR_DIMMED, 0);
+	else
+	{
+		SetCtrlVal(panel, IFACEPANEL_ASYNCTRIGGER, 0);
+		SetCtrlAttribute(panel, IFACEPANEL_ASYNCTRIGGER, ATTR_DIMMED, 1);
+	}
+	
+	GetCtrlVal(panel, IFACEPANEL_ASYNCTRIGGER, &asynctrigger);
+	if( (capturemode == 1) /* sync */ || asynctrigger)
+		SetCtrlAttribute(panel, IFACEPANEL_CLOCKEDGE, ATTR_DIMMED, 0);
+	else
+		SetCtrlAttribute(panel, IFACEPANEL_CLOCKEDGE, ATTR_DIMMED, 1);
+	
+	if(capturemode == 0) // async
+		SetCtrlAttribute(panel, IFACEPANEL_SAMPLERATE, ATTR_DIMMED, 0);
+	else
+		SetCtrlAttribute(panel, IFACEPANEL_SAMPLERATE, ATTR_DIMMED, 1);
+}
+
 int main (int argc, char *argv[])
 {
 	int panelHandle;
@@ -211,17 +241,10 @@ int main (int argc, char *argv[])
 	
 	
 	
-	GetPanelHandleFromTabPage (panelHandle, IFACEPANEL_SYNCASYNCTAB, 0, &ASYNCTAB);
-	GetPanelHandleFromTabPage (panelHandle, IFACEPANEL_SYNCASYNCTAB, 1, &SYNCTAB);
-	
 	GetPanelHandleFromTabPage (panelHandle, IFACEPANEL_DISPLAYTAB, 0, &TIMINGTAB);
 	GetPanelHandleFromTabPage (panelHandle, IFACEPANEL_DISPLAYTAB, 1, &LISTINGTAB);
 	
 	SetCtrlAttribute(TIMINGTAB, TIMPANEL_TIMINGDIAGRAM, ATTR_DIGWAVEFORM_SHOW_STATE_LABEL, 0); // disable state labels. 
-	
-    Radio_ConvertFromTree (ASYNCTAB, TABPANEL_RATEMULTIPLIER);
-	Radio_ConvertFromTree (SYNCTAB, TABPANEL_2_EDGE);
-	
 	
 	DisplayPanel (panelHandle);
 	
@@ -240,6 +263,7 @@ int main (int argc, char *argv[])
 	
 	datalength=0;
 	UpdateSliders(panelHandle);
+	UpdateConfig(panelHandle);
 	
 	RunUserInterface ();
 	
@@ -302,52 +326,43 @@ int CVICALLBACK CAPTUREBUTTON_hit (int panel, int control, int event,
 {
 	int async, sync, rising, falling, both;
 	unsigned long rate, samplenumber;
-	int asyncsynctab;
+	int capturemode;
 	int edge;
-	double ratedouble;
-	int multiplier;
 	int result;
 
 	if(event != EVENT_COMMIT)
 		return 0; // not a click! mouseover etc.
 	
 	
+	Radio_GetMarkedOption(panel, IFACEPANEL_CAPTUREMODE, &capturemode); // Retrieve async/sync
 	
-	GetActiveTabPage(panel, IFACEPANEL_SYNCASYNCTAB, &asyncsynctab);
-	if(asyncsynctab==0) // async
+	if(capturemode==0) // async
 	{
 		async=1;
 		sync=rising=falling=both=0;
 		
-		GetCtrlVal(ASYNCTAB, TABPANEL_SAMPLEFREQ, &ratedouble);
-		
-		Radio_GetMarkedOption (ASYNCTAB, TABPANEL_RATEMULTIPLIER, &multiplier);
-		
-		if(multiplier==1)
-			ratedouble*=1000;
-		
-		rate = floor(ratedouble+0.5); // C doesn't have a round function, this is equivilent.
+		GetCtrlVal(panel, IFACEPANEL_SAMPLERATE, &rate); // retrieve rate
 	}
 	else // sync
 	{
 		sync=1;
 		async=rate=0;
 	
-		Radio_GetMarkedOption (SYNCTAB, TABPANEL_2_EDGE, &edge);
+		Radio_GetMarkedOption (panel, IFACEPANEL_CLOCKEDGE, &edge);
 		
 		switch(edge)
 		{
-			case 0:
+			case 0: // rising
 				rising = true;
 				falling = both = false;
 				break;
 				
-			case 1:
+			case 1: // falling
 				falling = true;
 				rising = both = false;
 				break;
 				
-			case 2:
+			case 2: // "change" == both
 				both = true;
 				rising = falling = false;
 				break;
@@ -701,5 +716,25 @@ int CVICALLBACK CH_CHECKBOX_hit (int panel, int control, int event,
 {
 	if(event == EVENT_COMMIT)
 		UpdateDisplay(panel);
+	return 0;
+}
+
+int CVICALLBACK CAPTUREMODE_hit (int panel, int control, int event,
+		void *callbackData, int eventData1, int eventData2)
+{
+	if(event != EVENT_COMMIT) return 0;
+	
+	UpdateConfig(panel);
+	
+	return 0;
+}
+
+int CVICALLBACK ASYNCTIRGGER_hit (int panel, int control, int event,
+		void *callbackData, int eventData1, int eventData2)
+{
+	if(event != EVENT_COMMIT) return 0;
+	
+	UpdateConfig(panel);
+	
 	return 0;
 }
