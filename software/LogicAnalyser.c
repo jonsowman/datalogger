@@ -99,8 +99,12 @@ void UpdateDisplay(int panel)
 	
 	
 	// Do headers:
-	// Reset textbox:
+	// Reset textbox(s):
 	ResetTextBox(DISPLAYTABPANEL2, LISTPANEL_DATALISTING, "");
+	SetCtrlVal(DISPLAYTABPANEL2, LISTPANEL_LISTINGHEADING, "");  // Note headers are in a string not textbox
+	
+	if(datalength == 0)
+		return;
 	
 	for(j=0; j<8; j++)
 		if(CHenable[j])
