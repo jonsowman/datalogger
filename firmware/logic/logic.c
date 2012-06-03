@@ -137,7 +137,8 @@ uint8_t getLogicState(void)
  */
 bool setSampleRate(uint32_t* rate)
 {
-	if(*rate <= MAX_SAMPLE_RATE && *rate >= MIN_SAMPLE_RATE)
+	if((config & MODE_ASYNC && *rate <= MAX_SAMPLE_RATE 
+		&& *rate >= MIN_SAMPLE_RATE) || config & MODE_SYNC)
 	{
 		samplerate = *rate;
 		return true;
