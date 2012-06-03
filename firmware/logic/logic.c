@@ -51,8 +51,8 @@ bool verifyOptions(uint8_t options)
 {
 	if((options & MODE_ASYNC) && (options & MODE_SYNC))
 		return false;
-	if((options & SYNC_EDGE_RISE) && (options & SYNC_EDGE_FALL)
-			&& (options & SYNC_EDGE_BOTH))
+	if((options & EDGE_RISE) && (options & EDGE_FALL)
+			&& (options & EDGE_BOTH))
 		return false;
 	if(!options & OPTIONS_VALID)
 		return false;
@@ -233,9 +233,9 @@ void _startTimer(void)
 void _startExtInterrupt(uint8_t config)
 {
 	// Configure the edge for interrupt
-	if(config & SYNC_EDGE_RISE)
+	if(config & EDGE_RISE || config & EDGE_BOTH)
 		INTCON2bits.INTEDG0 = 1;
-	else if(config & SYNC_EDGE_FALL)
+	else if(config & EDGE_FALL)
 		INTCON2bits.INTEDG0 = 0;
 		
 	// Clear the flag and enable the interrupt
@@ -254,8 +254,7 @@ void high_isr(void)
 {
 	if(INTCONbits.TMR0IF || INTCONbits.INT0IF)
 	{
-		LATB = LATB ^ 0x02; // FIXME
-		if(writeptr < samplenumber) // check against max sample num
+		if(writeptr < samplenumber)
 		{
 			writeRAM(writeptr);
 			writeptr++;

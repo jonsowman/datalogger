@@ -14,9 +14,9 @@
 
 #define MODE_ASYNC				0x01
 #define MODE_SYNC				0x02
-#define SYNC_EDGE_RISE			0x04
-#define SYNC_EDGE_FALL			0x08
-#define SYNC_EDGE_BOTH			0x10
+#define EDGE_RISE				0x04
+#define EDGE_FALL				0x08
+#define EDGE_BOTH				0x10
 #define OPTIONS_VALID			0x80
 
 // Configure the analyser with the options 8-bit bitfield
