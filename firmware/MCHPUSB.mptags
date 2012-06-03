@@ -47,6 +47,9 @@ DETACHED_STATE::0	C:\datalogger\firmware\system\usb\usbmmap.h	21;"	d	line:21
 DTS	C:\datalogger\firmware\system\usb\usbmmap.h	54;"	m	line:54	struct:_BD_STAT::<anonymous>
 DTSEN	C:\datalogger\firmware\system\usb\usbmmap.h	51;"	m	line:51	struct:_BD_STAT::<anonymous>
 DWORD	C:\datalogger\firmware\system\typedefs.h	89;"	t	line:89
+EDGE_BOTH::0x10	C:\datalogger\firmware\logic\logic.h	19;"	d	line:19
+EDGE_FALL::0x08	C:\datalogger\firmware\logic\logic.h	18;"	d	line:18
+EDGE_RISE::0x04	C:\datalogger\firmware\logic\logic.h	17;"	d	line:17
 EP00_IN::(0x00<<3)|(IN<<2)	C:\datalogger\firmware\system\usb\usbdrv\usbdrv.h	82;"	d	line:82
 EP00_OUT::(0x00<<3)|(OUT<<2)	C:\datalogger\firmware\system\usb\usbdrv\usbdrv.h	81;"	d	line:81
 EP01_IN::(0x01<<3)|(IN<<2)	C:\datalogger\firmware\system\usb\usbdrv\usbdrv.h	84;"	d	line:84
@@ -184,9 +187,6 @@ ReadPOT	C:\datalogger\firmware\user\user.c	197;"	f	line:197	signature:(void)
 ReadPOT	C:\datalogger\firmware\user\user.c	36;"	p	line:36	file:	signature:(void)
 RemoteWakeup	C:\datalogger\firmware\system\usb\usbmmap.h	39;"	m	line:39	struct:_USB_DEVICE_STATUS::<anonymous>
 ResetTempLog	C:\datalogger\firmware\user\user.c	33;"	p	line:33	file:	signature:(void)
-SYNC_EDGE_BOTH::0x10	C:\datalogger\firmware\logic\logic.h	19;"	d	line:19
-SYNC_EDGE_FALL::0x08	C:\datalogger\firmware\logic\logic.h	18;"	d	line:18
-SYNC_EDGE_RISE::0x04	C:\datalogger\firmware\logic\logic.h	17;"	d	line:17
 ServiceRequests	C:\datalogger\firmware\user\user.c	32;"	p	line:32	file:	signature:(void)
 ServiceRequests	C:\datalogger\firmware\user\user.c	57;"	f	line:57	signature:(void)
 ServiceRequests	C:\datalogger\firmware\user\user.h	69;"	p	line:69	signature:(void)
@@ -459,7 +459,7 @@ logicStart	C:\datalogger\firmware\logic\logic.c	67;"	f	line:67	signature:(void)
 logicStart	C:\datalogger\firmware\logic\logic.h	29;"	p	line:29	signature:(void)
 logic_state	C:\datalogger\firmware\logic\logic.c	22;"	v	line:22
 low	C:\datalogger\firmware\user\user.c	199;"	l	line:199
-low_isr	C:\datalogger\firmware\logic\logic.c	286;"	f	line:286	signature:(void)
+low_isr	C:\datalogger\firmware\logic\logic.c	285;"	f	line:285	signature:(void)
 low_isr	C:\datalogger\firmware\logic\logic.h	52;"	p	line:52	signature:(void)
 mInitAllLEDs::LATD&=0xF0;TRISD&=0xF0;	C:\datalogger\firmware\io_cfg.h	31;"	d	line:31
 mInitPOT::TRISAbits.TRISA0=1;ADCON0=0x01	C:\datalogger\firmware\io_cfg.h	28;"	d	line:28
