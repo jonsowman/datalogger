@@ -43,6 +43,11 @@
 #define  IFACEPANEL_NONECHBUTTON         27      /* callback function: NONECHBUTTON_hit */
 #define  IFACEPANEL_RANGESLIDER          28      /* callback function: RANGESLIDER_hit */
 #define  IFACEPANEL_POSITIONSLIDER       29      /* callback function: POSITIONSLIDER_hit */
+#define  IFACEPANEL_RADIOGROUP           30
+#define  IFACEPANEL_RADIOGROUP_2         31
+#define  IFACEPANEL_CHECKBOX             32
+#define  IFACEPANEL_RING                 33
+#define  IFACEPANEL_DECORATION           34
 
      /* tab page panel controls */
 #define  LISTPANEL_DATALISTING           2
