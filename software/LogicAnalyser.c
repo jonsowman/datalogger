@@ -60,19 +60,13 @@ void UpdateSliders(int panel) // Call this any time you update datalength or mov
 	if(datalength>20)
 		SetCtrlAttribute(panel, IFACEPANEL_RANGESLIDER, ATTR_MAX_VALUE, 100); // Master Max Range Option!
 	else
-		if(datalength == 0)
-			SetCtrlAttribute(panel, IFACEPANEL_RANGESLIDER, ATTR_MAX_VALUE, 1);
-		else
 			SetCtrlAttribute(panel, IFACEPANEL_RANGESLIDER, ATTR_MAX_VALUE, datalength);
 		
 	GetCtrlVal(panel, IFACEPANEL_RANGESLIDER, &range);
 	
 	
 	// Now setup the position max:
-	if(datalength == 0)
-		SetCtrlAttribute(panel, IFACEPANEL_POSITIONSLIDER, ATTR_MAX_VALUE, 1);
-	else
-		SetCtrlAttribute(panel, IFACEPANEL_POSITIONSLIDER, ATTR_MAX_VALUE, datalength-range);
+	SetCtrlAttribute(panel, IFACEPANEL_POSITIONSLIDER, ATTR_MAX_VALUE, datalength-range);
 	
 	UpdateDisplay(panel);
 }
@@ -104,6 +98,9 @@ void UpdateDisplay(int panel)
 	ResetTextBox(LISTINGTAB, LISTPANEL_DATALISTING, "");
 	SetCtrlVal(LISTINGTAB, LISTPANEL_LISTINGHEADING, "");  // Note headers are in a string not textbox
 	
+	// Clear timing diag labels:
+	SetCtrlAttribute(TIMINGTAB, TIMPANEL_TIMINGDIAGRAM, ATTR_YLABEL_VISIBLE, 0);
+	
 	if(datalength == 0)
 		return;
 	
@@ -122,8 +119,12 @@ void UpdateDisplay(int panel)
 	{
 		// Empty the timing diagram:
 		ClearDigitalGraph(TIMINGTAB, TIMPANEL_TIMINGDIAGRAM);
-		return;
+		SetCtrlAttribute(TIMINGTAB, TIMPANEL_TIMINGDIAGRAM, ATTR_YLABEL_VISIBLE, 0);
+		return; // No timing diagram, listing already cleared, so we can just quit here.
 	}
+	
+	// We have at least one channel and nonzero data:
+	SetCtrlAttribute(TIMINGTAB, TIMPANEL_TIMINGDIAGRAM, ATTR_YLABEL_VISIBLE, 1);
 	
 	timingdata = malloc(sizeof(short int)*range*numchannels);
 	if(timingdata == NULL) return; // Out of mem!?
