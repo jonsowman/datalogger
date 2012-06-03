@@ -18,6 +18,7 @@ static int LISTINGTAB; // So do our own - these are set in main()
 #include <stdio.h>
 
 // Couple of static state variables:
+BOOL trigger_wait;
 BOOL capture_begun;
 BOOL retrieval_begun;
 unsigned int GetDatasPerTick;
@@ -418,7 +419,8 @@ int CVICALLBACK CAPTUREBUTTON_hit (int panel, int control, int event,
 	StatusMessage(panel, IFACEPANEL_STATUSBOX, "Analyser armed");
 
 	
-	capture_begun = false; // state used later - set once samples have been taken
+	trigger_wait = false; // state used later - set once samples have been taken
+	capture_begun = false;  // more state
 	retrieval_begun = false; // Set once capture finished
 	datastoreptr=datastore;
 	// Start the retrieve timer:
@@ -522,7 +524,11 @@ int CVICALLBACK RETRIEVETIMER_hit (int panel, int control, int event,
 			
 			case STATE_WAIT:
 				// Waiting for capture to begin
-				StatusMessage(panel, IFACEPANEL_STATUSBOX, "Waiting for trigger/clock");
+				if(!trigger_wait)
+				{
+					StatusMessage(panel, IFACEPANEL_STATUSBOX, "Waiting for trigger/clock");
+					trigger_wait=true;
+				}
 				return 0;
 			
 			case STATE_PROG:
