@@ -1,4 +1,4 @@
 * UI for triggering with async
 * cancel button
 * mid-capture error handling
-
+* more work on timing diag labels - X axis labels based on pos, hide lines when not set nicely
