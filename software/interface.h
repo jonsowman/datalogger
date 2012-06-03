@@ -53,8 +53,9 @@
 
      /* tab page panel controls */
 #define  RS232TAB_CHANNEL                2
-#define  RS232TAB_TEXTBOX                3
-#define  RS232TAB_DECODEBUTTON           4
+#define  RS232TAB_RS232RESULT            3
+#define  RS232TAB_DECODEBUTTON           4       /* callback function: DECODEBUTTON_hit */
+#define  RS232TAB_BITRATE                5
 
      /* tab page panel controls */
 #define  TIMPANEL_TIMINGDIAGRAM          2
@@ -74,6 +75,7 @@ int  CVICALLBACK CAPTUREMODE_hit(int panel, int control, int event, void *callba
 int  CVICALLBACK CH_CHECKBOX_hit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK DEBUGBUTTON_hit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK DEBUGCHECKBOX_hit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK DECODEBUTTON_hit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK DUMMYDATABUTTON_hit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK IFACEPANEL_hit(int panel, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK NONECHBUTTON_hit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
