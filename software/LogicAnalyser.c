@@ -178,7 +178,7 @@ void UpdateDisplay(int panel)
 		for(j=0; j<8; j++)
 			if(CHenable[j])
 			{
-				sprintf(buf, "%d   ", (datastore[i+position]>>(7-j)) & 1 ); // Again, lazyily aligning with space padding
+				sprintf(buf, " %d  ", (datastore[i+position]>>(7-j)) & 1 ); // Again, lazyily aligning with space padding
 									// This is a way of retrieving a single bit - shift, then filter out the LSbit with the &
 				SetCtrlVal(LISTINGTAB, LISTPANEL_DATALISTING, buf);  // append CH values, spaces to align lazily
 			}
