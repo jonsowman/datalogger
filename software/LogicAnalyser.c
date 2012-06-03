@@ -609,16 +609,6 @@ int CVICALLBACK RETRIEVETIMER_hit (int panel, int control, int event,
 	return 0;
 }
 
-int CVICALLBACK GENERATELISTINGBUTTON_hit (int panel, int control, int event,
-		void *callbackData, int eventData1, int eventData2)
-{
-	if(event != EVENT_COMMIT)
-		return 0; // Not a click
-	
-	UpdateDisplay(panel);   
-
-	return 0;
-}
 
 int CVICALLBACK DUMMYDATABUTTON_hit (int panel, int control, int event,
 		void *callbackData, int eventData1, int eventData2)
