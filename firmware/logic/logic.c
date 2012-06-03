@@ -85,10 +85,30 @@ bool logicStart(void)
  */
 void _beginSampling(uint8_t config)
 {
-	if(config & MODE_ASYNC)
+	// Async untriggered
+	if(config == (MODE_ASYNC | OPTIONS_VALID))
 	{
 		_startTimer();
 	}
+	// Async triggered
+	else if(config & MODE_ASYNC)
+	{
+	// This is a bit of a hack to get around the fact
+	// that the PIC hardware can't trigger on changing
+	// level, only rising or falling. Therefore we read
+	// the value of the pin and set the interrupt to
+	// trigger on the opposite level.
+		if(config & EDGE_BOTH)
+		{
+			if(PORTDATA0)
+				config |= EDGE_FALL;
+			else
+				config |= EDGE_RISE;
+			config &= ~(EDGE_BOTH);
+		}
+		_startExtInterrupt(config);	
+	}
+	// Sync
 	else if(config & MODE_SYNC)
 	{
 		_startExtInterrupt(config);
@@ -223,6 +243,9 @@ void _startTimer(void)
 	// Finally enable the timer
 	T0CONbits.TMR0ON = 1;
 	
+	// Skip the triggering
+	logic_state = LOGIC_INPROGRESS;
+	
 	return;
 }
 
@@ -252,30 +275,48 @@ void _startExtInterrupt(uint8_t config)
 #pragma interrupt high_isr
 void high_isr(void)
 {
-	if(INTCONbits.TMR0IF || INTCONbits.INT0IF)
+	// Check whether we're triggering or sampling
+	if(logic_state == LOGIC_INPROGRESS)
 	{
-		if(writeptr < samplenumber)
+		if(INTCONbits.TMR0IF || INTCONbits.INT0IF)
 		{
-			writeRAM(writeptr);
-			writeptr++;
-			logic_state = LOGIC_INPROGRESS;
-			if(INTCONbits.TMR0IF)
+			if(writeptr < samplenumber)
 			{
-				TMR0L = TIMER_PRELOAD;
-				INTCONbits.TMR0IF = 0;
+				writeRAM(writeptr);
+				writeptr++;
+				if(INTCONbits.TMR0IF)
+				{
+					TMR0L = TIMER_PRELOAD;
+					INTCONbits.TMR0IF = 0;
+				}
+				else if(INTCONbits.INT0IF)
+				{
+					if(config & EDGE_BOTH) INTCON2 ^= 0x40;
+					INTCONbits.INT0IF = 0;
+				}
 			}
-			else if(INTCONbits.INT0IF)
+			else // Done sampling, stop interrupting
 			{
-				INTCONbits.INT0IF = 0;
+				INTCONbits.INT0IE = 0;
+				INTCONbits.TMR0IE = 0;
+				T0CONbits.TMR0ON = 0;
+				logic_state = LOGIC_END;
+				LATLEDB = 1;
 			}
 		}
-		else // Done sampling, stop interrupting
+	} else if(logic_state == LOGIC_WAITING)
+	{
+		if(config & MODE_ASYNC && INTCONbits.INT0IF)
 		{
 			INTCONbits.INT0IE = 0;
-			INTCONbits.TMR0IE = 0;
-			T0CONbits.TMR0ON = 0;
-			logic_state = LOGIC_END;
-			LATLEDB = 1;
+			INTCONbits.INT0IF = 0;
+			logic_state = LOGIC_INPROGRESS;
+			_startTimer();
+		}
+		else if(config & MODE_SYNC && INTCONbits.INT0IF)
+		{
+			INTCONbits.INT0IF = 0;
+			logic_state = LOGIC_INPROGRESS;
 		}
 	}
 }

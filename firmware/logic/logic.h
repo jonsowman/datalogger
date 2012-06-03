@@ -12,6 +12,9 @@
 #define MAX_SAMPLE_RATE			250000UL
 #define MAX_SAMPLE_NUM			0x20000
 
+#define INT_MODE_TRIGGER		0x00
+#define INT_MODE_SAMPLE			0x01
+
 #define MODE_ASYNC				0x01
 #define MODE_SYNC				0x02
 #define EDGE_RISE				0x04
