@@ -60,7 +60,7 @@ void UpdateSliders(int panel) // Call this any time you update datalength or mov
 	// Set max range to 20 or datalength, whichever is smaller, unless datalength=0 in which case set max range to 1
 	// (Doesn't like min = max = 0)
 	if(datalength>20)
-		SetCtrlAttribute(panel, IFACEPANEL_RANGESLIDER, ATTR_MAX_VALUE, 50); // Master Max Range Option!
+		SetCtrlAttribute(panel, IFACEPANEL_RANGESLIDER, ATTR_MAX_VALUE, 100); // Master Max Range Option!
 	else
 		if(datalength == 0)
 			SetCtrlAttribute(panel, IFACEPANEL_RANGESLIDER, ATTR_MAX_VALUE, 1);
