@@ -119,7 +119,12 @@ void UpdateDisplay(int panel)
 		if(CHenable[i])
 			numchannels++;
 		
-	if(numchannels == 0) return;
+	if(numchannels == 0)
+	{
+		// Empty the timing diagram:
+		ClearDigitalGraph(TIMINGTAB, TIMPANEL_TIMINGDIAGRAM);
+		return;
+	}
 	
 	timingdata = malloc(sizeof(short int)*range*numchannels);
 	if(timingdata == NULL) return; // Out of mem!?
