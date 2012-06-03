@@ -100,11 +100,11 @@ void _beginSampling(uint8_t config)
 	// trigger on the opposite level.
 		if(config & EDGE_BOTH)
 		{
-			if(PORTDATA0)
-				config |= EDGE_FALL;
-			else
-				config |= EDGE_RISE;
 			config &= ~(EDGE_BOTH);
+			if(PORTDATA0) // If line is really low
+				config |= EDGE_RISE;
+			else
+				config |= EDGE_FALL;
 		}
 		_startExtInterrupt(config);	
 	}
@@ -255,11 +255,12 @@ void _startTimer(void)
  */
 void _startExtInterrupt(uint8_t config)
 {
-	// Configure the edge for interrupt
+	// Configure the edge for interrupt, these are the
+	// wrong way around since the frontend filters invert
 	if(config & EDGE_RISE || config & EDGE_BOTH)
-		INTCON2bits.INTEDG0 = 1;
-	else if(config & EDGE_FALL)
 		INTCON2bits.INTEDG0 = 0;
+	else if(config & EDGE_FALL)
+		INTCON2bits.INTEDG0 = 1;
 		
 	// Clear the flag and enable the interrupt
 	RCONbits.IPEN = 1;
