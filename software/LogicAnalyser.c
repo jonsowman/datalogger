@@ -740,3 +740,158 @@ int CVICALLBACK ASYNCTIRGGER_hit (int panel, int control, int event,
 	
 	return 0;
 }
+
+int CVICALLBACK DECODEBUTTON_hit (int panel, int control, int event,
+		void *callbackData, int eventData1, int eventData2)
+{
+	const int framelength=8; // exclusing start/stop bits
+	const int channel=0; // Default CH0
+	unsigned int i, j, samplerate=5, bitrate=1; // We only care about ratio of
+		// samplerate to bitrate, in this case 5:1
+	char datastore2[245]; // TODO DEBUG FIXME means we'll get errors if we overrun - handy <=====================================
+	unsigned int datalen2=245; // FIXME DEBUG TODO FIX ME TOO
+	unsigned int ptr=0;
+	unsigned int readframe;
+	// Flags:
+	
+	if(event != EVENT_COMMIT) return 0;
+	
+	/******* RS232 FRAMING DECODE PROCESS **************
+	In order to synchronise reliably, we need to find what is definitely a
+	start bit, and must know for sure that it is not part of a data frame.
+	Only sure way to do this is wait for a mark period of at least N bit
+	periods, where N=framelength.  After this any SPACE bit is definitely
+	a start bit.
+	
+	Having found a start bit, we need to synchronise in order to decide
+	what samples to read to check the END MARK bit and for each data bit.
+	A simple (and in theory reliable) way of doing this is to assume the
+	falling edge happened precisely half way between the last MARK sample
+	and first SPACE sample.  We can then use the bit rate to estimate
+	the position of the centre of each data bit and the END bit.  We then
+	pick the nearest sample to each of these centres.  We read the END bit -
+	if it is not a SPACE, we have a framing error, and need to return to
+	finding a period of at least N MARK bits.
+	
+	We can now read the N data bits, decode ASCII, display as hex,
+	check parity, or whatever.
+	
+	Flow:
+	10 Scan for N MARKs followed by SPACE
+	20 Check for END MARK - if not GOTO 10
+	30 Read Byte
+	40 Scan for next SPACE start bit
+	50 GOTO 20
+	*****************************************************/
+	
+	// Example sample buffer:
+	// 100 MARK samples (i.e. idle)
+	// 1 STOP bit (SPACE) (5 samples)
+	// 8 data bits: 01000010, MSbit first (=0x42), with 5 samples each
+	// 100 MARK samples
+	
+	for(i=0; i<100; i++) // 20 idle bits
+		datastore2[i]=MARK;
+	for(i=100; i<110; i++) // 1 start MARK bit and 1st data bit
+		datastore2[i]=SPACE;
+	for(i=110; i<115; i++) // 2nd data bit
+		datastore2[i]=MARK;
+	for(i=115; i<135; i++) // 3rd to 6th data bits
+		datastore2[i]=SPACE;
+	for(i=135; i<140; i++) // 7th data bit
+		datastore2[i]=MARK;
+	for(i=140; i<145; i++) // 8th data bit
+		datastore2[i]=SPACE;
+	for(i=145; i<245; i++) // 1 stop bit and 19 idle bits
+		datastore2[i]=MARK;
+	
+	// Synchronising loop
+	while( ptr < datalen2 - ceil( (double)samplerate/bitrate*(framelength-1) ) )
+	{
+		if(datastore2[ptr] == MARK)
+		{
+			i++; // MARK count
+			ptr++;
+			continue;
+		}
+		else // space
+			if(i <= framelength) // Cannot sync -- reset
+			{
+				i=0; // Reset MARK count
+				ptr++;
+				continue;
+			}
+				
+		// We now consider ptr to be the first sample of a START bit
+		// We will assume the falling edge of the START bit was 0.5 samples before ptr
+		// The middle of the start bit is at sample
+		//		 ptr - 0.5 + (samplerate/bitrate)/2
+		
+		// Check for the end bit - the middle of the end bit should be at sample:
+		//		 ptr - 0.5 + (samplerate/bitrate)*(N+1.5)
+		// We need to round this to get a whole sample num - C has no round() but ceil(x+0.5) is equivilent
+			
+		if(datastore2[(int)(ptr + ceil( (double)samplerate/bitrate * ((double)framelength + 1.5) ))] != MARK)
+		{
+			// Incorrect END bit - framing error!
+			// Return to original idle-scan:
+			i=0;
+			ptr++;
+			//continue;
+		}
+		
+		// Now we have a frame with correct START and END bits - read off the data!
+		readframe=0;
+		// * sample = ptr - 0.5 + (samplerate/bitrate)*(1.5+j)
+		// * Again, round with ceil(x+0.5)
+		// * Pick out channel using (datastore[sample] >> channel) & 1
+		// * Shift into correct bit position in frame using << (framelength-1-j)
+		// * Add to readframe using |=
+		
+		for(j=0; j<framelength; j++)
+			readframe |= ((datastore2[(int)(ceil(ptr + (samplerate/bitrate)*(1.5+j)))] >> channel) & 1) << (framelength-1-j);
+		
+		// Now readframe should contain the byte!
+		printf("byte decoded: 0x%x\n", readframe);
+		
+		// Finally, align ptr with somewhere inside the END MARK bit
+		// Aiming for the middle: ptr - 0.5 + (samplerate/bitrate)*(N+2.5)
+		
+		ptr += ceil( (samplerate/bitrate)*(framelength+2.5) );
+		// i should already be > framelength, so we can just reloop
+		// and go straight to looking for the first falling edge of a START bit.
+		
+	}
+	
+	return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
