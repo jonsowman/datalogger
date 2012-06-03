@@ -142,8 +142,10 @@ void UpdateDisplay(int panel)
 	
 	PlotDigitalLines(TIMINGTAB, TIMPANEL_TIMINGDIAGRAM, timingdata, range*numchannels, VAL_CHAR, numchannels);
 	
-	// Replace axis lables with CH?
+	// Correct X axis:
+	SetCtrlAttribute(TIMINGTAB, TIMPANEL_TIMINGDIAGRAM, ATTR_XAXIS_OFFSET, (double)position);
 	
+	// Replace axis lables with CH?
 	i=0;
 	for(j=0; j<8; j++)
 	{

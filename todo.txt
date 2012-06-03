@@ -1,3 +1,2 @@
 * cancel button
 * mid-capture error handling
-* more work on timing diag labels - X axis labels based on pos
