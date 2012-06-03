@@ -326,28 +326,30 @@ int CVICALLBACK CAPTUREBUTTON_hit (int panel, int control, int event,
 {
 	int async, sync, rising, falling, both;
 	unsigned long rate, samplenumber;
-	int capturemode;
-	int edge;
-	int result;
+	int capturemode, edge, result, asynctrigger;
 
 	if(event != EVENT_COMMIT)
 		return 0; // not a click! mouseover etc.
-	
 	
 	Radio_GetMarkedOption(panel, IFACEPANEL_CAPTUREMODE, &capturemode); // Retrieve async/sync
 	
 	if(capturemode==0) // async
 	{
 		async=1;
-		sync=rising=falling=both=0;
-		
+		sync=0;
 		GetCtrlVal(panel, IFACEPANEL_SAMPLERATE, &rate); // retrieve rate
+		
+		// Check for async trigger - used later
+		GetCtrlVal(panel, IFACEPANEL_ASYNCTRIGGER, &asynctrigger);
 	}
 	else // sync
 	{
 		sync=1;
 		async=rate=0;
+	}
 	
+	if( (capturemode == 1) || asynctrigger) // sync or (async with trigger)
+	{
 		Radio_GetMarkedOption (panel, IFACEPANEL_CLOCKEDGE, &edge);
 		
 		switch(edge)
@@ -367,9 +369,10 @@ int CVICALLBACK CAPTUREBUTTON_hit (int panel, int control, int event,
 				rising = falling = false;
 				break;
 		}
-	
-
 	}
+	else // async without trigger
+		rising=falling=both=0;
+	
 	
 	// Clear out old data:
 	datalength = 0;
