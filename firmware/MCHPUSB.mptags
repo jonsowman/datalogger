@@ -441,7 +441,7 @@ getSampleNumber	C:\datalogger\firmware\logic\logic.h	38;"	p	line:38	signature:(v
 getSampleRate	C:\datalogger\firmware\logic\logic.c	147;"	f	line:147	signature:(void)
 getSampleRate	C:\datalogger\firmware\logic\logic.h	36;"	p	line:36	signature:(void)
 high	C:\datalogger\firmware\user\user.c	199;"	l	line:199
-high_isr	C:\datalogger\firmware\logic\logic.c	276;"	f	line:276	signature:(void)
+high_isr	C:\datalogger\firmware\logic\logic.c	277;"	f	line:277	signature:(void)
 high_isr	C:\datalogger\firmware\logic\logic.h	56;"	p	line:56	signature:(void)
 i	C:\datalogger\firmware\logic\logic.c	184;"	l	line:184
 i	C:\datalogger\firmware\periph\periph.c	126;"	l	line:126
@@ -461,7 +461,7 @@ logicStart	C:\datalogger\firmware\logic\logic.c	67;"	f	line:67	signature:(void)
 logicStart	C:\datalogger\firmware\logic\logic.h	32;"	p	line:32	signature:(void)
 logic_state	C:\datalogger\firmware\logic\logic.c	22;"	v	line:22
 low	C:\datalogger\firmware\user\user.c	199;"	l	line:199
-low_isr	C:\datalogger\firmware\logic\logic.c	326;"	f	line:326	signature:(void)
+low_isr	C:\datalogger\firmware\logic\logic.c	327;"	f	line:327	signature:(void)
 low_isr	C:\datalogger\firmware\logic\logic.h	55;"	p	line:55	signature:(void)
 mInitAllLEDs::LATD&=0xF0;TRISD&=0xF0;	C:\datalogger\firmware\io_cfg.h	31;"	d	line:31
 mInitPOT::TRISAbits.TRISA0=1;ADCON0=0x01	C:\datalogger\firmware\io_cfg.h	28;"	d	line:28
