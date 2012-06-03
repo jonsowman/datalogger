@@ -52,6 +52,30 @@ void StatusMessage(int panel, int statusbox, char *message)
 	SetCtrlIndex (panel, statusbox, count-1);
 }
 
+void UpdateSliders(int panel) // Call this any time you update datalength or move the range slider
+{
+	unsigned int position, range;
+	
+	// Set max range to 20 or datalength, whichever is smaller, unless datalength=0 in which case set max range to 1
+	// (Doesn't like min = max = 0)
+	if(datalength>20)
+		SetCtrlAttribute(panel, IFACEPANEL_RANGESLIDER, ATTR_MAX_VALUE, 20);
+	else
+		if(datalength == 0)
+			SetCtrlAttribute(panel, IFACEPANEL_RANGESLIDER, ATTR_MAX_VALUE, 1);
+		else
+			SetCtrlAttribute(panel, IFACEPANEL_RANGESLIDER, ATTR_MAX_VALUE, datalength);
+		
+	GetCtrlVal(panel, IFACEPANEL_RANGESLIDER, &range);
+	
+	
+	// Now setup the position max:
+	if(datalength == 0)
+		SetCtrlAttribute(panel, IFACEPANEL_POSITIONSLIDER, ATTR_MAX_VALUE, 1);
+	else
+		SetCtrlAttribute(panel, IFACEPANEL_POSITIONSLIDER, ATTR_MAX_VALUE, datalength-range);
+}
+
 int main (int argc, char *argv[])
 {
 	int panelHandle;
@@ -97,6 +121,9 @@ int main (int argc, char *argv[])
 		StatusMessage(panelHandle, IFACEPANEL_STATUSBOX, "Failed to connect to logic analyser");
 		SetCtrlVal(panelHandle, IFACEPANEL_CONNECTEDLED, 0);
 	}
+	
+	datalength=0;
+	UpdateSliders(panelHandle);
 	
 	RunUserInterface ();
 	
@@ -212,6 +239,7 @@ int CVICALLBACK CAPTUREBUTTON_hit (int panel, int control, int event,
 	
 	// Clear out old data:
 	datalength = 0;
+	UpdateSliders(panel);
 	
 	GetCtrlVal(panel, IFACEPANEL_SAMPLENUMBER, &samplenumber);
 		
@@ -423,6 +451,7 @@ int CVICALLBACK RETRIEVETIMER_hit (int panel, int control, int event,
 				
 				// Mark data length:
 				datalength = datastoreptr-datastore;
+				UpdateSliders(panel);
 				
 				return 0;
 			
@@ -514,6 +543,8 @@ int CVICALLBACK DUMMYDATABUTTON_hit (int panel, int control, int event,
 	
 	if(debug) printf("Data Dummied - length %d\n", datalength);
 	
+	UpdateSliders(panel);
+	
 	return 0;
 }
 
@@ -558,6 +589,17 @@ int CVICALLBACK NONECHBUTTON_hit (int panel, int control, int event,
 	SetCtrlVal(panel, IFACEPANEL_CH5_CHECKBOX, 0); SetCtrlVal(panel, IFACEPANEL_CH4_CHECKBOX, 0);
 	SetCtrlVal(panel, IFACEPANEL_CH3_CHECKBOX, 0); SetCtrlVal(panel, IFACEPANEL_CH2_CHECKBOX, 0);
 	SetCtrlVal(panel, IFACEPANEL_CH1_CHECKBOX, 0); SetCtrlVal(panel, IFACEPANEL_CH0_CHECKBOX, 0);
+	
+	return 0;
+}
+
+int CVICALLBACK RANGESLIDER_hit (int panel, int control, int event,
+		void *callbackData, int eventData1, int eventData2)
+{
+	if(event != EVENT_COMMIT)
+		return 0; // not a click
+	
+	UpdateSliders(panel);
 	
 	return 0;
 }
