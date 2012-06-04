@@ -479,7 +479,7 @@ int getdata(char *datastore, char **datastoreptr)
 	
 	// Invert data
 	for(i=0; i<RecvLength-2; i++)
-		receive_buf[2+i] = ~receive_buf[2+i];
+		(*datastoreptr)[i] = ~((*datastoreptr)[i]);
 	
 	*datastoreptr += RecvLength - 2;
 	
