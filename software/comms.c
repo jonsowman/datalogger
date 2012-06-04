@@ -166,8 +166,9 @@ DWORD SendReceivePacket(BYTE *SendData, DWORD SendLength, BYTE *ReceiveData,
 
     if(myOutPipe != INVALID_HANDLE_VALUE && myInPipe != INVALID_HANDLE_VALUE)
     {
-		if(debug && SendData[0] != 0xdd) printf("About to send command 0x%x\n", SendData[0]);
-		// Squelch ping/pongs
+		if(debug && (SendData[0] != 0xdd) && (SendData[0] != 0x65) && (SendData[0] != 0x66))
+			printf("About to send command 0x%x\n", SendData[0]);
+		// Squelch ping/pongs, poll, and getdata
 		
         if(MPUSBWrite(myOutPipe,SendData,SendLength,&SentDataLength,SendDelay))
         {
@@ -176,8 +177,9 @@ DWORD SendReceivePacket(BYTE *SendData, DWORD SendLength, BYTE *ReceiveData,
             {
 				// Read went ok!
 				
-				if(debug && ReceiveData[0] != 0xdd) printf("Received command 0x%x\n", ReceiveData[0]);
-				// Squelch ping/pongs
+				if(debug && (ReceiveData[0] != 0xdd) && (ReceiveData[0] != 0x65) && (ReceiveData[0] != 0x66))
+					printf("Received command 0x%x\n", ReceiveData[0]);
+				// Squelch ping/pongs, poll and getdata
 				
 				// We have some commands which can validly return unexpected lengths:
 				// "The UCAM hack" - who knows what's going on, but it doesn't really matter
