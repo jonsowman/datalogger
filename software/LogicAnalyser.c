@@ -827,7 +827,9 @@ int CVICALLBACK DECODEBUTTON_hit (int panel, int control, int event,
 		// We need to round this to get a whole sample num - C has no round() but floor(x+0.5) is equivilent
 		
 		if(debug) printf("Estimated END bit @ sample %d\n", (int)((double)ptr + floor( (double)samplerate/bitrate * ((double)framelength + 1.5) )));
-			
+		printf("> framelength = %d\n", framelength);
+		printf("Above before round: sample %f\n", ptr + (double)samplerate/bitrate * ((double)framelength + 1.5) - 0.5);
+
 		if(datastore[(int)((double)ptr + floor( (double)samplerate/bitrate * ((double)framelength + 1.5) ))] != MARK)
 		{
 			// Incorrect END bit - framing error!
@@ -858,9 +860,6 @@ int CVICALLBACK DECODEBUTTON_hit (int panel, int control, int event,
 		ptr += floor( (samplerate/bitrate)*(framelength+1.5) );
 		// i should already be > framelength, so we can just reloop
 		// and go straight to looking for the first falling edge of a START bit.
-		
-		// TODO DEBUG FIXME only read one byte:
-		return 0;
 		
 	}
 	
