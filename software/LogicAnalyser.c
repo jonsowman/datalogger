@@ -855,9 +855,9 @@ int CVICALLBACK DECODEBUTTON_hit (int panel, int control, int event,
 		printf("byte decoded: 0x%x\n", readframe);
 		
 		// Finally, align ptr with somewhere inside the END MARK bit
-		// Aiming for the middle: ptr - 0.5 + (samplerate/bitrate)*(N+2.5)
+		// Aiming for the middle: ptr - 0.5 + (samplerate/bitrate)*(N+1.5)
 		
-		ptr += ceil( (samplerate/bitrate)*(framelength+2.5) );
+		ptr += ceil( (samplerate/bitrate)*(framelength+1.5) );
 		// i should already be > framelength, so we can just reloop
 		// and go straight to looking for the first falling edge of a START bit.
 		
