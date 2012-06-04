@@ -843,11 +843,11 @@ int CVICALLBACK DECODEBUTTON_hit (int panel, int control, int event,
 		// * sample = ptr - 0.5 + (samplerate/bitrate)*(1.5+j)
 		// * Again, round with ceil(x+0.5)
 		// * Pick out channel using (datastore[sample] >> channel) & 1
-		// * Shift into correct bit position in frame using << (framelength-1-j)
+		// * Shift into correct bit position in frame using << j (Remember LSbit first)
 		// * Add to readframe using |=
 		
 		for(j=0; j<framelength; j++)
-			readframe |= ((datastore[(int)(ceil(ptr + (samplerate/bitrate)*(1.5+j)))] >> channel) & 1) << (framelength-1-j);
+			readframe |= ((datastore[(int)(ceil(ptr + (samplerate/bitrate)*(1.5+j)))] >> channel) & 1) << j;
 		
 		// Now readframe should contain the byte!
 		printf("byte decoded: 0x%x\n", readframe);
