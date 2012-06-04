@@ -824,11 +824,11 @@ int CVICALLBACK DECODEBUTTON_hit (int panel, int control, int event,
 		
 		// Check for the end bit - the middle of the end bit should be at sample:
 		//		 ptr - 0.5 + (samplerate/bitrate)*(N+1.5)
-		// We need to round this to get a whole sample num - C has no round() but ceil(x+0.5) is equivilent
+		// We need to round this to get a whole sample num - C has no round() but floor(x+0.5) is equivilent
 		
-		if(debug) printf("Estimated END bit @ sample %d\n", (int)(ptr + ceil( (double)samplerate/bitrate * ((double)framelength + 1.5) )));
+		if(debug) printf("Estimated END bit @ sample %d\n", (int)((double)ptr + floor( (double)samplerate/bitrate * ((double)framelength + 1.5) )));
 			
-		if(datastore[(int)(ptr + ceil( (double)samplerate/bitrate * ((double)framelength + 1.5) ))] != MARK)
+		if(datastore[(int)((double)ptr + floor( (double)samplerate/bitrate * ((double)framelength + 1.5) ))] != MARK)
 		{
 			// Incorrect END bit - framing error!
 			if(debug) printf("Framing error!\n");
@@ -847,7 +847,7 @@ int CVICALLBACK DECODEBUTTON_hit (int panel, int control, int event,
 		// * Add to readframe using |=
 		
 		for(j=0; j<framelength; j++)
-			readframe |= ((datastore[(int)(ceil(ptr + (samplerate/bitrate)*(1.5+j)))] >> channel) & 1) << j;
+			readframe |= ((datastore[(int)(floor((double)ptr + ((double)samplerate/bitrate)*(1.5+j)))] >> channel) & 1) << j;
 		
 		// Now readframe should contain the byte!
 		printf("byte decoded: 0x%x\n", readframe);
@@ -855,7 +855,7 @@ int CVICALLBACK DECODEBUTTON_hit (int panel, int control, int event,
 		// Finally, align ptr with somewhere inside the END MARK bit
 		// Aiming for the middle: ptr - 0.5 + (samplerate/bitrate)*(N+1.5)
 		
-		ptr += ceil( (samplerate/bitrate)*(framelength+1.5) );
+		ptr += floor( (samplerate/bitrate)*(framelength+1.5) );
 		// i should already be > framelength, so we can just reloop
 		// and go straight to looking for the first falling edge of a START bit.
 		
