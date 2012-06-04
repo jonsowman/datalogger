@@ -434,6 +434,8 @@ int poll_state(unsigned int *sampleptr, unsigned int *state)
 
 int getdata(char *datastore, char **datastoreptr)
 {
+	unsigned int i;
+	
 	DWORD RecvLength = LEN_GETDATA_RS;
 	send_buf[0] = CMD_GETDATA_RQ;
 	send_buf[1] = LEN_GETDATA_RQ;
@@ -474,6 +476,10 @@ int getdata(char *datastore, char **datastoreptr)
 	
 	// Right, copy data:
 	memcpy(*datastoreptr, receive_buf+2, RecvLength - 2);
+	
+	// Invert data
+	for(i=0; i<RecvLength-2; i++)
+		receive_buf[2+i] = ~receive_buf[2+i];
 	
 	*datastoreptr += RecvLength - 2;
 	
