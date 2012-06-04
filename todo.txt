@@ -1,2 +1,18 @@
 * cancel button
 * mid-capture error handling
+
+
+
+LATA += 0x8;
+if(LATA&0x38 == 0x38){
+    LATA |= ~0x38; //Clear the bits
+        LATB += 0x8;
+	        if(LATB & 0xf8 == 0xf8){
+		            LATB |= ~0xf8; //Clear the bits
+			                LATD++;
+					            if(LATD == 0xff){
+						                    LATD = 0;
+								                    LATBbits.LATB2 = 1;
+										                    //Something here about resetting it all back to zero
+												            }
+													    }
