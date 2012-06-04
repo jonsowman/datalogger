@@ -795,6 +795,8 @@ int CVICALLBACK DECODEBUTTON_hit (int panel, int control, int event,
 	50 GOTO 20
 	*****************************************************/
 	
+	if(debug) printf("Sample rate: %d, bit rate: %d, samples/bit: %f\n", samplerate, bitrate, (double)samplerate/bitrate);
+	
 	// Synchronising loop
 	while( ptr < datalength - ceil( (double)samplerate/bitrate*(framelength-1) ) )
 	{
@@ -813,6 +815,9 @@ int CVICALLBACK DECODEBUTTON_hit (int panel, int control, int event,
 			}
 				
 		// We now consider ptr to be the first sample of a START bit
+		
+		if(debug) printf("rs232: START found @ sample %d\n", ptr);
+			
 		// We will assume the falling edge of the START bit was 0.5 samples before ptr
 		// The middle of the start bit is at sample
 		//		 ptr - 0.5 + (samplerate/bitrate)/2
@@ -820,6 +825,8 @@ int CVICALLBACK DECODEBUTTON_hit (int panel, int control, int event,
 		// Check for the end bit - the middle of the end bit should be at sample:
 		//		 ptr - 0.5 + (samplerate/bitrate)*(N+1.5)
 		// We need to round this to get a whole sample num - C has no round() but ceil(x+0.5) is equivilent
+		
+		if(debug) printf("Estimated END bit @ sample %d\n", (int)(ptr + ceil( (double)samplerate/bitrate * ((double)framelength + 1.5) )));
 			
 		if(datastore[(int)(ptr + ceil( (double)samplerate/bitrate * ((double)framelength + 1.5) ))] != MARK)
 		{
@@ -851,6 +858,9 @@ int CVICALLBACK DECODEBUTTON_hit (int panel, int control, int event,
 		ptr += ceil( (samplerate/bitrate)*(framelength+1.5) );
 		// i should already be > framelength, so we can just reloop
 		// and go straight to looking for the first falling edge of a START bit.
+		
+		// TODO DEBUG FIXME only read one byte:
+		return 0;
 		
 	}
 	

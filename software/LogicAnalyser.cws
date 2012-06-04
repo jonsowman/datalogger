@@ -1,19 +1,19 @@
 [Workspace Header]
 Version = 810
-Pathname = "/c/Users/david/Desktop/datalogger/software/LogicAnalyser.cws"
-CVI Dir = "/c/program files (x86)/national instruments/cvi81"
-IVI Standard Root Dir = "/C/Program Files (x86)/IVI"
-VXIplug&play Framework Dir = "/c/vxipnp/winnt"
+Pathname = "/c/datalogger/software/LogicAnalyser.cws"
+CVI Dir = "/c/program files/national instruments/cvi81"
+IVI Standard Root Dir = "/C/Program Files/IVI Foundation/IVI"
+VXIplug&play Framework Dir = "/C/Program Files/IVI Foundation/VISA/winnt"
 Number of Projects = 1
 Active Project = 1
 Project 0001 = "LogicAnalyser.prj"
 Project 0001 Folder Instrument Files Collapsed = True
 Drag Bar Left = 208
-Window Top = 28
-Window Left = 15
-Window Bottom = 1037
-Window Right = 1306
-Maximized = False
+Window Top = 30
+Window Left = 26
+Window Bottom = 532
+Window Right = 816
+Maximized = True
 Maximized Children = True
 Max Number Of Errors = 20
 Track Include File Dependencies = True
@@ -44,36 +44,35 @@ Batch Build Debug = False
 Force Rebuild = False
 
 [File 0001]
-Path Line0001 = "/c/program files (x86)/national instruments/cvi81/toolslib/custctrl/radioGroup.f"
-Path Line0002 = "p"
+Path = "/c/Program Files/National Instruments/CVI81/toolslib/custctrl/radioGroup.fp"
 File Type = "Function Panel"
 Disk Date = 3245652000
 In Projects = "1,"
 
 [File 0002]
-Path = "/c/Users/david/Desktop/datalogger/software/LogicAnalyser.c"
+Path = "/c/datalogger/software/LogicAnalyser.c"
 File Type = "CSource"
-Disk Date = 3421616684
+Disk Date = 3421655450
 In Projects = "1,"
 Window Top = 30
 Window Left = 10
 Window Z-Order = 1
-Source Window State = "1,797,830,797,4,19,4,0,0,131,0,0,0,0,0,72,805,0,821,70,349,748,1,0,"
+Source Window State = "1,797,797,797,67,68,68,0,0,130,0,0,0,0,0,57,343,0,391,36,349,748,1,0,"
 
 [File 0003]
-Path = "/c/Users/david/Desktop/datalogger/software/comms.c"
+Path = "/c/datalogger/software/comms.c"
 File Type = "CSource"
-Disk Date = 3421519155
+Disk Date = 3421653212
 In Projects = "1,"
 Window Top = 89
 Window Left = 250
 Window Z-Order = 4
-Source Window State = "1,479,479,479,4,11,11,0,0,166,0,0,0,0,0,69,466,0,489,17,924,1363,1,0,"
+Source Window State = "1,481,481,481,35,46,35,0,0,156,0,0,0,0,0,69,132,0,180,20,924,1280,1,0,"
 
 [File 0004]
-Path = "/c/Users/david/Desktop/datalogger/software/comms.h"
+Path = "/c/datalogger/software/comms.h"
 File Type = "Include"
-Disk Date = 3421603695
+Disk Date = 3421651246
 In Projects = "1,"
 Window Top = 30
 Window Left = 10
@@ -81,19 +80,19 @@ Window Z-Order = 5
 Source Window State = "1,29,30,29,13,13,13,0,0,31,0,0,0,0,0,54,15,0,31,15,734,283,1,0,"
 
 [File 0005]
-Path = "/c/Users/david/Desktop/datalogger/software/interface.h"
+Path = "/c/datalogger/software/interface.h"
 File Type = "Include"
-Disk Date = 3421615949
+Disk Date = 3421651246
 In Projects = "1,"
 Window Top = 32
 Window Left = 10
 Window Z-Order = 3
-Source Window State = "1,57,57,57,9,25,25,0,3,80,0,0,0,0,0,25,11,0,57,9,349,676,1,0,"
+Source Window State = "1,46,46,46,9,30,30,0,0,80,0,0,0,0,0,25,14,0,46,9,349,676,1,0,"
 
 [File 0006]
-Path = "/c/Users/david/Desktop/datalogger/software/interface.uir"
+Path = "/c/datalogger/software/interface.uir"
 File Type = "User Interface Resource"
-Disk Date = 3421615949
+Disk Date = 3421655983
 In Projects = "1,"
 Window Top = 32
 Window Left = 10

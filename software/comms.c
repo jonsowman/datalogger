@@ -166,8 +166,9 @@ DWORD SendReceivePacket(BYTE *SendData, DWORD SendLength, BYTE *ReceiveData,
 
     if(myOutPipe != INVALID_HANDLE_VALUE && myInPipe != INVALID_HANDLE_VALUE)
     {
-		if(debug && SendData[0] != 0xdd) printf("About to send command 0x%x\n", SendData[0]);
-		// Squelch ping/pongs
+		if(debug && (SendData[0] != 0xdd) && (SendData[0] != 0x65) && (SendData[0] != 0x66))
+			printf("About to send command 0x%x\n", SendData[0]);
+		// Squelch ping/pongs, poll, and getdata
 		
         if(MPUSBWrite(myOutPipe,SendData,SendLength,&SentDataLength,SendDelay))
         {
@@ -176,8 +177,9 @@ DWORD SendReceivePacket(BYTE *SendData, DWORD SendLength, BYTE *ReceiveData,
             {
 				// Read went ok!
 				
-				if(debug && ReceiveData[0] != 0xdd) printf("Received command 0x%x\n", ReceiveData[0]);
-				// Squelch ping/pongs
+				if(debug && (ReceiveData[0] != 0xdd) && (ReceiveData[0] != 0x65) && (ReceiveData[0] != 0x66))
+					printf("Received command 0x%x\n", ReceiveData[0]);
+				// Squelch ping/pongs, poll and getdata
 				
 				// We have some commands which can validly return unexpected lengths:
 				// "The UCAM hack" - who knows what's going on, but it doesn't really matter
@@ -434,6 +436,8 @@ int poll_state(unsigned int *sampleptr, unsigned int *state)
 
 int getdata(char *datastore, char **datastoreptr)
 {
+	unsigned int i;
+	
 	DWORD RecvLength = LEN_GETDATA_RS;
 	send_buf[0] = CMD_GETDATA_RQ;
 	send_buf[1] = LEN_GETDATA_RQ;
@@ -474,6 +478,10 @@ int getdata(char *datastore, char **datastoreptr)
 	
 	// Right, copy data:
 	memcpy(*datastoreptr, receive_buf+2, RecvLength - 2);
+	
+	// Invert data
+	for(i=0; i<RecvLength-2; i++)
+		(*datastoreptr)[i] = ~((*datastoreptr)[i]);
 	
 	*datastoreptr += RecvLength - 2;
 	
