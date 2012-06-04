@@ -28,6 +28,8 @@ int getdata(char *datastore, char **datastoreptr);
 
 #define DATASTORE_SIZE 131072
 
+#define MARK 1
+#define SPACE 0
 
 
 
