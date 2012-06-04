@@ -12,6 +12,7 @@
 
 static int TIMINGTAB; // Labwindows doesn't give us constants for tab panels
 static int LISTINGTAB; // So do our own - these are set in main()
+static int RS232TAB;
 
 #include "comms.h"  
 #include "interface.h"
@@ -27,6 +28,7 @@ unsigned int GetDatasPerTick;
 char *datastore=NULL;
 char *datastoreptr=NULL;
 unsigned int datalength=0;
+unsigned int samplerate=1;
 
 void StatusMessage(int panel, int statusbox, char *message);
 void UpdateSliders(int panel);
@@ -247,6 +249,7 @@ int main (int argc, char *argv[])
 	
 	GetPanelHandleFromTabPage (panelHandle, IFACEPANEL_DISPLAYTAB, 0, &TIMINGTAB);
 	GetPanelHandleFromTabPage (panelHandle, IFACEPANEL_DISPLAYTAB, 1, &LISTINGTAB);
+	GetPanelHandleFromTabPage (panelHandle, IFACEPANEL_DISPLAYTAB, 2, &RS232TAB);
 	
 	SetCtrlAttribute(TIMINGTAB, TIMPANEL_TIMINGDIAGRAM, ATTR_DIGWAVEFORM_SHOW_STATE_LABEL, 0); // disable state labels. 
 	
@@ -399,7 +402,11 @@ int CVICALLBACK CAPTUREBUTTON_hit (int panel, int control, int event,
 		return 0;
 	}
 	
+	// Configured ok!
+	
 	StatusMessage(panel, IFACEPANEL_STATUSBOX, "Successfully configured analyser");
+	
+	samplerate = rate; // Set the global samplerate, used in RS232decode
 	
 	SetCtrlAttribute(panel, IFACEPANEL_CAPTUREPROGRESS, ATTR_MAX_VALUE, samplenumber);
 	// Set sample counter widget max to samplenumber
@@ -744,17 +751,21 @@ int CVICALLBACK ASYNCTIRGGER_hit (int panel, int control, int event,
 int CVICALLBACK DECODEBUTTON_hit (int panel, int control, int event,
 		void *callbackData, int eventData1, int eventData2)
 {
-	const int framelength=8; // exclusing start/stop bits
+	const int framelength=8; // exclusing start/stop bits. Usually 8 = 1 byte
+	
 	const int channel=0; // Default CH0
-	unsigned int i, j, samplerate=5, bitrate=1; // We only care about ratio of
-		// samplerate to bitrate, in this case 5:1
-	char datastore2[245]; // TODO DEBUG FIXME means we'll get errors if we overrun - handy <=====================================
-	unsigned int datalen2=245; // FIXME DEBUG TODO FIX ME TOO
-	unsigned int ptr=0;
-	unsigned int readframe;
-	// Flags:
+	
+	unsigned int i=0, j, bitrate; 
+	// We only care about ratio of samplerate to bitrate, in this case 5:1
+	
+	unsigned int ptr=0; // For nav inside the datastore
+	unsigned int readframe; // output frame
+	
 	
 	if(event != EVENT_COMMIT) return 0;
+	
+	
+	GetCtrlVal(RS232TAB, RS232TAB_BITRATE, &bitrate);
 	
 	/******* RS232 FRAMING DECODE PROCESS **************
 	In order to synchronise reliably, we need to find what is definitely a
@@ -784,31 +795,10 @@ int CVICALLBACK DECODEBUTTON_hit (int panel, int control, int event,
 	50 GOTO 20
 	*****************************************************/
 	
-	// Example sample buffer:
-	// 100 MARK samples (i.e. idle)
-	// 1 STOP bit (SPACE) (5 samples)
-	// 8 data bits: 01000010, MSbit first (=0x42), with 5 samples each
-	// 100 MARK samples
-	
-	for(i=0; i<100; i++) // 20 idle bits
-		datastore2[i]=MARK;
-	for(i=100; i<110; i++) // 1 start MARK bit and 1st data bit
-		datastore2[i]=SPACE;
-	for(i=110; i<115; i++) // 2nd data bit
-		datastore2[i]=MARK;
-	for(i=115; i<135; i++) // 3rd to 6th data bits
-		datastore2[i]=SPACE;
-	for(i=135; i<140; i++) // 7th data bit
-		datastore2[i]=MARK;
-	for(i=140; i<145; i++) // 8th data bit
-		datastore2[i]=SPACE;
-	for(i=145; i<245; i++) // 1 stop bit and 19 idle bits
-		datastore2[i]=MARK;
-	
 	// Synchronising loop
-	while( ptr < datalen2 - ceil( (double)samplerate/bitrate*(framelength-1) ) )
+	while( ptr < datalength - ceil( (double)samplerate/bitrate*(framelength-1) ) )
 	{
-		if(datastore2[ptr] == MARK)
+		if(datastore[ptr] == MARK)
 		{
 			i++; // MARK count
 			ptr++;
@@ -831,9 +821,10 @@ int CVICALLBACK DECODEBUTTON_hit (int panel, int control, int event,
 		//		 ptr - 0.5 + (samplerate/bitrate)*(N+1.5)
 		// We need to round this to get a whole sample num - C has no round() but ceil(x+0.5) is equivilent
 			
-		if(datastore2[(int)(ptr + ceil( (double)samplerate/bitrate * ((double)framelength + 1.5) ))] != MARK)
+		if(datastore[(int)(ptr + ceil( (double)samplerate/bitrate * ((double)framelength + 1.5) ))] != MARK)
 		{
 			// Incorrect END bit - framing error!
+			if(debug) printf("Framing error!\n");
 			// Return to original idle-scan:
 			i=0;
 			ptr++;
@@ -849,7 +840,7 @@ int CVICALLBACK DECODEBUTTON_hit (int panel, int control, int event,
 		// * Add to readframe using |=
 		
 		for(j=0; j<framelength; j++)
-			readframe |= ((datastore2[(int)(ceil(ptr + (samplerate/bitrate)*(1.5+j)))] >> channel) & 1) << (framelength-1-j);
+			readframe |= ((datastore[(int)(ceil(ptr + (samplerate/bitrate)*(1.5+j)))] >> channel) & 1) << (framelength-1-j);
 		
 		// Now readframe should contain the byte!
 		printf("byte decoded: 0x%x\n", readframe);
