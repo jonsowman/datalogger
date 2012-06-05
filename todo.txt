@@ -1,9 +1,9 @@
 * cancel button
 * mid-capture error handling
-* sample numbers in listing
 * check timing diag x axis
 
 
+tim asm suggestion:
 
 LATA += 0x8;
 if(LATA&0x38 == 0x38){
