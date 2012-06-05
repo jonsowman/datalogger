@@ -11,4 +11,5 @@ reports/*/*.aux
 reports/*/*.log
 software/cvibuild.LogicAnalyser/*
 .~lock*
+software/*.cdb
 
