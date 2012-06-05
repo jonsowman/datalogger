@@ -179,7 +179,7 @@ void UpdateDisplay(int panel)
 	buf[0]='\0'; // Empty buf
 	
 	// Empty space for samplenum alignment:
-	for(j=0; j<=samplenumcols; j++) // <= gives us one extra space.
+	for(j=0; j<samplenumcols+3; j++) // 3 extra spaces for [] and spacer space
 		strncat(buf, " ", 1);
 	
 	// Actual headers
@@ -198,7 +198,7 @@ void UpdateDisplay(int panel)
 	for(i=0; i<range; i++)
 	{
 		// Print samplenum. printf can't pad to a variable const width so we have to do it manually.
-		buf[0]='\0'; // empty buf
+		strncpy(buf, "[", 2);
 		
 		if(position+i == 0) // special case
 			for(j=0; j<samplenumcols-1; j++) // pad with appropriate num of 0s for const width
@@ -207,8 +207,9 @@ void UpdateDisplay(int panel)
 			for(j=0; j<samplenumcols-ceil(log10(position+i+1)); j++) // pad with appropriate num of 0s for const width
 				strncat(buf, "0", 1);
 		
-		sprintf(buf2, "%d ", i+position);
+		sprintf(buf2, "%d", i+position);
 		strncat(buf, buf2, samplenumcols+1); // +1 for extra space
+		strncat(buf, "] ", 2);
 		SetCtrlVal(LISTINGTAB, LISTPANEL_DATALISTING, buf);  // start line with samplenumber (+space)
 		
 		for(j=0; j<8; j++)

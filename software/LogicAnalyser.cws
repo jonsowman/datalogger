@@ -53,12 +53,12 @@ In Projects = "1,"
 [File 0002]
 Path = "/c/Users/david/Desktop/datalogger/software/LogicAnalyser.c"
 File Type = "CSource"
-Disk Date = 3421697717
+Disk Date = 3421705230
 In Projects = "1,"
 Window Top = 30
 Window Left = 10
 Window Z-Order = 1
-Source Window State = "1,830,830,830,106,107,107,0,0,210,0,0,0,0,0,73,798,0,830,120,349,748,1,0,"
+Source Window State = "1,181,181,181,29,30,29,0,0,210,0,0,0,0,0,73,164,0,181,30,349,748,1,0,"
 
 [File 0003]
 Path = "/c/Users/david/Desktop/datalogger/software/comms.c"
