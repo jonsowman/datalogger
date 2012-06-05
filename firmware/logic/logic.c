@@ -319,7 +319,6 @@ void _startExtInterrupt(uint8_t config)
 #pragma interrupt high_isr
 void high_isr(void)
 {
-	// Check whether we're triggering or sampling
 	if(logic_state == LOGIC_INPROGRESS)
 	{
 		if(writeptr < samplenumber)

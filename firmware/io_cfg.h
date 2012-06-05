@@ -95,10 +95,10 @@
 #define TRISADDR0		TRISAbits.TRISA3
 
 /********* SRAM Control Lines ********/
-#define LATCE			LATCbits.LATC1
-#define LATOE			LATCbits.LATC0
-#define	LATWE			LATCbits.LATC2
-#define	LATCE2			LATCbits.LATC6
+#define LATCE			PORTCbits.RC1
+#define LATOE			PORTCbits.RC0
+#define	LATWE			PORTCbits.RC2
+#define	LATCE2			PORTCbits.RC6
 
 #define TRISCE			TRISCbits.TRISC1
 #define TRISOE			TRISCbits.TRISC0

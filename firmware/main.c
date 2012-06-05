@@ -47,7 +47,7 @@ void interrupt_at_low_vector(void)
 void main(void)
 {   
 	uint32_t snum = 0x1000;
-	uint32_t rate = 5000UL;
+	uint32_t rate = 20000UL;
     InitializeSystem();
 	enableBuffer();
 	
