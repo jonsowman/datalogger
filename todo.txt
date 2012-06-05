@@ -1,5 +1,7 @@
 * cancel button
 * mid-capture error handling
+* sample numbers in listing
+* check timing diag x axis
 
 
 
