@@ -76,8 +76,8 @@ void UpdateSliders(int panel) // Call this any time you update datalength or mov
 
 void UpdateDisplay(int panel)
 {
-	unsigned int i, j, range, position;
-	char buf[8]="";
+	unsigned int i, j, range, position, samplenumcols;
+	char buf[128]="";
 	char buf2[128]="";
 	int CHenable[8]; // Waste of space, but 32 bytes makes the code so much nicer and neater
 	double value;
@@ -165,28 +165,59 @@ void UpdateDisplay(int panel)
 	
 	/******************** LISTING **********************************/
 	
-	// Do headers:
-	buf2[0]='\0'; // Empty buf2
+	// In general buf2 used for sprintfs and buf used for collating
+	
+	// Need to work out how many digits the sample count is going to be at max
+	// i.e. ceil(log10(datalen-1)) (datalen-1 is max b/c of 0 based counting)
+	if(datalength>1)
+		samplenumcols=ceil(log10(datalength-1));
+	else
+		samplenumcols=1; // Skillfully avoiding log(0).  Or log(-1) for that matter.
+	
+	/****** HEADERS *******/
+	
+	buf[0]='\0'; // Empty buf
+	
+	// Empty space for samplenum alignment:
+	for(j=0; j<=samplenumcols; j++) // <= gives us one extra space.
+		strncat(buf, " ", 1);
+	
+	// Actual headers
 	for(j=0; j<8; j++)
 		if(CHenable[j])
 		{
-			sprintf(buf, "CH%d ", 7-j);
-			strncat(buf2, buf, 5);
+			sprintf(buf2, "CH%d ", 7-j);
+			strncat(buf, buf2, 5);
 			
 		}
 		
-	SetCtrlVal(LISTINGTAB, LISTPANEL_LISTINGHEADING, buf2);  // Note headers are in a string not textbox
+	SetCtrlVal(LISTINGTAB, LISTPANEL_LISTINGHEADING, buf);  // Note headers are in a string not textbox
 	// So set actually sets instead of appending
 		
-	// Do data:
+	// Do data samples:
 	for(i=0; i<range; i++)
 	{
+		// Print samplenum. printf can't pad to a variable const width so we have to do it manually.
+		buf[0]='\0'; // empty buf
+		
+		if(position+i == 0) // special case
+			for(j=0; j<samplenumcols-1; j++) // pad with appropriate num of 0s for const width
+				strncat(buf, "0", 1);
+		else			
+			for(j=0; j<samplenumcols-ceil(log10(position+i+1)); j++) // pad with appropriate num of 0s for const width
+				strncat(buf, "0", 1);
+		
+		sprintf(buf2, "%d ", i+position);
+		strncat(buf, buf2, samplenumcols+1); // +1 for extra space
+		SetCtrlVal(LISTINGTAB, LISTPANEL_DATALISTING, buf);  // start line with samplenumber (+space)
+		
 		for(j=0; j<8; j++)
 			if(CHenable[j])
 			{
-				sprintf(buf, " %d  ", (datastore[i+position]>>(7-j)) & 1 ); // Again, lazyily aligning with space padding
+				sprintf(buf2, " %d  ", (datastore[i+position]>>(7-j)) & 1 ); // Again, lazyily aligning with space padding
 									// This is a way of retrieving a single bit - shift, then filter out the LSbit with the &
-				SetCtrlVal(LISTINGTAB, LISTPANEL_DATALISTING, buf);  // append CH values, spaces to align lazily
+				
+				SetCtrlVal(LISTINGTAB, LISTPANEL_DATALISTING, buf2);  // append CH values, spaces to align lazily
 			}
 		
 		SetCtrlVal(LISTINGTAB, LISTPANEL_DATALISTING, "\n"); // finally newline
@@ -604,6 +635,7 @@ int CVICALLBACK RETRIEVETIMER_hit (int panel, int control, int event,
 				
 				// Mark data length:
 				datalength = datastoreptr-datastore;
+				if(debug) printf("datalength=%d",datalength);
 				UpdateSliders(panel);
 				
 				return 0;
