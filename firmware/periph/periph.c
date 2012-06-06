@@ -41,7 +41,6 @@ void setRAMAddress(uint32_t address)
  */
 void writeRAM(uint32_t address)
 {
-	LATB ^= 0x02;
 	// Do this in hw
 	//setRAMAddress(address);
 	LATAbits.LATA0 = 0;
