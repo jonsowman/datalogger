@@ -272,7 +272,7 @@ void UserInit(void)
 	TRISADDR13 = 1;
 	TRISADDR14 = 1;
 	TRISADDR15 = 1;
-	TRISADDR16 = 1;
+	TRISADDR16 = 0; // Not controlled by counter
 	
 	// Put the SRAM into standby
 	LATCE = 1;
