@@ -286,8 +286,10 @@ void UserInit(void)
 	LATLEDA = 0;
 	LATLEDB = 0;
 	
-	// RB1 is a debug thing
+	// RB1 is hw addressing MR
 	TRISBbits.TRISB1 = 0;
+	LATBbits.LATB1 = 0; // MR active high
+	LATAbits.LATA0 = 1; // clock on falling
 }
 
 /** EOF user.c ***************************************************************/

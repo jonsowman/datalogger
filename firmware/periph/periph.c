@@ -41,8 +41,12 @@ void setRAMAddress(uint32_t address)
  */
 void writeRAM(uint32_t address)
 {
-	LATB ^= 0x02;
-	setRAMAddress(address);
+	// Do this in hw
+	//setRAMAddress(address);
+	LATAbits.LATA0 = 0;
+	Delay1TCY();
+	LATAbits.LATA1 = 1;
+	Delay1TCY();
 	
 	// WE must drop with or before CE#/CE2 for outputs
 	// to remain Hi-Z after write

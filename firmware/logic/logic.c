@@ -74,7 +74,6 @@ bool logicStart(void)
 		return false;
 	
 	logicReset();
-	LATLEDB = 0;
 	logic_state = LOGIC_ARM;
 	
 	// Calculate and load the prescaler and preload
@@ -208,6 +207,9 @@ uint8_t* fillUSBBuffer(uint8_t* usbptr)
  */
 void logicReset(void)
 {
+	LATBbits.LATB1 = 1;
+	Delay10TCYx(1);
+	LATBbits.LATB1 = 0;
 	writeptr = 0;
 	readptr = 0;
 	logic_state = LOGIC_IDLE;
