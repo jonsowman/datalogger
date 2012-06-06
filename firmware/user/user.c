@@ -255,7 +255,7 @@ void UserInit(void)
 	// Channel 0 (D0) as input
 	TRISDATA0 = 1;
 
-	// Set up ADDR lines as outputs
+	// Set up ADDR lines as inputs
 	TRISADDR0 = 1;
 	TRISADDR1 = 1;
 	TRISADDR2 = 1;
