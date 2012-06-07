@@ -476,33 +476,46 @@ int CVICALLBACK CAPTUREBUTTON_hit (int panel, int control, int event,
 int CVICALLBACK RECONNECTBUTTON_hit (int panel, int control, int event,
 		void *callbackData, int eventData1, int eventData2)
 {
-	switch (event)
+	int CaptureInProgress;
+	
+	if(event != EVENT_COMMIT) return 0; // not a click
+	
+	// Abort capture if in progress:
+	GetCtrlAttribute(panel, IFACEPANEL_RETRIEVETIMER, ATTR_ENABLED, &CaptureInProgress);
+	if(CaptureInProgress)
 	{
-		case EVENT_COMMIT:
-			if(close_usb() == SUCCESS)
-			{
-				StatusMessage(panel, IFACEPANEL_STATUSBOX, "Disconnected from logic analyser");
-				SetCtrlVal(panel, IFACEPANEL_CONNECTEDLED, 0);
-			}
-			else
-				StatusMessage(panel, IFACEPANEL_STATUSBOX, "Failed to disconnect from logic analyser");
-				
-				
-				
-			if(init_usb() == SUCCESS)
-			{
-				StatusMessage(panel, IFACEPANEL_STATUSBOX, "Connected to logic analyser");
-				SetCtrlVal(panel, IFACEPANEL_CONNECTEDLED, 1);
-			}
-			else
-			{
-				StatusMessage(panel, IFACEPANEL_STATUSBOX, "Failed to connect to logic analyser");
-				SetCtrlVal(panel, IFACEPANEL_CONNECTEDLED, 0);
-				close_usb();
-			}
-
-			break;
+		StatusMessage(panel, IFACEPANEL_STATUSBOX, "Reconnecting: aborting capture/retrive");
+		datalength=0;
+		retrieval_begun=0;
+		capture_begun=0;
+		SetCtrlAttribute(panel, IFACEPANEL_RETRIEVETIMER, ATTR_ENABLED, 0);
+		return 0;
 	}
+	
+	
+	
+	if(close_usb() == SUCCESS)
+	{
+		StatusMessage(panel, IFACEPANEL_STATUSBOX, "Disconnected from logic analyser");
+		SetCtrlVal(panel, IFACEPANEL_CONNECTEDLED, 0);
+	}
+	else
+		StatusMessage(panel, IFACEPANEL_STATUSBOX, "Failed to disconnect from logic analyser");
+		
+		
+		
+	if(init_usb() == SUCCESS)
+	{
+		StatusMessage(panel, IFACEPANEL_STATUSBOX, "Connected to logic analyser");
+		SetCtrlVal(panel, IFACEPANEL_CONNECTEDLED, 1);
+	}
+	else
+	{
+		StatusMessage(panel, IFACEPANEL_STATUSBOX, "Failed to connect to logic analyser");
+		SetCtrlVal(panel, IFACEPANEL_CONNECTEDLED, 0);
+		close_usb();
+	}
+
 	return 0;
 }
 
@@ -543,10 +556,25 @@ int CVICALLBACK DEBUGCHECKBOX_hit (int panel, int control, int event,
 int CVICALLBACK RETRIEVETIMER_hit (int panel, int control, int event,
 		void *callbackData, int eventData1, int eventData2)
 {
-	unsigned int numsamples, max, sampleptr, state, i;
+	unsigned int numsamples, max, sampleptr, state, i, AnalyserConnected;
 
 	if(event != EVENT_TIMER_TICK)
 		return 0; // not a tick!
+	
+	
+	// If we aren't connected, we need to abort the capture/retrieve:
+	GetCtrlVal(panel, IFACEPANEL_CONNECTEDLED, &AnalyserConnected);
+	if(!AnalyserConnected)
+	{
+		StatusMessage(panel, IFACEPANEL_STATUSBOX, "Connection lost: aborting capture/retrive");
+		datalength=0;
+		retrieval_begun=0;
+		capture_begun=0;
+		SetCtrlAttribute(panel, IFACEPANEL_RETRIEVETIMER, ATTR_ENABLED, 0);
+		return 0;
+	}
+	
+	
 	
 	
 	if(!retrieval_begun) // Still in the capture phase - poll!

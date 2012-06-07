@@ -454,6 +454,8 @@ int getdata(char *datastore, char **datastoreptr)
 		return USB_ERROR;
 	}
 	
+	if(debug) printf("Got a packet, len %d\n", RecvLength);
+	
 	// Check for EOF or other errors:
 	if(receive_buf[0] == CMD_ERROR_RS)
 	{
