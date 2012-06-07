@@ -840,6 +840,7 @@ int CVICALLBACK DECODEBUTTON_hit (int panel, int control, int event,
 	
 	
 	GetCtrlVal(RS232TAB, RS232TAB_BITRATE, &bitrate);
+	GetCtrlVal(RS232TAB, RS232TAB_CHANNEL, &channel);
 	
 	/******* RS232 FRAMING DECODE PROCESS **************
 	In order to synchronise reliably, we need to find what is definitely a
@@ -873,8 +874,8 @@ int CVICALLBACK DECODEBUTTON_hit (int panel, int control, int event,
 	
 	// Synchronising loop
 	while( ptr < datalength - ceil( (double)samplerate/bitrate*(framelength-1) ) )
-	{
-		if(datastore[ptr] == MARK)
+	{																	    
+		if((datastore[ptr]>>channel)&1  == MARK)
 		{
 			i++; // MARK count
 			ptr++;
@@ -904,7 +905,7 @@ int CVICALLBACK DECODEBUTTON_hit (int panel, int control, int event,
 		printf("> framelength = %d\n", framelength);
 		printf("Above before round: sample %f\n", ptr + (double)samplerate/bitrate * ((double)framelength + 1.5) - 0.5);
 
-		if(datastore[(int)((double)ptr + floor( (double)samplerate/bitrate * ((double)framelength + 1.5) ))] != MARK)
+		if(((datastore[(int)((double)ptr + floor( (double)samplerate/bitrate * ((double)framelength + 1.5) ))])>>channel)&1 != MARK)
 		{
 			// Incorrect END bit - framing error!
 			if(debug) printf("Framing error!\n");
