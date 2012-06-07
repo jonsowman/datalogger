@@ -16,7 +16,7 @@
 
 #define  IFACEPANEL                      1       /* callback function: IFACEPANEL_hit */
 #define  IFACEPANEL_QUITBUTTON           2       /* callback function: QUITBUTTON_hit */
-#define  IFACEPANEL_DISPLAYTAB           3
+#define  IFACEPANEL_DISPLAYTAB           3       /* callback function: DISPLAYTAB_hit */
 #define  IFACEPANEL_CAPTUREBUTTON        4       /* callback function: CAPTUREBUTTON_hit */
 #define  IFACEPANEL_STATUSBOX            5
 #define  IFACEPANEL_DEBUGBUTTON          6       /* callback function: DEBUGBUTTON_hit */
@@ -76,6 +76,7 @@ int  CVICALLBACK CH_CHECKBOX_hit(int panel, int control, int event, void *callba
 int  CVICALLBACK DEBUGBUTTON_hit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK DEBUGCHECKBOX_hit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK DECODEBUTTON_hit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK DISPLAYTAB_hit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK DUMMYDATABUTTON_hit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK IFACEPANEL_hit(int panel, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK NONECHBUTTON_hit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);

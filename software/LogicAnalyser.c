@@ -56,14 +56,27 @@ void StatusMessage(int panel, int statusbox, char *message)
 
 void UpdateSliders(int panel) // Call this any time you update datalength or move the range slider
 {
-	unsigned int position, range;
+	unsigned int position, range, tab;
 	
-	// Set max range to 20 or datalength, whichever is smaller, unless datalength=0 in which case set max range to 1
+	GetActiveTabPage(panel, IFACEPANEL_DISPLAYTAB, &tab);
+	
+	// Set max range to MAX or datalength, whichever is smaller, unless datalength=0 in which case set max range to 1
 	// (Doesn't like min = max = 0)
-	if(datalength>20)
-		SetCtrlAttribute(panel, IFACEPANEL_RANGESLIDER, ATTR_MAX_VALUE, 100); // Master Max Range Option!
+	// MAX depends on whether listing or timing diag.
+	if(tab == 0) // Timing diag
+	{
+		if(datalength>100)
+			SetCtrlAttribute(panel, IFACEPANEL_RANGESLIDER, ATTR_MAX_VALUE, 100);
+		else
+				SetCtrlAttribute(panel, IFACEPANEL_RANGESLIDER, ATTR_MAX_VALUE, datalength);
+	}
 	else
-			SetCtrlAttribute(panel, IFACEPANEL_RANGESLIDER, ATTR_MAX_VALUE, datalength);
+	{
+		if(datalength>23)
+			SetCtrlAttribute(panel, IFACEPANEL_RANGESLIDER, ATTR_MAX_VALUE, 23); // Master Max Range Option!
+		else
+				SetCtrlAttribute(panel, IFACEPANEL_RANGESLIDER, ATTR_MAX_VALUE, datalength);
+	}
 		
 	GetCtrlVal(panel, IFACEPANEL_RANGESLIDER, &range);
 	
@@ -927,32 +940,24 @@ int CVICALLBACK DECODEBUTTON_hit (int panel, int control, int event,
 	return 0;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+int CVICALLBACK DISPLAYTAB_hit (int panel, int control, int event,
+		void *callbackData, int eventData1, int eventData2)
+{
+	int range, max;
+	
+	if(event != EVENT_ACTIVE_TAB_CHANGE) return 0;
+	
+	UpdateSliders(panel);
+	
+	// put value within range if necessary
+	GetCtrlVal(panel, IFACEPANEL_RANGESLIDER, &range);
+	GetCtrlAttribute(panel, IFACEPANEL_RANGESLIDER, ATTR_MAX_VALUE, &max);
+	
+	printf("%d\n", range);
+	
+	if(range>max)
+		SetCtrlVal(panel, IFACEPANEL_RANGESLIDER, max);
+	
+	
+	return 0;
+}
