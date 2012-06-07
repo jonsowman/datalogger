@@ -953,8 +953,6 @@ int CVICALLBACK DISPLAYTAB_hit (int panel, int control, int event,
 	GetCtrlVal(panel, IFACEPANEL_RANGESLIDER, &range);
 	GetCtrlAttribute(panel, IFACEPANEL_RANGESLIDER, ATTR_MAX_VALUE, &max);
 	
-	printf("%d\n", range);
-	
 	if(range>max)
 		SetCtrlVal(panel, IFACEPANEL_RANGESLIDER, max);
 	
