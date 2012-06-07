@@ -90,6 +90,7 @@ bool logicStart(void)
  */
 void _beginSampling(uint8_t config)
 {
+	LATLEDB = 1;
 	// Async untriggered
 	if(config == (MODE_ASYNC | OPTIONS_VALID))
 	{
@@ -193,6 +194,7 @@ uint8_t* fillUSBBuffer(uint8_t* usbptr)
 		if(readptr == writeptr)
 		{
 			logic_state = LOGIC_END_DATA;
+			LATLEDB = 0;
 			break;
 		}
 		*usbptr++ = readRAM(readptr++);
@@ -207,6 +209,7 @@ uint8_t* fillUSBBuffer(uint8_t* usbptr)
  */
 void logicReset(void)
 {
+	LATLEDB = 0;
 	LATBbits.LATB1 = 1;
 	Delay10TCYx(1);
 	LATBbits.LATB1 = 0;
@@ -238,7 +241,7 @@ uint8_t _calcPrescaler(uint32_t rate)
 uint8_t _calcPreload(uint32_t targetrate, uint8_t ps)
 {
 	uint32_t preload = targetrate - (TIMER_PSICLK >> ps);
-	preload *= 256UL;
+	preload *= 275UL;
 	preload /= targetrate;
 	return (uint8_t)preload;
 }
@@ -325,26 +328,40 @@ void high_isr(void)
 	{
 		if(writeptr < samplenumber)
 		{
-			writeRAM(writeptr);
-			writeptr++;
 			if(INTCONbits.TMR0IF)
 			{
 				TMR0L = timer_preload;
 				INTCONbits.TMR0IF = 0;
 			}
-			else
+			else if(config & EDGE_BOTH)
 			{
-				if(config & EDGE_BOTH) INTCON2 ^= 0x40;
+				INTCON2 ^= 0x40;
 				INTCONbits.INT0IF = 0;
 			}
+			//writeRAM(writeptr);
+			// Manual RAM write with hw addressing
+			LATAbits.LATA0 = 0;
+			_asm nop _endasm;
+			LATAbits.LATA0 = 1;
+			LATADDR16 = writeptr >> 16;
+			LATC = 0x40 | (LATC & 0xB9);
+			_asm nop _endasm;
+			LATC = 0x06 | (LATC & 0xB9);
+			writeptr++;
 		}
 		else // Done sampling, stop interrupting
 		{
+			// Reset the ripple counters
+			LATBbits.LATB1 = 1;
+			_asm nop _endasm;
+			LATBbits.LATB1 = 0;
+			// Disable interrupts
 			INTCONbits.INT0IE = 0;
 			INTCONbits.TMR0IE = 0;
 			logic_state = LOGIC_END;
 		}
-	} else if(logic_state == LOGIC_WAITING)
+	}
+	else if(logic_state == LOGIC_WAITING)
 	{
 		if(config & MODE_ASYNC)
 		{

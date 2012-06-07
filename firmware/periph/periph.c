@@ -51,7 +51,6 @@ void writeRAM(uint32_t address)
 	// Set A16 manually:
 	LATADDR16 = address >> 16;
 	
-	
 	// WE must drop with or before CE#/CE2 for outputs
 	// to remain Hi-Z after write
 
@@ -75,7 +74,14 @@ uint8_t readRAM(uint32_t address)
 {
 	uint8_t data;
 	
-	setRAMAddress(address);
+	//setRAMAddress(address);
+	LATAbits.LATA0 = 0;
+	Delay1TCY();
+	LATAbits.LATA0 = 1;
+	Delay1TCY();
+	
+	// Set A16 manually:
+	LATADDR16 = address >> 16;
 	
 	// WE# must remain high during a read cycle
 	LATWE = 1;

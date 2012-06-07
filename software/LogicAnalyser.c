@@ -290,7 +290,7 @@ int main (int argc, char *argv[])
 		return -1;
 	}
 	
-	
+	datalength=0;
 	
 	GetPanelHandleFromTabPage (panelHandle, IFACEPANEL_DISPLAYTAB, 0, &TIMINGTAB);
 	GetPanelHandleFromTabPage (panelHandle, IFACEPANEL_DISPLAYTAB, 1, &LISTINGTAB);
@@ -677,7 +677,7 @@ int CVICALLBACK RETRIEVETIMER_hit (int panel, int control, int event,
 				
 				// Mark data length:
 				datalength = datastoreptr-datastore;
-				if(debug) printf("datalength=%d",datalength);
+
 				UpdateSliders(panel);
 				
 				return 0;
@@ -827,7 +827,9 @@ int CVICALLBACK DECODEBUTTON_hit (int panel, int control, int event,
 {
 	const int framelength=8; // exclusing start/stop bits. Usually 8 = 1 byte
 	
-	const int channel=0; // Default CH0
+	int channel=0; // Default CH0
+	
+	char outputbuf[128];
 	
 	unsigned int i=0, j, bitrate; 
 	// We only care about ratio of samplerate to bitrate, in this case 5:1
@@ -840,6 +842,34 @@ int CVICALLBACK DECODEBUTTON_hit (int panel, int control, int event,
 	
 	
 	GetCtrlVal(RS232TAB, RS232TAB_BITRATE, &bitrate);
+	GetCtrlVal(RS232TAB, RS232TAB_CHANNEL, &channel);
+	
+	
+for(i=0; i<100; i++) // 20 idle bits
+datastore[i]=MARK;
+for(i=100; i<110; i++) // 1 start MARK bit and 1st data bit
+datastore[i]=SPACE;
+for(i=110; i<115; i++) // 2nd data bit
+datastore[i]=MARK;
+for(i=115; i<135; i++) // 3rd to 6th data bits
+datastore[i]=SPACE;
+for(i=135; i<140; i++) // 7th data bit
+datastore[i]=MARK;
+for(i=140; i<145; i++) // 8th data bit
+datastore[i]=SPACE;
+for(i=145; i<245; i++) // 1 stop bit and 19 idle bits
+datastore[i]=MARK;
+
+
+
+
+datalength=245;
+samplerate=1500;
+channel=0;
+
+	
+	
+	
 	
 	/******* RS232 FRAMING DECODE PROCESS **************
 	In order to synchronise reliably, we need to find what is definitely a
@@ -871,10 +901,12 @@ int CVICALLBACK DECODEBUTTON_hit (int panel, int control, int event,
 	
 	if(debug) printf("Sample rate: %d, bit rate: %d, samples/bit: %f\n", samplerate, bitrate, (double)samplerate/bitrate);
 	
+	ResetTextBox(RS232TAB, RS232TAB_RS232RESULT, "");
+	
 	// Synchronising loop
 	while( ptr < datalength - ceil( (double)samplerate/bitrate*(framelength-1) ) )
-	{
-		if(datastore[ptr] == MARK)
+	{																	    
+		if((datastore[ptr]>>channel)&1  == MARK)
 		{
 			i++; // MARK count
 			ptr++;
@@ -901,17 +933,16 @@ int CVICALLBACK DECODEBUTTON_hit (int panel, int control, int event,
 		// We need to round this to get a whole sample num - C has no round() but floor(x+0.5) is equivilent
 		
 		if(debug) printf("Estimated END bit @ sample %d\n", (int)((double)ptr + floor( (double)samplerate/bitrate * ((double)framelength + 1.5) )));
-		printf("> framelength = %d\n", framelength);
-		printf("Above before round: sample %f\n", ptr + (double)samplerate/bitrate * ((double)framelength + 1.5) - 0.5);
+		if(debug) printf("> framelength = %d\n", framelength);
+		if(debug) printf("Above before round: sample %f\n", ptr + (double)samplerate/bitrate * ((double)framelength + 1.5) - 0.5);
 
-		if(datastore[(int)((double)ptr + floor( (double)samplerate/bitrate * ((double)framelength + 1.5) ))] != MARK)
+		if(((datastore[(int)((double)ptr + floor( (double)samplerate/bitrate * ((double)framelength + 1.5) ))])>>channel)&1 != MARK)
 		{
 			// Incorrect END bit - framing error!
 			if(debug) printf("Framing error!\n");
 			// Return to original idle-scan:
 			i=0;
 			ptr++;
-			//continue;
 		}
 		
 		// Now we have a frame with correct START and END bits - read off the data!
@@ -926,7 +957,9 @@ int CVICALLBACK DECODEBUTTON_hit (int panel, int control, int event,
 			readframe |= ((datastore[(int)(floor((double)ptr + ((double)samplerate/bitrate)*(1.5+j)))] >> channel) & 1) << j;
 		
 		// Now readframe should contain the byte!
-		printf("byte decoded: 0x%x\n", readframe);
+		if(debug) printf("byte decoded: 0x%x\n", readframe);
+		sprintf(outputbuf, "0x%x ", readframe);
+		SetCtrlVal(RS232TAB, RS232TAB_RS232RESULT, outputbuf);
 		
 		// Finally, align ptr with somewhere inside the END MARK bit
 		// Aiming for the middle: ptr - 0.5 + (samplerate/bitrate)*(N+1.5)
@@ -952,8 +985,6 @@ int CVICALLBACK DISPLAYTAB_hit (int panel, int control, int event,
 	// put value within range if necessary
 	GetCtrlVal(panel, IFACEPANEL_RANGESLIDER, &range);
 	GetCtrlAttribute(panel, IFACEPANEL_RANGESLIDER, ATTR_MAX_VALUE, &max);
-	
-	printf("%d\n", range);
 	
 	if(range>max)
 		SetCtrlVal(panel, IFACEPANEL_RANGESLIDER, max);
