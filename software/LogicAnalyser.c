@@ -677,7 +677,7 @@ int CVICALLBACK RETRIEVETIMER_hit (int panel, int control, int event,
 				
 				// Mark data length:
 				datalength = datastoreptr-datastore;
-				if(debug) printf("datalength=%d",datalength);
+
 				UpdateSliders(panel);
 				
 				return 0;
