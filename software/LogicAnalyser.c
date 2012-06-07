@@ -290,7 +290,7 @@ int main (int argc, char *argv[])
 		return -1;
 	}
 	
-	
+	datalength=0;
 	
 	GetPanelHandleFromTabPage (panelHandle, IFACEPANEL_DISPLAYTAB, 0, &TIMINGTAB);
 	GetPanelHandleFromTabPage (panelHandle, IFACEPANEL_DISPLAYTAB, 1, &LISTINGTAB);
