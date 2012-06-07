@@ -188,7 +188,7 @@ uint32_t getSampleNumber(void)
 uint8_t* fillUSBBuffer(uint8_t* usbptr)
 {
 	uint8_t i;
-	for(i=0; i<(USBGEN_EP_SIZE - 1); i++)
+	for(i=0; i<(USBGEN_EP_SIZE - 2); i++)
 	{
 		if(readptr == writeptr)
 		{
