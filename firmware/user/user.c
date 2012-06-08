@@ -255,8 +255,9 @@ void UserInit(void)
 	// Channel 0 (D0) as input
 	TRISDATA0 = 1;
 
-	// Set up ADDR lines as inputs
-	TRISADDR0 = 1;
+        // These lines are driven by the ripple counters and 
+        // should therefore remain Hi=Z
+        TRISADDR0 = 1;
 	TRISADDR1 = 1;
 	TRISADDR2 = 1;
 	TRISADDR3 = 1;
@@ -286,10 +287,8 @@ void UserInit(void)
 	LATLEDA = 0;
 	LATLEDB = 0;
 	
-	// RB1 is hw addressing MR
 	TRISBbits.TRISB1 = 0;
 	LATBbits.LATB1 = 0; // MR active high
 	LATAbits.LATA0 = 1; // clock on falling
 }
 
-/** EOF user.c ***************************************************************/

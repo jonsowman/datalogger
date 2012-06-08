@@ -241,6 +241,9 @@ uint8_t _calcPrescaler(uint32_t rate)
 uint8_t _calcPreload(uint32_t targetrate, uint8_t ps)
 {
 	uint32_t preload = targetrate - (TIMER_PSICLK >> ps);
+        // This value should be 256 but is increased to compensate
+        // somewhat for the PICs slowness in context saving and 
+        // restoration at the beginning and end of ISRs.
 	preload *= 275UL;
 	preload /= targetrate;
 	return (uint8_t)preload;
@@ -320,7 +323,12 @@ void _startExtInterrupt(uint8_t config)
 	logic_state = LOGIC_WAITING;
 }  
 
-// Interrupt stuff here
+/**
+ * Interrupts to deal with triggering and sampling.
+ * Note that C18 will try and context save everything if there are
+ * function calls in the ISR, so this is avoided to as great an
+ * extent as possible.
+ */
 #pragma interrupt high_isr
 void high_isr(void)
 {
@@ -338,8 +346,7 @@ void high_isr(void)
 				INTCON2 ^= 0x40;
 				INTCONbits.INT0IF = 0;
 			}
-			//writeRAM(writeptr);
-			// Manual RAM write with hw addressing
+                        // Clock the addressing and then RAM
 			LATAbits.LATA0 = 0;
 			_asm nop _endasm;
 			LATAbits.LATA0 = 1;

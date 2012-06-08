@@ -46,16 +46,14 @@ void interrupt_at_low_vector(void)
 // Main program loop
 void main(void)
 {   
-	uint32_t snum = 0x1000;
-	uint32_t rate = 20000UL;
     InitializeSystem();
-	enableBuffer();
+    enableBuffer();
 	
     while(1)
     {
         USBTasks();         // USB Tasks
         ProcessIO();        // See user\user.c & .h
-		UserTasks();
+        UserTasks();
     }
 }
 

@@ -12,7 +12,9 @@
 #include "periph\periph.h"
 
 /**
- * Write the given SRAM byte address to the IO pins.
+ * Write the given SRAM byte address to the IO pins
+ * using soft addressing, this is not ever used in later revisions
+ * of the hardware which employ hardware addressing.
  */
 void setRAMAddress(uint32_t address)
 {
@@ -41,8 +43,7 @@ void setRAMAddress(uint32_t address)
  */
 void writeRAM(uint32_t address)
 {
-	// Do this in hw
-	//setRAMAddress(address);
+        // Clock the ripple counters to set the address
 	LATAbits.LATA0 = 0;
 	Delay1TCY();
 	LATAbits.LATA0 = 1;
@@ -53,7 +54,6 @@ void writeRAM(uint32_t address)
 	
 	// WE must drop with or before CE#/CE2 for outputs
 	// to remain Hi-Z after write
-
 	// Start RAM write by dropping CE# and WE# and
 	// raising CE2.
 	LATC = 0x40 | (LATC & 0xB9);
@@ -62,9 +62,6 @@ void writeRAM(uint32_t address)
 	
 	// End write by dropping CE2 and raising CE# and WE#
 	LATC = 0x06 | (LATC & 0xB9);
-	
-	// Disable the buffer
-	//disableBuffer();
 }
 
 /**
@@ -74,7 +71,6 @@ uint8_t readRAM(uint32_t address)
 {
 	uint8_t data;
 	
-	//setRAMAddress(address);
 	LATAbits.LATA0 = 0;
 	Delay1TCY();
 	LATAbits.LATA0 = 1;
